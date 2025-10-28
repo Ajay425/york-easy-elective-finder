@@ -2,26 +2,22 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import './index.css'
+import {BrowserRouter as Router, Routes , Route} from 'react-router-dom';
+import Home from './components/sections/Home.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1>Welcome to YorkU Elective Tracker</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Note: Always double check with your faculty academic advisor for elective selections.
-      </p>
-    </>
+    <div className="min-h-screen w-full flex flex-col items-center justify-start pt-8">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </div>
   )
 }
+
 
 export default App
