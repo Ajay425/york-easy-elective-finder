@@ -1,25 +1,14 @@
 from playwright.sync_api import sync_playwright
-import os, re, time, random
+import os, re, time, random, datetime
 
 # ----------------------------------------------------------
 # ⚙️ USER SETTINGS
 # ----------------------------------------------------------
 
-# 🏃‍♂️ FAST_MODE = True  →  Much faster scraping (≈4–6 s/page)
-# 🐢 FAST_MODE = False →  Slower but safer (≈15–20 s/page, less Cloudflare risk)
 FAST_MODE = False
-
-# 🧠 Only scrape the first N subjects (for testing)
-# Set to None for all subjects.
 MAX_SUBJECTS = None
-
-# Campus to select for every search
 CAMPUS_NAME = "Keele"
-
-# Output directory
 SAVE_DIR = "york_courses"
-
-# Progress tracking file
 PROGRESS_FILE = "progress.txt"
 
 # ----------------------------------------------------------
@@ -43,10 +32,36 @@ def sanitize_filename(name: str) -> str:
 
 
 # ----------------------------------------------------------
+# 🕐 DAILY MAINTENANCE CHECK (with 5-minute leeway)
+# ----------------------------------------------------------
+def check_maintenance_window():
+    """Pause scraper between 11:55 p.m. and 1:45 a.m."""
+    now = datetime.datetime.now()
+    start = now.replace(hour=23, minute=55, second=0, microsecond=0)
+    end = now.replace(hour=1, minute=45, second=0, microsecond=0)
+
+    # If we're after midnight, `start` belongs to the previous day
+    if now.hour < 2:
+        start = (now - datetime.timedelta(days=1)).replace(hour=23, minute=55, second=0, microsecond=0)
+
+    if start <= now <= end:
+        target = now.replace(hour=1, minute=45, second=0, microsecond=0)
+        # If we're before midnight, move target to next day
+        if now.hour >= 23:
+            target = (now + datetime.timedelta(days=1)).replace(hour=1, minute=45, second=0, microsecond=0)
+
+        wait_seconds = (target - now).total_seconds()
+        print(f"🕐 Maintenance window detected ({now.strftime('%H:%M')} → 1:45 a.m.).")
+        print(f"💤 Sleeping for {wait_seconds/60:.1f} minutes...")
+        time.sleep(wait_seconds)
+        print("✅ Maintenance window over — resuming.")
+
+
+# ----------------------------------------------------------
 # 🧠 SESSION DETECTION + RECOVERY HELPERS
 # ----------------------------------------------------------
 def session_expired(page):
-    """Detect York's 'session ended' error page by looking for known phrases."""
+    """Detect York's 'session ended' error page."""
     try:
         html = page.content().lower()
         if "your session has been ended" in html or "you have exceeded the maximum time limit" in html:
@@ -56,8 +71,9 @@ def session_expired(page):
         pass
     return False
 
+
 def reload_york_main(page, start_url, subject_value=None, campus_name=None):
-    """Safely reloads the main York course search page and optionally re-selects subject/campus."""
+    """Safely reload the main York course search page and optionally re-select subject/campus."""
     print("🔄 Re-loading main York course site...")
     retries = 3
     for attempt in range(1, retries + 1):
@@ -65,7 +81,7 @@ def reload_york_main(page, start_url, subject_value=None, campus_name=None):
             page.goto(start_url, wait_until="domcontentloaded", timeout=60000)
             page.locator("img[alt='Search By Subject']").click()
             page.wait_for_load_state("networkidle", timeout=60000)
-            break  # success
+            break
         except Exception as e:
             print(f"⚠️ Reload attempt {attempt} failed: {e}")
             if attempt < retries:
@@ -124,6 +140,7 @@ with sync_playwright() as p:
     # ----------------------------------------------------------
     # Step 1 – Open main site and reach “Search by Subject”
     # ----------------------------------------------------------
+    check_maintenance_window()
     print("🌐 Opening York course site...")
     page.goto(start_url, timeout=60000)
     human_pause()
@@ -169,7 +186,6 @@ with sync_playwright() as p:
     else:
         print("✅ No new pre-existing folders found to add.")
 
-    # Reload final progress set
     with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
         completed_subjects = {line.strip() for line in f if line.strip()}
     print(f"🔁 Resuming — {len(completed_subjects)} subjects already completed")
@@ -178,6 +194,8 @@ with sync_playwright() as p:
     # Step 3 – Loop through each subject
     # ----------------------------------------------------------
     for idx, (subject_name, subject_value) in enumerate(subjects, start=1):
+        check_maintenance_window()  # 🕐 Pause automatically if in window
+
         if subject_name in completed_subjects:
             print(f"⏭️ Skipping {subject_name} — already completed.")
             continue
@@ -191,25 +209,15 @@ with sync_playwright() as p:
         except:
             print("⚠️ subjectSelect not found — reloading main York site.")
             reload_york_main(page, start_url)
-            try:
-                page.wait_for_selector("#subjectSelect", timeout=60000)
-            except:
-                print("❌ Could not reload subject selection page.")
-                continue
+            continue
 
         try:
             page.select_option("#subjectSelect", value=subject_value)
         except Exception as e:
             print(f"⚠️ Retry select_option failed: {e}")
             reload_york_main(page, start_url)
-            try:
-                page.wait_for_selector("#subjectSelect", timeout=60000)
-                page.select_option("#subjectSelect", value=subject_value)
-            except Exception as e2:
-                print(f"❌ Could not recover for {subject_name}: {e2}")
-                continue
+            continue
 
-        # --- Select campus ---
         page.evaluate(f"""
             const campus = document.getElementById('campusSelect');
             for (const o of campus.options) o.selected = false;
@@ -254,6 +262,7 @@ with sync_playwright() as p:
         # Step 4 – Visit each course, save HTML, return to list
         # ----------------------------------------------------------
         for i, (code, title, link) in enumerate(course_links, start=1):
+            check_maintenance_window()  # 🕐 Also check inside loop
             filename = sanitize_filename(f"{code}_{title}.html")
             filepath = os.path.join(subj_dir, filename)
             print(f"   ↳ [{i}/{len(course_links)}] {code} – {title}")
@@ -271,8 +280,6 @@ with sync_playwright() as p:
             except Exception as e:
                 print(f"      ❌ Failed: {e}")
 
-            # Return to subject list page
-            # Return to subject list page safely
             try:
                 page.go_back(wait_until="networkidle", timeout=60000)
                 human_pause(1.0, 2.0)
@@ -283,10 +290,8 @@ with sync_playwright() as p:
                 print(f"⚠️ go_back failed ({e}), reloading main site.")
                 reload_york_main(page, start_url, subject_value, CAMPUS_NAME)
 
-
             human_pause()
 
-        # Mark subject complete
         with open(PROGRESS_FILE, "a", encoding="utf-8") as f:
             f.write(subject_name + "\n")
         print(f"✅ Finished {subject_name} (saved to {PROGRESS_FILE})")
