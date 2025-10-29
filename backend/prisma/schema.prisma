@@ -17,24 +17,37 @@ datasource db {
 
 model Course {
   id        Int      @id @default(autoincrement())
-  dept      String
+  dept      String 
   code      String
   credit    Float?
   name      String
-  prereqs   String?
+  prereq 
   desc      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
-// model Department{
-//   id Int
+// MANY TO MANY
+model coursePrerequisites{
+  courseCode String
+  prerequsites String
+}
 
-// }
+model Department{
+  acronym String
+  longForm String
+}
 
-model User {
-  id      Int      @id @default(autoincrement())
-  username String @unique
-  email   String   @unique
-  password String
+model Faculty{
+  acronym String
+  longForm String
+}
+
+model Professor{
+  id Int
+  name String
+}
+
+model courseTaught{
+  courseCode String
+  term String
+  professor String
 }
