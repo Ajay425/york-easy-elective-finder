@@ -5,6 +5,7 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
+import sidebar from "../ui/sidebar";
 
 const CoursesPage = () => {
   const courses = [
@@ -96,6 +97,9 @@ const CoursesPage = () => {
 
   return (
     <section className="min-h-screen bg-[#A42439] flex flex-col items-center justify-center p-6">
+      {/* Sidebar */}
+
+
       <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-10 bg-gradient-to-r from-yellow-200 via-white to-yellow-100 bg-clip-text text-transparent">
         Explore Your Electives
       </h1>
@@ -103,30 +107,28 @@ const CoursesPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {courses.map((course, index) => (
           <Card
-            key={index}
-            className="rounded-2xl border border-[#ffffff20] shadow-md hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-[#fdfdfd] to-[#f7e6e6] hover:from-[#fff5f5] hover:to-[#ffeaea] transform hover:-translate-y-1"
-          >
-            <CardHeader>
-              <CardTitle className="text-lg font-bold text-[#A42439] tracking-tight">
-                {course.code}
-              </CardTitle>
-              <CardDescription className="text-gray-600 font-medium text-sm">
-                {course.title}
-              </CardDescription>
-            </CardHeader>
+          key={index}
+  className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md shadow-lg hover:shadow-2xl hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1"
+>
+  <CardHeader>
+    <CardTitle className="text-lg font-bold text-white tracking-tight">
+      {course.code}
+    </CardTitle>
+    <CardDescription className="text-gray-200 font-medium text-sm">
+      {course.title}
+    </CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p className="text-gray-300 text-sm mb-3">
+      Credits: {course.credits}
+    </p>
+    <p className="text-gray-300 text-xs">Faculty: {course.faculty}</p>
+    <p className="text-yellow-200 text-xs mt-2">
+      ⭐ Popularity: {course.popularity}
+    </p>
+  </CardContent>
+</Card>
 
-            <CardContent>
-              <p className="text-gray-700 text-sm mb-3">{course.description}</p>
-              <div className="flex justify-between items-center text-xs text-gray-500">
-                <span>
-                  <strong>Credits:</strong> {course.credits}
-                </span>
-                <span className="bg-[#A42439]/10 text-[#A42439] px-2 py-1 rounded-full font-semibold text-[10px]">
-                  {course.faculty.split(" ")[0]}
-                </span>
-              </div>
-            </CardContent>
-          </Card>
         ))}
       </div>
       
