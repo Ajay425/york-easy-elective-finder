@@ -15,39 +15,92 @@ datasource db {
 }
 
 
+// model Course {
+//   id        Int      @id @default(autoincrement()) 
+//   deptAcronym   String 
+//   dept      Department @relation(fields:[deptAcronym], references: [acronym])
+//   code      String
+//   credit    Float?
+//   name      String
+//   prerequisites     Course[] @relation("CourseToPrereqs")
+//   prerequisiteFor   Course[] @relation("CourseToPrereqs")
+//   desc      String?
+// }
+
 model Course {
-  id        Int      @id @default(autoincrement())
-  dept      String 
-  code      String
-  credit    Float?
-  name      String
-  prereq 
+  id        Int      @id @default(autoincrement()) 
+  faculty   String
+  deptAcronym   String 
+  courseCode      String
+  credit    Float
+  name      String?
   desc      String?
+  language String?
+  year Int
+    prerequisites     CoursePrerequisite[] @relation("CoursePrerequisite_course")
+   prerequisiteFor   CoursePrerequisite[] @relation("CoursePrerequisite_prereq")
+  @@unique([faculty, deptAcronym,courseCode, credit])
 }
 
-// MANY TO MANY
-model coursePrerequisites{
-  courseCode String
-  prerequsites String
+model CoursePrerequisite {
+  id           Int      @id @default(autoincrement())
+  courseId     Int
+  prereqId     Int
+  course       Course   @relation("CoursePrerequisite_course", fields: [courseId], references: [id])
+  prerequisite Course   @relation("CoursePrerequisite_prereq", fields: [prereqId], references: [id])
+  @@unique([courseId, prereqId])
+}
+
+// //Faculty houses Department
+model Faculty{
+  acronym String @id @unique
+  longForm String
+  url String 
 }
 
 model Department{
-  acronym String
-  longForm String
+  acronym String @id @unique
+  longForm String? 
 }
-
-model Faculty{
-  acronym String
-  longForm String
-}
-
 model Professor{
-  id Int
-  name String
+  id Int @id @default(autoincrement()) 
+  firstname String
+  lastname String
+  @@unique([firstname, lastname])
 }
 
-model courseTaught{
-  courseCode String
-  term String
-  professor String
-}
+// model Department{
+//   acronym String @id @unique
+//   longForm String 
+//   courses Course[]
+//   facultyAcronym String
+//   faculty        Faculty     @relation(fields: [facultyAcronym], references: [acronym])
+// }
+
+
+// //Faculty houses Department
+// model Faculty{
+//   acronym String @id @unique
+//   longForm String
+//   deptAcronym String 
+//   department Department[]
+// }
+
+// model 
+// model Professor{
+//   id Int @id @unique
+//   department String
+//   firstname String
+//   lastname String
+//   numRatings Float?
+//   overallRating String?
+// }
+
+
+// model courseAvailablity{
+//   courseCode String
+//   term String
+//   section String
+//   lecturetype String
+//   professor String
+// }
