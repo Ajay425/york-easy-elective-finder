@@ -5,6 +5,7 @@ import './App.css'
 import './index.css'
 import {BrowserRouter as Router, Routes , Route} from 'react-router-dom';
 import Home from './components/sections/Home.jsx';
+import Electives from './components/sections/Electives.jsx';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/electives" element={<Electives />} />
         </Routes>
       </Router>
     </div>

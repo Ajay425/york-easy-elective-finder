@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import {
   Select,
@@ -8,6 +9,8 @@ import {
 } from "@/components/ui/select";
 
 const Home = () => {
+    const navigate = useNavigate();
+
   return (
     <section className="flex flex-col items-center justify-center min-h-[80vh] px-6 py-16 bg-gradient-to-br from-[#A42439] via-[#8c1f32] to-[#6a1525] text-center space-y-8">
       <div className="max-w-3xl space-y-4">
@@ -19,58 +22,21 @@ const Home = () => {
         </p>
       </div>
 
-    <div className="flex flex-col md:flex-row gap-6 w-full max-w-2xl justify-center">
-        <Select>
-        <SelectTrigger className="w-[220px] bg-white text-black font-medium rounded-xl shadow">      
-            <SelectValue placeholder="Select Faculty" />
-        </SelectTrigger>
-        <SelectContent> 
-            <SelectItem value="arts">Faculty of Arts</SelectItem>
-            <SelectItem value="engineering">Lassonde School of Engineering</SelectItem>
-            <SelectItem value="science">Faculty of Science</SelectItem>
-            <SelectItem value="business">Schulich School of Business</SelectItem>
-            <SelectItem value="health">Faculty of Health</SelectItem>
-            <SelectItem value="education">Faculty of Education</SelectItem>
-            <SelectItem value="finearts">Faculty of Fine Arts</SelectItem>
-        </SelectContent>
-      </Select>
-    
-    {/* Department Select */}
-        <Select>
-          <SelectTrigger className="w-[220px] bg-white text-black font-medium rounded-xl shadow">
-            <SelectValue placeholder="Select Department" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="math">Mathematics & Statistics</SelectItem>
-            <SelectItem value="cs">Computer Science</SelectItem>
-            <SelectItem value="eco">Economics</SelectItem>
-          </SelectContent>
-        </Select>
-    {/* Credit Select */}
-        <Select>
-          <SelectTrigger className="w-[220px] bg-white text-black font-medium rounded-xl shadow">
-            <SelectValue placeholder="Select Credits" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="3">3 Credits</SelectItem>
-            <SelectItem value="6">6 Credits</SelectItem>
-            <SelectItem value="9">9 Credits</SelectItem>
-          </SelectContent>
-        </Select>
-
-    </div>
-
-
-
-      <div className="mt-10">
+      <div className="">
         <Button
-          className="bg-white text-[#A42439] hover:bg-gray-100 hover:text-[#8c1f32] text-lg font-semibold px-8 py-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
-        >
-          Search for Electives
+        onClick={() => {navigate('/electives')}}
+        className="relative overflow-hidden text-lg font-semibold px-8 py-6 rounded-2xl shadow-md bg-white text-[#A42439] transition-all duration-500 hover:scale-105 hover:shadow-xl group">
+          <span className="absolute inset-0 bg-gradient-to-r from-[#A42439] via-[#8c1f32] to-[#6a1525] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out rounded-2xl"></span>
+            <span className="relative z-10 text-[#A42439] group-hover:text-white transition-colors duration-500">
+                    Search for Electives
+            </span>
         </Button>
-      </div>
+        </div>
       <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-10">
         ⚠️ Always double-check with your faculty academic advisor before finalizing your electives.
+      </p>
+      <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-10">
+        📚 This tool is unofficial and not affiliated with York University. Feedback? Suggestions? Reach out to @plebewastaken on Discord. 
       </p>
     </section>
   );
