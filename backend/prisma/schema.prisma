@@ -66,6 +66,12 @@ model Professor{
   id Int @id @default(autoincrement()) 
   firstname String
   lastname String
+  avgRating Float?
+  avgDifficulty Float?
+  wouldTakeAgainPercent Float?
+  numberOfRatings Int?
+  department String?
+  rateMyProfLink String?
   @@unique([firstname, lastname])
 }
 
