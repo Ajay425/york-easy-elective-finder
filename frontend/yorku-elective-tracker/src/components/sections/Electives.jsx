@@ -18,8 +18,11 @@ import { X } from "lucide-react";
 
 const filterOptions = {
   Faculty: ["Lassonde", "Science", "Health", "LA&PS", "Schulich"],
-  Credits: ["3.00", "6.00"],
+  Credits: ["1.00", "3.00", "6.00", "9.00"],
   Popularity: ["⭐ High", "⭐ Medium", "⭐ Low"],
+  Delivery: ["In-Person", "Online", "Hybrid"],
+  Year: ["1st Year", "2nd Year", "3rd Year", "4th Year"],
+  Term: ["Fall", "Winter", "Summer"],
 };
 
 const Electives = () => {
@@ -27,9 +30,14 @@ const Electives = () => {
     Faculty: "",
     Credits: "",
     Popularity: "",
+    Delivery: "",
+    Year: "",
+    Term: "",
   });
 
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursesPerPage = 12;
 
   const courses = [
     { code: "EECS 1011", title: "Introduction to Programming", credits: "3.00", faculty: "Lassonde School of Engineering", description: "Covers programming fundamentals using Java. Topics include loops, conditionals, arrays, and object-oriented design.", lecture: "Mon & Wed 2:30 PM - 4:00 PM" },
@@ -44,6 +52,8 @@ const Electives = () => {
     { code: "ADMS 1000", title: "Introduction to Business", credits: "3.00", faculty: "Schulich School of Business", description: "Covers business fundamentals, marketing, management, and finance.", lecture: "Fri 1:00 PM - 4:00 PM" },
     { code: "HIST 1010", title: "World History Since 1500", credits: "6.00", faculty: "Faculty of Liberal Arts & Professional Studies", description: "Examine major global events shaping the modern world.", lecture: "Tue & Thu 6:00 PM - 7:30 PM" },
     { code: "SOSC 1350", title: "Introduction to Criminology", credits: "3.00", faculty: "Faculty of Liberal Arts & Professional Studies", description: "An interdisciplinary exploration of crime, justice, and society.", lecture: "Mon 5:00 PM - 8:00 PM" },
+    { code: "SOSC 1350", title: "Introduction to Criminology", credits: "3.00", faculty: "Faculty of Liberal Arts & Professional Studies", description: "An interdisciplinary exploration of crime, justice, and society.", lecture: "Mon 5:00 PM - 8:00 PM" },
+
   ];
 
   const filteredCourses = courses.filter((course) => {
@@ -52,6 +62,12 @@ const Electives = () => {
       (!filters.Credits || course.credits === filters.Credits)
     );
   });
+
+  // Pagination logic
+  const indexOfLast = currentPage * coursesPerPage;
+  const indexOfFirst = indexOfLast - coursesPerPage;
+  const currentCourses = filteredCourses.slice(indexOfFirst, indexOfLast);
+  const totalPages = Math.ceil(filteredCourses.length / coursesPerPage);
 
   return (
     <div className="relative min-h-screen w-full bg-[#A42439] text-white flex flex-col items-center overflow-x-hidden">
@@ -94,7 +110,16 @@ const Electives = () => {
           </DropdownMenu>
         ))}
         <Button
-          onClick={() => setFilters({ Faculty: "", Credits: "", Popularity: "" })}
+          onClick={() =>
+            setFilters({
+              Faculty: "",
+              Credits: "",
+              Popularity: "",
+              Delivery: "",
+              Year: "",
+              Term: "",
+            })
+          }
           variant="secondary"
           className="bg-white/10 text-white border border-white/20 hover:bg-white/20"
         >
@@ -104,7 +129,7 @@ const Electives = () => {
 
       {/* Course Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-7xl px-6 sm:px-10 pb-10">
-        {filteredCourses.map((course, index) => (
+        {currentCourses.map((course, index) => (
           <Card
             key={index}
             onClick={() => setSelectedCourse(course)}
@@ -127,6 +152,29 @@ const Electives = () => {
           </Card>
         ))}
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-3 mb-10">
+          <Button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((p) => p - 1)}
+            className="bg-white/10 text-white border border-white/20 hover:bg-white/20 disabled:opacity-50"
+          >
+            Prev
+          </Button>
+          <span className="text-sm text-yellow-100">
+            Page {currentPage} of {totalPages}
+          </span>
+          <Button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((p) => p + 1)}
+            className="bg-white/10 text-white border border-white/20 hover:bg-white/20 disabled:opacity-50"
+          >
+            Next
+          </Button>
+        </div>
+      )}
 
       {/* Slide-In Info Panel */}
       <AnimatePresence>
