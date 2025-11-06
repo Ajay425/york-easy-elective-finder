@@ -19,16 +19,16 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: jinjin
+-- Name: public; Type: SCHEMA; Schema: -; Owner: printerbeast
 --
 
 -- *not* creating schema, since initdb creates it
 
 
-ALTER SCHEMA public OWNER TO jinjin;
+ALTER SCHEMA public OWNER TO printerbeast;
 
 --
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: jinjin
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: printerbeast
 --
 
 COMMENT ON SCHEMA public IS '';
@@ -39,7 +39,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: Course; Type: TABLE; Schema: public; Owner: jinjin
+-- Name: Course; Type: TABLE; Schema: public; Owner: printerbeast
 --
 
 CREATE TABLE public."Course" (
@@ -55,10 +55,10 @@ CREATE TABLE public."Course" (
 );
 
 
-ALTER TABLE public."Course" OWNER TO jinjin;
+ALTER TABLE public."Course" OWNER TO printerbeast;
 
 --
--- Name: CoursePrerequisite; Type: TABLE; Schema: public; Owner: jinjin
+-- Name: CoursePrerequisite; Type: TABLE; Schema: public; Owner: printerbeast
 --
 
 CREATE TABLE public."CoursePrerequisite" (
@@ -68,10 +68,10 @@ CREATE TABLE public."CoursePrerequisite" (
 );
 
 
-ALTER TABLE public."CoursePrerequisite" OWNER TO jinjin;
+ALTER TABLE public."CoursePrerequisite" OWNER TO printerbeast;
 
 --
--- Name: CoursePrerequisite_id_seq; Type: SEQUENCE; Schema: public; Owner: jinjin
+-- Name: CoursePrerequisite_id_seq; Type: SEQUENCE; Schema: public; Owner: printerbeast
 --
 
 CREATE SEQUENCE public."CoursePrerequisite_id_seq"
@@ -83,17 +83,17 @@ CREATE SEQUENCE public."CoursePrerequisite_id_seq"
     CACHE 1;
 
 
-ALTER SEQUENCE public."CoursePrerequisite_id_seq" OWNER TO jinjin;
+ALTER SEQUENCE public."CoursePrerequisite_id_seq" OWNER TO printerbeast;
 
 --
--- Name: CoursePrerequisite_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jinjin
+-- Name: CoursePrerequisite_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: printerbeast
 --
 
 ALTER SEQUENCE public."CoursePrerequisite_id_seq" OWNED BY public."CoursePrerequisite".id;
 
 
 --
--- Name: Course_id_seq; Type: SEQUENCE; Schema: public; Owner: jinjin
+-- Name: Course_id_seq; Type: SEQUENCE; Schema: public; Owner: printerbeast
 --
 
 CREATE SEQUENCE public."Course_id_seq"
@@ -105,17 +105,17 @@ CREATE SEQUENCE public."Course_id_seq"
     CACHE 1;
 
 
-ALTER SEQUENCE public."Course_id_seq" OWNER TO jinjin;
+ALTER SEQUENCE public."Course_id_seq" OWNER TO printerbeast;
 
 --
--- Name: Course_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jinjin
+-- Name: Course_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: printerbeast
 --
 
 ALTER SEQUENCE public."Course_id_seq" OWNED BY public."Course".id;
 
 
 --
--- Name: Department; Type: TABLE; Schema: public; Owner: jinjin
+-- Name: Department; Type: TABLE; Schema: public; Owner: printerbeast
 --
 
 CREATE TABLE public."Department" (
@@ -124,10 +124,10 @@ CREATE TABLE public."Department" (
 );
 
 
-ALTER TABLE public."Department" OWNER TO jinjin;
+ALTER TABLE public."Department" OWNER TO printerbeast;
 
 --
--- Name: Faculty; Type: TABLE; Schema: public; Owner: jinjin
+-- Name: Faculty; Type: TABLE; Schema: public; Owner: printerbeast
 --
 
 CREATE TABLE public."Faculty" (
@@ -137,10 +137,10 @@ CREATE TABLE public."Faculty" (
 );
 
 
-ALTER TABLE public."Faculty" OWNER TO jinjin;
+ALTER TABLE public."Faculty" OWNER TO printerbeast;
 
 --
--- Name: Professor; Type: TABLE; Schema: public; Owner: jinjin
+-- Name: Professor; Type: TABLE; Schema: public; Owner: printerbeast
 --
 
 CREATE TABLE public."Professor" (
@@ -156,10 +156,10 @@ CREATE TABLE public."Professor" (
 );
 
 
-ALTER TABLE public."Professor" OWNER TO jinjin;
+ALTER TABLE public."Professor" OWNER TO printerbeast;
 
 --
--- Name: Professor_id_seq; Type: SEQUENCE; Schema: public; Owner: jinjin
+-- Name: Professor_id_seq; Type: SEQUENCE; Schema: public; Owner: printerbeast
 --
 
 CREATE SEQUENCE public."Professor_id_seq"
@@ -171,17 +171,17 @@ CREATE SEQUENCE public."Professor_id_seq"
     CACHE 1;
 
 
-ALTER SEQUENCE public."Professor_id_seq" OWNER TO jinjin;
+ALTER SEQUENCE public."Professor_id_seq" OWNER TO printerbeast;
 
 --
--- Name: Professor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jinjin
+-- Name: Professor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: printerbeast
 --
 
 ALTER SEQUENCE public."Professor_id_seq" OWNED BY public."Professor".id;
 
 
 --
--- Name: _prisma_migrations; Type: TABLE; Schema: public; Owner: jinjin
+-- Name: _prisma_migrations; Type: TABLE; Schema: public; Owner: printerbeast
 --
 
 CREATE TABLE public._prisma_migrations (
@@ -196,31 +196,31 @@ CREATE TABLE public._prisma_migrations (
 );
 
 
-ALTER TABLE public._prisma_migrations OWNER TO jinjin;
+ALTER TABLE public._prisma_migrations OWNER TO printerbeast;
 
 --
--- Name: Course id; Type: DEFAULT; Schema: public; Owner: jinjin
+-- Name: Course id; Type: DEFAULT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public."Course" ALTER COLUMN id SET DEFAULT nextval('public."Course_id_seq"'::regclass);
 
 
 --
--- Name: CoursePrerequisite id; Type: DEFAULT; Schema: public; Owner: jinjin
+-- Name: CoursePrerequisite id; Type: DEFAULT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public."CoursePrerequisite" ALTER COLUMN id SET DEFAULT nextval('public."CoursePrerequisite_id_seq"'::regclass);
 
 
 --
--- Name: Professor id; Type: DEFAULT; Schema: public; Owner: jinjin
+-- Name: Professor id; Type: DEFAULT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public."Professor" ALTER COLUMN id SET DEFAULT nextval('public."Professor_id_seq"'::regclass);
 
 
 --
--- Data for Name: Course; Type: TABLE DATA; Schema: public; Owner: jinjin
+-- Data for Name: Course; Type: TABLE DATA; Schema: public; Owner: printerbeast
 --
 
 COPY public."Course" (id, "deptAcronym", "courseCode", credit, name, "desc", language, faculty, year) FROM stdin;
@@ -4192,7 +4192,7 @@ COPY public."Course" (id, "deptAcronym", "courseCode", credit, name, "desc", lan
 
 
 --
--- Data for Name: CoursePrerequisite; Type: TABLE DATA; Schema: public; Owner: jinjin
+-- Data for Name: CoursePrerequisite; Type: TABLE DATA; Schema: public; Owner: printerbeast
 --
 
 COPY public."CoursePrerequisite" (id, "courseId", "prereqId") FROM stdin;
@@ -6879,7 +6879,7 @@ COPY public."CoursePrerequisite" (id, "courseId", "prereqId") FROM stdin;
 
 
 --
--- Data for Name: Department; Type: TABLE DATA; Schema: public; Owner: jinjin
+-- Data for Name: Department; Type: TABLE DATA; Schema: public; Owner: printerbeast
 --
 
 COPY public."Department" (acronym, "longForm") FROM stdin;
@@ -7058,7 +7058,7 @@ WRIT	Writing
 
 
 --
--- Data for Name: Faculty; Type: TABLE DATA; Schema: public; Owner: jinjin
+-- Data for Name: Faculty; Type: TABLE DATA; Schema: public; Owner: printerbeast
 --
 
 COPY public."Faculty" (acronym, "longForm", url) FROM stdin;
@@ -7076,7 +7076,7 @@ SC	Faculty of Science	https://www.yorku.ca/science/
 
 
 --
--- Data for Name: Professor; Type: TABLE DATA; Schema: public; Owner: jinjin
+-- Data for Name: Professor; Type: TABLE DATA; Schema: public; Owner: printerbeast
 --
 
 COPY public."Professor" (id, firstname, lastname, "avgDifficulty", "avgRating", department, "numberOfRatings", "rateMyProfLink", "wouldTakeAgainPercent") FROM stdin;
@@ -9405,7 +9405,7 @@ COPY public."Professor" (id, firstname, lastname, "avgDifficulty", "avgRating", 
 
 
 --
--- Data for Name: _prisma_migrations; Type: TABLE DATA; Schema: public; Owner: jinjin
+-- Data for Name: _prisma_migrations; Type: TABLE DATA; Schema: public; Owner: printerbeast
 --
 
 COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count) FROM stdin;
@@ -9429,28 +9429,28 @@ b6ab2359-0f77-4064-9376-c184951c2f6c	51d5f9a7785170bfd78e6ff3c8557a724dc988c9f62
 
 
 --
--- Name: CoursePrerequisite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jinjin
+-- Name: CoursePrerequisite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: printerbeast
 --
 
 SELECT pg_catalog.setval('public."CoursePrerequisite_id_seq"', 2781, true);
 
 
 --
--- Name: Course_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jinjin
+-- Name: Course_id_seq; Type: SEQUENCE SET; Schema: public; Owner: printerbeast
 --
 
 SELECT pg_catalog.setval('public."Course_id_seq"', 7639, true);
 
 
 --
--- Name: Professor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: jinjin
+-- Name: Professor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: printerbeast
 --
 
 SELECT pg_catalog.setval('public."Professor_id_seq"', 2321, true);
 
 
 --
--- Name: CoursePrerequisite CoursePrerequisite_pkey; Type: CONSTRAINT; Schema: public; Owner: jinjin
+-- Name: CoursePrerequisite CoursePrerequisite_pkey; Type: CONSTRAINT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public."CoursePrerequisite"
@@ -9458,7 +9458,7 @@ ALTER TABLE ONLY public."CoursePrerequisite"
 
 
 --
--- Name: Course Course_pkey; Type: CONSTRAINT; Schema: public; Owner: jinjin
+-- Name: Course Course_pkey; Type: CONSTRAINT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public."Course"
@@ -9466,7 +9466,7 @@ ALTER TABLE ONLY public."Course"
 
 
 --
--- Name: Department Department_pkey; Type: CONSTRAINT; Schema: public; Owner: jinjin
+-- Name: Department Department_pkey; Type: CONSTRAINT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public."Department"
@@ -9474,7 +9474,7 @@ ALTER TABLE ONLY public."Department"
 
 
 --
--- Name: Faculty Faculty_pkey; Type: CONSTRAINT; Schema: public; Owner: jinjin
+-- Name: Faculty Faculty_pkey; Type: CONSTRAINT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public."Faculty"
@@ -9482,7 +9482,7 @@ ALTER TABLE ONLY public."Faculty"
 
 
 --
--- Name: Professor Professor_pkey; Type: CONSTRAINT; Schema: public; Owner: jinjin
+-- Name: Professor Professor_pkey; Type: CONSTRAINT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public."Professor"
@@ -9490,7 +9490,7 @@ ALTER TABLE ONLY public."Professor"
 
 
 --
--- Name: _prisma_migrations _prisma_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: jinjin
+-- Name: _prisma_migrations _prisma_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public._prisma_migrations
@@ -9498,42 +9498,42 @@ ALTER TABLE ONLY public._prisma_migrations
 
 
 --
--- Name: CoursePrerequisite_courseId_prereqId_key; Type: INDEX; Schema: public; Owner: jinjin
+-- Name: CoursePrerequisite_courseId_prereqId_key; Type: INDEX; Schema: public; Owner: printerbeast
 --
 
 CREATE UNIQUE INDEX "CoursePrerequisite_courseId_prereqId_key" ON public."CoursePrerequisite" USING btree ("courseId", "prereqId");
 
 
 --
--- Name: Course_faculty_deptAcronym_courseCode_credit_key; Type: INDEX; Schema: public; Owner: jinjin
+-- Name: Course_faculty_deptAcronym_courseCode_credit_key; Type: INDEX; Schema: public; Owner: printerbeast
 --
 
 CREATE UNIQUE INDEX "Course_faculty_deptAcronym_courseCode_credit_key" ON public."Course" USING btree (faculty, "deptAcronym", "courseCode", credit);
 
 
 --
--- Name: Department_acronym_key; Type: INDEX; Schema: public; Owner: jinjin
+-- Name: Department_acronym_key; Type: INDEX; Schema: public; Owner: printerbeast
 --
 
 CREATE UNIQUE INDEX "Department_acronym_key" ON public."Department" USING btree (acronym);
 
 
 --
--- Name: Faculty_acronym_key; Type: INDEX; Schema: public; Owner: jinjin
+-- Name: Faculty_acronym_key; Type: INDEX; Schema: public; Owner: printerbeast
 --
 
 CREATE UNIQUE INDEX "Faculty_acronym_key" ON public."Faculty" USING btree (acronym);
 
 
 --
--- Name: Professor_firstname_lastname_key; Type: INDEX; Schema: public; Owner: jinjin
+-- Name: Professor_firstname_lastname_key; Type: INDEX; Schema: public; Owner: printerbeast
 --
 
 CREATE UNIQUE INDEX "Professor_firstname_lastname_key" ON public."Professor" USING btree (firstname, lastname);
 
 
 --
--- Name: CoursePrerequisite CoursePrerequisite_courseId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: jinjin
+-- Name: CoursePrerequisite CoursePrerequisite_courseId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public."CoursePrerequisite"
@@ -9541,7 +9541,7 @@ ALTER TABLE ONLY public."CoursePrerequisite"
 
 
 --
--- Name: CoursePrerequisite CoursePrerequisite_prereqId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: jinjin
+-- Name: CoursePrerequisite CoursePrerequisite_prereqId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: printerbeast
 --
 
 ALTER TABLE ONLY public."CoursePrerequisite"
@@ -9549,7 +9549,7 @@ ALTER TABLE ONLY public."CoursePrerequisite"
 
 
 --
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: jinjin
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: printerbeast
 --
 
 REVOKE USAGE ON SCHEMA public FROM PUBLIC;
