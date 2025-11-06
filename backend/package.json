@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,8 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.18.0",
+    "cheerio": "^1.1.2",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "franc": "^6.2.0",
+    "franc-min": "^6.2.0",
+    "ratemyprofessor-api": "^1.0.1"
   },
   "devDependencies": {
     "prisma": "^6.18.0"

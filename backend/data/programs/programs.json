@@ -1,0 +1,1304 @@
+[
+  {
+    "id": 1,
+    "name": "Accounting",
+    "url": "https://futurestudents.yorku.ca/program/certificates/accounting",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 3,
+    "name": "Actuarial Science",
+    "url": "https://futurestudents.yorku.ca/program/actuarial-science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 5,
+    "name": "Actuarial Science",
+    "url": "https://futurestudents.yorku.ca/program/certificates/actuarial-science",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 7,
+    "name": "Advocacy & Public Engagement",
+    "url": "https://futurestudents.yorku.ca/program/certificates/advocacy-and-public-engagement",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 9,
+    "name": "African Studies",
+    "url": "https://futurestudents.yorku.ca/program/african-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 11,
+    "name": "Anthropology",
+    "url": "https://futurestudents.yorku.ca/program/anthropology",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 13,
+    "name": "Anti Racist Research Practice",
+    "url": "https://futurestudents.yorku.ca/program/certificates/anti-racist-research-practice",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 15,
+    "name": "Applied Mathematics",
+    "url": "https://futurestudents.yorku.ca/program/applied-mathematics",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 17,
+    "name": "Athletic Therapy",
+    "url": "https://futurestudents.yorku.ca/program/certificates/athletic-therapy",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 19,
+    "name": "Education",
+    "url": "https://futurestudents.yorku.ca/program/education",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 21,
+    "name": "Bachelor of Education (French)",
+    "url": "https://futurestudents.yorku.ca/program/bachelor-of-education-french",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 23,
+    "name": "Biochemistry",
+    "url": "https://futurestudents.yorku.ca/program/biochemistry",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 25,
+    "name": "Biology",
+    "url": "https://futurestudents.yorku.ca/program/biology/science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 27,
+    "name": "Biology",
+    "url": "https://futurestudents.yorku.ca/program/biology/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 29,
+    "name": "Biomedical Physics",
+    "url": "https://futurestudents.yorku.ca/program/biomedical-physics",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 31,
+    "name": "Biomedical Science",
+    "url": "https://futurestudents.yorku.ca/program/biomedical-science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 33,
+    "name": "Biotechnology",
+    "url": "https://futurestudents.yorku.ca/program/biotechnology",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 35,
+    "name": "Black Canadian Studies",
+    "url": "https://futurestudents.yorku.ca/program/certificates/black-canadian-studies",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 37,
+    "name": "Business & Society",
+    "url": "https://futurestudents.yorku.ca/program/business-society",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 39,
+    "name": "Business Administration",
+    "url": "https://futurestudents.yorku.ca/program/business-administration",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 41,
+    "name": "Business Economics",
+    "url": "https://futurestudents.yorku.ca/program/business-economics/laps",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 43,
+    "name": "Business Economics",
+    "url": "https://futurestudents.yorku.ca/program/business-economics/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 45,
+    "name": "Canadian Business for Internationally Educated Professionals",
+    "url": "https://futurestudents.yorku.ca/program/certificates/canadian-business-for-internationally-educated-professionals",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 47,
+    "name": "Chemistry",
+    "url": "https://futurestudents.yorku.ca/program/chemistry",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 49,
+    "name": "Childrens Literature",
+    "url": "https://futurestudents.yorku.ca/program/certificates/childrens-literature",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 51,
+    "name": "Children, Childhood & Youth",
+    "url": "https://futurestudents.yorku.ca/program/children-childhood-youth",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 53,
+    "name": "Cinema & Media Arts",
+    "url": "https://futurestudents.yorku.ca/program/cinema-media-arts",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 55,
+    "name": "Media Arts",
+    "url": "https://futurestudents.yorku.ca/program/media-arts",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 57,
+    "name": "Cinema & Media Arts - Production",
+    "url": "https://futurestudents.yorku.ca/program/cinema-media-production",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 59,
+    "name": "Screenwriting",
+    "url": "https://futurestudents.yorku.ca/program/screenwriting",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 61,
+    "name": "Cities, Regions, Planning",
+    "url": "https://futurestudents.yorku.ca/program/cities-regions-planning",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 63,
+    "name": "Civil Engineering",
+    "url": "https://futurestudents.yorku.ca/program/civil-engineering",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 65,
+    "name": "Classical Studies",
+    "url": "https://futurestudents.yorku.ca/program/classical-studies-classics",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 67,
+    "name": "Climate Solutions & Sustainable Energy",
+    "url": "https://futurestudents.yorku.ca/program/certificates/climate-solutions-and-sustainable-energy",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 69,
+    "name": "Cognitive Science",
+    "url": "https://futurestudents.yorku.ca/program/cognitive-science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 71,
+    "name": "Commerce",
+    "url": "https://futurestudents.yorku.ca/program/commerce",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 73,
+    "name": "Commerce Qualification Year",
+    "url": "https://futurestudents.yorku.ca/program/commerce-qualification-year",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 75,
+    "name": "Communication & Media Studies",
+    "url": "https://futurestudents.yorku.ca/program/communication-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 77,
+    "name": "Communication, Social Media & Public Relations",
+    "url": "https://futurestudents.yorku.ca/program/communication-social-media-and-public-relations",
+    "is_certificate": false,
+    "campus": "Markham"
+  },
+  {
+    "id": 79,
+    "name": "Communications",
+    "url": "https://futurestudents.yorku.ca/program/communications",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 81,
+    "name": "Computer Engineering",
+    "url": "https://futurestudents.yorku.ca/program/computer-engineering",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 83,
+    "name": "Computer Science",
+    "url": "https://futurestudents.yorku.ca/program/computer-science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 85,
+    "name": "Computer Science for Software Development",
+    "url": "https://futurestudents.yorku.ca/program/computer-science-for-software-development",
+    "is_certificate": false,
+    "campus": "Markham"
+  },
+  {
+    "id": 87,
+    "name": "Computer Security",
+    "url": "https://futurestudents.yorku.ca/program/computer-security",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 89,
+    "name": "Creative Technologies",
+    "url": "https://futurestudents.yorku.ca/program/creative-technologies",
+    "is_certificate": false,
+    "campus": "Markham"
+  },
+  {
+    "id": 91,
+    "name": "Creative Writing",
+    "url": "https://futurestudents.yorku.ca/program/creative-writing",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 93,
+    "name": "Criminology",
+    "url": "https://futurestudents.yorku.ca/program/criminology",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 95,
+    "name": "Criminology Qualification Year",
+    "url": "https://futurestudents.yorku.ca/program/criminology-qualification-year",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 97,
+    "name": "Public History",
+    "url": "https://futurestudents.yorku.ca/program/certificates/public-history",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 99,
+    "name": "Community Arts Practice",
+    "url": "https://futurestudents.yorku.ca/program/certificates/community-arts-practice",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 101,
+    "name": "Culture, Medicine & Health",
+    "url": "https://futurestudents.yorku.ca/program/certificates/culture-medicine-and-health",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 103,
+    "name": "Dance",
+    "url": "https://futurestudents.yorku.ca/program/dance",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 105,
+    "name": "Data Science",
+    "url": "https://futurestudents.yorku.ca/program/data-science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 107,
+    "name": "Design",
+    "url": "https://futurestudents.yorku.ca/program/design",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 109,
+    "name": "Digital Health",
+    "url": "https://futurestudents.yorku.ca/program/certificates/digital-health",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 111,
+    "name": "Digital Media @ Lassonde",
+    "url": "https://futurestudents.yorku.ca/program/digital-media/lassonde",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 113,
+    "name": "Digital Media @ AMPD",
+    "url": "https://futurestudents.yorku.ca/program/digital-media/ampd",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 115,
+    "name": "Digital Technologies",
+    "url": "https://futurestudents.yorku.ca/program/digital-technologies",
+    "is_certificate": false,
+    "campus": "Markham"
+  },
+  {
+    "id": 117,
+    "name": "Disaster Emergency Management",
+    "url": "https://futurestudents.yorku.ca/program/disaster-emergency-management",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 119,
+    "name": "Discipline of Teaching English as an International Language",
+    "url": "https://futurestudents.yorku.ca/program/certificates/dteil",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 121,
+    "name": "Earth Atmospheric Science",
+    "url": "https://futurestudents.yorku.ca/program/earth-atmospheric-science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 123,
+    "name": "East Asian Studies",
+    "url": "https://futurestudents.yorku.ca/program/east-asian-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 125,
+    "name": "Economics",
+    "url": "https://futurestudents.yorku.ca/program/economics/laps",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 127,
+    "name": "Economics",
+    "url": "https://futurestudents.yorku.ca/program/economics/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 129,
+    "name": "Economics Qualification Year",
+    "url": "https://futurestudents.yorku.ca/program/economics-qualification-year",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 131,
+    "name": "Educational Studies",
+    "url": "https://futurestudents.yorku.ca/program/educational-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 133,
+    "name": "Electrical Engineering",
+    "url": "https://futurestudents.yorku.ca/program/electrical-engineering",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 135,
+    "name": "Emergency Management",
+    "url": "https://futurestudents.yorku.ca/program/certificates/emergency-management",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 137,
+    "name": "Undeclared Engineering",
+    "url": "https://futurestudents.yorku.ca/program/engineering",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 139,
+    "name": "Engineering & International Development Studies",
+    "url": "https://futurestudents.yorku.ca/program/engineering-intl-development-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 141,
+    "name": "English",
+    "url": "https://futurestudents.yorku.ca/program/english",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 143,
+    "name": "English & Professional Writing",
+    "url": "https://futurestudents.yorku.ca/program/english-professional-writing",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 145,
+    "name": "English Studies",
+    "url": "https://futurestudents.yorku.ca/program/english-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 147,
+    "name": "Entrepreneurship & Innovation",
+    "url": "https://futurestudents.yorku.ca/program/entrepreneurship-and-innovation",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 149,
+    "name": "Environmental Arts & justice",
+    "url": "https://futurestudents.yorku.ca/program/environmental-arts-justice",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 151,
+    "name": "Environmental Biology",
+    "url": "https://futurestudents.yorku.ca/program/environmental-biology",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 153,
+    "name": "Environmental Science",
+    "url": "https://futurestudents.yorku.ca/program/environmental-science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 155,
+    "name": "Philosophy",
+    "url": "https://futurestudents.yorku.ca/program/philosophy/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 157,
+    "name": "Financial Business & Economics",
+    "url": "https://futurestudents.yorku.ca/program/financial-business-economics",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 159,
+    "name": "Financial Planning",
+    "url": "https://futurestudents.yorku.ca/program/certificates/financial-planning",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 161,
+    "name": "Financial Technologies",
+    "url": "https://futurestudents.yorku.ca/program/financial-technologies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 163,
+    "name": "First Year Exploration",
+    "url": "https://futurestudents.yorku.ca/program/first-year-exploration/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 165,
+    "name": "First Year Science",
+    "url": "https://futurestudents.yorku.ca/program/first-year-science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 167,
+    "name": "Fitness Exercise & Counselling",
+    "url": "https://futurestudents.yorku.ca/program/certificates/fitness-exercise-counselling",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 169,
+    "name": "French Studies",
+    "url": "https://futurestudents.yorku.ca/program/french-studies/laps",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 171,
+    "name": "French Studies",
+    "url": "https://futurestudents.yorku.ca/program/french-studies/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 173,
+    "name": "Womens Studies",
+    "url": "https://futurestudents.yorku.ca/program/certificates/womens-studies",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 175,
+    "name": "Gender & Womens Studies",
+    "url": "https://futurestudents.yorku.ca/program/gender-womens-studies/laps",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 177,
+    "name": "Geomatic Engineering",
+    "url": "https://futurestudents.yorku.ca/program/geomatic-engineering",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 179,
+    "name": "Geographic Information Systems",
+    "url": "https://futurestudents.yorku.ca/program/certificates/geographic-information-systems",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 181,
+    "name": "German Studies",
+    "url": "https://futurestudents.yorku.ca/program/german-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 183,
+    "name": "Global Geography",
+    "url": "https://futurestudents.yorku.ca/program/global-geography",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 185,
+    "name": "Global Health",
+    "url": "https://futurestudents.yorku.ca/program/global-health",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 187,
+    "name": "History",
+    "url": "https://futurestudents.yorku.ca/program/history/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 189,
+    "name": "Global Political Studies",
+    "url": "https://futurestudents.yorku.ca/program/global-political-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 191,
+    "name": "Health & Society",
+    "url": "https://futurestudents.yorku.ca/program/health-society",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 193,
+    "name": "Health Policy Management & Digital Health",
+    "url": "https://futurestudents.yorku.ca/program/health-policy-management-digital-health",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 195,
+    "name": "Health Services & Financial Management",
+    "url": "https://futurestudents.yorku.ca/program/certificates/health-services-financial-management",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 197,
+    "name": "Health Studies",
+    "url": "https://futurestudents.yorku.ca/program/health-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 199,
+    "name": "Hebrew Jewish Studies",
+    "url": "https://futurestudents.yorku.ca/program/certificates/hebrew-jewish-studies",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 201,
+    "name": "Hellenic Studies",
+    "url": "https://futurestudents.yorku.ca/program/hellenic-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 203,
+    "name": "History @ Laps",
+    "url": "https://futurestudents.yorku.ca/program/history/laps",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 205,
+    "name": "Human Resources Management",
+    "url": "https://futurestudents.yorku.ca/program/certificates/human-resources-management",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 207,
+    "name": "Human Resources Management",
+    "url": "https://futurestudents.yorku.ca/program/human-resources-management",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 209,
+    "name": "Human Resources Management for Internationally Educated Professionals",
+    "url": "https://futurestudents.yorku.ca/program/certificates/human-resources-management-for-internationally-educated-professionals",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 211,
+    "name": "Human Rights & Equity Studies",
+    "url": "https://futurestudents.yorku.ca/program/human-rights-equity-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 213,
+    "name": "Humanities",
+    "url": "https://futurestudents.yorku.ca/program/humanities",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 215,
+    "name": "Indigenous Studies",
+    "url": "https://futurestudents.yorku.ca/program/certificates/indigenous-studies-certificate",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 217,
+    "name": "Indigenous Studies",
+    "url": "https://futurestudents.yorku.ca/program/indigenous-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 219,
+    "name": "Individualized Studies",
+    "url": "https://futurestudents.yorku.ca/program/individualized-studies/laps",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 221,
+    "name": "Information Technology",
+    "url": "https://futurestudents.yorku.ca/program/information-technology",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 223,
+    "name": "Information Technology Auditing & Assurance",
+    "url": "https://futurestudents.yorku.ca/program/certificates/information-technology-auditing-assurance",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 225,
+    "name": "Information Technology Auditing & Assurance for Internationally Educated Professionals",
+    "url": "https://futurestudents.yorku.ca/program/certificates/information-technology-for-internationally-educated-professionals",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 227,
+    "name": "Integrative Arts",
+    "url": "https://futurestudents.yorku.ca/program/integrative-arts",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 229,
+    "name": "Social Science",
+    "url": "https://futurestudents.yorku.ca/program/social-science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 231,
+    "name": "International Development Studies",
+    "url": "https://futurestudents.yorku.ca/program/international-development-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 233,
+    "name": "International Studies Business Administration",
+    "url": "https://futurestudents.yorku.ca/program/international-studies-business-administration",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 235,
+    "name": "International Studies",
+    "url": "https://futurestudents.yorku.ca/program/international-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 237,
+    "name": "Investment Management",
+    "url": "https://futurestudents.yorku.ca/program/certificates/investment-management",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 239,
+    "name": "Italian Studies",
+    "url": "https://futurestudents.yorku.ca/program/italian-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 241,
+    "name": "Jewish Studies",
+    "url": "https://futurestudents.yorku.ca/program/jewish-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 243,
+    "name": "Jewish Studies",
+    "url": "https://futurestudents.yorku.ca/program/certificates/jewish-studies",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 245,
+    "name": "Kinesiology Health Science",
+    "url": "https://futurestudents.yorku.ca/program/kinesiology-health-science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 247,
+    "name": "Language",
+    "url": "https://futurestudents.yorku.ca/program/certificates/language",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 249,
+    "name": "First Year Engineering Core",
+    "url": "https://futurestudents.yorku.ca/program/first-year-engineering-core",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 251,
+    "name": "Law & Social Thought",
+    "url": "https://futurestudents.yorku.ca/program/certificates/law-social-thought",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 253,
+    "name": "Law & Society",
+    "url": "https://futurestudents.yorku.ca/program/law-society",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 255,
+    "name": "Law & Society",
+    "url": "https://futurestudents.yorku.ca/program/certificates/law-society",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 257,
+    "name": "Law & Society Qualification Year",
+    "url": "https://futurestudents.yorku.ca/program/law-society-qualification-year",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 259,
+    "name": "Law",
+    "url": "https://futurestudents.yorku.ca/program/law",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 261,
+    "name": "Linguistics",
+    "url": "https://futurestudents.yorku.ca/program/linguistics",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 263,
+    "name": "Linguistics & Language Studies",
+    "url": "https://futurestudents.yorku.ca/program/linguistics-language-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 265,
+    "name": "Logistics",
+    "url": "https://futurestudents.yorku.ca/program/certificates/logistics",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 267,
+    "name": "Management",
+    "url": "https://futurestudents.yorku.ca/program/certificates/management",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 269,
+    "name": "Marketing",
+    "url": "https://futurestudents.yorku.ca/program/certificates/marketing",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 271,
+    "name": "Mathematics  @ Science",
+    "url": "https://futurestudents.yorku.ca/program/mathematics/science",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 273,
+    "name": "Mathematics",
+    "url": "https://futurestudents.yorku.ca/program/mathematics/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 275,
+    "name": "Mathematics for Education",
+    "url": "https://futurestudents.yorku.ca/program/mathematics-education",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 277,
+    "name": "Mechanical Engineering",
+    "url": "https://futurestudents.yorku.ca/program/mechanical-engineering",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 279,
+    "name": "Meteorology",
+    "url": "https://futurestudents.yorku.ca/program/certificates/meteorology",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 281,
+    "name": "Music",
+    "url": "https://futurestudents.yorku.ca/program/music",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 283,
+    "name": "Neuroscience",
+    "url": "https://futurestudents.yorku.ca/program/neuroscience",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 287,
+    "name": "Nursing",
+    "url": "https://futurestudents.yorku.ca/program/nursing",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 289,
+    "name": "Nursing: Post-RN for Internationally Educated Nurses",
+    "url": "https://futurestudents.yorku.ca/program/nursing-ien",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 293,
+    "name": "Philosophy",
+    "url": "https://futurestudents.yorku.ca/program/philosophy/laps",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 295,
+    "name": "Physics & Astronomy",
+    "url": "https://futurestudents.yorku.ca/program/physics-astronomy",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 297,
+    "name": "Political Science @ LAPS",
+    "url": "https://futurestudents.yorku.ca/program/political-science/laps",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 299,
+    "name": "Political Science",
+    "url": "https://futurestudents.yorku.ca/program/political-science/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 301,
+    "name": "Portuguese Studies",
+    "url": "https://futurestudents.yorku.ca/program/portuguese-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 303,
+    "name": "Practical Ethics",
+    "url": "https://futurestudents.yorku.ca/program/certificates/practical-ethics",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 305,
+    "name": "Translation Studies",
+    "url": "https://futurestudents.yorku.ca/program/translation-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 307,
+    "name": "Professional Writing",
+    "url": "https://futurestudents.yorku.ca/program/professional-writing",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 309,
+    "name": "Proficiency in Spanish",
+    "url": "https://futurestudents.yorku.ca/program/certificates/proficiency-in-spanish",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 311,
+    "name": "Psychology",
+    "url": "https://futurestudents.yorku.ca/program/psychology/health",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 313,
+    "name": "Psychology",
+    "url": "https://futurestudents.yorku.ca/program/psychology/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 315,
+    "name": "Public Administration",
+    "url": "https://futurestudents.yorku.ca/program/public-administration",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 317,
+    "name": "Public Administration & Law",
+    "url": "https://futurestudents.yorku.ca/program/certificates/public-administration-and-law",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 319,
+    "name": "Public Policy Analysis",
+    "url": "https://futurestudents.yorku.ca/program/certificates/public-policy-analysis",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 321,
+    "name": "Refugee & Migration Studies",
+    "url": "https://futurestudents.yorku.ca/program/certificates/refugee-and-migration-studies",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 325,
+    "name": "Rehabilitation Services",
+    "url": "https://futurestudents.yorku.ca/program/certificates/rehabilitation-services",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 327,
+    "name": "Religious Studies",
+    "url": "https://futurestudents.yorku.ca/program/religious-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 329,
+    "name": "Science, Technology & Society",
+    "url": "https://futurestudents.yorku.ca/program/science-technology-and-society",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 331,
+    "name": "Sexuality Studies",
+    "url": "https://futurestudents.yorku.ca/program/sexuality-studies/laps",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 333,
+    "name": "Sexuality Studies",
+    "url": "https://futurestudents.yorku.ca/program/certificates/sexuality-studies",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 335,
+    "name": "Social Work",
+    "url": "https://futurestudents.yorku.ca/program/social-work",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 337,
+    "name": "Social Work Post Degree",
+    "url": "https://futurestudents.yorku.ca/program/social-work-post-degree",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 339,
+    "name": "Sociology",
+    "url": "https://futurestudents.yorku.ca/program/sociology/laps",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 341,
+    "name": "Sociology",
+    "url": "https://futurestudents.yorku.ca/program/sociology/glendon",
+    "is_certificate": false,
+    "campus": "Glendon"
+  },
+  {
+    "id": 343,
+    "name": "Software Engineering",
+    "url": "https://futurestudents.yorku.ca/program/software-engineering",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 345,
+    "name": "Space Engineering",
+    "url": "https://futurestudents.yorku.ca/program/space-engineering",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 347,
+    "name": "Spanish",
+    "url": "https://futurestudents.yorku.ca/program/spanish",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 349,
+    "name": "Spanish & Latin American Cultures & Societies",
+    "url": "https://futurestudents.yorku.ca/program/spanish-and-latin-american-cultures-and-societies",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 351,
+    "name": "Spanish/English",
+    "url": "https://futurestudents.yorku.ca/program/certificates/spanish-english",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 353,
+    "name": "Speech Language Sciences",
+    "url": "https://futurestudents.yorku.ca/program/speech-language-sciences",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 355,
+    "name": "Sport Management",
+    "url": "https://futurestudents.yorku.ca/program/sport-management",
+    "is_certificate": false,
+    "campus": "Markham"
+  },
+  {
+    "id": 357,
+    "name": "Statistics",
+    "url": "https://futurestudents.yorku.ca/program/statistics",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 359,
+    "name": "Sustainable Environmental Management",
+    "url": "https://futurestudents.yorku.ca/program/sustainable-environmental-management",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 361,
+    "name": "Teaching English to Speakers of Other Languages",
+    "url": "https://futurestudents.yorku.ca/program/certificates/tesol",
+    "is_certificate": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 363,
+    "name": "Technical & Professional Communication",
+    "url": "https://futurestudents.yorku.ca/program/certificates/technical-professional-writing",
+    "is_certificate": true,
+    "campus": "Glendon"
+  },
+  {
+    "id": 365,
+    "name": "Theatre",
+    "url": "https://futurestudents.yorku.ca/program/theatre",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 367,
+    "name": "Performance Creation",
+    "url": "https://futurestudents.yorku.ca/program/performance-creation",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 369,
+    "name": "Undecided",
+    "url": "https://futurestudents.yorku.ca/program/undecided-major",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 373,
+    "name": "Undeclared",
+    "url": "https://futurestudents.yorku.ca/program/undeclared-major",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 375,
+    "name": "Art History",
+    "url": "https://futurestudents.yorku.ca/program/art-history",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 377,
+    "name": "Visual Arts",
+    "url": "https://futurestudents.yorku.ca/program/visual-arts",
+    "is_certificate": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 379,
+    "name": "Work & Labour Studies",
+    "url": "https://futurestudents.yorku.ca/program/work-labour-studies",
+    "is_certificate": false,
+    "campus": "Keele"
+  }
+]

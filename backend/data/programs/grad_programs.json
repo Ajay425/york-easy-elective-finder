@@ -1,0 +1,744 @@
+[
+  {
+    "id": 1,
+    "name": "Accounting",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/accounting",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 3,
+    "name": "Professional Accounting",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/professional-accounting",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 6,
+    "name": "Advanced Accounting",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/advanced-accounting",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 7,
+    "name": "Advanced Hebrew & Jewish Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/advanced-hebrew-jewish-studies",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 9,
+    "name": "Anthropology, Social",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/anthropology-social",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 11,
+    "name": "Art History & Visual Culture",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/art-history-and-visual-culture",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 13,
+    "name": "Artificial Intelligence",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/artificial-intelligence",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 15,
+    "name": "Arts & Media Administration",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/arts-and-media-administration",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 17,
+    "name": "Asian Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/asian-studies",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 19,
+    "name": "Biology",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/biology",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 21,
+    "name": "Biotechnology",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/biotechnology",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 23,
+    "name": "Biotechnology Management",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/biotechnology-management",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 25,
+    "name": "Business Administration",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/business-administration",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 27,
+    "name": "Business Analytics",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/business-analytics",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 29,
+    "name": "Business & The Environment",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/business-and-the-environment",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 31,
+    "name": "Chemistry",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/chemistry",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 33,
+    "name": "Cinema & Media Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/cinema-and-media-studies",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 35,
+    "name": "Civil Engineering",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/civil-engineering",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 37,
+    "name": "Communication & Culture",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/communication-and-culture",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 39,
+    "name": "Comparative Literature",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/comparative-literature",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 41,
+    "name": "Conference Interpreting",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/conference-interpreting",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 43,
+    "name": "Critical Disability Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/critical-disability-studies",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 45,
+    "name": "Culture, Communication & Leadership In Canadian Business",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/culture-communication-leadership-in-canadian-business",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 47,
+    "name": "Curatorial Studies in Visual Culture",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/curatorial-studies-in-visual-culture",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 49,
+    "name": "Dance",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/dance",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 51,
+    "name": "Democratic Administration",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/democratic-administration",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 53,
+    "name": "Design",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/design",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 55,
+    "name": "Development Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/development-studies",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 57,
+    "name": "Digital Media",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/digital-media",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 59,
+    "name": "Disaster & Emergency Management",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/disaster-and-emergency-management",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 61,
+    "name": "Early Childhood Education",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/early-childhood-education",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 63,
+    "name": "Earth & Space Science",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/earth-and-space-science",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 65,
+    "name": "Economics",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/economics",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 67,
+    "name": "Education in Urban Environments",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/education-urban-environments",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 69,
+    "name": "Education: Language, Culture & teaching",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/education-language-culture-and-teaching",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 71,
+    "name": "Electrical Engineering & Computer Science",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/electrical-engineering-and-computer-science",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 73,
+    "name": "English",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/english",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 75,
+    "name": "Environmental Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/environmental-studies",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 77,
+    "name": "Environmental Sustainability Education",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/environmental-sustainability-education",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 79,
+    "name": "Etudes Francaises",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/etudes-francaises",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 81,
+    "name": "Etudes Francophones",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/etudes-francophones",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 83,
+    "name": "European Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/european-studies",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 85,
+    "name": "Film",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/film",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 87,
+    "name": "Finance",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/finance",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 89,
+    "name": "Financial Accountability",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/financial-accountability",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 91,
+    "name": "Financial Engineering",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/financial-engineering",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 93,
+    "name": "Foundations of Canadian Law",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/foundations-of-canadian-law",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 95,
+    "name": "Womens Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/womens-studies",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 97,
+    "name": "General Interpreting",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/general-interpreting",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 99,
+    "name": "Geography",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/geography",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 101,
+    "name": "Global Health",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/global-health",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 103,
+    "name": "Global Metals & Minerals Management",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/global-metals-and-minerals-management",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 105,
+    "name": "Health",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/health",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 107,
+    "name": "Health Industry Management",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/health-industry-management",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 109,
+    "name": "Health Psychology",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/health-psychology",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 111,
+    "name": "History",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/history",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 113,
+    "name": "Human Resources Management",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/human-resources-management",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 115,
+    "name": "Humanities",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/humanities",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 117,
+    "name": "Information Technology",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/information-technology",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 119,
+    "name": "Interdisciplinary Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/interdisciplinary-studies",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 121,
+    "name": "Intermediate Accounting",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/intermediate-accounting",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 123,
+    "name": "International & Security Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/international-and-security-studies",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 125,
+    "name": "Jewish Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/jewish-studies",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 127,
+    "name": "Justice System Administration",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/justice-system-administration",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 129,
+    "name": "Kinesiology & Health Science",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/kinesiology-and-health-science",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 131,
+    "name": "Language & Literacy Education",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/language-literacy-education",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 133,
+    "name": "Latin American & Caribbean Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/latin-american-and-caribbean-studies",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 135,
+    "name": "Law",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/law",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 137,
+    "name": "Law (Osgoode Professional Development)",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/law-professional-development",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 139,
+    "name": "Law for Law Enforcement Professionals",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/law-for-law-enforcement-professionals",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 141,
+    "name": "Leadership & Community Engagement",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/leadership-community-engagement",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 143,
+    "name": "Linguistics & Applied Linguistics",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/linguistics-and-applied-linguistics",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 145,
+    "name": "Management",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/management",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 147,
+    "name": "Management",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/management",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 149,
+    "name": "Management Practice",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/management-practice",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 151,
+    "name": "Marketing",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/marketing",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 153,
+    "name": "MBA in Tech Leadership",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/mba-in-tech-leadership",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 155,
+    "name": "Mathematics & Statistics",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/mathematics-and-statistics",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 157,
+    "name": "Mathematics Education",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/mathematics-education",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 159,
+    "name": "Mechanical Engineering",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/mechanical-engineering",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 161,
+    "name": "Music",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/music",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 163,
+    "name": "Neuroscience",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/neuroscience",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 165,
+    "name": "Nursing",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/nursing",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 167,
+    "name": "Philosophy",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/philosophy",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 169,
+    "name": "Physics & Astronomy",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/physics-and-astronomy",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 171,
+    "name": "Political Science",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/political-science",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 173,
+    "name": "Advanced Management",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/advanced-management",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 175,
+    "name": "Community culture-policy",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/community-culture-policy",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 177,
+    "name": "Psychology",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/psychology",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 179,
+    "name": "Public & International Affairs",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/public-and-international-affairs",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 181,
+    "name": "public-policy-administration-and-law",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/public-policy-administration-and-law",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 183,
+    "name": "Quantitative Methods",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/quantitative-methods",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 185,
+    "name": "Real Estate Infrastructure",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/real-estate-infrastructure",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 187,
+    "name": "Refugee & Migration Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/refugee-and-migration-studies",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 189,
+    "name": "Science & Technology Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/science-and-technology-studies",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 191,
+    "name": "Social & Political Thought",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/social-and-political-thought",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 193,
+    "name": "Social Work",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/social-work",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 195,
+    "name": "Socio-Legal Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/socio-legal-studies",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 197,
+    "name": "Sociology",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/sociology",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 199,
+    "name": "Supply Chain Management",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/supply-chain-management",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 201,
+    "name": "Theatre",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/theatre",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 203,
+    "name": "Theatre-studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/theatre-studies",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 205,
+    "name": "Translation Studies",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/translation-studies",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 208,
+    "name": "Value Theory  & Applied Ethics",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/value-theory-applied-ethics",
+    "is_diploma": true,
+    "campus": "Keele"
+  },
+  {
+    "id": 209,
+    "name": "Visual Arts",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/visual-arts",
+    "is_diploma": false,
+    "campus": "Keele"
+  },
+  {
+    "id": 211,
+    "name": "World Literature",
+    "url": "https://futurestudents.yorku.ca/graduate/programs/diplomas/world-literature",
+    "is_diploma": true,
+    "campus": "Keele"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "faculty": "AP",
+    "name": "Faculty of Liberal Arts & Professional Studies",
+    "url": "https://www.yorku.ca/laps/"
+  },
+  {
+    "faculty": "ED",
+    "name": "Faculty of Education",
+    "url": "https://www.yorku.ca/edu/"
+  },
+  {
+    "faculty": "EU",
+    "name": "Faculty of Environmental & Urban Change",
+    "url": "https://www.yorku.ca/euc/"
+  },
+  {
+    "faculty": "FA",
+    "name": "School of the Arts, Media, Performance & Design",
+    "url": "https://ampd.yorku.ca/"
+  },
+  {
+    "faculty": "GL",
+    "name": "Glendon College",
+    "url": "https://www.glendon.yorku.ca/"
+  },
+  {
+    "faculty": "GS",
+    "name": "Faculty of Graduate Studies",
+    "url": "https://www.yorku.ca/gradstudies/"
+  },
+  {
+    "faculty": "HH",
+    "name": "Faculty of Health",
+    "url": "https://www.yorku.ca/health/"
+  },
+  {
+    "faculty": "LE",
+    "name": "Lassonde School of Engineering",
+    "url": "https://lassonde.yorku.ca/"
+  },
+  {
+    "faculty": "SB",
+    "name": "Schulich School of Business",
+    "url": "https://schulich.yorku.ca/"
+  },
+  {
+    "faculty": "SC",
+    "name": "Faculty of Science",
+    "url": "https://www.yorku.ca/science/"
+  }
+]
