@@ -1,0 +1,3 @@
+- Use pagination so that we can display multiple pages based on the courses.jsonn I will use shorttly
+- Use Sheet component so that we can make it easier to display instead of creating our own
+- Add filter options for different 
