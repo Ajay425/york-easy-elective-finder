@@ -24,6 +24,7 @@ async function main() {
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const data = JSON.parse(fileContent)
     for (let course of data){
+        
         console.log(`Course ${course.dept} ${course.code}`)
         const courseDB = await prisma.course.findUnique({
             where:{

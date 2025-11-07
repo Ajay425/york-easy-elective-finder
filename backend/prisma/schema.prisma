@@ -37,8 +37,10 @@ model Course {
   desc      String?
   language String?
   year Int
-    prerequisites     CoursePrerequisite[] @relation("CoursePrerequisite_course")
-   prerequisiteFor   CoursePrerequisite[] @relation("CoursePrerequisite_prereq")
+
+  courseOfferings CurrentCourseOfferings[]
+  prerequisites     CoursePrerequisite[] @relation("CoursePrerequisite_course")
+  prerequisiteFor   CoursePrerequisite[] @relation("CoursePrerequisite_prereq")
   @@unique([faculty, deptAcronym,courseCode, credit])
 }
 
@@ -62,7 +64,9 @@ model Department{
   acronym String @id @unique
   longForm String? 
 }
-model Professor{
+
+
+model Instructors{
   id Int @id @default(autoincrement()) 
   firstname String
   lastname String
@@ -72,7 +76,29 @@ model Professor{
   numberOfRatings Int?
   department String?
   rateMyProfLink String?
+  offerings InstructorOfferings[]
   @@unique([firstname, lastname])
+  @@map("Professor")  //  tells Prisma this model uses the existing "Professors" table
+}
+
+model CurrentCourseOfferings{
+  id Int @id @default(autoincrement())
+  term String
+  courseId Int
+  course Course @relation(fields:[courseId], references: [id])
+  section String
+  type String
+  instructors InstructorOfferings[]
+  @@unique([term,courseId, section, type])
+}
+
+model InstructorOfferings{
+  id Int @id @default(autoincrement())
+  instructorId Int
+  courseOfferingId Int
+  instructor Instructors @relation(fields:[instructorId], references:[id])
+  courseOffering CurrentCourseOfferings @relation(fields:[courseOfferingId], references:[id])
+@@unique([instructorId, courseOfferingId])
 }
 
 // model Department{
