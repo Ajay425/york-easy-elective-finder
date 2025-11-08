@@ -31,12 +31,25 @@ async function main() {
 // });
 
 // console.dir(cterms, { depth: null });
- const cterms = await prisma.Course.findMany({
-    where:{
-        credit: {lte : 3.0}
+ const cterms = await prisma.Instructors.findMany({
+    orderBy:{
+      numberOfRatings:"desc"
     }
  })
- console.log(cterms)
+//  console.log(cterms)
+
+//  const res = await prisma.$queryRaw
+//   ` SELECT * FROM "InstructorOfferings" 
+//     WHERE "instructorId" in (
+//     SELECT "id" FROM "Professor"
+//     ORder by "numberOfRatings" desc)`
+//  console.log(res)
+const vals = { values: ['1.0', '3.0'] }
+console.log(vals.val1)
+ const res = await prisma.$queryRaw
+  ` SELECT * FROM "Course" 
+    WHERE credit <= ${vals[0]}` 
+ console.log(res)
 }
 
 

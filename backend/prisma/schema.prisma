@@ -15,18 +15,6 @@ datasource db {
 }
 
 
-// model Course {
-//   id        Int      @id @default(autoincrement()) 
-//   deptAcronym   String 
-//   dept      Department @relation(fields:[deptAcronym], references: [acronym])
-//   code      String
-//   credit    Float?
-//   name      String
-//   prerequisites     Course[] @relation("CourseToPrereqs")
-//   prerequisiteFor   Course[] @relation("CourseToPrereqs")
-//   desc      String?
-// }
-
 model Course {
   id        Int      @id @default(autoincrement()) 
   faculty   String
@@ -100,39 +88,3 @@ model InstructorOfferings{
   courseOffering CurrentCourseOfferings @relation(fields:[courseOfferingId], references:[id])
 @@unique([instructorId, courseOfferingId])
 }
-
-// model Department{
-//   acronym String @id @unique
-//   longForm String 
-//   courses Course[]
-//   facultyAcronym String
-//   faculty        Faculty     @relation(fields: [facultyAcronym], references: [acronym])
-// }
-
-
-// //Faculty houses Department
-// model Faculty{
-//   acronym String @id @unique
-//   longForm String
-//   deptAcronym String 
-//   department Department[]
-// }
-
-// model 
-// model Professor{
-//   id Int @id @unique
-//   department String
-//   firstname String
-//   lastname String
-//   numRatings Float?
-//   overallRating String?
-// }
-
-
-// model courseAvailablity{
-//   courseCode String
-//   term String
-//   section String
-//   lecturetype String
-//   professor String
-// }
