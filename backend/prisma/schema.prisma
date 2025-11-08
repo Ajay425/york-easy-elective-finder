@@ -29,6 +29,8 @@ model Course {
   courseOfferings CurrentCourseOfferings[]
   prerequisites     CoursePrerequisite[] @relation("CoursePrerequisite_course")
   prerequisiteFor   CoursePrerequisite[] @relation("CoursePrerequisite_prereq")
+  fallPopularity Int?
+  winterPopularity Int?
   @@unique([faculty, deptAcronym,courseCode, credit])
 }
 

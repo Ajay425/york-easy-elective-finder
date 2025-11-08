@@ -36,20 +36,24 @@ async function main() {
       numberOfRatings:"desc"
     }
  })
-//  console.log(cterms)
 
-//  const res = await prisma.$queryRaw
-//   ` SELECT * FROM "InstructorOfferings" 
-//     WHERE "instructorId" in (
-//     SELECT "id" FROM "Professor"
-//     ORder by "numberOfRatings" desc)`
-//  console.log(res)
-const vals = { values: ['1.0', '3.0'] }
-console.log(vals.val1)
- const res = await prisma.$queryRaw
-  ` SELECT * FROM "Course" 
-    WHERE credit <= ${vals[0]}` 
- console.log(res)
+
+const vals = [1.0]
+const years = [1]
+const courses = await prisma.course.findMany({
+  where: {
+    credit: {
+      in: vals, // matches credit = 1.0 OR 3.0 OR 5.0
+    },
+    year:{
+      in:years
+    }
+  },
+  orderBy:{
+    id:'desc'
+  }
+})
+console.log(courses)
 }
 
 
