@@ -171,7 +171,7 @@ const Electives = () => {
       </div>
 
       <p className="text-sm text-yellow-100 italic text-center mb-5">
-        Note: Click on course card for more information about the course description and instructors.
+        Note: Click on course card for more information about the course description, prerequisites and instructors.
       </p>
 
       {/* Course Grid */}
