@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Card,
   CardHeader,
@@ -16,54 +16,99 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
-const filterOptions = {
-  Faculty: ["Lassonde", "Science", "Health", "LA&PS", "Schulich"],
-  Credits: ["1.00", "3.00", "6.00", "9.00"],
-  Popularity: ["⭐ High", "⭐ Medium", "⭐ Low"],
-  Delivery: ["In-Person", "Online", "Hybrid"],
-  Year: ["1st Year", "2nd Year", "3rd Year", "4th Year"],
-  Term: ["Fall", "Winter", "Summer"],
-};
-
 const Electives = () => {
   const [filters, setFilters] = useState({
     Faculty: "",
     Credits: "",
-    Popularity: "",
-    Delivery: "",
-    Year: "",
     Term: "",
   });
 
+  const [courses, setCourses] = useState([]);
+  const [filterOptions, setFilterOptions] = useState({
+    Faculty: [],
+    Credits: [],
+    Term: [],
+  });
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const coursesPerPage = 12;
 
-  const courses = [
-    { code: "EECS 1011", title: "Introduction to Programming", credits: "3.00", faculty: "Lassonde School of Engineering", description: "Covers programming fundamentals using Java. Topics include loops, conditionals, arrays, and object-oriented design.", lecture: "Mon & Wed 2:30 PM - 4:00 PM" },
-    { code: "MATH 1013", title: "Calculus I", credits: "3.00", faculty: "Faculty of Science", description: "Differential calculus with applications to physical sciences and engineering.", lecture: "Tue & Thu 10:00 AM - 11:30 AM" },
-    { code: "PSYC 1010", title: "Introduction to Psychology", credits: "6.00", faculty: "Faculty of Health", description: "Introduction to the scientific study of human behaviour and mental processes.", lecture: "Mon, Wed, Fri 9:30 AM - 10:30 AM" },
-    { code: "EECS 2030", title: "Advanced Object-Oriented Programming", credits: "3.00", faculty: "Lassonde School of Engineering", description: "Covers design patterns, Java, and software engineering principles.", lecture: "Tue & Thu 1:00 PM - 2:30 PM" },
-    { code: "MATH 1025", title: "Applied Linear Algebra", credits: "3.00", faculty: "Faculty of Science", description: "Explore matrices, vectors, and transformations for practical computation.", lecture: "Mon & Wed 11:00 AM - 12:30 PM" },
-    { code: "PHIL 1000", title: "Introduction to Philosophy", credits: "3.00", faculty: "Faculty of Liberal Arts & Professional Studies", description: "Investigate questions about knowledge, existence, and ethics.", lecture: "Wed & Fri 2:00 PM - 3:30 PM" },
-    { code: "HUMA 1200", title: "Understanding Literature", credits: "3.00", faculty: "Faculty of Liberal Arts & Professional Studies", description: "An overview of literary genres, themes, and critical reading methods.", lecture: "Tue 6:00 PM - 9:00 PM" },
-    { code: "ECON 1000", title: "Introduction to Microeconomics", credits: "3.00", faculty: "Faculty of Liberal Arts & Professional Studies", description: "Understand how individuals and firms make economic decisions.", lecture: "Mon & Wed 3:00 PM - 4:30 PM" },
-    { code: "EECS 2021", title: "Computer Organization", credits: "3.00", faculty: "Lassonde School of Engineering", description: "Study digital logic, computer architecture, and hardware components.", lecture: "Thu 10:00 AM - 1:00 PM" },
-    { code: "ADMS 1000", title: "Introduction to Business", credits: "3.00", faculty: "Schulich School of Business", description: "Covers business fundamentals, marketing, management, and finance.", lecture: "Fri 1:00 PM - 4:00 PM" },
-    { code: "HIST 1010", title: "World History Since 1500", credits: "6.00", faculty: "Faculty of Liberal Arts & Professional Studies", description: "Examine major global events shaping the modern world.", lecture: "Tue & Thu 6:00 PM - 7:30 PM" },
-    { code: "SOSC 1350", title: "Introduction to Criminology", credits: "3.00", faculty: "Faculty of Liberal Arts & Professional Studies", description: "An interdisciplinary exploration of crime, justice, and society.", lecture: "Mon 5:00 PM - 8:00 PM" },
-    { code: "SOSC 1350", title: "Introduction to Criminology", credits: "3.00", faculty: "Faculty of Liberal Arts & Professional Studies", description: "An interdisciplinary exploration of crime, justice, and society.", lecture: "Mon 5:00 PM - 8:00 PM" },
+  // Fetch and normalize course data
+  useEffect(() => {
+    fetch("/data/all_courses.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const formatted = data.map((c) => ({
+          code: `${c.facultyPrefix}/${c.dept} ${c.code}`,
+          title: c.title,
+          credits: c.credit.toFixed(2),
+          faculty:
+            c.facultyPrefix === "SB"
+              ? "Schulich School of Business"
+              : c.facultyPrefix === "AP"
+              ? "Faculty of Liberal Arts & Professional Studies"
+              : c.facultyPrefix === "SC"
+              ? "Faculty of Science"
+              : c.facultyPrefix === "LE"
+              ? "Lassonde School of Engineering"
+              : c.facultyPrefix === "ED"
+              ? "Faculty of Education"
+              : "Other",
+          description: c.description,
+          terms: c.terms || [],
+        }));
 
-  ];
+        // Extract dynamic filter options
+        const faculties = Array.from(
+          new Set(formatted.map((c) => c.faculty))
+        ).sort();
+        const credits = Array.from(
+          new Set(formatted.map((c) => c.credits))
+        ).sort((a, b) => parseFloat(a) - parseFloat(b));
+        const terms = Array.from(
+          new Set(
+            formatted.flatMap((c) =>
+              c.terms.map((t) =>
+                t.term === "F"
+                  ? "Fall"
+                  : t.term === "W"
+                  ? "Winter"
+                  : t.term === "S"
+                  ? "Summer"
+                  : t.term
+              )
+            )
+          )
+        );
 
-  const filteredCourses = courses.filter((course) => {
-    return (
-      (!filters.Faculty || course.faculty.includes(filters.Faculty)) &&
-      (!filters.Credits || course.credits === filters.Credits)
-    );
-  });
+        setCourses(formatted);
+        setFilterOptions({ Faculty: faculties, Credits: credits, Term: terms });
+      })
+      .catch((err) => console.error("Failed to load courses:", err));
+  }, []);
 
-  // Pagination logic
+  // Filter courses dynamically
+  const filteredCourses = useMemo(() => {
+    return courses.filter((course) => {
+      const termLabels = course.terms.map((t) =>
+        t.term === "F"
+          ? "Fall"
+          : t.term === "W"
+          ? "Winter"
+          : t.term === "S"
+          ? "Summer"
+          : t.term
+      );
+
+      return (
+        (!filters.Faculty || course.faculty === filters.Faculty) &&
+        (!filters.Credits || course.credits === filters.Credits) &&
+        (!filters.Term || termLabels.includes(filters.Term))
+      );
+    });
+  }, [courses, filters]);
+
+  // Pagination
   const indexOfLast = currentPage * coursesPerPage;
   const indexOfFirst = indexOfLast - coursesPerPage;
   const currentCourses = filteredCourses.slice(indexOfFirst, indexOfLast);
@@ -71,13 +116,14 @@ const Electives = () => {
 
   return (
     <div className="relative min-h-screen w-full bg-[#A42439] text-white flex flex-col items-center overflow-x-hidden">
+      {/* Header */}
       <section className="bg-[#A42439] pt-2 w-full">
         <h1 className="text-xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-yellow-200 via-white to-yellow-100 bg-clip-text text-transparent drop-shadow-lg text-center">
           Explore Your Electives
         </h1>
       </section>
 
-      {/* Filter Bar */}
+      {/* Dynamic Filter Bar */}
       <div className="flex flex-wrap justify-center gap-3 px-4 sm:px-8 mb-8 mt-6">
         {Object.entries(filterOptions).map(([filterName, options]) => (
           <DropdownMenu key={filterName}>
@@ -89,7 +135,7 @@ const Electives = () => {
                 {filters[filterName] || filterName}
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-white/10 text-white border border-white/20 backdrop-blur-md">
+            <DropdownMenuContent className="bg-white/10 text-white border border-white/20 backdrop-blur-md max-h-64 overflow-y-auto">
               {options.map((option) => (
                 <DropdownMenuItem
                   key={option}
@@ -114,9 +160,6 @@ const Electives = () => {
             setFilters({
               Faculty: "",
               Credits: "",
-              Popularity: "",
-              Delivery: "",
-              Year: "",
               Term: "",
             })
           }
@@ -126,6 +169,10 @@ const Electives = () => {
           Clear Filters
         </Button>
       </div>
+
+      <p className="text-sm text-yellow-100 italic text-center mb-5">
+        Note: Click on course card for more information about the course description and instructors.
+      </p>
 
       {/* Course Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-7xl px-6 sm:px-10 pb-10">
@@ -152,6 +199,7 @@ const Electives = () => {
           </Card>
         ))}
       </div>
+      
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
@@ -184,25 +232,66 @@ const Electives = () => {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 80 }}
-            className="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white/10 backdrop-blur-xl border-l border-white/20 shadow-2xl p-6 z-50 flex flex-col"
+            className="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white/10 backdrop-blur-xl border-l border-white/20 shadow-2xl p-6 z-50 flex flex-col overflow-y-auto"
           >
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-white">{selectedCourse.code}</h2>
+            <div className="flex justify-between items-center mb-4 sticky top-0 bg-[#A42439]/60 backdrop-blur-md p-2 rounded">
+              <h2 className="text-xl font-bold text-white">
+                {selectedCourse.code}
+              </h2>
               <button onClick={() => setSelectedCourse(null)}>
                 <X className="text-white w-6 h-6 hover:text-yellow-200" />
               </button>
             </div>
-            <h3 className="text-lg text-yellow-100 mb-2">{selectedCourse.title}</h3>
-            <p className="text-gray-200 text-sm mb-4">{selectedCourse.description}</p>
+
+            <h3 className="text-lg text-yellow-100 mb-2">
+              {selectedCourse.title}
+            </h3>
+            <p className="text-gray-200 text-sm mb-4">
+              {selectedCourse.description}
+            </p>
             <p className="text-gray-300 text-sm mb-2">
               <strong>Faculty:</strong> {selectedCourse.faculty}
             </p>
             <p className="text-gray-300 text-sm mb-2">
               <strong>Credits:</strong> {selectedCourse.credits}
             </p>
-            <p className="text-gray-300 text-sm">
-              <strong>Lecture:</strong> {selectedCourse.lecture}
-            </p>
+
+            {/* Display all sections and instructors */}
+            {selectedCourse.terms?.length > 0 && (
+              <div className="mt-4 space-y-3">
+                <h4 className="text-yellow-200 font-semibold mb-2">
+                  Sections & Instructors:
+                </h4>
+                {selectedCourse.terms.map((term, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white/10 p-3 rounded-lg border border-white/20"
+                  >
+                    <p className="text-sm text-gray-100 mb-1">
+                      <strong>
+                        Term:{" "}
+                        {term.term === "F"
+                          ? "Fall"
+                          : term.term === "W"
+                          ? "Winter"
+                          : term.term === "S"
+                          ? "Summer"
+                          : term.term}
+                      </strong>{" "}
+                      — Section {term.section}
+                    </p>
+                    <ul className="text-xs text-gray-200 list-disc ml-4">
+                      {term.meetings.map((m, i) => (
+                        <li key={i}>
+                          {m.type}: {m.firstName || "TBA"}{" "}
+                          {m.lastName || ""}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

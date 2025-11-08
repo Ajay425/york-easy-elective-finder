@@ -35,8 +35,11 @@ const Home = () => {
       <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-10">
         ⚠️ Always double-check with your faculty academic advisor before finalizing your electives.
       </p>
-      <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-10">
-        📚 This tool is unofficial and not affiliated with York University. Feedback? Suggestions? Reach out to @plebewastaken on Discord. 
+      <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-5">
+        📚 This tool is unofficial and not affiliated with York University.
+      </p>
+      <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-5">
+        📞 Feedback, Suggestions? Reach out to @plebewastaken on Discord or email at plebwastaken68@gmail.com.
       </p>
     </section>
   );
