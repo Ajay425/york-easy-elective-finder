@@ -1,0 +1,9 @@
+[
+  { "term": "F", "name": "Fall Term", "dates": "September – December", "description": "One-term course (typically 3 credits)" },
+  { "term": "W", "name": "Winter Term", "dates": "January – April", "description": "One-term course (typically 3 credits)" },
+  { "term": "Y", "name": "Full Year (Undergraduate)", "dates": "September – April", "description": "Two-term course (6 credits)" },
+  { "term": "A", "name": "Summer Term (Full)", "dates": "May – August", "description": "Full summer session course (3–6 credits)" },
+  { "term": "B", "name": "Summer Term (First Half)", "dates": "May – June", "description": "First half of summer term course" },
+  { "term": "C", "name": "Summer Term (Second Half)", "dates": "July – August", "description": "Second half of summer term course" },
+  { "term": "M", "name": "Full Year (Graduate/Extended)", "dates": "September – August", "description": "Year-long or graduate-level course" }
+]

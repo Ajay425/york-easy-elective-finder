@@ -38,22 +38,108 @@ async function main() {
  })
 
 
-const vals = [1.0]
-const years = [1]
+
+const termsFromFrontend = ['F', 'W', 'Y'];
+const typesFromFrontend = ['LECT', 'ONLN'];
+const yearsFromFrontend = [1, 2];
+const deptAcronymFrotnend = ['EECS']
+const creditsFromFrontend = [1, 3];
 const courses = await prisma.course.findMany({
   where: {
-    credit: {
-      in: vals, // matches credit = 1.0 OR 3.0 OR 5.0
+    deptAcronym:{ in: deptAcronymFrotnend},
+      year: { in: yearsFromFrontend },
+    credit: { in: creditsFromFrontend },
+    courseOfferings: {
+      some: {
+        term: { in: termsFromFrontend },
+        type: { in: typesFromFrontend },
+      },
     },
-    year:{
-      in:years
+  },
+  include: {
+    courseOfferings: true, // include all offerings, or still filter if you want
+  },
+  orderBy: {
+    id: 'desc',
+  },
+});
+
+// console.log(JSON.stringify(courses, null, 2));
+
+const uniqueness = await prisma.Instructors.findMany({
+  where:{
+    avgDifficulty:{
+      gte:0
+    },
+    numberOfRatings:{
+      gte:100
+    },
+    wouldTakeAgainPercent:{
+      gte:90
     }
   },
+
   orderBy:{
-    id:'desc'
+    numberOfRatings:'desc'
+  },
+  take:20
+
+})
+
+// console.log(uniqueness)
+
+
+const counts = await prisma.instructors.groupBy({
+  by: ['avgDifficulty'],  // column(s) to group by
+  _count: {
+    avgDifficulty: true,  // count of rows in each group
+  },
+  orderBy:{
+    avgDifficulty:'desc'
   }
 })
-console.log(courses)
+
+// console.log(counts)
+const simplified = counts.map(item => ({
+  avgDifficulty: item.avgDifficulty,
+  count: item._count.avgDifficulty,
+}))
+
+console.log(simplified)
+
+const uniqueSections = await prisma.currentCourseOfferings.findMany({
+  distinct: ['term'],
+  select: {
+    term: true,
+  },
+});
+
+console.log(uniqueSections);
+
+const uniqueTypes = await prisma.currentCourseOfferings.findMany({
+  distinct: ['type'],
+  select: {
+    type: true,
+  },
+});
+
+
+console.log(uniqueTypes);
+
+const types = ['LECT','BLEN', 'ONLN']
+const test = await prisma.currentCourseOfferings.findMany({
+  where:{
+    type: {
+      in: types
+    },
+    term:'F'
+  },
+  include:{
+    course:true
+  },
+  take:20
+})
+// console.log(test)
 }
 
 
