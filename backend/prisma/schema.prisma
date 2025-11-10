@@ -29,12 +29,6 @@ model Course {
   courseOfferings CurrentCourseOfferings[]
   prerequisites     CoursePrerequisite[] @relation("CoursePrerequisite_course")
   prerequisiteFor   CoursePrerequisite[] @relation("CoursePrerequisite_prereq")
-  fallPopularity Float?
-  winterPopularity Float?
-  fullYearPopularity Float?
-  summerFullPopularity Float?
-  summerFirstHalfPopularity Float?
-  summerSecondHalfPopularity Float?
 
   @@unique([faculty, deptAcronym,courseCode, credit])
 }
@@ -72,6 +66,7 @@ model Instructors{
   department String?
   rateMyProfLink String?
   offerings InstructorOfferings[]
+  popularity Float?
   @@unique([firstname, lastname])
   @@map("Professor")  //  tells Prisma this model uses the existing "Professors" table
 }
