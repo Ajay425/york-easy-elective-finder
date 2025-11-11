@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import courseRouter from './router/courseRouter.js';
 import "dotenv/config";
+import cors from 'cors';
 
 
 const app = express();
@@ -10,6 +11,9 @@ const app = express();
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
+app.use(cors({
+    origin: '*' // replace '*' with your frontend URL in production
+}));
 
 const PORT = process.env.PORT;
 
