@@ -129,9 +129,8 @@ const uniqueTypes = await prisma.currentCourseOfferings.findMany({
 const terms = ['F'];                 // e.g. ['F','W']
 const types = ['LECT','BLEN','ONLN'];
 const years = [1];
-const depts = ['EECS'];
-const faculties = ['LE'];
-
+const depts = ['CHEM'];
+const faculties = ['SC'];
 
 const courses5 = await prisma.course.findMany({
   where: {
