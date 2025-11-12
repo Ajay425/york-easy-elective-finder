@@ -15,8 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { getProfessorRating } from "../../assets/utils/RMPData";
- // ✅ Import RMP utilities
+import { buildCoursesURL } from "../../lib/courseFilters";
 
 const Electives = () => {
   const [filters, setFilters] = useState({
@@ -33,82 +32,87 @@ const Electives = () => {
   });
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [profRatings, setProfRatings] = useState({});
   const coursesPerPage = 12;
 
   // Fetch and normalize course data
-  useEffect(() => {
-    fetch("/data/all_courses.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const formatted = data.map((c) => ({
-          code: `${c.facultyPrefix}/${c.dept} ${c.code}`,
-          title: c.title,
-          credits: c.credit.toFixed(2),
-          faculty:
-            c.facultyPrefix === "SB"
-              ? "Schulich School of Business"
-              : c.facultyPrefix === "AP"
-              ? "Faculty of Liberal Arts & Professional Studies"
-              : c.facultyPrefix === "SC"
-              ? "Faculty of Science"
-              : c.facultyPrefix === "LE"
-              ? "Lassonde School of Engineering"
-              : c.facultyPrefix === "ED"
-              ? "Faculty of Education"
-              : "Other",
-          description: c.description,
-          terms: c.terms || [],
-        }));
+useEffect(() => {
+  fetch(buildCoursesURL())
+    .then((res) => res.json())
+    .then((responseData) => {
+      const data = responseData.courses;
+      
+      if (!data || !Array.isArray(data) || data.length === 0) {
+        console.warn('No courses returned from API');
+        return;
+      }
+      
+      const formatted = data.map((c) => ({
+      code: `${c.faculty}/${c.deptAcronym} ${c.courseCode}`,
+      title: c.name,
+    credits: c.credit.toFixed(2),
+  faculty:
+    c.faculty === "SB"
+      ? "Schulich School of Business"
+      : c.faculty === "AP"
+      ? "Faculty of Liberal Arts & Professional Studies"
+      : c.faculty === "SC"
+      ? "Faculty of Science"
+      : c.faculty === "LE"
+      ? "Lassonde School of Engineering"
+      : c.faculty === "ED"
+      ? "Faculty of Education"
+      : "Other",
 
-        const faculties = Array.from(new Set(formatted.map((c) => c.faculty))).sort();
-        const credits = Array.from(new Set(formatted.map((c) => c.credits))).sort(
-          (a, b) => parseFloat(a) - parseFloat(b)
-        );
-        const terms = Array.from(
-          new Set(
-            formatted.flatMap((c) =>
-              c.terms.map((t) =>
-                t.term === "F"
-                  ? "Fall"
-                  : t.term === "W"
-                  ? "Winter"
-                  : t.term === "Y"
-                  ? "Year-Long"
-                  : t.term === "S"
-                  ? "Summer"
-                  : t.term
-              )
+    description: c.desc || '',
+      // best instructor rating from the course offerings
+    topInstructorRating: c.courseOfferings?.[0]?.instructors?.[0]?.instructor?.avgRating,
+    topInstructorName: c.courseOfferings?.[0]?.instructors?.[0]?.instructor 
+    ? `${c.courseOfferings[0].instructors[0].instructor.firstname} ${c.courseOfferings[0].instructors[0].instructor.lastname}`
+    : null,
+    terms: (c.courseOfferings || []).map(offering => ({
+      term: offering.term,
+      section: offering.section,
+      meetings: (offering.instructors || []).map(io => ({
+        type: offering.type,
+        firstName: io.instructor?.firstname || "TBA",
+        lastName: io.instructor?.lastname || "",
+        //RMP Prof Ratings from DB
+        avgRating: io.instructor?.avgRating,
+        avgDifficulty: io.instructor?.avgDifficulty,
+        wouldTakeAgainPercent: io.instructor?.wouldTakeAgainPercent,
+        numberOfRatings: io.instructor?.numberOfRatings,
+        rateMyProfLink: io.instructor?.rateMyProfLink,
+      }))
+    })),
+  }));
+
+      const faculties = Array.from(new Set(formatted.map((c) => c.faculty))).sort();
+      const credits = Array.from(new Set(formatted.map((c) => c.credits))).sort(
+        (a, b) => parseFloat(a) - parseFloat(b)
+      );
+      const terms = Array.from(
+        new Set(
+          formatted.flatMap((c) =>
+            c.terms.map((t) =>
+              t.term === "F"
+                ? "Fall"
+                : t.term === "W"
+                ? "Winter"
+                : t.term === "Y"
+                ? "Year-Long"
+                : t.term === "S"
+                ? "Summer"
+                : t.term
             )
           )
-        );
+        )
+      );
 
-        setCourses(formatted);
-        setFilterOptions({ Faculty: faculties, Credits: credits, Term: terms });
-      })
-      .catch((err) => console.error("Failed to load courses:", err));
-  }, []);
-
-  // Load RMP data when a course is selected
-  useEffect(() => {
-    if (!selectedCourse) return;
-
-    const loadRatings = async () => {
-      const ratings = {};
-      for (const t of selectedCourse.terms || []) {
-        for (const m of t.meetings || []) {
-          if (m.firstName && m.lastName) {
-            const key = `${m.firstName} ${m.lastName}`;
-            const rmp = await getProfessorRating(m.firstName, m.lastName);
-            if (rmp) ratings[key] = rmp;
-          }
-        }
-      }
-      setProfRatings(ratings);
-    };
-
-    loadRatings();
-  }, [selectedCourse]);
+      setCourses(formatted);
+      setFilterOptions({ Faculty: faculties, Credits: credits, Term: terms });
+    })
+    .catch((err) => console.error("Failed to load courses:", err));
+}, []);
 
   // Filter courses dynamically
   const filteredCourses = useMemo(() => {
@@ -220,6 +224,20 @@ const Electives = () => {
                 Credits: {course.credits}
               </p>
               <p className="text-gray-300 text-xs">Faculty: {course.faculty}</p>
+
+              {/*popularity rating  */}
+          {course.topInstructorRating && (
+            <div className="mt-2 pt-2 border-t border-white/20">
+          <p className="text-yellow-200 text-sm font-semibold">
+            ⭐ {course.topInstructorRating.toFixed(1)} - Top Rated
+          </p>
+          {course.topInstructorName && (
+            <p className="text-gray-300 text-xs italic">
+              {course.topInstructorName}
+          </p>
+          )}
+        </div>
+          )}
             </CardContent>
           </Card>
         ))}
@@ -275,6 +293,9 @@ const Electives = () => {
             <p className="text-gray-300 text-sm mb-2">
               <strong>Credits:</strong> {selectedCourse.credits}
             </p>
+            <p className="text-sm text-yellow-100 italic mb-5">
+              Note: Always double check if you need permission from an instructor to enroll into this course.
+              </p>
 
             {/* Term Sections */}
             {selectedCourse.terms?.length > 0 && (
@@ -289,7 +310,6 @@ const Electives = () => {
                     title="🍂 Fall"
                     color="text-yellow-300"
                     terms={selectedCourse.terms.filter((t) => t.term === "F")}
-                    profRatings={profRatings}
                   />
                 )}
 
@@ -299,7 +319,6 @@ const Electives = () => {
                     title="❄️ Winter"
                     color="text-blue-300"
                     terms={selectedCourse.terms.filter((t) => t.term === "W")}
-                    profRatings={profRatings}
                   />
                 )}
 
@@ -312,7 +331,6 @@ const Electives = () => {
                     terms={selectedCourse.terms.filter(
                       (t) => !["F", "W"].includes(t.term)
                     )}
-                    profRatings={profRatings}
                   />
                 )}
               </div>
@@ -325,7 +343,7 @@ const Electives = () => {
 };
 
 // ✅ Reusable Term Section Component
-const TermSection = ({ title, color, terms, profRatings }) => (
+const TermSection = ({ title, color, terms }) => (
   <div>
     <h5 className={`text-lg ${color} font-semibold mb-2`}>{title}</h5>
     <div className="space-y-3">
@@ -339,20 +357,31 @@ const TermSection = ({ title, color, terms, profRatings }) => (
           </p>
           <ul className="text-xs text-gray-200 list-disc ml-4">
             {term.meetings?.length ? (
-              term.meetings.map((m, i) => {
-                const key = `${m.firstName} ${m.lastName}`;
-                const rmp = profRatings[key];
-                return (
-                  <li key={i}>
-                    {m.type}: {m.firstName || "TBA"} {m.lastName || ""}
-                    {rmp && (
-                      <span className="text-yellow-200 ml-2">
-                        ⭐ {rmp.overall_rating || "N/A"} ({rmp.numratings} ratings)
-                      </span>
-                    )}
-                  </li>
-                );
-              })
+              term.meetings.map((m, i) => (
+                <li key={i}>
+                  {m.type}: {m.firstName || "TBA"} {m.lastName || ""}
+                  {m.avgRating && m.numberOfRatings && (
+                    <span className="text-yellow-200 ml-2">
+                      ⭐ {m.avgRating.toFixed(1)} ({m.numberOfRatings} ratings)
+                      {m.wouldTakeAgainPercent && (
+                        <span className="ml-1">
+                          • {m.wouldTakeAgainPercent.toFixed(0)}% would take again
+                        </span>
+                      )}
+                    </span>
+                  )}
+                  {m.rateMyProfLink && (
+                    <a 
+                      href={m.rateMyProfLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-300 ml-2 hover:underline"
+                    >
+                      View RMP
+                    </a>
+                  )}
+                </li>
+              ))
             ) : (
               <li className="italic text-gray-300">No meeting info</li>
             )}
