@@ -32,13 +32,13 @@ const Home = () => {
             </span>
         </Button>
         </div>
-      <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-10">
+      <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-5">
         ⚠️ Always double-check with your faculty academic advisor before finalizing your electives.
       </p>
-      <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-5">
+      <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-3">
         📚 This tool is unofficial and not affiliated with York University.
       </p>
-      <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-5">
+      <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-3">
         📞 Feedback, Suggestions? Reach out to @plebewastaken on Discord or email at plebwastaken68@gmail.com.
       </p>
     </section>
