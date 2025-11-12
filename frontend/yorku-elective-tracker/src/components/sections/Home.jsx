@@ -39,7 +39,7 @@ const Home = () => {
         📚 This tool is unofficial and not affiliated with York University.
       </p>
       <p className="text-gray-200 italic max-w-md text-base leading-relaxed mt-3">
-        📞 Feedback, Suggestions? Reach out to @plebewastaken on Discord or email at plebwastaken68@gmail.com.
+        📞 Feedback, Suggestions? Reach out to @plebwastaken on Discord or email at plebwastaken68@gmail.com.
       </p>
     </section>
   );
