@@ -25,6 +25,7 @@ async function main() {
     const data = JSON.parse(fileContent)
     for (let course of data){
         console.log(`Course ${course.dept} ${course.code}`)
+
         const courseRow = await prisma.course.findUnique({
                 where: {
                     faculty_deptAcronym_courseCode_credit: {
@@ -48,6 +49,7 @@ async function main() {
       
                     
                     console.log(`${terms.term} ${course.facultyPrefix} ${course.dept} ${course.code} ${terms.section} ${sanitizedType} `)
+                    
                     const courseOfferingId = await prisma.CurrentCourseOfferings.findUnique({
                         where:{
                             term_courseId_section_type:{
@@ -78,13 +80,26 @@ async function main() {
 
                     const isntrID= instructorPRISMA.id
                     
-                    const instructorOffering = await prisma.InstructorOfferings.create({
-                        data:{
+                   try {
+                        const instructorOffering = await prisma.instructorOfferings.upsert({
+                            where: {
+                            instructorId_courseOfferingId: {
+                                instructorId: isntrID,
+                                courseOfferingId: courseOfferingId.id,
+                            },
+                            },
+                            update: {}, // empty => do NOTHING if already exists
+                            create: {
                             instructorId: isntrID,
-                            courseOfferingId:courseOfferingId.id
+                            courseOfferingId: courseOfferingId.id,
+                            },
+                        });
+
+                        console.log('Upserted instructorOffering id:', instructorOffering.id);
+                        } catch (err) {
+                        console.error('Failed to upsert instructorOffering:', err);
+                        throw err;
                         }
-                    })
-                    console.log(instructorOffering)
                 }
             }
           }

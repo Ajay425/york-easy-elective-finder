@@ -77,49 +77,9 @@ async function main() {
 catch(err){
     console.log(err)
 }
-//     const files = await fs.readdir(coursesDir);  // Read all files in the course directory
-//     for (let file of files) {
-//       if (path.extname(file) === '.json') {  // Only process JSON files
-//         const filePath = path.join(coursesDir, file);
 
-//         // Read the JSON file using fs.promises.readFile and parse it
-//         const fileContent = await fs.readFile(filePath, 'utf-8');
-//         const data = JSON.parse(fileContent);  // Parse the JSON content
-
-//         // Iterate over courses in the JSON data
-//         for (let course of data) {
-//           const faculty = course.facultyPrefix;
-//           const deptAcronym = course.dept;
-//           const courseCode = course.code;
-//           const credit = course.credit;
-//           const name = course.title;
-//           const desc = course.description;
-//           const language = course.language;
-//           const year =  parseInt(course.code[0],10)
-//           const courseCreation = await prisma.Course.create({
-//             data: {
-//               faculty: faculty,
-//               deptAcronym: deptAcronym,
-//               courseCode: courseCode,
-//               credit: credit,
-//               name: name,
-//               desc: desc,
-//               language: language,
-//               year:year
-//             },
-//           });
-
-//           console.log("Complete");
-//           console.log(courseCreation);
-//         }
-//       }
-//     }
-//   } catch (err) {
-//     console.error('Error while processing courses:', err);
-//   }
 }
 
-// Run main function and handle disconnect from Prisma
 main()
   .then(async () => {
     await prisma.$disconnect();

@@ -1,6 +1,6 @@
 import rmp from "ratemyprofessor-api";
 
-import { PrismaClient } from '../../generated/prisma/index.js';
+import { PrismaClient } from '../generated/prisma/index.js';
 const prisma = new PrismaClient();
 
 
@@ -51,28 +51,4 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
-
-
-// (async () => {
-//   const school = await rmp.searchSchool("York University - Keele Campus");
-//   if (school !== undefined) {
-//     const schoolId = school[0].node.id;
-
-//     // to search for professors with a name and get all query results
-//     // const JeanFrechetSearchResults = await rmp.searchProfessorsAtSchoolId(
-//     //   "Carl Wolfe",
-//     //   schoolId
-//     // );
-//     // to search for a professor with a specific name and get only the ratings and other relevant information
-//     const JeanFrechetRatings = await rmp.getProfessorRatingAtSchoolId(
-//       "Jarek Szlichta",
-//       schoolId
-//     );
-//     console.log(JeanFrechetRatings);
-
-//   } else {
-//     console.log("unknown school name");
-//   }
-// })();
-
 
