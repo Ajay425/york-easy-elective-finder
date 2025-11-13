@@ -4,7 +4,6 @@ import os, re, time, random, datetime
 # ----------------------------------------------------------
 # ⚙️ USER SETTINGS
 # ----------------------------------------------------------
-
 FAST_MODE = False
 MAX_SUBJECTS = None
 CAMPUS_NAME = "Keele"
@@ -113,6 +112,7 @@ def reload_york_main(page, start_url, subject_value=None, campus_name=None):
 with sync_playwright() as p:
     print(f"🚀 Launching Playwright browser (FAST_MODE={FAST_MODE})")
 
+
     browser = p.chromium.launch(
         headless=False,
         args=[
@@ -120,9 +120,14 @@ with sync_playwright() as p:
             "--disable-infobars",
             "--no-sandbox",
             "--disable-dev-shm-usage",
-        ]
+            "--disable-gpu",
+            "--disable-software-rasterizer",
+            "--disable-backgrounding-occluded-windows",
+            "--disable-background-timer-throttling",
+            "--disable-features=UseSkiaRenderer",
+            "--ignore-gpu-blacklist",
+        ],
     )
-
     context = browser.new_context(
         user_agent=(
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -132,6 +137,7 @@ with sync_playwright() as p:
         viewport={"width": 1366, "height": 768},
     )
     page = context.new_page()
+    
     page.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
     base_url = "https://w2prod.sis.yorku.ca"
@@ -271,12 +277,13 @@ with sync_playwright() as p:
                 page.goto(link, wait_until="networkidle", timeout=60000)
                 if session_expired(page):
                     reload_york_main(page, start_url, subject_value, CAMPUS_NAME)
-                    continue
 
                 html = page.content()
                 with open(filepath, "w", encoding="utf-8") as f:
                     f.write(html)
                 print(f"      💾 Saved {filename}")
+                human_pause(1.0, 2.0)
+
             except Exception as e:
                 print(f"      ❌ Failed: {e}")
 
@@ -291,6 +298,20 @@ with sync_playwright() as p:
                 reload_york_main(page, start_url, subject_value, CAMPUS_NAME)
 
             human_pause()
+
+        # ---------- NEW: ensure we return to the main search page ----------
+        try:
+            print("   ↩️ Returning to main search page...")
+            page.goto(start_url, wait_until="domcontentloaded", timeout=60000)
+            human_pause(0.5, 1.0)
+            try:
+                page.locator("img[alt='Search By Subject']").click()
+                page.wait_for_load_state("networkidle", timeout=60000)
+            except Exception:
+                # If the click fails, the next loop will detect & reload; small pause to stabilize
+                human_pause(1.0, 2.0)
+        except Exception as e:
+            print(f"⚠️ Failed to return to main: {e}")
 
         with open(PROGRESS_FILE, "a", encoding="utf-8") as f:
             f.write(subject_name + "\n")
