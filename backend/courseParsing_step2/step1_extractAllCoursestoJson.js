@@ -3,7 +3,7 @@ import path from "path";
 import * as cheerio from "cheerio";
 import { fileURLToPath } from "url";
 
-import { extractPrereqsWithCredits } from "./parsePrereqs.js";
+import { extractPrereqsWithCredits } from "./parsePrereqsHelperFunc.js";
 import { Console } from "console";
 
 /**

@@ -28,46 +28,38 @@ async function main() {
 
         for (let meeting of term.meetings){
 
-            lecturetypes.add(meeting.type)
+
+            lecturetypes.add(meeting.type) //this line of code? i think i already did a lot with regex, need to find
+            //so i only get the 
+
             for (let instr of meeting.instructors){
                 console.log(`${instr.firstName} ${instr.lastName}`)
 
-                // const upsertProf = await prisma.professor.upsert({
-                //     where: {
-                //         firstname_lastname: {   // 👈 note the exact name format
-                //         firstname:instr.firstName,
-                //         lastname:instr.lastName
-                //         }
-                //     },
-                //     update: {},
-                //     create: {
-                //         firstname:instr.firstName,
-                //         lastname:instr.lastName
-                //     }
-                //     });
+                const upsertProf = await prisma.professor.upsert({
+                    where: {
+                        firstname_lastname: {   // 👈 note the exact name format
+                        firstname:instr.firstName,
+                        lastname:instr.lastName
+                        }
+                    },
+                    update: {},
+                    create: {
+                        firstname:instr.firstName,
+                        lastname:instr.lastName
+                    }
+                    });
 
-                // console.log(upsertProf)
+                console.log(upsertProf)
             }
         }
       }
-
-    //   // Insert into Prisma
-    //   const facultyCreation = await prisma.faculty.create({
-    //     data: {
-    //       acronym: acronym,
-    //       longForm: longForm,
-    //       url: url,
-    //     },
-    //   });
-
-    //   console.log(facultyCreation);
     
 
 }
     console.log(lecturetypes)
-    console.log('🎉 All faculties inserted successfully!');
+    console.log('🎉 All profs inserted successfully!');
   } catch (err) {
-    console.error('❌ Error while processing faculties:', err);
+    console.error('❌ Error while processing profs:', err);
   } finally {
     await prisma.$disconnect();
   }

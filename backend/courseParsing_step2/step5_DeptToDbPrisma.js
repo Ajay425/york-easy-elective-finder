@@ -1,3 +1,4 @@
+//Put dept into prisma, based on folder names . I.e "ENG - Engineering - ( GS, LE )" gets dept ENG and longform Engineering
 import fs from "fs";
 import path from "path";
 import { PrismaClient } from "../generated/prisma/index.js";
@@ -32,12 +33,22 @@ async function main() {
       console.log(`➡️ Inserting: ${deptAcronym} — ${deptFull}`);
 
       try {
-        await prisma.department.create({
-            data:
+        
+        //Try to insert dept
+        await prisma.department.upsert({
+          where:{
+            acronym: deptAcronym
+          },
+          update:{
+          },
+            
+          create:{
+           data:
                 {
                      acronym: deptAcronym, 
                     longForm: deptFull
-                }
+                } 
+          }
 
         });
       } catch (err) {

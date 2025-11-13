@@ -5,7 +5,7 @@ import { connect } from 'http2';
 import fs from 'fs';
 const prisma = new PrismaClient();
 
-import extractPrereqsWithCredits from "../courseParsing/parsePrereqs.js"
+import extractPrereqsWithCredits from "./parsePrereqs.js"
 
 // Helper: create the course or fetch it if it already exists
 async function getOrCreateCourse(prisma, pr) {
@@ -60,6 +60,11 @@ async function processCourses(prisma, courses6) {
         continue;
       }
 
+      //Skip if it's a self-prereq
+      if (courseId === prereqCourse.id) {
+        console.log(`Skipping self-prerequisite: ${courseId}`);
+        continue;
+      }
       // 2) Link: c (courseId) requires prereqCourse (prereqId)
       try {
         await prisma.coursePrerequisite.create({

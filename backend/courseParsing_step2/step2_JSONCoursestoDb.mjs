@@ -41,18 +41,43 @@ async function main() {
           const desc = course.description;
           const language = course.language;
           const year =  parseInt(course.code[0],10)
-          const courseCreation = await prisma.Course.create({
-            data: {
-              faculty: faculty,
-              deptAcronym: deptAcronym,
-              courseCode: courseCode,
-              credit: credit,
-              name: name,
-              desc: desc,
-              language: language,
-              year:year
-            },
-          });
+          
+          // const courseCreation = await prisma.Course.create({
+          //   data: {
+          //     faculty: faculty,
+          //     deptAcronym: deptAcronym,
+          //     courseCode: courseCode,
+          //     credit: credit,
+          //     name: name,
+          //     desc: desc,
+          //     language: language,
+          //     year:year
+          //   },
+          // });
+
+          //Because we might have the course in the database
+          const courseCreation = await prisma.course.upsert({
+              where: {
+                faculty_deptAcronym_courseCode_credit: {
+                  faculty,
+                  deptAcronym,
+                  courseCode,
+                  credit,
+                },
+              },
+              update: {},  // leave empty do NOTHING if exists
+              create: {
+                faculty,
+                deptAcronym,
+                courseCode,
+                credit,
+                name,
+                desc,
+                language,
+                year,
+              },
+            });
+
 
           console.log("Complete");
           console.log(courseCreation);
