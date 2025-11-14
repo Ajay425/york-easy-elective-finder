@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 // Path where your folders are located
 const baseDir = path.resolve(
-  "../../PythonCourseScraper/york_courses"
+  "../../step1_PythonCourseScraper/york_courses"
 );
 
 // Regex pattern to extract parts like "ENG - Engineering - ( GS, LE )"
@@ -43,11 +43,11 @@ async function main() {
           },
             
           create:{
-           data:
-                {
+           
+                
                      acronym: deptAcronym, 
                     longForm: deptFull
-                } 
+                
           }
 
         });

@@ -5,7 +5,7 @@ import { connect } from 'http2';
 import fs from 'fs';
 const prisma = new PrismaClient();
 
-import extractPrereqsWithCredits from "./parsePrereqs.js"
+import { extractPrereqsWithCredits } from "./parsePrereqsHelperFunc.js";
 
 // Helper: create the course or fetch it if it already exists
 async function getOrCreateCourse(prisma, pr) {

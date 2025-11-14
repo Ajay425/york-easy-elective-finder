@@ -3,7 +3,7 @@
 // const courseData = {
 //   description: `This two-course sequence develops students' understanding of financial accounting information so that they can be informed and effective users of the information. The courses focus on uses of accounting information for different decisions and from different stakeholder perspectives, and consider the economic and behavioural effects that accounting treatments have on users and preparers. Readings from current publications are used to demonstrate practical applications of the issues discussed in class. Classroom techniques such as case studies, classroom discussions, student presentations and group and individual research projects (intended to develop students' critical skills) are employed. Prerequisite: SB/ ACTG 2010 3.00. Course Credit Exclusion: GL/ECON 2710 3.00.`
 // };
-export default function extractPrereqsWithCredits(description) {
+ export function extractPrereqsWithCredits(description) {
   // ✅ Capture only the "Prerequisite(s)" or "Pre-requisite(s)" section
   // Stops before known headers or end of string.
   const prereqBlockRe =
@@ -83,3 +83,4 @@ export default function extractPrereqsWithCredits(description) {
 // const prereqs = extractPrereqsWithCredits(courseData.description);
 // console.log("Extracted prerequisites (deduped):");
 // console.log(prereqs);
+

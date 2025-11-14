@@ -22,7 +22,7 @@ async function main(){
         schoolId
         );
 
-        const insertProfRating = await prisma.professor.update(
+        const insertProfRating = await prisma.instructors.update(
             {
                 where:{
                     firstname_lastname:{
