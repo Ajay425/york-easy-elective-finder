@@ -26,10 +26,8 @@ async function main(){
             {
                 where:{
                     firstname_lastname:{
-
-
-                    firstname: prof.firstname,
-                    lastname: prof.lastname
+                      firstname: prof.firstname,
+                      lastname: prof.lastname
                                         }
                 },
             data:{
