@@ -39,7 +39,7 @@ async function main() {
               for (let instr of meeting.instructors){
                   console.log(`${instr.firstName} ${instr.lastName}`)
 
-                  const upsertProf = await prisma.professor.upsert({
+                  const upsertProf = await prisma.instructors.upsert({
                       where: {
                           firstname_lastname: {   // 👈 note the exact name format
                           firstname:instr.firstName,
@@ -53,7 +53,7 @@ async function main() {
                       }
                       });
 
-                  console.log("SUCCESS " + upsertProf);
+                  console.log("SUCCESS " , upsertProf);
               }
             }
         }

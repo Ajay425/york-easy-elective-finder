@@ -116,7 +116,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Root folder where all subjects are stored
-const baseDir = path.resolve(__dirname, "../../PythonCourseScraper/york_courses");
+const baseDir = path.resolve(__dirname, "../../step1_PythonCourseScraper/york_courses");
 
 // Output files
 const outputFile = path.join(__dirname, "all_courses.json");
