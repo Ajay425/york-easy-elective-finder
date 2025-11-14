@@ -1,0 +1,290 @@
+[
+  {
+    "firstname": "",
+    "lastname": "",
+    "reason": "firstname not found (empty firstname); lastname not found (empty firstname)",
+    "url": "https://www.ratemyprofessors.com/professor/892805",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:20:50.575Z"
+  },
+  {
+    "firstname": "Mike",
+    "lastname": "O'Brien",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/155700",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:20:57.704Z"
+  },
+  {
+    "firstname": "Abilash",
+    "lastname": "Sathyakumar",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:20:58.101Z"
+  },
+  {
+    "firstname": "Pranavan",
+    "lastname": "Thirunavukkarasu",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:21:17.252Z"
+  },
+  {
+    "firstname": "Vindra",
+    "lastname": "Moonilal",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:21:26.399Z"
+  },
+  {
+    "firstname": "Radith",
+    "lastname": "Kaiyum",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:21:29.047Z"
+  },
+  {
+    "firstname": "Sreena",
+    "lastname": "Thekkoot",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:21:31.936Z"
+  },
+  {
+    "firstname": "Subakaran",
+    "lastname": "Rajenthirakumar",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:21:35.237Z"
+  },
+  {
+    "firstname": "Fathinat",
+    "lastname": "Aboaba",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:21:35.293Z"
+  },
+  {
+    "firstname": "Jowel",
+    "lastname": "Akkeh",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:21:37.725Z"
+  },
+  {
+    "firstname": "Shemar",
+    "lastname": "Sesook",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:21:38.753Z"
+  },
+  {
+    "firstname": "Dienye",
+    "lastname": "Amajor",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:21:42.977Z"
+  },
+  {
+    "firstname": "Nicholas",
+    "lastname": "Fazio",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/25446",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:21:52.992Z"
+  },
+  {
+    "firstname": "Tylos",
+    "lastname": "Mandiwe",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:22:17.316Z"
+  },
+  {
+    "firstname": "Zuhra",
+    "lastname": "Abawi",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:22:17.677Z"
+  },
+  {
+    "firstname": "Manchari",
+    "lastname": "Paranthahan",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:22:19.100Z"
+  },
+  {
+    "firstname": "Christopher",
+    "lastname": "Geddert",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/2807788",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:22:33.060Z"
+  },
+  {
+    "firstname": "Aitak",
+    "lastname": "Sorahitalab",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:22:37.950Z"
+  },
+  {
+    "firstname": "Alexander",
+    "lastname": "Suriano",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/1488608",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:22:43.657Z"
+  },
+  {
+    "firstname": "Richard",
+    "lastname": "Bello",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/2791649",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:22:52.864Z"
+  },
+  {
+    "firstname": "Evania",
+    "lastname": "Pietrangelo-Porco",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:23:01.724Z"
+  },
+  {
+    "firstname": "Prilly",
+    "lastname": "Bicknell-Hersco",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:23:12.610Z"
+  },
+  {
+    "firstname": "Peter",
+    "lastname": "Alexander",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/1488608",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:23:15.204Z"
+  },
+  {
+    "firstname": "Hartarun",
+    "lastname": "Rihal",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:23:36.342Z"
+  },
+  {
+    "firstname": "Bahlelisiwe",
+    "lastname": "Luhlanga",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:23:42.734Z"
+  },
+  {
+    "firstname": "Benjamin",
+    "lastname": "Freedman",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/1104406",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:23:45.876Z"
+  },
+  {
+    "firstname": "Everdene",
+    "lastname": "Francis-Mcintosh",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:23:50.743Z"
+  },
+  {
+    "firstname": "Joseph",
+    "lastname": "Micallef",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/2925862",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:24:16.288Z"
+  },
+  {
+    "firstname": "Sejal",
+    "lastname": "Dave",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/710322",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:24:56.841Z"
+  },
+  {
+    "firstname": "Nivetha",
+    "lastname": "Jeevanantham",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:25:12.794Z"
+  },
+  {
+    "firstname": "Alexander",
+    "lastname": "MacLellan",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/1488608",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:25:21.909Z"
+  },
+  {
+    "firstname": "Christopher",
+    "lastname": "Jamison",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/2807788",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:25:28.258Z"
+  },
+  {
+    "firstname": "Nicole",
+    "lastname": "Alexander",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/1488608",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:25:53.755Z"
+  },
+  {
+    "firstname": "Alexander",
+    "lastname": "Painter",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/1488608",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:26:21.442Z"
+  },
+  {
+    "firstname": "Mythreyi",
+    "lastname": "Vijayakulan",
+    "reason": "firstname not found (invalid url); lastname not found (invalid url)",
+    "url": "",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:26:24.000Z"
+  },
+  {
+    "firstname": "Joshua",
+    "lastname": "Swamy",
+    "reason": "firstname not found (firstname not found); lastname not found (firstname not found)",
+    "url": "https://www.ratemyprofessors.com/professor/1609435",
+    "snippet": null,
+    "timestamp": "2025-11-13T23:26:28.556Z"
+  }
+]

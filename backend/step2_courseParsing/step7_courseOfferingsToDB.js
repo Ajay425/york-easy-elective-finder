@@ -31,7 +31,6 @@ async function main() {
             const sanitizedType = meeting.type.replace(/[^A-Za-z]/g, '').toUpperCase();
             if (teachingTypes.includes(sanitizedType)){
                     console.log(`${terms.term} ${course.facultyPrefix} ${course.dept} ${course.code} ${terms.section} ${sanitizedType} `)
-                    
                 // assume prisma is your PrismaClient and variables are defined:
                 // course.facultyPrefix, course.dept, course.code, course.credit
                 // terms.term, terms.section, sanitizedType
