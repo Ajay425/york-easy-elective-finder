@@ -1,95 +1,90 @@
 import { fileURLToPath } from 'url';
 import path from 'path';
-import fs from 'fs/promises';  // Importing fs.promises for reading files
+import fs from 'fs/promises';
 import { PrismaClient } from '../generated/prisma/index.js';
-import { franc } from 'franc';
 
 const prisma = new PrismaClient();
 
-// Current file and directory paths in ES Module scope
 const __filename = fileURLToPath(import.meta.url);
-console.log(`${__filename} FILENAME`)
-
 const __dirname = path.dirname(__filename);
-console.log(`${__dirname} DIRNAME`)
 
-// Course data directory
-const coursesDir = path.join(__dirname, './');
-
+// Path to the single JSON file
+const allCoursesPath = path.join(__dirname, 'all_courses.json');
 
 async function main() {
-  // const deleteUsers = await prisma.course.deleteMany({})
-  // console.log(deleteUsers)
-  // return
+  const failedUpserts = [];
+
   try {
-    const files = await fs.readdir(coursesDir);  // Read all files in the course directory
-    for (let file of files) {
-      if (path.extname(file) === '.json') {  // Only process JSON files
-        const filePath = path.join(coursesDir, file);
+    // Load only all_courses.json
+    const fileContent = await fs.readFile(allCoursesPath, 'utf-8');
+    const data = JSON.parse(fileContent);
 
-        // Read the JSON file using fs.promises.readFile and parse it
-        const fileContent = await fs.readFile(filePath, 'utf-8');
-        const data = JSON.parse(fileContent);  // Parse the JSON content
-
-        // Iterate over courses in the JSON data
-        for (let course of data) {
-          const faculty = course.facultyPrefix;
-          const deptAcronym = course.dept;
-          const courseCode = course.code;
-          const credit = course.credit;
-          const name = course.title;
-          const desc = course.description;
-          const language = course.language;
-          const year =  parseInt(course.code[0],10)
-          
-          // const courseCreation = await prisma.Course.create({
-          //   data: {
-          //     faculty: faculty,
-          //     deptAcronym: deptAcronym,
-          //     courseCode: courseCode,
-          //     credit: credit,
-          //     name: name,
-          //     desc: desc,
-          //     language: language,
-          //     year:year
-          //   },
-          // });
-
-          //Because we might have the course in the database
-          const courseCreation = await prisma.course.upsert({
-              where: {
-                faculty_deptAcronym_courseCode_credit: {
-                  faculty,
-                  deptAcronym,
-                  courseCode,
-                  credit,
-                },
-              },
-              update: {},  // leave empty do NOTHING if exists
-              create: {
-                faculty,
-                deptAcronym,
-                courseCode,
-                credit,
-                name,
-                desc,
-                language,
-                year,
-              },
-            });
+    for (let course of data) {
+      
+      const faculty = course.facultyPrefix;
+      const deptAcronym = course.dept;
+      const courseCode = course.code;
+      const credit = course.credit;
+      const name = course.title;
+      const desc = course.description;
+      const language = course.language;
+      const year = parseInt(course.code[0], 10);
 
 
-          console.log("Complete");
-          console.log(courseCreation);
-        }
+      try {
+        // MUST await or your try/catch won't catch errors
+        await prisma.course.upsert({
+          where: {
+            faculty_deptAcronym_courseCode_credit: {
+              faculty,
+              deptAcronym,
+              courseCode,
+              credit,
+            },
+          },
+          update: {
+            name,
+            desc,
+            language,
+            year,
+          },
+          create: {
+            faculty,
+            deptAcronym,
+            courseCode,
+            credit,
+            name,
+            desc,
+            language,
+            year,
+          },
+        });
+      } catch (error) {
+        console.log("failed")
+        failedUpserts.push({
+          faculty,
+          deptAcronym,
+          courseCode,
+          credit,
+          name,
+          error: error.message,
+        });
       }
     }
+
+    console.log("Completed course insert");
+
+    // Save failed upserts to file
+    const failedPath = path.join(__dirname, 'failed_upserts.json');
+    await fs.writeFile(failedPath, JSON.stringify(failedUpserts, null, 2));
+
+    console.log(`Failed upserts saved to ${failedPath}`);
+
   } catch (err) {
     console.error('Error while processing courses:', err);
   }
 }
 
-// Run main function and handle disconnect from Prisma
 main()
   .then(async () => {
     await prisma.$disconnect();

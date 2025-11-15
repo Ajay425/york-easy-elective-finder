@@ -62,7 +62,12 @@ async function main() {
                     type: sanitizedType,
                     },
                 },
-                update: {}, // empty -> do nothing if already exists
+                update: {
+                    term: terms.term,
+                    courseId: courseRecord.id,
+                    section: terms.section,
+                    type: sanitizedType,
+                }, // empty -> do nothing if already exists
                 create: {
                     term: terms.term,
                     courseId: courseRecord.id,
