@@ -27,9 +27,9 @@ export const DEPARTMENTS = [
 ];
 
 export const TERMS = ['F', 'W', 'S', 'Y'];
-export const COURSE_TYPES = ['LECT', 'TUTR', 'LAB', 'PRA', 'SEM', 'BLEN', 'ONLN', 'ONCA', 'HYFX'];
+export const COURSE_TYPES = ['LECT', 'TUTR', 'LAB', 'SEM', 'BLEN', 'ONLN', 'ONCA', 'HYFX'];
 export const YEARS = [1, 2, 3, 4];
-export const CREDITS = [0.5, 1, 1.5, 2, 3, 4, 4.5, 6, 9, 12]; // Add all possible credit values
+export const CREDITS = [0.5, 1, 1.5, 2, 3, 4, 4.5, 6, 9];
 
 // Helper function - pass ALL values to get ALL popular courses
 export function buildCoursesURL() {
@@ -40,5 +40,5 @@ export function buildCoursesURL() {
   const facs = FACULTIES.map(f => `faculties=${f}`).join('&');
   const credits = CREDITS.map(c => `credits=${c}`).join('&');
 
- 
+  return `https://yucoursesapi.jonathanaramos.ca/courses?${terms}&${types}&${years}&${depts}&${facs}&${credits}`;
 }
