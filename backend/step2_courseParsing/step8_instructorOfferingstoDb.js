@@ -7,14 +7,14 @@ import { connect } from 'http2';
 const prisma = new PrismaClient();
 
 // Current file and directory paths in ES Module scope
+// ✅ Setup paths in ES module scope
+// ✅ Setup paths in ES module scope
 const __filename = fileURLToPath(import.meta.url);
-console.log(`${__filename} FILENAME`)
-
 const __dirname = path.dirname(__filename);
-console.log(`${__dirname} DIRNAME`)
 
-// Course data directory
-const filePath = path.join(__dirname, '../data/all_courses.json');
+// ✅ Path to your single JSON file (adjust file name here)
+const filePath = path.join(__dirname, '../step2_courseParsing/all_courses.json');
+console.log(filePath)
 
 
 async function main() {
@@ -23,6 +23,7 @@ async function main() {
    try {
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const data = JSON.parse(fileContent)
+
     for (let course of data){
         console.log(`Course ${course.dept} ${course.code}`)
 

@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ✅ Path to your single JSON file (adjust file name here)
-const filePath = path.join(__dirname, '../data/all_courses.json');
+const filePath = path.join(__dirname, '../step2_courseParsing/all_courses.json');
 console.log(filePath)
 
 

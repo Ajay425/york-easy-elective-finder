@@ -45,33 +45,43 @@ async function main() {
 
 
 let years=  [0,1,2]
-let depts  =["NATS"]
-let faculties = ["SC"]
+let depts  =["MODR"]
+let faculties = ["AP"]
 let credits=[1,1.5,2,3,4,6,9]
 let terms=["F",'W',"Y"]
 let types=["LECT","ONCA"]
-//          const courses5 = await prisma.course.findMany({
-//                         where: {
-//                             deptAcronym: { in: depts },
-//                         },
-//                         include: {
-//                             courseOfferings: true,
-//                         },
-//                     });
+         const courses5 = await prisma.course.findMany({
+                        where: {
+                            deptAcronym: { in: depts },
+                        },
+                        include: {
+                            courseOfferings: true,
+                        },
+                    });
                     
-// console.log(courses5)
-const offerings = await prisma.currentCourseOfferings.findMany({
-  where: {
-    course: {
-      deptAcronym: "CHEM",
-    },
-  },
-  include: {
-    course: true,        // include course info
-    instructors: true,   // include instructor offerings if you want them
-  },
-});
-console.log(offerings)
+console.dir(courses5, { depth: null, colors: true, maxArrayLength: null });
+//   where: {
+//     course: {
+//       deptAcronym: "NATS",
+//     },
+//   },
+//   include: {
+//     course: true,        // include course info
+//     instructors: true,   // include instructor offerings if you want them
+//   },
+// });
+
+
+// console.log(offerings)
+
+// const offerings7 = await prisma.course.findMany({
+//   where: {
+//       deptAcronym: "NATS",
+//   },
+
+// });
+// console.log(offerings7)
+
 }
 main()
   .catch(console.error)

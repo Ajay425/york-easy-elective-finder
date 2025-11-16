@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 console.log(`${__dirname} DIRNAME`)
 
 // Course data directory
-const filePath = path.join(__dirname, '../data/all_courses.json');
+const filePath = path.join(__dirname, '../step2_courseParsing/all_courses.json');
 
 
 async function main() {
