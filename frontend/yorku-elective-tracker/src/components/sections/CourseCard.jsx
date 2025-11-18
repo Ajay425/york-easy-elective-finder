@@ -5,10 +5,26 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { TrendingUp, Award, BookOpen } from "lucide-react";
+import { Flame, GraduationCap, User } from "lucide-react";
 
 export function CourseCard({ course, onClick }) {
-  const popularity = course.topInstructorPopularity;
+  // Find first instructor with data across all terms
+  const getTopInstructor = () => {
+    for (const term of course.terms || []) {
+      for (const meeting of term.meetings || []) {
+        if (meeting.firstName && meeting.firstName !== "TBA") {
+          return {
+            name: `${meeting.firstName} ${meeting.lastName}`,
+            popularity: meeting.popularity
+          };
+        }
+      }
+    }
+    return null;
+  };
+
+  const topInstructor = getTopInstructor();
+  const popularity = topInstructor?.popularity || course.topInstructorPopularity;
   
   return (
     <Card
@@ -18,82 +34,97 @@ export function CourseCard({ course, onClick }) {
         cursor-pointer
         h-full
         rounded-2xl
-        bg-gradient-to-br from-[#8B1538] to-[#6B0F2B]
-        border border-white/20
-        shadow-lg
-        hover:shadow-2xl hover:border-yellow-400/50
-        hover:scale-[1.03]
+        bg-white/70 backdrop-blur-xl
+        border border-white/40
+        shadow-xl
+        hover:shadow-2xl hover:border-white/60
+        hover:scale-[1.05]
         transition-all duration-300 ease-out
         overflow-hidden
+        hover:-translate-y-2
       "
     >
-      {/* Subtle shine effect */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Decorative gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-purple-50/30 pointer-events-none" />
+      <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-yellow-200/20 to-transparent rounded-full blur-3xl" />
       
-      <CardHeader className="relative z-10 pb-4 space-y-2">
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex items-center gap-2 flex-1 min-w-0">
-            <div className="p-2 bg-white/10 rounded-lg border border-white/20 flex-shrink-0">
-              <BookOpen className="w-4 h-4 text-yellow-300" />
-            </div>
-            <CardTitle className="text-base font-bold text-white truncate">
-              {course.code}
-            </CardTitle>
+      {/* Popularity badge - floating top right */}
+      {popularity && (
+        <div className="absolute top-4 right-4 z-20">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full shadow-lg font-bold text-white backdrop-blur-sm">
+            <Flame className="w-3.5 h-3.5 text-yellow-100" />
+            <span className="text-xs">{popularity.toFixed(0)}</span>
           </div>
-          
-          {popularity && popularity >= 75 && (
-            <div className="flex-shrink-0">
-              <Award className="w-5 h-5 text-yellow-400" />
-            </div>
-          )}
         </div>
+      )}
+      
+      <CardHeader className="relative z-10 pb-2 pt-6 px-5">
+        <CardTitle className="text-lg font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text text-transparent mb-2 pr-12">
+          {course.code}
+        </CardTitle>
         
-        <CardDescription className="text-gray-100 text-sm font-medium line-clamp-2 leading-snug">
+        <CardDescription className="text-slate-700 text-sm font-semibold line-clamp-2 leading-relaxed">
           {course.title}
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="relative z-10 space-y-4">
-        {/* Info Grid */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-black/20 rounded-lg px-3 py-2 border border-white/10">
-            <p className="text-xs text-gray-400 mb-0.5">Credits</p>
-            <p className="text-white font-bold text-sm">{course.credits}</p>
+      <CardContent className="relative z-10 space-y-3 px-5 pb-5">
+        {/* Credits & Faculty in clean layout */}
+        <div className="space-y-2 pt-1">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-lg border border-blue-200/50">
+              <GraduationCap className="w-3.5 h-3.5 text-blue-600" />
+              <span className="text-xs font-bold text-blue-700">{course.credits}</span>
+            </div>
+            <span className="text-xs font-medium text-slate-600 truncate flex-1">
+              {course.faculty}
+            </span>
           </div>
-          
-          {popularity && (
-            <div className="bg-black/20 rounded-lg px-3 py-2 border border-white/10">
-              <p className="text-xs text-gray-400 mb-0.5">Rating</p>
-              <div className="flex items-center gap-1">
-                <TrendingUp className="w-3.5 h-3.5 text-yellow-400" />
-                <p className="text-yellow-300 font-bold text-sm">{popularity.toFixed(0)}</p>
+        </div>
+
+        {/* Instructor Card */}
+        <div className="pt-2">
+          {topInstructor ? (
+            <div className="flex items-center gap-2 p-2.5 bg-gradient-to-r from-purple-100/50 to-pink-100/50 rounded-lg border border-purple-200/50 group-hover:border-purple-300/70 transition-colors">
+              <div className="p-1 bg-white rounded-md shadow-sm">
+                <User className="w-3.5 h-3.5 text-purple-600" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[8px] text-purple-600 font-bold uppercase tracking-wide mb-0.5 opacity-75">
+                  Professor
+                </p>
+                <p className="text-xs text-slate-800 font-semibold truncate">
+                  {topInstructor.name}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 p-2.5 bg-gradient-to-r from-slate-100/50 to-gray-100/50 rounded-lg border border-slate-200/50">
+              <div className="p-1 bg-white rounded-md shadow-sm">
+                <User className="w-3.5 h-3.5 text-slate-400" />
+              </div>
+              <div>
+                <p className="text-[8px] text-slate-600 font-bold uppercase tracking-wide mb-0.5">
+                  Professor
+                </p>
+                <p className="text-xs text-slate-600 font-medium italic">
+                  TBA
+                </p>
               </div>
             </div>
           )}
         </div>
 
-        {/* Faculty */}
-        <div className="pt-2 border-t border-white/10">
-          <p className="text-xs text-gray-300 line-clamp-1">
-            {course.faculty}
+        {/* Hover hint */}
+        <div className="pt-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+          <p className="text-center text-[10px] font-semibold text-blue-600">
+            Click for details ✨
           </p>
         </div>
-
-        {/* Instructor */}
-        {course.topInstructorName && (
-          <div className="pt-2 pb-1">
-            <div className="flex items-center gap-2 px-3 py-2 bg-yellow-400/10 rounded-lg border border-yellow-400/20">
-              <span className="text-xs text-yellow-200">Top Prof:</span>
-              <span className="text-xs text-yellow-100 font-medium truncate">
-                {course.topInstructorName}
-              </span>
-            </div>
-          </div>
-        )}
       </CardContent>
 
-      {/* Bottom indicator */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400/0 via-yellow-400/50 to-yellow-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Subtle top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </Card>
   );
 }

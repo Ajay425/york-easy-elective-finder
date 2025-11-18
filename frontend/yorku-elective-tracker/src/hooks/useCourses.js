@@ -15,6 +15,12 @@ export function useCourses() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+  console.log('Course data sample:', courses[0]);
+  console.log('First course terms:', courses[0]?.terms);
+  console.log('First meeting:', courses[0]?.terms?.[0]?.meetings?.[0]);
+}, [courses]);
+
+  useEffect(() => {
     setLoading(true);
     fetch(buildCoursesURL())
       .then((res) => {
@@ -50,6 +56,7 @@ export function useCourses() {
               wouldTakeAgainPercent: io.instructor?.wouldTakeAgainPercent,
               numberOfRatings: io.instructor?.numberOfRatings,
               rateMyProfLink: io.instructor?.rateMyProfLink,
+              popularity: io.instructor?.popularity,
             })),
           })),
         }));

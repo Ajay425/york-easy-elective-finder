@@ -33,6 +33,14 @@ export function CourseDetailPanel({ course, onClose }) {
       <p className="text-sm text-yellow-100 italic mb-5">
         Note: Always double check if you need permission from an instructor to enroll into this course.
       </p>
+      <p className="text-sm text-yellow-100 italic mb-5">
+       To manually add this course please visit <a href="https://wrem.sis.yorku.ca/Apps/WebObjects/REM.woa/wa/DirectAction/rem" target="_blank" rel="noopener noreferrer" className="text-yellow-300 underline">REM</a>
+      </p>
+      <p className="text-sm text-yellow-100 italic mb-5">
+        To manually map this course into VSB please visit <a href="https://schedulebuilder.yorku.ca/vsb/criteria.jsp?access=0&lang=en&tip=1&page=results&scratch=0&term=0&sort=none&filters=iiiiiiii&bbs=&ds=&cams=0_1_2_3_4_5_6&locs=any" target="_blank" rel="noopener noreferrer" className="text-yellow-300 underline">Visual Schedule Builder</a>
+      </p>
+
+
 
       {course.terms?.length > 0 && (
         <div className="mt-4 space-y-6">

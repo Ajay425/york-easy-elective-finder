@@ -92,6 +92,7 @@ const Electives = () => {
       </p>
 
       {/* Course Grid */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-7xl px-6 sm:px-10 pb-10">
         {currentCourses.length > 0 ? (
           currentCourses.map((course, index) => (

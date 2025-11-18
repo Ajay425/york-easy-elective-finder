@@ -13,31 +13,35 @@ export function TermSection({ title, color, terms }) {
             </p>
             <ul className="text-xs text-gray-200 list-disc ml-4">
               {term.meetings?.length ? (
-                term.meetings.map((m, i) => (
-                  <li key={i}>
-                    {m.type}: {m.firstName || "TBA"} {m.lastName || ""}
-                    {m.avgRating && m.numberOfRatings && (
-                      <span className="text-yellow-200 ml-2">
-                        ⭐ {m.avgRating.toFixed(1)} ({m.numberOfRatings} ratings)
-                        {m.wouldTakeAgainPercent && (
-                          <span className="ml-1">
-                            • {m.wouldTakeAgainPercent.toFixed(0)}% would take again
-                          </span>
-                        )}
-                      </span>
-                    )}
-                    {m.rateMyProfLink && (
-                      <a
-                        href={m.rateMyProfLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-300 ml-2 hover:underline"
-                      >
-                        View RMP
-                      </a>
-                    )}
-                  </li>
-                ))
+                term.meetings.map((m, i) => {
+                  const hasInstructor = m.firstName && m.firstName !== "TBA";
+                  
+                  return (
+                    <li key={i}>
+                      {m.type}: {hasInstructor ? `${m.firstName} ${m.lastName}` : "TBA"}
+                      {hasInstructor && m.avgRating && m.numberOfRatings && (
+                        <span className="text-yellow-200 ml-2">
+                          ⭐ {m.avgRating.toFixed(1)} ({m.numberOfRatings} ratings)
+                          {m.wouldTakeAgainPercent && (
+                            <span className="ml-1">
+                              • {m.wouldTakeAgainPercent.toFixed(0)}% would take again
+                            </span>
+                          )}
+                        </span>
+                      )}
+                      {hasInstructor && m.rateMyProfLink && (
+                        <a
+                          href={m.rateMyProfLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-300 ml-2 hover:underline"
+                        >
+                          View RMP
+                        </a>
+                      )}
+                    </li>
+                  );
+                })
               ) : (
                 <li className="italic text-gray-300">No meeting info</li>
               )}
@@ -48,3 +52,5 @@ export function TermSection({ title, color, terms }) {
     </div>
   );
 }
+
+export default TermSection;
