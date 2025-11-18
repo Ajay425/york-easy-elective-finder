@@ -29,6 +29,9 @@ function extracttermInfo($, termRows) {
 
       const type = $(cols[0]).text().trim();
 
+      // Get category number
+      const catNumber = $(cols[2]).text().trim();
+
       // ✅ Extract all instructors (each in <a> tag)
       const instructorLinks = $(cols[3]).find("a");
       const instructors = [];
@@ -51,10 +54,10 @@ function extracttermInfo($, termRows) {
         instructors.push({ firstName, lastName });
       }
 
-      meetings.push({ type, instructors });
+      meetings.push({ type, catNumber, instructors });
     });
 
-    terms.push({ term, section, meetings });
+    terms.push({ term, section,  meetings });
   });
 
   return terms;
@@ -116,7 +119,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Root folder where all subjects are stored
-const baseDir = path.resolve(__dirname, "../../step1_PythonCourseScraper/york_courses");
+const baseDir = path.resolve(__dirname, "../../PythonCourseScraper/york_courses");
 
 // Output files
 const outputFile = path.join(__dirname, "all_courses.json");
