@@ -76,6 +76,7 @@ model CurrentCourseOfferings{
   courseId Int
   course Course @relation(fields:[courseId], references: [id])
   section String
+  catNumber String?
   type String
   instructors InstructorOfferings[]
   @@unique([term,courseId, section, type])
@@ -85,7 +86,8 @@ model InstructorOfferings{
   id Int @id @default(autoincrement())
   instructorId Int
   courseOfferingId Int
-  instructor Instructors @relation(fields:[instructorId], references:[id])
-  courseOffering CurrentCourseOfferings @relation(fields:[courseOfferingId], references:[id])
+  instructor        Instructors            @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+  courseOffering    CurrentCourseOfferings @relation(fields: [courseOfferingId], references: [id], onDelete: Cascade)
+
 @@unique([instructorId, courseOfferingId])
 }

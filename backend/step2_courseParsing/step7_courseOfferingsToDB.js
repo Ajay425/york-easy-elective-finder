@@ -67,12 +67,16 @@ async function main() {
                     courseId: courseRecord.id,
                     section: terms.section,
                     type: sanitizedType,
+                    catNumber: meeting.catNumber
+
                 }, // empty -> do nothing if already exists
                 create: {
                     term: terms.term,
                     courseId: courseRecord.id,
                     section: terms.section,
                     type: sanitizedType,
+                    catNumber: meeting.catNumber
+
                 },
                 });
 
