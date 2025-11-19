@@ -1,0 +1,593 @@
+[
+  {
+    "id": 6257,
+    "faculty": "SC",
+    "deptAcronym": "MATH",
+    "courseCode": "1090",
+    "credit": 3,
+    "name": "Introduction to Logic for Computer Science",
+    "desc": "The syntax and semantics of propositional and predicate logic. Applications to program specification and verification. Optional topics include set theory and induction using the formal logical language of the first part of the course. Prerequisite: : SC/MATH 1190 3.00 or SC/MATH 1019 3.00 or SC/MATH 1200 3.00 or SC/MATH 2200 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 2100,
+        "courseId": 6257,
+        "prereqId": 6260
+      },
+      {
+        "id": 2101,
+        "courseId": 6257,
+        "prereqId": 6253
+      },
+      {
+        "id": 2102,
+        "courseId": 6257,
+        "prereqId": 6261
+      },
+      {
+        "id": 2103,
+        "courseId": 6257,
+        "prereqId": 7465
+      }
+    ]
+  },
+  {
+    "id": 5054,
+    "faculty": "AP",
+    "deptAcronym": "EN",
+    "courseCode": "1002",
+    "credit": 3,
+    "name": "Intertextualities",
+    "desc": "This course advances students' training in comparative literary analysis, research and writing. It introduces students to intertextual relationships between old forms and new that exemplify literary movements and influences as well as canon and counter-canon formation. Prerequisite: AP/EN 1001 3.00 or permission by the department.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 1353,
+        "courseId": 5054,
+        "prereqId": 5053
+      }
+    ]
+  },
+  {
+    "id": 5623,
+    "faculty": "HH",
+    "deptAcronym": "GH",
+    "courseCode": "1011",
+    "credit": 3,
+    "name": "Foundations of Global Health II",
+    "desc": "A multidisciplinary introduction to the concepts, methods, values, and structures that determine health within and across health systems locally and globally. The course also focuses on building academic and professional skills to support long-term learning strategies for solving global health problems. Prerequisite: HH/GH 1010 3.00. Course Credit Exclusions: HH/IHST 1010 3.00. Previously offered as HH/IHST 1010 3. 00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 1654,
+        "courseId": 5623,
+        "prereqId": 5622
+      }
+    ]
+  },
+  {
+    "id": 4903,
+    "faculty": "LE",
+    "deptAcronym": "EECS",
+    "courseCode": "1560",
+    "credit": 3,
+    "name": "Introduction to Computing for Mathematics and Statistics",
+    "desc": "An introduction to scientific computing using an integrated computing and visualization environment. The course presents computer-based problem-solving techniques through a series of applications rooted in Mathematics and Statistics. Prerequisite: SC/MATH 1300 3.00: Corequisites: SC/MATH 1310 3.00; SC/MATH 1131 3.00 or SC/MATH 2030 3.00. Course credit exclusions: LE/EECS 1541 3.00, LE/EECS 1570 3.00. This course is not open to any student who has passed or is taking SC/PHYS 2030 3.00. PRIOR TO FALL 2014: course credit exclusions: LE/CSE 1541 3.00, LE/CSE 1570 3.00. PRIOR TO SUMMER 2013: course credit exclusions: SC/CSE 1541 3.00, SC/CSE 1570 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 1114,
+        "courseId": 4903,
+        "prereqId": 6263
+      },
+      {
+        "id": 1115,
+        "courseId": 4903,
+        "prereqId": 6264
+      },
+      {
+        "id": 1116,
+        "courseId": 4903,
+        "prereqId": 6259
+      },
+      {
+        "id": 1117,
+        "courseId": 4903,
+        "prereqId": 6274
+      }
+    ]
+  },
+  {
+    "id": 5492,
+    "faculty": "AP",
+    "deptAcronym": "FR",
+    "courseCode": "1080",
+    "credit": 6,
+    "name": "French Language and Culture (CEFR B1)",
+    "desc": "This course is intended for students with grade 12 French or equivalent level and is mandatory for students majoring or minoring in French. It is designed to improve students' ability to speak, understand, read and write French. The focus is on improving listening and pronunciation skills, and on developing spontaneous expression, research skills, and the ability to explain fundamental concepts of French society. Prerequisites: AP/FR 0130 6.00 (with a minimum grade of C), or GL/FRAN 1830 3.00 (with a minimum grade of C), or GL/FRAN 1330 3.00 (with a minimum grade of C), or through language placement test. Course credit exclusions: AP/FR 1060 6.00, GL/FRAN 2805 6.00 Note: the pre-requisite was AP/FR1030 6.00 ' 'Intermediate French' ' (with a minimum grade of C) prior to Summer 2021.",
+    "language": "French",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 1569,
+        "courseId": 5492,
+        "prereqId": 5490
+      },
+      {
+        "id": 1570,
+        "courseId": 5492,
+        "prereqId": 7505
+      },
+      {
+        "id": 1571,
+        "courseId": 5492,
+        "prereqId": 7506
+      }
+    ]
+  },
+  {
+    "id": 4896,
+    "faculty": "LE",
+    "deptAcronym": "EECS",
+    "courseCode": "1021",
+    "credit": 3,
+    "name": "Object-Oriented Programming & Telemetry as Engineering Cornerstones",
+    "desc": "The objective of EECS 1021 is to expand students' understanding of computational thinking and the interfacing of engineering-relevant hardware and software by removing scaffolding that was originally in place in EECS 1011. Students are exposed and interact with the underlying concepts of modern programming using a combination of activities, including experiential laboratories, projects and interactive programming assessments. The programming language is chosen so that it is widely used in a variety of applications, is object-oriented, and is of industrial strength (Java is an example of such a language). The problems are chosen in order to expose abstract programming concepts by immersing them in relevant and engaging applications. The experiential laboratory activities incorporate discrete sensors and actuators, focused on dynamic telemetry applications that are common to all branches of engineering. Furthermore, by identifying sensors as concrete inputs and actuators as output objects, students can build event-driven software that connects events to actions. The problems are chosen with consultation with the various engineering disciplines in the School with a view of exposing how computing is used in these disciplines. Prerequisites: LE/EECS1011 3.00. Course credit exclusions: LE/EECS 1020 3.00 .LE/EECS 1022 3.00, LE/ENG 1117 3.00. Previously offered as: LE/EECS1020 3.00, LE/CSE 1020 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 2823,
+        "courseId": 4896,
+        "prereqId": 4892
+      }
+    ]
+  },
+  {
+    "id": 4416,
+    "faculty": "FA",
+    "deptAcronym": "DANC",
+    "courseCode": "1216",
+    "credit": 3,
+    "name": "Contemporary/Modern Dance Forms",
+    "desc": "An introductory course in modern dance. Emphasizes integrated movement, alignment, modern dance vocabulary, artistic expression, as well as the creative process. Required of all BFA dance majors. Prerequisite: FA/DANC 1215 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 908,
+        "courseId": 4416,
+        "prereqId": 4415
+      }
+    ]
+  },
+  {
+    "id": 4897,
+    "faculty": "LE",
+    "deptAcronym": "EECS",
+    "courseCode": "1022",
+    "credit": 3,
+    "name": "Introduction to Object Oriented Programming",
+    "desc": "Provides a first exposure to object-oriented programming and enhances student understanding of key computing skills such as programming with objects and simple data structures (e.g., arrays, linked lists), reasoning about algorithms, and working with software tools. It uses a problem-based approach to expose the underlying concepts and an experiential laboratory to implement them. A mature Integrated Development Environment (such as Java and the Eclipse programming, testing, and debugging environment) is used to expose and provide context to the underlying ideas. Laboratory exercises expose students to a range of real-world problems with a view of motivating computational thinking and grounding the material covered in lectures. Prerequisites: LE/EECS 1012 3.00 or LE/EECS 1015 3.00. Course credit exclusions: LE/EECS 1021 3.00, LE/EECS 1020 3.00, LE/CSE 1020 3.00 , SC/CSE 1020 3.00, AP/ITEC 1620 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 1105,
+        "courseId": 4897,
+        "prereqId": 4893
+      },
+      {
+        "id": 1106,
+        "courseId": 4897,
+        "prereqId": 4894
+      }
+    ]
+  },
+  {
+    "id": 4904,
+    "faculty": "LE",
+    "deptAcronym": "EECS",
+    "courseCode": "1570",
+    "credit": 3,
+    "name": "Introduction to Computing for Psychology",
+    "desc": "An introduction to computing concepts with applications to problems drawn from psychology, including concepts of computer programming in an integrated computing and visualization environment. Prerequisite: SC/MATH 1505 6.00. Course credit exclusions: LE/EECS 1541 3.00, LE/EECS 1560 3.00. PRIOR TO FALL 2014: course credit exclusions: LE/CSE 1541 3.00, LE/CSE 1560 3.00. PRIOR TO SUMMER 2013: course credit exclusions: SC/CSE 1541 3.00, SC/CSE 1560 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 1118,
+        "courseId": 4904,
+        "prereqId": 7379
+      }
+    ]
+  },
+  {
+    "id": 4902,
+    "faculty": "LE",
+    "deptAcronym": "EECS",
+    "courseCode": "1541",
+    "credit": 3,
+    "name": "Introduction to Computing for the Physical Sciences",
+    "desc": "An introduction to scientific computing using an integrated computing and visualization platform. Elements of procedural programming such as: control structures, data types, program modules. Visualization in two and three dimensions. Applications to numerical computation and simulations relevant to the physical sciences. Prerequisite: SC/MATH 1013 3.00 or equivalent; Corequisites: SC/PHYS 1010 6.00 or SC/PHYS 1410 6.00 or SC/PHYS 1420 6.00; and SC/MATH 1021 3.00 or SC/MATH 1025 3.00. Course credit exclusions: LE/EECS 1011 3.00, LE/ EECS 1560 3.00, LE/EECS 1570 3.00. PRIOR TO FALL 2014: course credit exclusions: LE/CSE 1560 3.00, LE/SE1570 3.00. PRIOR TO SUMMER 2013: course credit exclusions: SC/CSE 1560 3.00, SC/CSE1570 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 1108,
+        "courseId": 4902,
+        "prereqId": 6251
+      },
+      {
+        "id": 1109,
+        "courseId": 4902,
+        "prereqId": 7405
+      },
+      {
+        "id": 1110,
+        "courseId": 4902,
+        "prereqId": 7406
+      },
+      {
+        "id": 1111,
+        "courseId": 4902,
+        "prereqId": 7407
+      },
+      {
+        "id": 1112,
+        "courseId": 4902,
+        "prereqId": 6254
+      },
+      {
+        "id": 1113,
+        "courseId": 4902,
+        "prereqId": 6255
+      }
+    ]
+  },
+  {
+    "id": 8663,
+    "faculty": "FA",
+    "deptAcronym": "THEA",
+    "courseCode": "1011",
+    "credit": 3,
+    "name": "Introduction to Acting II",
+    "desc": "Continues the exploration of the principles, processes and skills of acting for the stage commenced in FA/THEA 1010 3.00, with a particular emphasis on basic script analysis and the rehearsing and performing of monologues and scenes. A practical studio course with is a strong written component to the curriculum. Open to theatre majors only. Pre-requisite: a minimum grade of 'C+' in FA/THEA 1010 3.00, and/or permission of the department.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 3135,
+        "courseId": 8663,
+        "prereqId": 8662
+      }
+    ]
+  },
+  {
+    "id": 4597,
+    "faculty": "FA",
+    "deptAcronym": "DESN",
+    "courseCode": "1002",
+    "credit": 3,
+    "name": "Understanding Form and Context",
+    "desc": "This course introduces terms and theories to explain images and meanings in visual communication design. Topics covered include how meaning is formed, the reading of signs and symbols, text and images, and codes and cultures. Students express their creative potential through idea generation and image manipulation processes. Required course for BDes major. Prerequisite: FA/DESN 1001 3.00. Course credit exclusion: FA/YSDN 1002 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 979,
+        "courseId": 4597,
+        "prereqId": 4596
+      }
+    ]
+  },
+  {
+    "id": 6266,
+    "faculty": "SC",
+    "deptAcronym": "MATH",
+    "courseCode": "1507",
+    "credit": 3,
+    "name": "Mathematics II for the Biological and Health Sciences",
+    "desc": "An introduction to single variable integral, probability and statistics. This course is designed to provide a comprehensive mathematical background for students of the biological and social sciences. Students continue to develop basic mathematical skills and applications from SC/MATH 1506. Prerequisites: SC/MATH 1506 3.00. Course Credit exclusions: SC/MATH 1014 3.00, SC/MATH 1310 3.00, SC/MATH 1540 3.00, SC/MATH 1550 6.00, GL/MATH/MODR 1940 3.00, AP/ECON 1540, SC/ISCI 1402 3.00, SC/ISCI 1410 6.00, SC/MATH 1505 6.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 2108,
+        "courseId": 6266,
+        "prereqId": 6265
+      }
+    ]
+  },
+  {
+    "id": 7049,
+    "faculty": "SC",
+    "deptAcronym": "PHYS",
+    "courseCode": "1412",
+    "credit": 3,
+    "name": "Physics Fundamentals 2",
+    "desc": "A calculus-based survey of physics and sequel to SC/PHYS 1411 3.0. Topics include static and current electricity; waves and physical and geometrical optics; elements of modern physics. This course is recommended for students unlikely to take 2000-level Physics courses. Prerequisites: SC/PHYS 1411 3.00 or SC/PHYS1421 3.00 or SC/PHYS1011 3.00 or SC/PHYS 1800 3.00. Course credit exclusions: SC/PHYS 1010 6.00, SC/PHYS 1410 6.00, SC/PHYS 1420 6.00; SC/PHYS 1012 3.00, SC/PHYS 1422 3.00; SC/PHYS 1801 3.00; SC/ISCI 1310 6.00; SC/ISCI 1302 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 2569,
+        "courseId": 7049,
+        "prereqId": 7048
+      },
+      {
+        "id": 2570,
+        "courseId": 7049,
+        "prereqId": 7054
+      }
+    ]
+  },
+  {
+    "id": 4906,
+    "faculty": "LE",
+    "deptAcronym": "EECS",
+    "courseCode": "1720",
+    "credit": 3,
+    "name": "Building Interactive Systems",
+    "desc": "A second course teaching more advanced programming concepts within the context of image, sound and interaction using an object-oriented language; introduction to interactive systems, user interfaces, event-driven programming, object design and inheritance; implementation using debuggers, integrated development environments, user interface builders. Prerequisite: LE/EECS 1710 3.00. Course credit exclusions: LE/EECS 1020 3.00, LE/EECS 1022 3.00, AP/ITEC 1620 3.00. PRIOR TO FALL 2014: course credit exclusions: LE/CSE 1020 3.00. PRIOR TO SUMMER 2013: course credit exclusions: SC/CSE 1020 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 1119,
+        "courseId": 4906,
+        "prereqId": 4905
+      }
+    ]
+  },
+  {
+    "id": 4659,
+    "faculty": "AP",
+    "deptAcronym": "ECON",
+    "courseCode": "1540",
+    "credit": 3,
+    "name": "Introductory Mathematical Economics II",
+    "desc": "This course extends the analysis of basic Economics ideas, topics and problems begun in AP/ECON 1530 3.00. Again, relevant mathematical ideas and techniques are recalled and/or derived so as to provide a deeper understanding of Economic issues and how they can be resolved. The issues and problems covered require functions of more than one variable for their resolution. The notion of Quantity Supplied is combined with the notion of Quantity Demanded and notions of Market Equilibrium are introduced and discussed. Equilibria are evaluated through the introduction of mathematical notions and properties of systems of equations, eventually in matrix form. A deeper understanding of theories of demand (supply) and the foundations of demand (supply) functions is developed through the introduction of mathematical notions of unconstrained and constrained optimization and linear and nonlinear programming. As in AP/ECON 1530 3.00, many topics and issues are addressed and problem framing and problem solving abilities are enhanced. Prerequisite: AP/ECON 1530 3.00 or equivalent. Prerequisites or corequisites: AP/ECON 1000 3.00 or AP/ECON 1010 3.00, or equivalent. No Credit Retained (NCR) Note: Students who have successfully completed or who are currently enrolled in SC/MATH 1021 3.00, SC/MATH 1025 3.00, or SC/MATH 2221 3.00. SC/MATH 1510 6.00 and SC/MATH 1520 3.00 may not be taken by any students who has passed or is currently taking AP/ECON 1540 3.00. Course credit exclusions: SC/MATH 1505 6.00, SC/MATH 1540 3.00, SC/MATH 1550 6.00, GL/MATH 2650 3.00, GL/MODR 2650 3.00. Note: Acceptable course substitutes are available in the Calendar.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 991,
+        "courseId": 4659,
+        "prereqId": 4658
+      }
+    ]
+  },
+  {
+    "id": 8023,
+    "faculty": "HH",
+    "deptAcronym": "NURS",
+    "courseCode": "1543",
+    "credit": 3,
+    "name": "Health Assessment",
+    "desc": "Utilizes theory and practice of health assessment and therapeutic communication to support students' demonstration of focused history-taking and physical examination skills. Focused assessments skills include physical, psychosocial and other related aspects for clients across the lifespan. Inherent safety considerations, biases and assumptions embedded in traditional client assessments will be discussed and practiced in laboratory settings. Prerequisite: Prerequisites for 4-year Direct Entry BScN students: HH/NURS 1542 3.00, HH/KINE 1101 3.00. Open to: students in the BScN programs. Note: A minimum grade of 5.00 (C+) is required in this course in the BScN program.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 3453,
+        "courseId": 8023,
+        "prereqId": 8022
+      },
+      {
+        "id": 3454,
+        "courseId": 8023,
+        "prereqId": 7862
+      }
+    ]
+  },
+  {
+    "id": 8104,
+    "faculty": "FA",
+    "deptAcronym": "PANF",
+    "courseCode": "1510",
+    "credit": 3,
+    "name": "Introduction to Creative Methodologies II",
+    "desc": "The course continues the technical and philosophical approaches to creativity and its manifestations across interdisciplinary modes of artistic production. The course engages students through a series of thematic investigations informed by current sociocultural contexts and explores different ways that creativity can manifest as social justice and agency. The course will build on a foundation of skills developed through PANF 1500 3.0 (formerly PANF 1100 3.0) and will reinforce this across to a range of new contexts such as prototype design for digital-analog forms of artistic production. Students work towards a final project presentation. Regular critiques and discussions encourage students to think critically about the roles of emerging digital tools and methods within their own lives, in artistic production, and society at large. Classes consist of a blend of presentations on diverse art-technology histories, immersions in AMPD faculty studios and other research-creation processes, experiential exercises centered on specific applications and environments, cursory portraits of practices through specific artists across a wide range of fields, and critiques of major projects that combine theoretical and pragmatic approaches. Open to non-majors. Pre-requisite: FA/PANF 1500 3.0 Introduction to Creative Practices I (formerly PANF 1100 3.0), or by permission of the instructor.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 3382,
+        "courseId": 8104,
+        "prereqId": 8103
+      }
+    ]
+  },
+  {
+    "id": 7051,
+    "faculty": "SC",
+    "deptAcronym": "PHYS",
+    "courseCode": "1422",
+    "credit": 3,
+    "name": "Physics with Life Science Applications 2",
+    "desc": "A sequel to SC/PHYS1421 3.0 in which fundamental concepts are emphasized through applications to the life sciences. Topics include electrostatics; DC circuits; magnetic fields; induction; oscillation and waves, electromagnetic waves; optics. Differential calculus and vector algebra are used. This course is recommended for students unlikely to enrol in 2000-level physics courses. Prerequisites: SC/PHYS 1421 3.00 or SC/PHYS1411 3.00 or SC/PHYS1011 3.00 or SC/PHYS 1800 3.00. Course credit exclusions: SC/PHYS 1010 6.00, SC/PHYS1410 6.00, SC/PHYS 1420 6.00; SC/PHYS 1012 3.00, SC/PHYS 1412 3.00; SC/PHYS 1801 3.00; SC/ISCI 1310 6.00; SC/ISCI 1302 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 2574,
+        "courseId": 7051,
+        "prereqId": 7050
+      },
+      {
+        "id": 2575,
+        "courseId": 7051,
+        "prereqId": 7054
+      }
+    ]
+  },
+  {
+    "id": 4655,
+    "faculty": "AP",
+    "deptAcronym": "ECON",
+    "courseCode": "1010",
+    "credit": 3,
+    "name": "Introduction to Macroeconomics",
+    "desc": "Introduces macroeconomics principles for making smart choices as consumers, businesspeople, investors and informed citizens judging government policies. Focuses on performance of market economies - measured by GDP growth, unemployment, inflation - and roles for government monetary and fiscal policies. Other topics include business cycles, money and the Bank of Canada, exchange rates, government deficits, national debt, globalization and trade policy. Prerequisite: AP/ECON 1000 3.00 or equivalent. Course credit exclusions: GL/ECON 2510 3.00 (prior to Fall 2014), SB/INTL 1210 3.00. Note: Acceptable course substitutes are available in the Calendar",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 990,
+        "courseId": 4655,
+        "prereqId": 4654
+      }
+    ]
+  },
+  {
+    "id": 7055,
+    "faculty": "SC",
+    "deptAcronym": "PHYS",
+    "courseCode": "1801",
+    "credit": 3,
+    "name": "Electricity, Magnetism and Optics for Engineers",
+    "desc": "A survey of physics in which fundamental concepts in electricity, magnetism and optics are emphasized through engineering applications. This is a calculus-based course intended primarily for engineering students. Prerequisite: SC/PHYS 1800 3.00 and SC/MATH 1013 3.00 or equivalent. Corequisites: SC/MATH 1014 3.00 or SC/MATH 1310 3.00 or SC/MATH 1505 6.00. Course Credit Exclusions: SC/PHYS 1010 6.00, SC/PHYS 1012 3.00, SC/PHYS 1410 6.00, SC/PHYS 1412 3.00, SC/PHYS 1420 6.00, SC/PHYS 1422 3.00, SC/ISCI 1310 6.00, SC/ ISCI 1302 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 2577,
+        "courseId": 7055,
+        "prereqId": 7054
+      },
+      {
+        "id": 2578,
+        "courseId": 7055,
+        "prereqId": 6251
+      }
+    ]
+  },
+  {
+    "id": 5135,
+    "faculty": "LE",
+    "deptAcronym": "ENG",
+    "courseCode": "1102",
+    "credit": 4,
+    "name": "Renaissance Engineer 2: Engineering Design Principles",
+    "desc": "This course will cover: engineering design methodology; features and elements of good design with environment and human interface considerations; aesthetics in design and idea communication using graphics and technical drawings. Course Credit Exclusion: LE/TECL 2500 3.00. Prerequisite: LE/ENG 1101 4.00 or LE/ENG 1113 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 1358,
+        "courseId": 5135,
+        "prereqId": 5134
+      },
+      {
+        "id": 1359,
+        "courseId": 5135,
+        "prereqId": 7482
+      }
+    ]
+  },
+  {
+    "id": 4899,
+    "faculty": "LE",
+    "deptAcronym": "EECS",
+    "courseCode": "1516",
+    "credit": 3,
+    "name": "Object Oriented Design and Principles using Python",
+    "desc": "This course introduces the core concepts of object-oriented programming aiming at data science students with no prior experience of object-oriented design and programming. It focuses on subjects such as classes, objects, encapsulation, abstraction, inheritance, polymorphism, and the practical application of object-oriented design that is most useful in the domain of data science. These topics include data structures such as Stacks, Queues, linked data structures and trees. Data Science professionals require to work with algorithms that run in a reasonable time on large data sets. For this, computational complexity as a tool to evaluate the efficiency of designed algorithms is introduced. The language of choice is Python. Prerequisite: LE/EECS 1015 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 1107,
+        "courseId": 4899,
+        "prereqId": 4894
+      }
+    ]
+  },
+  {
+    "id": 4601,
+    "faculty": "FA",
+    "deptAcronym": "DESN",
+    "courseCode": "1011",
+    "credit": 3,
+    "name": "Visual Interaction Design",
+    "desc": "Investigates the role of basic coding and software applications in interaction design. The use of imagery, typography and form within compositional structures are explored through the development of human computer user interfaces, which incorporate the integration of visual elements with non-visual interactions. Required course for BDes major. Prerequisite: FA/DESN 1001 3.00 or permission of the Department of Design. Course credit exclusion: FA/YSDN 1006 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 980,
+        "courseId": 4601,
+        "prereqId": 4596
+      }
+    ]
+  },
+  {
+    "id": 5490,
+    "faculty": "AP",
+    "deptAcronym": "FR",
+    "courseCode": "0130",
+    "credit": 6,
+    "name": "Elementary French (CEFR A2)",
+    "desc": "This course is designed for students who have previously studied French. The aims of the course are to consolidate basic oral and written skills, to apply them in various contexts relating to everyday life, and to raise cultural awareness. This course will not count towards the degree requirements for students majoring or minoring in French Studies. Prerequisite: AP/FR 0120 6.00 (with a minimum grade of C) or GL/FRAN 1820 3.00 (with a minimum grade of C), or through a language placement test. Course credit exclusions: GL/FRAN 1825 3.00, GL/FRAN 1830 3.00, GL/FRAN 1325 3.00, GL/FRAN 1330 3.00 Note: Course code and Title were AP/FR 1030 Intermediate French prior to Summer 2021.",
+    "language": "French",
+    "year": 0,
+    "prerequisites": [
+      {
+        "id": 1567,
+        "courseId": 5490,
+        "prereqId": 5489
+      },
+      {
+        "id": 1568,
+        "courseId": 5490,
+        "prereqId": 7504
+      }
+    ]
+  },
+  {
+    "id": 8020,
+    "faculty": "HH",
+    "deptAcronym": "NURS",
+    "courseCode": "1511",
+    "credit": 3,
+    "name": "Nursing Theory and Knowledge Development",
+    "desc": "Reviews the history of nursing and development of the scientific and theoretical basis of nursing practice with an emphasis on multiple ways of knowing. The evolution of nursing as a self-regulating and unique profession is explored. The impact of evidence is emphasized. Critical analysis of theory and practice supports familiarization with nursing literature, information literacy and development of scholarly writing. Prerequisite: HH/NURS 1510 3.00 Open to: BScN students in 4-year Direct Entry program Note: A minimum grade of 5.00 (C+) is required in this course for the BScN program.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 3463,
+        "courseId": 8020,
+        "prereqId": 8019
+      }
+    ]
+  },
+  {
+    "id": 7046,
+    "faculty": "SC",
+    "deptAcronym": "PHYS",
+    "courseCode": "1012",
+    "credit": 3,
+    "name": "Physics 2",
+    "desc": "A sequel to PHYS1011 3.0. Topics include electrostatics; magnetostatics; electric current, DC circuits, and induction; electromagnetic waves, optics. Differential and integral calculus and vector algebra are used. This course covers fewer topics than SC/PHYS 1411 3.00 or SC/PHYS 1421 3.00, but covers them in greater depth. It should be taken by all those likely to enrol in 2000-level physics courses. Prerequisite: SC/PHYS1011 3.00, or a minimum grade of C in either SC/PHYS 1411 3.00 or SC/PHYS 1421 3.00; SC/MATH1013 3.00 or equivalent. Corequisite(s): SC/MATH 1014 3.00, or SC/MATH 1505 6.00, or equivalents. Course credit exclusions: SC/PHYS 1410 6.00; SC/PHYS 1420 6.00; SC/PHYS 1412 3.00; SC/PHYS 1422 3.00; SC/PHYS 1801 3.00; SC/ISCI 1310 6.00; SC/ISCI 1302 3.00.",
+    "language": "English",
+    "year": 1,
+    "prerequisites": [
+      {
+        "id": 2563,
+        "courseId": 7046,
+        "prereqId": 7048
+      },
+      {
+        "id": 2564,
+        "courseId": 7046,
+        "prereqId": 7050
+      }
+    ]
+  }
+]

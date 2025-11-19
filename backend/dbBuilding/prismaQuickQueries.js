@@ -50,6 +50,7 @@ let faculties = ["AP"]
 let credits=[1,1.5,2,3,4,6,9]
 let terms=["F",'W',"Y"]
 let types=["LECT","ONCA"]
+
         const courses5 = await prisma.course.findMany({
                         where: {
                             year: { in: years },
@@ -67,6 +68,13 @@ let types=["LECT","ONCA"]
        
 
 console.dir(courses5, { depth: null });
+fs.writeFileSync(
+  "courses5.json",
+  JSON.stringify(courses5, null, 2), // pretty print
+  "utf-8"
+);
+
+console.log("Saved to courses5.json!");
 }
 main()
   .catch(console.error)
