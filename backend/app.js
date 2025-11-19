@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import courseRouter from './router/courseRouter.js';
+import prereqRouter from './router/prereqRouter.js';
+
 import "dotenv/config";
 import cors from 'cors';
 
@@ -23,6 +25,7 @@ app.get("/",(req,res)=>{
 
 app.use("/courses", courseRouter)
 
+app.use("/prereq", prereqRouter)
 
 app.listen(PORT, (err)=>{
     if (err){

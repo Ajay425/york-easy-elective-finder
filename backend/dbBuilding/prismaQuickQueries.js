@@ -44,44 +44,29 @@ async function main() {
 //   );
 
 
-let years=  [0,1,2]
+let years=  [0,1]
 let depts  =["MODR"]
 let faculties = ["AP"]
 let credits=[1,1.5,2,3,4,6,9]
 let terms=["F",'W',"Y"]
 let types=["LECT","ONCA"]
-         const courses5 = await prisma.course.findMany({
+        const courses5 = await prisma.course.findMany({
                         where: {
-                            deptAcronym: { in: depts },
+                            year: { in: years },
+                            // deptAcronym: { in: depts },
+                            // faculty: { in: faculties },
+                            // credit: {in: credits},
+                             prerequisites: {some :{}},
+                            // courseOfferings: { some: { term: { in: terms }, type: { in: types } } },
                         },
                         include: {
-                            courseOfferings: true,
+                            prerequisites:true,
+                            },
                         },
-                    });
-                    
-console.dir(courses5, { depth: null, colors: true, maxArrayLength: null });
-//   where: {
-//     course: {
-//       deptAcronym: "NATS",
-//     },
-//   },
-//   include: {
-//     course: true,        // include course info
-//     instructors: true,   // include instructor offerings if you want them
-//   },
-// });
+                    );
+       
 
-
-// console.log(offerings)
-
-// const offerings7 = await prisma.course.findMany({
-//   where: {
-//       deptAcronym: "NATS",
-//   },
-
-// });
-// console.log(offerings7)
-
+console.dir(courses5, { depth: null });
 }
 main()
   .catch(console.error)

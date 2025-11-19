@@ -1,4 +1,4 @@
-import * as db from '../database/dbPrisma.js';
+import * as db from '../database/dbPrismaCourses.js';
 
 
 export async function getPopularCourses(req,res) {
@@ -18,6 +18,35 @@ export async function getPopularCourses(req,res) {
         const courses = await db.getPopularCoursesDb(terms,types,years,depts,faculties,credits)
 
         return res.status(200).json({msg:"success", courses:courses})
+    }
+    catch(err){
+        return res.status(500).json({ msg: err.message || err });    
+    }
+
+}
+
+
+
+export async function getCourseFromParams(req,res) {
+
+        const courseId = parseInt(req.params.id);
+    try{
+        const course = await db.getCourseFromIdDB(courseId)
+
+        return res.status(200).json({msg:"success", course:course})
+    }
+    catch(err){
+        return res.status(500).json({ msg: err.message || err });    
+    }
+
+}
+
+export async function getCourseFromQuery(req,res) {
+        const courseId = parseInt(req.query.id);
+    try{
+        const course = await db.getCourseFromIdDB(courseId)
+
+        return res.status(200).json({msg:"success", course:course})
     }
     catch(err){
         return res.status(500).json({ msg: err.message || err });    

@@ -4,7 +4,6 @@ const prisma = new PrismaClient()
 
 
 export async function getPopularCoursesDb(terms,types,years,depts, faculties, credits){
-
     try{
         const courses5 = await prisma.course.findMany({
                         where: {
@@ -60,3 +59,61 @@ export async function getPopularCoursesDb(terms,types,years,depts, faculties, cr
         throw err;
     }
 }
+export async function getCourseFromIdDB(courseId) {
+  try {
+    const course = await prisma.course.findUnique({
+      where: { id: courseId },
+      include: {
+        courseOfferings: {
+          include: {
+            // includes the join rows; each has `.instructor` relation
+            instructors: {
+              include: {
+                instructor: true
+              }
+            }
+          }
+        },
+        prerequisites: true,
+        prerequisiteFor: true,
+      },
+    });
+    return course;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function deletePrereq(prereqId) {
+try{
+    const prereq = await prisma.coursePrerequisite.delete({
+        where:{
+            id: prereqId
+        },
+    })
+    return prereq;
+}
+catch(err){
+    throw err;
+}
+
+}
+
+export async function deletePrereqFromCourse(courseId, prereqcourseId) {
+try{
+    const prereq = await prisma.coursePrerequisite.delete({
+        where:{
+            courseId_prereqId:{
+                courseId:courseId,
+                prereqId:prereqcourseId,
+            }
+        },
+    })
+    return prereq;
+}
+catch(err){
+    throw err;
+}
+
+}
+
