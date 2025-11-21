@@ -1,3 +1,6 @@
+const  BASE = import.meta.env.VITE_API_BASE;
+
+
 export const FACULTIES = [
   "AK", "AP", "AS", "ATH", "DMS", "ED", "ES", "EU", "FA", "GL", 
   "GS", "HH", "IOL", "LE", "OSC", "RIM", "SB", "SC"
@@ -40,5 +43,5 @@ export function buildCoursesURL() {
   const facs = FACULTIES.map(f => `faculties=${f}`).join('&');
   const credits = CREDITS.map(c => `credits=${c}`).join('&');
 
-  return `https://yucoursesapi.jonathanaramos.ca/courses?${terms}&${types}&${years}&${depts}&${facs}&${credits}`;
+  return `${BASE}/courses?${terms}&${types}&${years}&${depts}&${facs}&${credits}`;
 }
