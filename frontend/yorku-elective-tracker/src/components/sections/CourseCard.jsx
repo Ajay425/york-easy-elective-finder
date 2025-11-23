@@ -33,98 +33,89 @@ export function CourseCard({ course, onClick }) {
         group relative
         cursor-pointer
         h-full
-        rounded-2xl
-        bg-white/70 backdrop-blur-xl
-        border border-white/40
-        shadow-xl
-        hover:shadow-2xl hover:border-white/60
-        hover:scale-[1.05]
+        rounded-lg
+        bg-slate-800/80 backdrop-blur-md
+        border border-cyan-500/30
+        shadow-xl shadow-cyan-500/10
+        hover:shadow-2xl hover:shadow-cyan-500/30 hover:border-cyan-400/60
+        hover:scale-[1.03]
         transition-all duration-300 ease-out
         overflow-hidden
-        hover:-translate-y-2
       "
     >
-      {/* Decorative gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-purple-50/30 pointer-events-none" />
-      <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-yellow-200/20 to-transparent rounded-full blur-3xl" />
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
+
+      {/* Top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500" />
       
-      {/* Popularity badge - floating top right */}
+      {/* Popularity badge */}
       {popularity && (
-        <div className="absolute top-4 right-4 z-20">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full shadow-lg font-bold text-white backdrop-blur-sm">
-            <Flame className="w-3.5 h-3.5 text-yellow-100" />
-            <span className="text-xs">{popularity.toFixed(0)}</span>
+        <div className="absolute top-3 right-3 z-20">
+          <div className="px-2.5 py-1 bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 text-xs font-bold rounded-sm backdrop-blur-sm">
+            ★ {popularity.toFixed(0)}
           </div>
         </div>
       )}
       
-      <CardHeader className="relative z-10 pb-2 pt-6 px-5">
-        <CardTitle className="text-lg font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text text-transparent mb-2 pr-12">
-          {course.code}
-        </CardTitle>
+      {/* Content */}
+      <div className="relative z-10 p-5 h-full flex flex-col">
         
-        <CardDescription className="text-slate-700 text-sm font-semibold line-clamp-2 leading-relaxed">
-          {course.title}
-        </CardDescription>
-      </CardHeader>
+        {/* Course Code */}
+        <div className="mb-3">
+          <div className="text-xs text-cyan-400/60 font-bold tracking-widest uppercase mb-1">Course</div>
+          <h3 className="text-xl font-black text-cyan-400 tracking-tight">
+            {course.code}
+          </h3>
+        </div>
 
-      <CardContent className="relative z-10 space-y-3 px-5 pb-5">
-        {/* Credits & Faculty in clean layout */}
-        <div className="space-y-2 pt-1">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-lg border border-blue-200/50">
-              <GraduationCap className="w-3.5 h-3.5 text-blue-600" />
-              <span className="text-xs font-bold text-blue-700">{course.credits}</span>
-            </div>
-            <span className="text-xs font-medium text-slate-600 truncate flex-1">
-              {course.faculty}
-            </span>
+        {/* Title */}
+        <div className="mb-4 flex-1">
+          <p className="text-sm font-bold text-white/90 line-clamp-3 leading-snug">
+            {course.title}
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div className="h-px bg-gradient-to-r from-cyan-500/0 via-cyan-500/20 to-cyan-500/0 mb-3" />
+
+        {/* Info section */}
+        <div className="space-y-2 mb-4">
+          {/* Credits */}
+          <div className="flex items-center gap-2 text-blue-300/80 text-xs font-semibold">
+            <span className="text-blue-400">▸</span>
+            <span>{course.credits} Credits</span>
+          </div>
+          
+          {/* Faculty */}
+          <div className="flex items-center gap-2 text-cyan-300/80 text-xs font-semibold line-clamp-1">
+            <span className="text-cyan-400">▸</span>
+            <span className="truncate">{course.faculty}</span>
           </div>
         </div>
 
-        {/* Instructor Card */}
-        <div className="pt-2">
+        {/* Professor */}
+        <div className="pt-3 border-t border-cyan-500/20">
+          <div className="text-[9px] text-cyan-400/50 font-bold tracking-widest uppercase mb-1">
+            Instructor
+          </div>
           {topInstructor ? (
-            <div className="flex items-center gap-2 p-2.5 bg-gradient-to-r from-purple-100/50 to-pink-100/50 rounded-lg border border-purple-200/50 group-hover:border-purple-300/70 transition-colors">
-              <div className="p-1 bg-white rounded-md shadow-sm">
-                <User className="w-3.5 h-3.5 text-purple-600" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-[8px] text-purple-600 font-bold uppercase tracking-wide mb-0.5 opacity-75">
-                  Professor
-                </p>
-                <p className="text-xs text-slate-800 font-semibold truncate">
-                  {topInstructor.name}
-                </p>
-              </div>
-            </div>
+            <p className="text-xs text-cyan-300 font-bold truncate">
+              {topInstructor.name}
+            </p>
           ) : (
-            <div className="flex items-center gap-2 p-2.5 bg-gradient-to-r from-slate-100/50 to-gray-100/50 rounded-lg border border-slate-200/50">
-              <div className="p-1 bg-white rounded-md shadow-sm">
-                <User className="w-3.5 h-3.5 text-slate-400" />
-              </div>
-              <div>
-                <p className="text-[8px] text-slate-600 font-bold uppercase tracking-wide mb-0.5">
-                  Professor
-                </p>
-                <p className="text-xs text-slate-600 font-medium italic">
-                  TBA
-                </p>
-              </div>
-            </div>
+            <p className="text-xs text-slate-500 italic">
+              Unassigned
+            </p>
           )}
         </div>
+      </div>
 
-        {/* Hover hint */}
-        <div className="pt-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <p className="text-center text-[10px] font-semibold text-blue-600">
-            Click for details ✨
-          </p>
-        </div>
-      </CardContent>
-
-      {/* Subtle top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Hover effect overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/0 to-cyan-500/0 group-hover:from-cyan-500/5 group-hover:to-cyan-500/5 transition-all duration-300 pointer-events-none" />
+      
+      {/* Bottom glow on hover */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </Card>
   );
 }

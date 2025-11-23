@@ -10,7 +10,7 @@ import Electives from './components/sections/Electives.jsx';
 function App() {
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-start pt-8">
+    <div className="min-h-screen w-full flex flex-col items-center justify-start">
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
