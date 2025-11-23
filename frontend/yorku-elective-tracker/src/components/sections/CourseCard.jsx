@@ -33,89 +33,94 @@ export function CourseCard({ course, onClick }) {
         group relative
         cursor-pointer
         h-full
-        rounded-lg
-        bg-slate-800/80 backdrop-blur-md
-        border border-cyan-500/30
-        shadow-xl shadow-cyan-500/10
-        hover:shadow-2xl hover:shadow-cyan-500/30 hover:border-cyan-400/60
-        hover:scale-[1.03]
+        rounded-2xl
+        bg-gradient-to-br from-gray-800/40 via-gray-900/40 to-black/40
+        backdrop-blur-xl
+        border border-white/5
+        shadow-lg shadow-black/20
+        hover:border-[#7f5af0]/30
+        hover:shadow-2xl hover:shadow-[#7f5af0]/10
+        hover:translate-y-[-4px]
         transition-all duration-300 ease-out
         overflow-hidden
       "
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
-
-      {/* Top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500" />
+      {/* Shimmer effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
       
       {/* Popularity badge */}
       {popularity && (
-        <div className="absolute top-3 right-3 z-20">
-          <div className="px-2.5 py-1 bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 text-xs font-bold rounded-sm backdrop-blur-sm">
-            ★ {popularity.toFixed(0)}
+        <div className="absolute top-4 right-4 z-20">
+          <div className="flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold rounded-full shadow-lg">
+            ★ {popularity.toFixed(1)}
           </div>
         </div>
       )}
       
       {/* Content */}
-      <div className="relative z-10 p-5 h-full flex flex-col">
+      <div className="relative z-10 p-6 h-full flex flex-col">
         
         {/* Course Code */}
-        <div className="mb-3">
-          <div className="text-xs text-cyan-400/60 font-bold tracking-widest uppercase mb-1">Course</div>
-          <h3 className="text-xl font-black text-cyan-400 tracking-tight">
+        <div className="mb-4">
+          <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent group-hover:from-[#7f5af0] group-hover:to-[#a855f7] transition-all duration-300">
             {course.code}
           </h3>
         </div>
 
         {/* Title */}
-        <div className="mb-4 flex-1">
-          <p className="text-sm font-bold text-white/90 line-clamp-3 leading-snug">
+        <div className="mb-5 flex-1">
+          <p className="text-sm text-gray-300 line-clamp-3 leading-relaxed group-hover:text-white transition-colors duration-300">
             {course.title}
           </p>
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-cyan-500/0 via-cyan-500/20 to-cyan-500/0 mb-3" />
+        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4" />
 
-        {/* Info section */}
-        <div className="space-y-2 mb-4">
-          {/* Credits */}
-          <div className="flex items-center gap-2 text-blue-300/80 text-xs font-semibold">
-            <span className="text-blue-400">▸</span>
-            <span>{course.credits} Credits</span>
+        {/* Info Section */}
+        <div className="space-y-3 mb-5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-500 uppercase tracking-wider">Credits</span>
+            <span className="text-sm text-[#7f5af0] font-semibold">{course.credits}</span>
           </div>
-          
-          {/* Faculty */}
-          <div className="flex items-center gap-2 text-cyan-300/80 text-xs font-semibold line-clamp-1">
-            <span className="text-cyan-400">▸</span>
-            <span className="truncate">{course.faculty}</span>
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-500 uppercase tracking-wider">Faculty</span>
+            <span className="text-xs text-gray-400 truncate max-w-[60%] text-right">{course.faculty}</span>
           </div>
         </div>
 
-        {/* Professor */}
-        <div className="pt-3 border-t border-cyan-500/20">
-          <div className="text-[9px] text-cyan-400/50 font-bold tracking-widest uppercase mb-1">
-            Instructor
-          </div>
+        {/* Instructor */}
+        <div className="mt-auto pt-4 border-t border-white/5">
           {topInstructor ? (
-            <p className="text-xs text-cyan-300 font-bold truncate">
-              {topInstructor.name}
-            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7f5af0] to-[#ec4899] flex items-center justify-center flex-shrink-0">
+                <span className="text-white text-sm font-bold">
+                  {topInstructor.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+                </span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Instructor</p>
+                <p className="text-sm text-white font-medium truncate">
+                  {topInstructor.name}
+                </p>
+              </div>
+            </div>
           ) : (
-            <p className="text-xs text-slate-500 italic">
-              Unassigned
-            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-gray-700/50 flex items-center justify-center flex-shrink-0">
+                <span className="text-gray-500 text-lg">?</span>
+              </div>
+              <div className="flex-1">
+                <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Instructor</p>
+                <p className="text-sm text-gray-500 italic">To be announced</p>
+              </div>
+            </div>
           )}
         </div>
       </div>
 
-      {/* Hover effect overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/0 to-cyan-500/0 group-hover:from-cyan-500/5 group-hover:to-cyan-500/5 transition-all duration-300 pointer-events-none" />
-      
-      {/* Bottom glow on hover */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Bottom glow */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#7f5af0] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </Card>
   );
 }

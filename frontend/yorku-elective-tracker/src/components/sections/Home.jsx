@@ -53,8 +53,7 @@ const Home = () => {
               from-[#7f5af0] via-[#6a4fff] to-[#3a68ff]
               translate-x-[-100%]
               group-hover:translate-x-0
-              transition-transform duration-700 ease-out rounded-2xl
-            "
+              transition-transform duration-700 ease-out rounded-2xl"
           ></span>
 
           <span className="relative z-10 transition-colors duration-500 group-hover:text-white">
