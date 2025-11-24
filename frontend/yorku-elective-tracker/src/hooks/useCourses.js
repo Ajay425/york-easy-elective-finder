@@ -47,6 +47,7 @@ export function useCourses() {
           terms: (c.courseOfferings || []).map((offering) => ({
             term: offering.term,
             section: offering.section,
+            catNumber:offering.catNumber,
             meetings: (offering.instructors || []).map((io) => ({
               type: offering.type,
               firstName: io.instructor?.firstname || "TBA",

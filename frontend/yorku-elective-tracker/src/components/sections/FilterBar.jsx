@@ -104,6 +104,7 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
                   </div>
                   {options.map((option) => {
                     const active = filters[filterName].includes(option);
+                    
                     return (
                       <DropdownMenuItem
                         key={option}

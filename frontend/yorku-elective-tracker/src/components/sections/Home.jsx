@@ -1,8 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
+import { useState } from "react";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "../ui/select";
 
 const Home = () => {
+  const [selectedTerm, setSelectedTerm] = useState(null);
   const navigate = useNavigate();
+
+  const handleContinue = () => {
+    navigate("/electives", { state: { term: selectedTerm } });
+  }
+
+
 
   return (
     <section
@@ -13,6 +22,7 @@ const Home = () => {
         px-6 py-16 text-center space-y-8
       "
     >
+
       {/* Background Glows */}
       <div className="absolute w-[500px] h-[500px] bg-purple-800 rounded-full blur-[180px] opacity-25 top-[-120px] left-1/2 -translate-x-1/2 animate-pulse"></div>
       <div className="absolute w-[500px] h-[500px] bg-blue-700 rounded-full blur-[180px] opacity-20 bottom-[-150px] left-1/2 -translate-x-1/2 animate-pulse"></div>
@@ -34,16 +44,32 @@ const Home = () => {
         </p>
       </div>
 
+        <div className="relative z-10 w-full max-w-xs">
+        <Select onValueChange={(val) => setSelectedTerm(val)}>
+          <SelectTrigger className="w-full bg-white/10 backdrop-blur-xl border border-white/20 text-white">
+            <SelectValue placeholder="Select a Term..." />
+          </SelectTrigger>
+
+          <SelectContent className="bg-black/40 backdrop-blur-xl text-white border-white/10">
+            <SelectItem value="F">Fall (F)</SelectItem>
+            <SelectItem value="W">Winter (W)</SelectItem>
+            <SelectItem value="Y">Year-Long (Y)</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+
       {/* Button */}
       <div className="relative z-10">
         <Button
-          onClick={() => navigate("/electives")}
+          onClick={handleContinue}
+          disabled={!selectedTerm}
           className="
             relative overflow-hidden text-lg font-semibold px-10 py-6 rounded-2xl shadow-md
             bg-white text-[#7f5af0] border border-white/10
             transition-all duration-500 hover:scale-105 
             hover:shadow-[0_0_30px_rgba(127,90,240,0.45)]
-            group
+            group disabled:opacity-40 disabled:cursor-not-allowed
           "
         >
           {/* Sliding Color Animation (TrackMySubs style) */}

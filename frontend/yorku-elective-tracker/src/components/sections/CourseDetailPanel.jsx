@@ -1,9 +1,25 @@
 import { motion } from "framer-motion";
-import { X } from "lucide-react";
-import { TermSection } from "./TermSection";
+import { X, Copy } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export function CourseDetailPanel({ course, onClose }) {
+export function CourseDetailPanel({ course, selectedTerm, onClose }) {
   if (!course) return null;
+
+  // Filter term offerings based on selected term
+  const termOfferings =
+    course.terms?.filter((t) => t.term === selectedTerm) || [];
+
+  // Compute popularity for THIS term only
+  const termPopularity =
+    termOfferings
+      ?.flatMap((t) => t.meetings)
+      ?.map((m) => m.popularity)
+      ?.filter((p) => p !== undefined && p !== null)
+      ?.sort((a, b) => b - a)[0] ?? null;
+
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+  };
 
   return (
     <motion.div
@@ -11,66 +27,189 @@ export function CourseDetailPanel({ course, onClose }) {
       animate={{ x: 0 }}
       exit={{ x: "100%" }}
       transition={{ type: "spring", stiffness: 80 }}
-      className="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white/10 backdrop-blur-xl border-l border-white/20 shadow-2xl p-6 z-50 flex flex-col overflow-y-auto"
+      className="fixed top-0 right-0 h-full w-full sm:w-[420px] 
+                 bg-white/10 backdrop-blur-2xl border-l border-white/20 
+                 shadow-2xl p-6 z-50 flex flex-col overflow-y-auto"
     >
-      <div className="flex justify-between items-center mb-4 sticky top-0 bg-[#A42439]/60 backdrop-blur-md p-2 rounded">
-        <h2 className="text-xl font-bold text-white">{course.code}</h2>
-        <button onClick={onClose}>
-          <X className="text-white w-6 h-6 hover:text-yellow-200" />
+      {/* HEADER */}
+      <div
+        className="
+          flex justify-between items-center mb-4 sticky top-0
+          bg-black/30 backdrop-blur-xl p-3 rounded-xl
+          border border-white/20 shadow-lg
+        "
+      >
+        <h2 className="text-xl font-bold text-white tracking-wide">
+          {course.code}
+        </h2>
+
+        <button
+          onClick={onClose}
+          className="bg-white/10 hover:bg-white/20 rounded-lg p-1.5 
+                     border border-white/20 transition"
+        >
+          <X className="w-5 h-5 text-white" />
         </button>
       </div>
 
-      <h3 className="text-lg text-yellow-100 mb-2">{course.title}</h3>
-      <p className="text-gray-200 text-sm mb-4">{course.description}</p>
+      {/* TITLE + DESC */}
+      <h3 className="text-xl text-yellow-200 font-semibold mb-1">
+        {course.title}
+      </h3>
 
-      <p className="text-gray-300 text-sm mb-2">
-        <strong>Faculty:</strong> {course.faculty}
-      </p>
-      <p className="text-gray-300 text-sm mb-2">
-        <strong>Credits:</strong> {course.credits}
-      </p>
-
-      <p className="text-sm text-yellow-100 italic mb-5">
-        Note: Always double check if you need permission from an instructor to enroll into this course.
-      </p>
-      <p className="text-sm text-yellow-100 italic mb-5">
-       To manually add this course please visit <a href="https://wrem.sis.yorku.ca/Apps/WebObjects/REM.woa/wa/DirectAction/rem" target="_blank" rel="noopener noreferrer" className="text-yellow-300 underline">REM</a>
-      </p>
-      <p className="text-sm text-yellow-100 italic mb-5">
-        To manually map this course into VSB please visit <a href="https://schedulebuilder.yorku.ca/vsb/criteria.jsp?access=0&lang=en&tip=1&page=results&scratch=0&term=0&sort=none&filters=iiiiiiii&bbs=&ds=&cams=0_1_2_3_4_5_6&locs=any" target="_blank" rel="noopener noreferrer" className="text-yellow-300 underline">Visual Schedule Builder</a>
+      <p className="text-gray-200/90 text-sm leading-relaxed mb-4">
+        {course.description}
       </p>
 
+      {/* COURSE INFO BOX */}
+      <div className="bg-white/10 p-4 rounded-xl border border-white/20 shadow-inner space-y-2">
+        <p className="text-gray-300 text-sm">
+          <strong className="text-white">Faculty:</strong> {course.faculty}
+        </p>
+        <p className="text-gray-300 text-sm">
+          <strong className="text-white">Credits:</strong> {course.credits}
+        </p>
 
+        {/* TERM-BASED POPULARITY */}
+        {termPopularity !== null && (
+          <p className="text-gray-300 text-sm">
+            <strong className="text-white">Popularity:</strong>{" "}
+            {termPopularity}
+          </p>
+        )}
+      </div>
 
-      {course.terms?.length > 0 && (
-        <div className="mt-4 space-y-6">
-          <h4 className="text-yellow-200 font-semibold mb-2">
-            Sections & Instructors:
+      {/* NOTES */}
+      <div className="mt-4 space-y-4 text-sm text-yellow-100">
+        <p className="italic">
+          Always double-check if you need permission from an instructor to enroll.
+        </p>
+
+        <p className="italic">
+          To manually add this course visit{" "}
+          <a
+            href="https://wrem.sis.yorku.ca/Apps/WebObjects/REM.woa/wa/DirectAction/rem"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-yellow-300 underline"
+          >
+            REM
+          </a>
+        </p>
+
+        <p className="italic">
+          To map this course into VSB visit{" "}
+          <a
+            href="https://schedulebuilder.yorku.ca/vsb"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-yellow-300 underline"
+          >
+            Visual Schedule Builder
+          </a>
+        </p>
+      </div>
+
+      {/* TERM OFFERINGS */}
+      {termOfferings.length > 0 && (
+        <div className="mt-6 space-y-6">
+          <h4 className="text-yellow-200 font-semibold text-lg">
+            Sections for {selectedTerm} Term
           </h4>
 
-          {course.terms.some((t) => t.term === "F") && (
-            <TermSection
-              title="🍂 Fall"
-              color="text-yellow-300"
-              terms={course.terms.filter((t) => t.term === "F")}
-            />
-          )}
+          {termOfferings.map((t, idx) => (
+            <div
+              key={idx}
+              className="bg-white/10 rounded-xl p-4 border border-white/20 
+                         backdrop-blur-xl shadow-lg"
+            >
+              {/* Term + Cat Number */}
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <p className="text-yellow-200 font-semibold text-sm">
+                    Term: {t.term} — Section {t.section}
+                  </p>
 
-          {course.terms.some((t) => t.term === "W") && (
-            <TermSection
-              title="❄️ Winter"
-              color="text-blue-300"
-              terms={course.terms.filter((t) => t.term === "W")}
-            />
-          )}
+                  <p className="text-gray-200 text-sm mt-1">
+                    <strong className="text-white">Cat Number:</strong>{" "}
+                    <span className="font-mono">{t.catNumber}</span>
+                  </p>
+                </div>
 
-          {course.terms.filter((t) => !["F", "W"].includes(t.term)).length > 0 && (
-            <TermSection
-              title="📘 Other / Year-Long"
-              color="text-green-300"
-              terms={course.terms.filter((t) => !["F", "W"].includes(t.term))}
-            />
-          )}
+                {/* Copy Button */}
+                <Button
+                  size="icon"
+                  variant="outline"
+                  className="border-yellow-300 text-yellow-200 hover:bg-yellow-300 
+                             hover:text-black transition"
+                  onClick={() => handleCopy(t.catNumber)}
+                >
+                  <Copy className="w-4 h-4" />
+                </Button>
+              </div>
+
+              {/* INSTRUCTORS */}
+              {t.meetings?.length > 0 ? (
+                <div className="space-y-4">
+                  {t.meetings.map((m, index) => (
+                    <div
+                      key={index}
+                      className="bg-black/20 rounded-lg p-3 border border-white/10"
+                    >
+                      <p className="text-white text-sm font-semibold">
+                        {m.firstName} {m.lastName}
+                      </p>
+
+                      {/* RMP Ratings */}
+                      <div className="text-gray-300 text-xs mt-1 space-y-1">
+                        <p>
+                          ⭐ <strong>{m.avgRating ?? "N/A"}</strong> / 5
+                        </p>
+                        <p>
+                          📘 Difficulty:{" "}
+                          <strong>{m.avgDifficulty ?? "N/A"}</strong>
+                        </p>
+                        <p>
+                          🔁 Would take again:{" "}
+                          <strong>
+                            {m.wouldTakeAgainPercent
+                              ? `${m.wouldTakeAgainPercent}%`
+                              : "N/A"}
+                          </strong>
+                        </p>
+                        <p>
+                          🧪 Ratings:{" "}
+                          <strong>{m.numberOfRatings ?? "N/A"}</strong>
+                        </p>
+                      </div>
+
+                      {/* RMP Link */}
+                      {m.rateMyProfLink && (
+                        <a
+                          href={m.rateMyProfLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-yellow-300 underline text-xs mt-2 inline-block"
+                        >
+                          View on RateMyProfessors →
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-300 text-sm italic">
+                  No instructor information available.
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {termOfferings.length === 0 && (
+        <div className="mt-6 text-center text-gray-300">
+          <p>No sections offered for this term.</p>
         </div>
       )}
     </motion.div>
