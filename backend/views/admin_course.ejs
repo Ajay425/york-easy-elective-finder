@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title><%= title %></title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 18px; background: #f7f8fb }
+      label { display:block; margin-top:8px }
+      input[type=text], textarea { width: 60%; padding:6px }
+      .meta { color:#666; margin-bottom:8px }
+      .section { margin-top:18px; padding:14px; border:1px solid #eee; background:#fff; border-radius:6px }
+      table { border-collapse: collapse; width:100% }
+      td, th { padding:8px 10px; border:1px solid #eee }
+
+      /* Offering card layout using responsive CSS Grid */
+      .container { max-width:1100px; margin:18px auto; }
+      .page-title { font-size:20px; margin:6px 0 10px; display:flex; gap:12px; align-items:baseline }
+      .page-title .code { background:#eef6ff; padding:6px 8px; border-radius:6px; font-weight:700 }
+      .page-title .coursename { font-weight:600 }
+
+      .offering-card { margin-bottom:18px; padding:16px; border:1px solid #e0e6ef; border-radius:10px; background:#fff; display:grid; grid-template-columns: 1fr 360px; gap:20px; align-items:start; box-shadow:0 1px 3px rgba(20,30,50,0.04) }
+      .offering-main { min-width:0 }
+      .offering-form div { margin-bottom:10px }
+      .offering-form input { padding:6px; min-width:160px }
+      .offering-meta { display:flex; gap:12px; align-items:center; flex-wrap:wrap }
+
+      .offering-side { border-left:1px dashed #f0f4fb; padding-left:14px }
+      .instructors-list { margin-top:8px; padding-left:14px }
+      .instructors-list li { margin-bottom:8px; list-style: none }
+
+      .offering-actions { margin-top:10px }
+      .offering-actions button { margin-right:8px }
+
+      .item { padding:8px; border:1px solid #f0f4fb; margin-bottom:6px; cursor:pointer; border-radius:6px; background:#fff }
+      .item:hover { background:#f6f6f8 }
+
+      .instructor-editor input { margin-right:8px; margin-bottom:6px }
+      .inst-search, .create-instructor-form input { padding:8px }
+
+      /* Buttons */
+      .btn { padding:8px 10px; border-radius:6px; border:1px solid transparent; cursor:pointer }
+      .btn-primary { background:#2b6cb0; color:#fff }
+      .btn-ghost { background:transparent; border-color:#d6e4fb }
+      .btn-danger { background:#c53030; color:#fff }
+
+      /* Responsive: stack offering columns on smaller screens */
+      @media (max-width: 880px) {
+        .offering-card { grid-template-columns: 1fr; }
+        .offering-side { border-left:none; padding-left:0; margin-top:8px }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="display:flex;align-items:center;gap:12px;justify-content:space-between">
+        <div><a href="/admin">← Back to search</a></div>
+        <div><a href="/admin/logout" style="color:#2b6cb0;text-decoration:none">Logout</a></div>
+      </div>
+      <h1 class="page-title"><span class="code"><%= course.deptAcronym %> <%= course.courseCode %></span> — <span class="coursename"><%= course.name %></span></h1>
+      <div class="meta">Faculty: <%= course.faculty %> • Credits: <%= course.credit %> • Year: <%= course.year %></div>
+
+    <div class="section">
+      <h2>Edit basic info</h2>
+      <form method="post" action="/admin/course/<%= course.id %>/update">
+        <label>Faculty <input name="faculty" value="<%= course.faculty || '' %>" /></label>
+        <label>Dept Acronym <input name="deptAcronym" value="<%= course.deptAcronym || '' %>" /></label>
+        <label>Course Code <input name="courseCode" value="<%= course.courseCode || '' %>" /></label>
+        <label>Credits <input name="credit" value="<%= course.credit %>" /></label>
+        <label>Year <input name="year" value="<%= course.year %>" /></label>
+        <label>Name <input name="name" value="<%= course.name || '' %>" /></label>
+        <label>Description <textarea name="desc" rows="4"><%= course.desc || '' %></textarea></label>
+        <label>Language <input name="language" value="<%= course.language || '' %>" /></label>
+        <div style="margin-top:8px"><button type="submit">Save</button></div>
+      </form>
+    </div>
+
+    <div class="section">
+      <h2>Prerequisites</h2>
+      <% if (course.prerequisites && course.prerequisites.length) { %>
+        <table>
+          <tr><th>Prereq Id</th><th>Prereq Course</th><th>Credits</th><th></th></tr>
+          <% course.prerequisites.forEach(function(p){ %>
+            <tr>
+              <td><%= p.prereqId %></td>
+              <td>
+                <% if (p.prerequisite) { %>
+                  <a href="/admin/course/<%= p.prerequisite.id %>"><%= p.prerequisite.deptAcronym %> <%= p.prerequisite.courseCode %> — <%= p.prerequisite.name %></a>
+                <% } else { %>
+                  (missing course record)
+                <% } %>
+              </td>
+              <td>
+                <% if (p.prerequisite && (p.prerequisite.credit !== null && p.prerequisite.credit !== undefined)) { %>
+                  <%= p.prerequisite.credit %>
+                <% } else { %>
+                  —
+                <% } %>
+              </td>
+              <td>
+                <button class="delete-prereq" data-id="<%= p.id %>">Delete</button>
+              </td>
+            </tr>
+          <% }) %>
+        </table>
+      <% } else { %>
+        <div class="small">No prerequisites recorded.</div>
+      <% } %>
+
+      <div style="margin-top:12px">
+        <h3>Add prerequisite</h3>
+        <input id="pr-q" placeholder="Search course to add as prerequisite" />
+        <div id="pr-results"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Current Offerings</h2>
+      <% if (course.courseOfferings && course.courseOfferings.length) { %>
+          <% course.courseOfferings.forEach(function(off){ %>
+            <div class="offering-card" data-offering-id="<%= off.id %>">
+            <div class="offering-main">
+              <form class="offering-form">
+                <div style="display:flex; justify-content:space-between; align-items:center">
+                  <strong>Offering ID: <%= off.id %></strong>
+                  <div class="offering-actions">
+                    <button type="button" class="save-offering">Save Offering</button>
+                    <button type="button" class="delete-offering">Delete Offering</button>
+                  </div>
+                </div>
+                <div class="offering-meta">
+                  <label>Term: <input name="term" value="<%= off.term %>" /></label>
+                  <label>Section: <input name="section" value="<%= off.section %>" /></label>
+                  <label>Type: <input name="type" value="<%= off.type %>" /></label>
+                  <label>Cat Number: <input name="catNumber" value="<%= off.catNumber || '' %>" /></label>
+                </div>
+              </form>
+            </div>
+            <div class="offering-side">
+              <div><strong>Instructors</strong></div>
+              <ul class="instructors-list">
+              <% (off.instructors || []).forEach(function(io){ %>
+                <li data-io-id="<%= io.id %>">
+                  <% if (io.instructor) { %>
+                    <div style="display:flex; justify-content:space-between; align-items:center">
+                      <% if (io.instructor.rateMyProfLink) { %>
+                        <span class="instructor-name"><a href="<%= io.instructor.rateMyProfLink %>" target="_blank" rel="noopener noreferrer"><%= io.instructor.firstname %> <%= io.instructor.lastname %></a> <small style="color:#666; margin-left:8px">pop: <%= io.instructor.popularity ?? '—' %></small></span>
+                      <% } else { %>
+                        <span class="instructor-name"><%= io.instructor.firstname %> <%= io.instructor.lastname %> <small style="color:#666; margin-left:8px">pop: <%= io.instructor.popularity ?? '—' %></small></span>
+                      <% } %>
+                      <div>
+                        <button class="edit-instructor" data-id="<%= io.instructor.id %>">Edit</button>
+                        <button class="remove-instructor" data-offering-id="<%= off.id %>" data-instructor-id="<%= io.instructor.id %>">Remove</button>
+                      </div>
+                    </div>
+                    <div class="instructor-editor" data-instructor-id="<%= io.instructor.id %>" style="display:none; margin-top:6px;">
+                      <input name="firstname" value="<%= io.instructor.firstname %>" placeholder="First" />
+                      <input name="lastname" value="<%= io.instructor.lastname %>" placeholder="Last" />
+                      <input name="avgRating" value="<%= io.instructor.avgRating ?? '' %>" placeholder="Avg Rating" />
+                      <input name="avgDifficulty" value="<%= io.instructor.avgDifficulty ?? '' %>" placeholder="Avg Difficulty" />
+                      <input name="wouldTakeAgainPercent" value="<%= io.instructor.wouldTakeAgainPercent ?? '' %>" placeholder="Would Take Again %" />
+                      <input name="numberOfRatings" value="<%= io.instructor.numberOfRatings ?? '' %>" placeholder="# Ratings" />
+                      <input name="department" value="<%= io.instructor.department ?? '' %>" placeholder="Dept" />
+                      <input name="rateMyProfLink" value="<%= io.instructor.rateMyProfLink ?? '' %>" placeholder="RMP Link" />
+                      <input name="popularity" value="<%= io.instructor.popularity ?? '' %>" placeholder="Popularity" />
+                      <div style="margin-top:6px">
+                        <button class="btn btn-primary save-instructor" data-id="<%= io.instructor.id %>">Save</button>
+                        <button class="btn btn-ghost generate-popularity" data-id="<%= io.instructor.id %>">Generate popularity</button>
+                      </div>
+                    </div>
+                  <% } else { %>
+                    (TBA)
+                  <% } %>
+                </li>
+              <% }) %>
+              </ul>
+
+              <div style="margin-top:10px">
+                <div style="margin-bottom:8px"><strong>Add existing instructor</strong></div>
+                <input class="inst-search" placeholder="Search instructors by name" data-offering-id="<%= off.id %>" />
+                <div class="inst-results" data-offering-id="<%= off.id %>"></div>
+                <div style="margin-top:8px"><strong>Create new instructor and attach</strong></div>
+                <form class="create-instructor-form" data-offering-id="<%= off.id %>">
+                  <div style="display:flex; gap:8px; align-items:center;">
+                    <input name="firstname" placeholder="First name" />
+                    <input name="lastname" placeholder="Last name" />
+                    <button type="button" class="btn get-instructor-info">Get info</button>
+                    <span class="small info-status" style="margin-left:8px;color:#666"></span>
+                  </div>
+                  <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap">
+                    <input name="avgRating" placeholder="Avg Rating" />
+                    <input name="avgDifficulty" placeholder="Avg Difficulty" />
+                    <input name="wouldTakeAgainPercent" placeholder="Would Take Again %" />
+                    <input name="numberOfRatings" placeholder="# Ratings" />
+                    <input name="department" placeholder="Dept" />
+                    <input name="rateMyProfLink" placeholder="RMP Link" />
+                    <input name="popularity" placeholder="Popularity" />
+                  </div>
+                  <div style="margin-top:8px; display:flex; gap:8px; align-items:center">
+                    <button type="submit" class="btn btn-primary">Create & Attach</button>
+                    <button type="button" class="btn clear-instructor">Clear</button>
+                    <span style="color:#666;font-size:13px">Tip: use "Get info" to prefill fields</span>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="small">No current offerings.</div>
+      <% } %>
+
+      <div style="margin-top:12px">
+        <h3>Add Offering</h3>
+        <form id="add-offering-form">
+          <div>Term: <input name="term" /></div>
+          <div>Section: <input name="section" /></div>
+          <div>Type: <input name="type" /></div>
+          <div>Cat Number: <input name="catNumber" /></div>
+          <div style="margin-top:6px"><button type="submit">Create Offering</button></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Danger Zone</h2>
+      <form method="post" action="/admin/course/<%= course.id %>/delete" onsubmit="return confirm('Delete this course and related data?');">
+        <button type="submit" style="background:#b00;color:#fff;padding:8px;border:none">Delete Course</button>
+      </form>
+    </div>
+    </div>
+    </div>
+    <script>
+      // Prereq delete handler
+      document.querySelectorAll('.delete-prereq').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const id = btn.dataset.id;
+          if (!confirm('Delete this prerequisite link?')) return;
+          try {
+            const res = await fetch(`/prereq/${id}`, { method: 'DELETE' });
+            if (res.status === 204) location.reload(); else alert('Failed to delete');
+          } catch (err) { alert('Error'); }
+        });
+      });
+
+      // Prereq search/add
+      const prQ = document.getElementById('pr-q');
+      const prResults = document.getElementById('pr-results');
+      let prTimer;
+      prQ && prQ.addEventListener('input', ()=>{
+        clearTimeout(prTimer); prTimer = setTimeout(doPrSearch, 350);
+      });
+      async function doPrSearch(){
+        const q = prQ.value.trim(); if (!q) { prResults.innerHTML = ''; return }
+        const res = await fetch(`/courses/search?q=${encodeURIComponent(q)}&page=1&pageSize=5`);
+        const json = await res.json();
+        const list = json.results || [];
+        prResults.innerHTML = '';
+        for (const it of list){
+          const el = document.createElement('div'); el.className='item'; el.textContent = `${it.code} — ${it.title || ''} • ${it.credit ?? '—'}`;
+          el.addEventListener('click', async ()=>{
+            // create prereq link: course.id is available in template
+            try{
+              const res = await fetch('/prereq', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ courseId: <%= course.id %>, prereqId: it.id }) });
+              if (res.status === 201) location.reload(); else alert('Failed to add');
+            }catch(err){alert('Error')}
+          });
+          prResults.appendChild(el);
+        }
+      }
+
+      // Offering save/delete handlers
+      document.querySelectorAll('.save-offering').forEach(btn=>{
+        btn.addEventListener('click', async (e)=>{
+          const container = btn.closest('[data-offering-id]');
+          const offeringId = container.dataset.offeringId;
+          const form = container.querySelector('.offering-form');
+          const fd = new FormData(form);
+          const payload = Object.fromEntries(fd.entries());
+          try{
+            const res = await fetch(`/courses/offering/${offeringId}`, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+            if (res.ok) { alert('Saved'); location.reload() } else { alert('Failed to save') }
+          }catch(err){alert('Error')}
+        })
+      });
+
+      document.querySelectorAll('.delete-offering').forEach(btn=>{
+        btn.addEventListener('click', async (e)=>{
+          const container = btn.closest('[data-offering-id]');
+          const offeringId = container.dataset.offeringId;
+          if (!confirm('Delete this offering?')) return;
+          try{
+            const res = await fetch(`/courses/offering/${offeringId}`, { method: 'DELETE' });
+            if (res.status === 204) location.reload(); else alert('Failed to delete');
+          }catch(err){alert('Error')}
+        })
+      });
+
+      // Add offering
+      const addForm = document.getElementById('add-offering-form');
+      addForm && addForm.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const fd = new FormData(addForm); const payload = Object.fromEntries(fd.entries());
+        try{
+          const res = await fetch(`/courses/<%= course.id %>/offering`, { method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+          if (res.status === 201) location.reload(); else alert('Failed to create');
+        }catch(err){alert('Error')}
+      });
+      
+          // Instructor edit/save handlers
+          document.querySelectorAll('.edit-instructor').forEach(btn=>{
+            btn.addEventListener('click', (e)=>{
+              const id = btn.dataset.id;
+              const editor = document.querySelector(`.instructor-editor[data-instructor-id="${id}"]`);
+              if (!editor) return;
+              editor.style.display = editor.style.display === 'none' ? 'block' : 'none';
+            });
+          });
+
+          document.querySelectorAll('.save-instructor').forEach(btn=>{
+            btn.addEventListener('click', async ()=>{
+              const id = btn.dataset.id;
+              const editor = document.querySelector(`.instructor-editor[data-instructor-id="${id}"]`);
+              const inputs = editor.querySelectorAll('input');
+              const payload = {};
+              inputs.forEach(i=>{ if (i.name) payload[i.name] = i.value });
+              try{
+                const res = await fetch(`/courses/instructor/${id}`, { method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+                  if (res.ok) {
+                  const json = await res.json();
+                  const inst = json.instructor || json.updated || json;
+                  // update displayed name and popularity inline; make name a link if rateMyProfLink present
+                  const nameSpan = document.querySelector(`.instructor-name:has(button[data-id="${id}"])`) || document.querySelector(`.instructor-name`);
+                  if (nameSpan) {
+                    const nameHtml = inst.rateMyProfLink ? `<a href="${inst.rateMyProfLink}" target="_blank" rel="noopener noreferrer">${inst.firstname || ''} ${inst.lastname || ''}</a>` : `${inst.firstname || ''} ${inst.lastname || ''}`;
+                    nameSpan.innerHTML = `${nameHtml} <small style="color:#666; margin-left:8px">pop: ${inst.popularity ?? '—'}</small>`;
+                  }
+                  editor.style.display = 'none';
+                  alert('Instructor saved')
+                } else { alert('Failed to save') }
+              }catch(err){alert('Error')}
+            });
+          });
+
+          // Generate popularity handler
+          document.querySelectorAll('.generate-popularity').forEach(btn=>{
+            btn.addEventListener('click', async ()=>{
+              const id = btn.dataset.id;
+              try{
+                const res = await fetch(`/courses/instructor/${id}/popularity`, { method: 'POST' });
+                if (res.ok) {
+                  const json = await res.json();
+                  const inst = json.instructor || json;
+                  // update displayed popularity and keep link if present
+                  const nameSpan = document.querySelector(`.instructor-name:has(button[data-id="${id}"])`) || document.querySelector(`.instructor-name`);
+                  if (nameSpan) {
+                    const nameHtml = inst.rateMyProfLink ? `<a href="${inst.rateMyProfLink}" target="_blank" rel="noopener noreferrer">${inst.firstname || ''} ${inst.lastname || ''}</a>` : `${inst.firstname || ''} ${inst.lastname || ''}`;
+                    nameSpan.innerHTML = `${nameHtml} <small style="color:#666; margin-left:8px">pop: ${inst.popularity ?? '—'}</small>`;
+                  }
+                  // also update editor input for popularity if present
+                  const editor = document.querySelector(`.instructor-editor[data-instructor-id="${id}"]`);
+                  if (editor) {
+                    const popInput = editor.querySelector('input[name="popularity"]');
+                    if (popInput) popInput.value = inst.popularity ?? '';
+                  }
+                  alert('Popularity regenerated')
+                } else { alert('Failed to regenerate') }
+              }catch(err){alert('Error')}
+            })
+          })
+
+          // Remove instructor from offering
+          document.querySelectorAll('.remove-instructor').forEach(btn=>{
+            btn.addEventListener('click', async ()=>{
+              const offeringId = btn.dataset.offeringId;
+              const instructorId = btn.dataset.instructorId;
+              if (!confirm('Remove this instructor from the offering?')) return;
+              try{
+                const res = await fetch(`/courses/offering/${offeringId}/instructor/${instructorId}`, { method: 'DELETE' });
+                if (res.status === 204) location.reload(); else alert('Failed to remove');
+              }catch(err){alert('Error')}
+            });
+          });
+
+          // Instructor search & attach per offering
+          document.querySelectorAll('.inst-search').forEach(input=>{
+            let t;
+            input.addEventListener('input', ()=>{
+              clearTimeout(t); t = setTimeout(async ()=>{
+                const q = input.value.trim(); const offeringId = input.dataset.offeringId; const resultsEl = document.querySelector(`.inst-results[data-offering-id="${offeringId}"]`);
+                if (!q) { resultsEl.innerHTML = ''; return }
+                try{
+                  const res = await fetch(`/courses/instructors/search?q=${encodeURIComponent(q)}&limit=5`);
+                  const json = await res.json(); const list = json.results || [];
+                  resultsEl.innerHTML = '';
+                  for (const it of list){
+                    const el = document.createElement('div'); el.className='item'; el.textContent = `${it.firstname} ${it.lastname}`;
+                    el.addEventListener('click', async ()=>{
+                      try{
+                        const r = await fetch(`/courses/offering/${offeringId}/instructor`, { method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ instructorId: it.id }) });
+                        if (r.status === 201) location.reload(); else alert('Failed to attach');
+                      }catch(err){alert('Error')}
+                    });
+                    resultsEl.appendChild(el);
+                  }
+                }catch(err){ resultsEl.innerHTML = 'Search failed' }
+              }, 300)
+            })
+          });
+
+          // Create new instructor and attach
+          document.querySelectorAll('.create-instructor-form').forEach(form=>{
+            form.addEventListener('submit', async (e)=>{
+              e.preventDefault();
+              const offeringId = form.dataset.offeringId;
+              const fd = new FormData(form); const payload = Object.fromEntries(fd.entries());
+              try{
+                const res = await fetch('/courses/instructor', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+                if (res.status === 201){
+                  const j = await res.json();
+                  const iid = j.instructor.id;
+                  const r2 = await fetch(`/courses/offering/${offeringId}/instructor`, { method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ instructorId: iid }) });
+                  if (r2.status === 201) location.reload(); else alert('Created but failed to attach');
+                } else { alert('Failed to create') }
+              }catch(err){alert('Error')}
+            })
+          })
+          
+          // Get info button for create-instructor-form
+          document.querySelectorAll('.get-instructor-info').forEach(btn=>{
+            btn.addEventListener('click', async (e)=>{
+              const form = btn.closest('.create-instructor-form');
+              if (!form) return;
+              const firstname = (form.querySelector('input[name="firstname"]').value || '').trim();
+              const lastname = (form.querySelector('input[name="lastname"]').value || '').trim();
+              const statusEl = form.querySelector('.info-status');
+              statusEl.textContent = 'Looking up...';
+              try{
+                const res = await fetch(`/courses/instructor/info?firstname=${encodeURIComponent(firstname)}&lastname=${encodeURIComponent(lastname)}`);
+                if (!res.ok) { statusEl.textContent = 'Lookup failed'; return }
+                const json = await res.json();
+                if (!json.info) { statusEl.textContent = 'No info found'; return }
+                const info = json.info;
+                // populate fields
+                const setIf = (name, val) => { const el = form.querySelector(`input[name="${name}"]`); if (el) el.value = val != null ? val : ''; };
+                setIf('avgRating', info.avgRating ?? '');
+                setIf('avgDifficulty', info.avgDifficulty ?? '');
+                setIf('wouldTakeAgainPercent', info.wouldTakeAgainPercent ?? '');
+                setIf('numberOfRatings', info.numberOfRatings ?? '');
+                setIf('department', info.department ?? '');
+                setIf('rateMyProfLink', info.rateMyProfLink ?? '');
+                statusEl.textContent = json.confident ? 'Match found' : 'Possible match — verify';
+              }catch(err){ statusEl.textContent = 'Error' }
+            })
+          })
+
+          // Clear button for create-instructor-form
+          document.querySelectorAll('.clear-instructor').forEach(btn=>{
+            btn.addEventListener('click', (e)=>{
+              const form = btn.closest('.create-instructor-form');
+              if (!form) return;
+              // clear all inputs in this form
+              form.querySelectorAll('input').forEach(i => i.value = '');
+              const statusEl = form.querySelector('.info-status');
+              if (statusEl) statusEl.textContent = '';
+            });
+          });
+    </script>
+  </body>
+</html>

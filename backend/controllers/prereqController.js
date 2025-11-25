@@ -12,3 +12,16 @@ catch(err){
 }
 
 }
+
+export async function createPrereq(req, res) {
+    const { courseId, prereqId } = req.body || {};
+    if (!courseId || !prereqId) return res.status(400).json({ msg: 'courseId and prereqId required' });
+    try {
+        // reuse db helper in courses module if available
+        const coursesDb = await import('../database/dbPrismaCourses.js');
+        const created = await coursesDb.createPrereqDB(Number(courseId), Number(prereqId));
+        return res.status(201).json({ msg: 'created', created });
+    } catch (err) {
+        return res.status(500).json({ msg: err.message || err });
+    }
+}
