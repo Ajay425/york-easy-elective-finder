@@ -8,6 +8,10 @@ const prereqRouter = express.Router();
 
 // prereqRouter.get("/:id", courseController.getPreqreq)
 
-prereqRouter.delete("/:id", prereqController.deletePrereq) // deletes a specific pre req for a given course
+// create a prerequisite link
+prereqRouter.post('/', prereqController.createPrereq);
+
+// delete a prerequisite by id
+prereqRouter.delete('/:id', prereqController.deletePrereq); // deletes a specific pre req for a given course
 
 export default prereqRouter;
