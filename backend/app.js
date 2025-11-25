@@ -8,7 +8,7 @@ import cors from 'cors';
 
 
 const app = express();
-
+import fs from 'fs'
 
 //middleware
 app.use(express.json());
@@ -19,8 +19,21 @@ app.use(cors({
 
 const PORT = process.env.PORT;
 
-app.get("/",(req,res)=>{
-    res.send("Nothing to see")
+app.get("/api",(req,res)=>{
+    if (req.url === '/favicon.ico') {
+        res.end();
+    } 
+    // Ends request for favicon without counting
+    const json1 = fs.readFileSync('./data/count.json', 'utf-8');
+    const obj = JSON.parse(json1);
+
+    if (req.query.type == 'new-visit'){
+        obj.visits = obj.visits + 1
+    }
+    const newJson = JSON.stringify(obj)
+
+    fs.writeFileSync('./data/count.json', newJson);
+    res.send(newJson)
 })
 
 app.use("/courses", courseRouter)
