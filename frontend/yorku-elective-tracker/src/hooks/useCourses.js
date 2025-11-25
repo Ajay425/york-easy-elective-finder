@@ -39,6 +39,8 @@ export function useCourses() {
           title: c.name,
           credits: c.credit.toFixed(2),
           faculty: FACULTY_NAMES[c.faculty] || "Other",
+          year: c.year,
+          deptAcronym: c.deptAcronym,
           description: c.desc || "",
           topInstructorPopularity: c.courseOfferings?.[0]?.instructors?.[0]?.instructor?.popularity,
           topInstructorName: c.courseOfferings?.[0]?.instructors?.[0]?.instructor

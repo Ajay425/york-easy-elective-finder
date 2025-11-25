@@ -14,11 +14,11 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
     <div className="w-full px-4 sm:px-8 mb-6">
       {/* Filter Header with Icon */}
       <div className="flex items-center justify-center gap-2 mb-4">
-        <Filter className="w-5 h-5 text-yellow-200" />
-        <h3 className="text-lg font-semibold text-yellow-100">
+        <Filter className="w-5 h-5 text-purple-300" />
+        <h3 className="text-lg font-semibold text-white">
           Filter Courses
           {totalActiveFilters > 0 && (
-            <span className="ml-2 text-sm text-yellow-300">
+            <span className="ml-2 text-sm text-purple-300">
               ({totalActiveFilters} active)
             </span>
           )}
@@ -38,30 +38,31 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
                   variant="outline"
                   className={`
                     relative group
-                    min-w-[140px] h-auto py-3 px-4
-                    rounded-xl font-medium text-sm
-                    border-2 transition-all duration-300
+                    min-w-[140px] h-auto py-2.5 px-4
+                    rounded-lg font-medium text-sm
+                    border transition-all duration-300
                     ${hasActiveFilters 
-                      ? 'bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border-yellow-400/60 text-white shadow-lg shadow-yellow-500/20' 
-                      : 'bg-white/5 border-white/20 text-white/90 hover:bg-white/10 hover:border-white/40'
+                      ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-400/40 text-white shadow-lg shadow-purple-500/10 group-hover:from-purple-500/35 group-hover:to-pink-500/35 group-hover:border-purple-400/70 group-hover:text-purple-100 group-hover:shadow-purple-500/20' 
+                      : 'bg-white/5 border-white/15 text-white/80 hover:bg-white/10 hover:border-white/25 hover:text-purple-300'
                     }
-                    hover:scale-105 hover:shadow-xl
+                    hover:shadow-lg
                     active:scale-95
+                    group-hover:animate-pulse
                   `}
                 >
                   <div className="flex flex-col items-start w-full gap-1">
                     {/* Filter Name with Icon */}
                     <div className="flex items-center justify-between w-full">
-                      <span className="font-semibold">
+                      <span className="font-semibold transition-all duration-300 group-hover:text-purple-300">
                         {filterName}
                       </span>
                       <div className="flex items-center gap-1">
                         {hasActiveFilters && (
-                          <span className="px-2 py-0.5 text-xs font-bold bg-yellow-400 text-black rounded-full">
+                          <span className="px-2 py-0.5 text-xs font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-black rounded-full text-[10px] transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-400/50">
                             {activeCount}
                           </span>
                         )}
-                        <ChevronDown className="w-4 h-4 transition-transform group-data-[state=open]:rotate-180" />
+                        <ChevronDown className="w-4 h-4 transition-all duration-300 group-data-[state=open]:rotate-180 group-hover:text-purple-300" />
                       </div>
                     </div>
 
@@ -71,14 +72,14 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
                         {filters[filterName].slice(0, 2).map((tag, i) => (
                           <span
                             key={i}
-                            className="px-2 py-0.5 text-[10px] font-medium bg-yellow-300 text-black rounded-md truncate max-w-[80px]"
+                            className="px-2 py-0.5 text-[10px] font-medium bg-purple-400/30 text-purple-200 rounded-md truncate max-w-[80px]"
                             title={tag}
                           >
                             {tag}
                           </span>
                         ))}
                         {activeCount > 2 && (
-                          <span className="px-2 py-0.5 text-[10px] font-bold bg-yellow-400/50 text-white rounded-md">
+                          <span className="px-2 py-0.5 text-[10px] font-bold bg-pink-400/30 text-pink-200 rounded-md">
                             +{activeCount - 2}
                           </span>
                         )}
@@ -90,17 +91,16 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
 
               <DropdownMenuContent 
                 className="
-                  bg-[#2A0B14]/95 backdrop-blur-xl
-                  text-white border-2 border-white/30
-                  rounded-xl shadow-2xl
+                  bg-gray-900/98 backdrop-blur-md
+                  text-white border border-white/10
+                  rounded-lg shadow-xl
                   max-h-72 overflow-y-auto
                   min-w-[200px]
-                  scrollbar-thin scrollbar-thumb-yellow-400/50 scrollbar-track-white/10
                 "
               >
                 <div className="p-2">
-                  <div className="text-xs font-semibold text-yellow-200 px-2 py-1 mb-1">
-                    Select {filterName}
+                  <div className="text-xs font-semibold text-white/60 px-2 py-2 mb-1 uppercase tracking-wider">
+                    {filterName}
                   </div>
                   {options.map((option) => {
                     const active = filters[filterName].includes(option);
@@ -118,18 +118,18 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
                           onFilterChange();
                         }}
                         className={`
-                          cursor-pointer rounded-lg px-3 py-2 my-1
-                          transition-all duration-200
+                          cursor-pointer rounded-md px-3 py-2 my-0.5
+                          transition-all duration-200 group
                           ${active 
-                            ? 'bg-yellow-400/25 text-yellow-100 font-semibold border-l-4 border-yellow-400' 
-                            : 'hover:bg-white/10 text-white/80 hover:text-white'
+                            ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white font-medium group-hover:from-purple-500/50 group-hover:to-pink-500/50 group-hover:text-purple-100' 
+                            : 'hover:bg-white/5 text-white/70 hover:text-purple-300 hover:bg-white/10'
                           }
                         `}
                       >
                         <div className="flex items-center justify-between w-full">
-                          <span>{option}</span>
+                          <span className="transition-all duration-200">{option}</span>
                           {active && (
-                            <span className="text-yellow-400 text-lg">✓</span>
+                            <span className="text-purple-400 transition-all duration-200 group-hover:scale-110 group-hover:text-purple-300">✓</span>
                           )}
                         </div>
                       </DropdownMenuItem>
@@ -146,24 +146,24 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
           <Button
             onClick={onClear}
             className="
-              min-w-[140px] h-auto py-3 px-4
-              rounded-xl font-semibold text-sm
-              bg-gradient-to-br from-red-500/20 to-red-700/20
-              border-2 border-red-400/60
+              min-w-[140px] h-auto py-2.5 px-4
+              rounded-lg font-semibold text-sm
+              bg-gradient-to-r from-red-500/15 to-orange-500/15
+              border border-red-400/30
               text-white
-              shadow-lg shadow-red-500/20
-              hover:bg-red-500/30 hover:border-red-400/80
-              hover:scale-105 hover:shadow-xl
+              shadow-md shadow-red-500/10
+              hover:bg-red-500/25 hover:border-red-400/50 hover:text-red-200 hover:shadow-lg hover:shadow-red-500/20
               active:scale-95
               transition-all duration-300
               group
+              hover:animate-pulse
             "
           >
             <div className="flex items-center gap-2">
-              <X className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
+              <X className="w-4 h-4 group-hover:rotate-90 transition-all duration-300" />
               <div className="flex flex-col items-start">
-                <span>Clear All</span>
-                <span className="text-xs text-red-200">
+                <span className="transition-all duration-300">Clear All</span>
+                <span className="text-xs text-red-200/70 transition-all duration-300 group-hover:text-red-200">
                   {totalActiveFilters} filter{totalActiveFilters !== 1 ? 's' : ''}
                 </span>
               </div>
@@ -181,16 +181,17 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
                 key={`${filterName}-${value}`}
                 className="
                   flex items-center gap-2 px-3 py-1.5
-                  bg-gradient-to-r from-yellow-400/20 to-yellow-600/20
-                  border border-yellow-400/40
-                  rounded-full text-xs text-yellow-100
-                  shadow-md hover:shadow-lg
-                  transition-all duration-200
+                  bg-gradient-to-r from-purple-500/20 to-pink-500/20
+                  border border-purple-400/30
+                  rounded-full text-xs text-purple-100
+                  shadow-sm hover:shadow-md hover:from-purple-500/40 hover:to-pink-500/40 hover:border-purple-400/60 hover:text-purple-200
+                  transition-all duration-300
                   group
+                  hover:animate-pulse
                 "
               >
-                <span className="font-medium">{filterName}:</span>
-                <span className="font-semibold">{value}</span>
+                <span className="font-medium transition-all duration-300">{filterName}:</span>
+                <span className="font-semibold transition-all duration-300">{value}</span>
                 <button
                   onClick={() => {
                     setFilters((prev) => ({
@@ -202,7 +203,7 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
                   className="
                     ml-1 p-0.5 rounded-full
                     bg-red-500/30 hover:bg-red-500/50
-                    transition-colors duration-200
+                    transition-all duration-200
                     group-hover:scale-110
                   "
                 >

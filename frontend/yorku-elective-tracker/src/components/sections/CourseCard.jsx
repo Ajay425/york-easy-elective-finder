@@ -58,7 +58,17 @@ export function CourseCard({ course, selectedTerm, onClick }) {
 
   const fallbackInstructor = getFallbackInstructor();
 
-  // 4. Final values (term -> fallback -> course)
+  // 4. Check if online option is available for selected term
+  const hasOnlineOption = () => {
+    if (!selectedTerm || !course.terms) return false;
+    const offering = course.terms.find((t) => t.term === selectedTerm);
+    if (!offering || !offering.meetings) return false;
+    return offering.meetings.some((m) => m.type === "ONLN" || m.type === "ONCA" || m.type === "HYFX");
+  };
+
+  const isOnlineAvailable = hasOnlineOption();
+
+  // 5. Final values (term -> fallback -> course)
   const topInstructor = termInstructor || fallbackInstructor;
   const popularity =
     termPopularity ??
@@ -120,6 +130,14 @@ export function CourseCard({ course, selectedTerm, onClick }) {
               {course.faculty}
             </span>
           </div>
+          {isOnlineAvailable && (
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-gray-500 uppercase tracking-wider">Format</span>
+              <span className="px-2 py-0.5 text-xs font-semibold bg-gradient-to-r from-blue-500/30 to-cyan-500/30 text-blue-200 rounded-full">
+                🌐 Online Available
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Instructor */}

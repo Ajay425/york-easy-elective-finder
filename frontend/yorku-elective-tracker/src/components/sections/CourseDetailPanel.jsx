@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
-import { X, Copy } from "lucide-react";
+import { X, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export function CourseDetailPanel({ course, selectedTerm, onClose }) {
+  const [copiedIndex, setCopiedIndex] = useState(null);
+
   if (!course) return null;
 
   // Filter term offerings based on selected term
@@ -17,8 +20,10 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
       ?.filter((p) => p !== undefined && p !== null)
       ?.sort((a, b) => b - a)[0] ?? null;
 
-  const handleCopy = (text) => {
+  const handleCopy = (text, index) => {
     navigator.clipboard.writeText(text);
+    setCopiedIndex(index);
+    setTimeout(() => setCopiedIndex(null), 2000);
   };
 
   return (
@@ -137,16 +142,68 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
                 </div>
 
                 {/* Copy Button */}
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className="border-yellow-300 text-yellow-200 hover:bg-yellow-300 
-                             hover:text-black transition"
-                  onClick={() => handleCopy(t.catNumber)}
-                >
-                  <Copy className="w-4 h-4" />
-                </Button>
+                <div className="relative">
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    className="bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600
+                               border-purple-400 text-white shadow-lg shadow-purple-500/50
+                               hover:shadow-purple-500/80 transition-all duration-200 hover:scale-110"
+                    onClick={() => handleCopy(t.catNumber, idx)}
+                  >
+                    {copiedIndex === idx ? (
+                      <Check className="w-4 h-4" />
+                    ) : (
+                      <Copy className="w-4 h-4" />
+                    )}
+                  </Button>
+                  
+                  {/* Confirmation Message */}
+                  {copiedIndex === idx && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-full mt-2 right-0 bg-green-500 text-white text-xs 
+                                 px-3 py-1.5 rounded-lg whitespace-nowrap font-semibold 
+                                 shadow-lg"
+                    >
+                      Copied!
+                    </motion.div>
+                  )}
+                </div>
               </div>
+
+              {/* COURSE TYPES */}
+              {t.meetings?.length > 0 && (
+                <div className="mb-4 pb-4 border-b border-white/10">
+                  <p className="text-gray-300 text-xs mb-2">
+                    <strong className="text-white">Course Types:</strong>
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {Array.from(new Set(t.meetings.map((m) => m.type))).map((type) => {
+                      const typeLabels = {
+                        "LECT": "Lecture",
+                        "TUTR": "Tutorial",
+                        "LAB": "Lab",
+                        "SEM": "Seminar",
+                        "BLEN": "Blended",
+                        "ONLN": "Online",
+                        "ONCA": "Online Async",
+                        "HYFX": "Hybrid"
+                      };
+                      return (
+                        <span
+                          key={type}
+                          className="px-2 py-1 text-[10px] font-semibold bg-white/10 text-white rounded border border-white/20"
+                        >
+                          {typeLabels[type] || type}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
 
               {/* INSTRUCTORS */}
               {t.meetings?.length > 0 ? (
