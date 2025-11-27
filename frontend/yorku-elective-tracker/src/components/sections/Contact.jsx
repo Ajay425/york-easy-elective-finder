@@ -31,7 +31,7 @@ const ContactUs = () => {
 
   try {
     const formData = new FormData();
-    formData.append("access_key", import.meta.env.VITE_WEB3_API_KEY);
+    formData.append("access_key", "d2a725ac-5fce-4d7d-bb9a-4ce8e754537a");
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("message", data.message);
