@@ -31,11 +31,12 @@ const ContactUs = () => {
 
   try {
     const formData = new FormData();
-    formData.append("access_key", "d2a725ac-5fce-4d7d-bb9a-4ce8e754537a");
+    formData.set("access_key", "d2a725ac-5fce-4d7d-bb9a-4ce8e754537a");
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("message", data.message);
 
+    console.log("FORMDATA SENT:", Object.fromEntries(formData.entries()));
     const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       body: formData,
