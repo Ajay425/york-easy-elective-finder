@@ -26,32 +26,53 @@ const ContactUs = () => {
   });
 
 
+  const onSubmit = async (data) => {
+  console.log("Submitting form:", data);
 
-
-  const onSubmit =  async (data) => {
+  try {
     const formData = new FormData();
     formData.append("access_key", import.meta.env.WEB3_API_KEY);
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("message", data.message);
-    formData.append("botcheck", ""); 
-    
+
     const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       body: formData,
     });
 
-  const result = await res.json();
-  if (result.success) {
+    console.log("Raw Web3Forms Response:", res);
+
+    // If response is NOT ok, log more details
+    if (!res.ok) {
+      console.error(
+        "%c[WEB3FORMS ERROR] Response not OK",
+        "color:red; font-weight:bold;"
+      );
+      console.error("Status:", res.status);
+      console.error("Status Text:", res.statusText);
+      console.error("URL:", res.url);
+    }
+
+    const result = await res.json();
+    console.log("Parsed JSON:", result);
+
+    if (result.success) {
       setSubmitted(true);
       form.reset();
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 3000);
+      setTimeout(() => setSubmitted(false), 3000);
     } else {
-      alert("There was an error submitting the form. Please try again.");
+      console.error("[WEB3FORMS FAILURE]", result);
+      alert("Error: " + result.message);
     }
-  };
+  } catch (err) {
+    console.error("%c[NETWORK ERROR contacting Web3Forms]", "color:red;", err);
+    alert("Network error — check console for details.");
+  }
+};
+
+
+
 
 
 
