@@ -10,7 +10,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import { set } from "zod";
 
 const ContactUs = () => {
@@ -204,12 +204,31 @@ const ContactUs = () => {
                 />
 
                 {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full py-3 bg-gradient-to-r from-[#7f5af0] to-[#a855f7] text-white font-semibold rounded-lg shadow-lg hover:scale-[1.02] transition-all"
-                >
-                  Send Message
-                </button>
+                <div className="flex justify-center pt-4">
+        <Button
+          className="
+            relative overflow-hidden text-lg font-semibold px-10 py-6 rounded-2xl shadow-md
+            bg-white text-[#7f5af0] border border-white/10
+            transition-all duration-500 hover:scale-105 
+            hover:shadow-[0_0_30px_rgba(127,90,240,0.45)]
+            group disabled:opacity-40 disabled:cursor-not-allowed
+          "
+        >
+          {/* Sliding Color Animation (TrackMySubs style) */}
+          <span
+            className="
+              absolute inset-0 bg-gradient-to-r 
+              from-[#7f5af0] via-[#6a4fff] to-[#3a68ff]
+              translate-x-[-100%]
+              group-hover:translate-x-0
+              transition-transform duration-700 ease-out rounded-2xl"
+          ></span>
+
+          <span className="relative z-10 transition-colors duration-500 group-hover:text-white">
+                  Submit Message
+          </span>
+        </Button>
+      </div>
 
               </form>
             </Form>
