@@ -6,6 +6,7 @@ import './index.css'
 import {BrowserRouter as Router, Routes , Route} from 'react-router-dom';
 import Home from './components/sections/Home.jsx';
 import Electives from './components/sections/Electives.jsx';
+import ContactUs from './components/sections/Contact.jsx';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/electives" element={<Electives />} />
+          <Route path="/contact-us" element={<ContactUs />} />
         </Routes>
       </Router>
     </div>

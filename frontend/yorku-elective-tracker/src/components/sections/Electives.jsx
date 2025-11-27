@@ -8,6 +8,7 @@ import { CourseCard } from "./CourseCard";
 import { CourseDetailPanel } from "./CourseDetailPanel";
 import { Pagination } from "./Pagination";
 import { useLocation } from "react-router-dom";
+import { Mail } from "lucide-react";
 
 const Electives = () => {
   const { courses, loading, error } = useCourses();
@@ -111,6 +112,20 @@ const Electives = () => {
           Explore Your Electives ({selectedTerm})
         </h1>
       </section>
+
+      {/* Contact Icon */}
+  <div className="absolute top-4 left-4 z-20 group/mail">
+    <div onClick={ (e) => {
+      e.stopPropagation();
+      window.location.href = '/contact-us'
+    }} className="h-10 w-10 flex items-center justify-center border border-purple-400/50 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/10 hover:from-purple-500/40 hover:to-pink-500/30 hover:border-purple-400 shadow-lg shadow-purple-500/20 group-hover/mail:shadow-purple-500/40 transition-all duration-300 cursor-pointer group-hover/mail:scale-110">
+      <Mail className="w-5 h-5 text-purple-300 group-hover/mail:text-purple-200 transition-colors duration-300" />
+    <div className="absolute top-12 left-0 px-3 py-2 bg-gray-900 text-purple-200 text-xs font-semibold rounded-lg whitespace-nowrap opacity-0 group-hover/mail:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg border border-purple-400/30">
+    Contact Us
+    </div>
+    </div>
+  </div>
+
 
       {/* Search Bar */}
       <div className="relative z-10 w-full flex justify-center">

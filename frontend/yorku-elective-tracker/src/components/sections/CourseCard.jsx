@@ -1,10 +1,10 @@
 import {
   Card,
 } from "@/components/ui/card";
+import { GraduationCap, Users, Flame } from "lucide-react";
 
 export function CourseCard({ course, selectedTerm, onClick }) {
 
-  // 1. Compute term-based popularity safely
   const computeTermPopularity = () => {
     if (!selectedTerm || !course.terms) return null;
     const offering = course.terms.find((t) => t.term === selectedTerm);
@@ -19,7 +19,6 @@ export function CourseCard({ course, selectedTerm, onClick }) {
 
   const termPopularity = computeTermPopularity();
 
-  // 2. Compute term-based instructor
   const getTermInstructor = () => {
     if (!selectedTerm || !course.terms) return null;
 
@@ -41,7 +40,6 @@ export function CourseCard({ course, selectedTerm, onClick }) {
 
   const termInstructor = getTermInstructor();
 
-  // 3. Fallback (original logic)
   const getFallbackInstructor = () => {
     for (const term of course.terms || []) {
       for (const meeting of term.meetings || []) {
@@ -58,7 +56,6 @@ export function CourseCard({ course, selectedTerm, onClick }) {
 
   const fallbackInstructor = getFallbackInstructor();
 
-  // 4. Check if online option is available for selected term
   const hasOnlineOption = () => {
     if (!selectedTerm || !course.terms) return false;
     const offering = course.terms.find((t) => t.term === selectedTerm);
@@ -68,7 +65,6 @@ export function CourseCard({ course, selectedTerm, onClick }) {
 
   const isOnlineAvailable = hasOnlineOption();
 
-  // 5. Final values (term -> fallback -> course)
   const topInstructor = termInstructor || fallbackInstructor;
   const popularity =
     termPopularity ??
@@ -79,9 +75,7 @@ export function CourseCard({ course, selectedTerm, onClick }) {
   return (
     <Card
       onClick={onClick}
-      className="
-        group relative cursor-pointer h-full rounded-2xl
-        bg-gradient-to-br from-gray-800/40 via-gray-900/40 to-black/40
+      className="group relative cursor-pointer h-full rounded-2xl bg-gradient-to-br from-gray-800/40 via-gray-900/40 to-black/40
         backdrop-blur-xl border border-white/5 shadow-lg shadow-black/20
         hover:border-[#7f5af0]/30 hover:shadow-2xl hover:shadow-[#7f5af0]/10
         hover:translate-y-[-4px] transition-all duration-300 ease-out overflow-hidden
@@ -90,26 +84,50 @@ export function CourseCard({ course, selectedTerm, onClick }) {
       {/* Shimmer */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
 
-      {/* Popularity badge */}
-      {popularity && (
-        <div className="absolute top-4 right-4 z-20">
-          <div className="flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold rounded-full shadow-lg">
-            ★ {Number(popularity).toFixed(1)}
-          </div>
-        </div>
-      )}
-
       {/* Content */}
       <div className="relative z-10 p-6 h-full flex flex-col">
-        {/* Course Code */}
+        {/* Header Section */}
         <div className="mb-4">
-          <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent group-hover:from-[#7f5af0] group-hover:to-[#a855f7] transition-all duration-300">
-            {course.code}
-          </h3>
+          {/* Course Code with Credits badge */}
+          <div className="flex items-start justify-between mb-3">
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent group-hover:from-[#7f5af0] group-hover:to-[#a855f7] transition-all duration-300">
+              {course.code}
+            </h3>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#7f5af0]/20 rounded-lg border border-[#7f5af0]/30">
+              <GraduationCap className="w-3.5 h-3.5 text-[#7f5af0]" />
+              <span className="text-sm text-white font-semibold">{course.credits}</span>
+            </div>
+          </div>
+
+          {/* Popularity bar */}
+          {popularity && (
+            <div className="mb-3">
+              <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center gap-1.5">
+                  <Flame className="w-3.5 h-3.5 text-orange-400" />
+                  <span className="text-xs text-gray-400 uppercase tracking-wider">Popularity</span>
+                </div>
+                <span className="text-sm text-white font-bold">{popularity}/100</span>
+              </div>
+              <div className="h-1.5 bg-gray-700/50 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full transition-all duration-500"
+                  style={{ width: `${popularity}%` }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Online badge */}
+          {isOnlineAvailable && (
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-400/30 rounded-full">
+              <span className="text-xs font-semibold text-blue-300">🌐 Online Available</span>
+            </div>
+          )}
         </div>
 
         {/* Title */}
-        <div className="mb-5 flex-1">
+        <div className="mb-4 flex-1">
           <p className="text-sm text-gray-300 line-clamp-3 leading-relaxed group-hover:text-white transition-colors duration-300">
             {course.title}
           </p>
@@ -118,29 +136,15 @@ export function CourseCard({ course, selectedTerm, onClick }) {
         {/* Divider */}
         <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4" />
 
-        {/* Info Section */}
-        <div className="space-y-3 mb-5">
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-500 uppercase tracking-wider">Credits</span>
-            <span className="text-sm text-[#7f5af0] font-semibold">{course.credits}</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-500 uppercase tracking-wider">Faculty</span>
-            <span className="text-xs text-gray-400 truncate max-w-[60%] text-right">
-              {course.faculty}
-            </span>
-          </div>
-          {isOnlineAvailable && (
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-gray-500 uppercase tracking-wider">Format</span>
-              <span className="px-2 py-0.5 text-xs font-semibold bg-gradient-to-r from-blue-500/30 to-cyan-500/30 text-blue-200 rounded-full">
-                🌐 Online Available
-              </span>
-            </div>
-          )}
+        {/* Faculty */}
+        <div className="mb-4">
+          <p className="text-xs text-gray-500 uppercase tracking-wider mb-1.5">Faculty</p>
+          <p className="text-xs text-gray-300">
+            {course.faculty}
+          </p>
         </div>
 
-        {/* Instructor */}
+        {/* Instructor Section */}
         <div className="mt-auto pt-4 border-t border-white/5">
           {topInstructor ? (
             <div className="flex items-center gap-3">
@@ -155,9 +159,12 @@ export function CourseCard({ course, selectedTerm, onClick }) {
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">
-                  TOP Instructor
-                </p>
+                <div className="flex items-center gap-1.5 mb-1">
+                  <Users className="w-3 h-3 text-gray-500" />
+                  <p className="text-[10px] text-gray-500 uppercase tracking-wider">
+                    Top Instructor
+                  </p>
+                </div>
                 <p className="text-sm text-white font-medium truncate">{topInstructor.name}</p>
               </div>
             </div>
@@ -167,9 +174,12 @@ export function CourseCard({ course, selectedTerm, onClick }) {
                 <span className="text-gray-500 text-lg">?</span>
               </div>
               <div className="flex-1">
-                <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">
-                  Instructor
-                </p>
+                <div className="flex items-center gap-1.5 mb-1">
+                  <Users className="w-3 h-3 text-gray-500" />
+                  <p className="text-[10px] text-gray-500 uppercase tracking-wider">
+                    Instructor
+                  </p>
+                </div>
                 <p className="text-sm text-gray-500 italic">To be announced</p>
               </div>
             </div>
