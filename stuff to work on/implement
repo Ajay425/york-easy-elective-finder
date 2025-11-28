@@ -1,5 +1,7 @@
-- Give multiple selection options
-- Give Fall and Winter Sub headings
-- Add back popularity 
-- Fix the rmp link which shows up for a TBA prof. 
-- Show foundational science electives as well. 
+- Fix online showing status
+- Add SEM to courseTypes (Done) 
+- Stack Searches and Course filters
+- Align the Popular searches properly (Done)
+- Add conntact us to the sidebar (Done)
+- Fix refresh during filters
+- Add an message saying we only display elective courses which dont need pre reqs (Done)

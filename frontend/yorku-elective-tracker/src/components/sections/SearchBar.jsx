@@ -158,28 +158,31 @@ export function SearchBar({ onSearch, searchQuery }) {
 
       {/* Quick Search Suggestions */}
       {!searchQuery && !searchInput && (
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          <span className="text-xs text-white/40 mr-2">Popular searches:</span>
-          {['EECS', 'MATH', 'Psychology', 'Business', '3.00 credits'].map((suggestion) => (
-            <button
-              key={suggestion}
-              onClick={() => {
-                setSearchInput(suggestion);
-                onSearch(suggestion);
-              }}
-              className="
-                px-3 py-1 text-xs font-medium
-                bg-white/5 hover:bg-yellow-400/20
-                border border-white/20 hover:border-yellow-400/40
-                rounded-full
-                text-white/60 hover:text-yellow-200
-                transition-all duration-200
-                hover:scale-105
-              "
-            >
-              {suggestion}
-            </button>
-          ))}
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <p className="text-xs font-semibold text-white/40 uppercase tracking-wider">Popular Searches</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {['ECON', 'STS', 'Psychology', 'Business', 'Games'].map((suggestion) => (
+              <button
+                key={suggestion}
+                onClick={() => {
+                  setSearchInput(suggestion);
+                  onSearch(suggestion);
+                }}
+                className="
+                  px-4 py-2 text-xs font-semibold
+                  bg-gradient-to-r from-purple-500/20 to-pink-500/10
+                  hover:from-purple-500/40 hover:to-pink-500/30
+                  border border-purple-400/30 hover:border-purple-400/60
+                  rounded-full
+                  text-purple-300 hover:text-purple-200
+                  transition-all duration-300
+                  hover:scale-110 hover:shadow-lg hover:shadow-purple-500/30
+                "
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>

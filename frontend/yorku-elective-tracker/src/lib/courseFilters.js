@@ -30,7 +30,7 @@ export const DEPARTMENTS = [
 ];
 
 export const TERMS = ['F', 'W', 'S', 'Y'];
-export const COURSE_TYPES = ['LECT', 'TUTR', 'LAB', 'SEM', 'BLEN', 'ONLN', 'ONCA', 'HYFX'];
+export const COURSE_TYPES = ['LECT', 'TUTR', 'LAB', 'SEMR', 'BLEN', 'ONLN', 'ONCA', 'HYFX'];
 export const YEARS = [1, 2, 3, 4];
 export const CREDITS = [0.5, 1, 1.5, 2, 3, 4, 4.5, 6, 9];
 

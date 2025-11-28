@@ -5,72 +5,111 @@ import { GraduationCap, Users, Flame } from "lucide-react";
 
 export function CourseCard({ course, selectedTerm, onClick }) {
 
-  const computeTermPopularity = () => {
-    if (!selectedTerm || !course.terms) return null;
-    const offering = course.terms.find((t) => t.term === selectedTerm);
-    if (!offering) return null;
+  // Find first valid instructor in a specific term
+const getInstructorFromMeeting = (meeting) => {
+    if (!meeting) return null;
 
-    const pops = offering.meetings
-      ?.map((m) => m.popularity)
-      ?.filter((p) => p !== undefined && p !== null);
+    const first = (meeting.firstName || "").trim();
+    const last = (meeting.lastName || "").trim();
 
-    return pops?.length ? Math.max(...pops) : null;
+    // Invalid if no first name or it's TBA
+    if (!first || first.toUpperCase() === "TBA") return null;
+
+    const fullName = last ? `${first} ${last}` : first;
+
+    return {
+      name: fullName,
+      popularity: meeting.popularity ?? null,
+    };
   };
 
-  const termPopularity = computeTermPopularity();
+  // Find first valid instructor in a specific term
+  const findInstructorInTerm = (term) => {
+    if (!term?.meetings) return null;
 
-  const getTermInstructor = () => {
-    if (!selectedTerm || !course.terms) return null;
-
-    const offering = course.terms.find((t) => t.term === selectedTerm);
-    if (!offering || !offering.meetings) return null;
-
-    const valid = offering.meetings.find(
-      (m) => m.firstName && m.firstName !== "TBA"
-    );
-
-    if (valid) {
-      return {
-        name: `${valid.firstName} ${valid.lastName}`,
-        popularity: valid.popularity,
-      };
+    for (const m of term.meetings) {
+      const instructor = getInstructorFromMeeting(m);
+      if (instructor) return instructor;
     }
     return null;
   };
 
-  const termInstructor = getTermInstructor();
+  // Main instructor selector
+  const getInstructor = (course, selectedTerm) => {
+    if (!course?.terms) return null;
 
-  const getFallbackInstructor = () => {
-    for (const term of course.terms || []) {
-      for (const meeting of term.meetings || []) {
-        if (meeting.firstName && meeting.firstName !== "TBA") {
-          return {
-            name: `${meeting.firstName} ${meeting.lastName}`,
-            popularity: meeting.popularity,
-          };
+    // 1️⃣ If a term is selected: ONLY look at that term
+    if (selectedTerm) {
+      const term = course.terms.find((t) => t.term === selectedTerm);
+      if (!term) return null;
+      return findInstructorInTerm(term);
+    }
+
+    // 2️⃣ If no term selected: search all terms for any valid instructor
+    for (const term of course.terms) {
+      const inst = findInstructorInTerm(term);
+      if (inst) return inst;
+    }
+
+    return null;
+  };
+
+  // Popularity selection
+  const getPopularity = (course, selectedTerm) => {
+    if (!course?.terms) return null;
+
+    // 1️⃣ If a term is selected: ONLY use that term's popularity values
+    if (selectedTerm) {
+      const term = course.terms.find((t) => t.term === selectedTerm);
+      if (!term?.meetings) return null;
+
+      const pops = term.meetings
+        .map((m) => m.popularity)
+        .filter((p) => p !== undefined && p !== null);
+
+      return pops.length ? Math.max(...pops) : null;
+    }
+
+    // 2️⃣ If NO term selected: compute max across all terms
+    let maxPop = null;
+    for (const term of course.terms) {
+      for (const m of term.meetings || []) {
+        const p = m.popularity;
+        if (p !== undefined && p !== null) {
+          maxPop = maxPop === null ? p : Math.max(maxPop, p);
         }
       }
     }
-    return null;
+
+    if (maxPop !== null) return maxPop;
+
+    // 3️⃣ Final fallback: course-level field if you really want it
+    return course.topInstructorPopularity ?? null;
   };
 
-  const fallbackInstructor = getFallbackInstructor();
+  // Detect online availability
+const ONLINE_TYPES = ["ONLN", "ONCA", "ONCB", "HYFX", "REM", "REM1", "HYBR"]; 
 
-  const hasOnlineOption = () => {
-    if (!selectedTerm || !course.terms) return false;
-    const offering = course.terms.find((t) => t.term === selectedTerm);
-    if (!offering || !offering.meetings) return false;
-    return offering.meetings.some((m) => m.type === "ONLN" || m.type === "ONCA" || m.type === "HYFX");
-  };
+const isOnline = (course, selectedTerm) => {
+  if (!course?.terms) return false;
 
-  const isOnlineAvailable = hasOnlineOption();
+  // Must check ONLY the chosen term
+  const term = course.terms.find((t) => t.term === selectedTerm);
+  if (!term?.meetings) return false;
 
-  const topInstructor = termInstructor || fallbackInstructor;
-  const popularity =
-    termPopularity ??
-    termInstructor?.popularity ??
-    fallbackInstructor?.popularity ??
-    course.topInstructorPopularity;
+  // Checks exact meeting types ONLY (no substring accidents)
+  return term.meetings.some((m) =>
+    ONLINE_TYPES.includes((m.type || "").trim().toUpperCase())
+  );
+};
+
+
+
+
+  const topInstructor = getInstructor(course, selectedTerm);
+  const popularity = getPopularity(course, selectedTerm, topInstructor);
+  const isOnlineAvailable = isOnline(course, selectedTerm);
+
 
   return (
     <Card

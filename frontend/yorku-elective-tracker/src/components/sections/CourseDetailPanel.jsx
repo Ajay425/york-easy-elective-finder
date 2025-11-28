@@ -39,7 +39,7 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
       {/* HEADER */}
       <div
         className="
-          flex justify-between items-center mb-4 sticky top-0
+          flex justify-between items-center mb-4 top-0
           bg-black/30 backdrop-blur-xl p-3 rounded-xl
           border border-white/20 shadow-lg
         "
@@ -112,6 +112,9 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
           >
             Visual Schedule Builder
           </a>
+        </p>
+        <p className="italic">
+          <a href="/contact-us" className="underline hover:text-[#7f5af0] transition-colors">Click Here to contact us for any course errors.</a>
         </p>
       </div>
 
