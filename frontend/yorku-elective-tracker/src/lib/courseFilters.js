@@ -36,7 +36,8 @@ export const CREDITS = [0.5, 1, 1.5, 2, 3, 4, 4.5, 6, 9];
 
 // Helper function - pass ALL values to get ALL popular courses
 export function buildCoursesURL() {
-  const terms = TERMS.map(t => `terms=${t}`).join('&');
+  const terms = `terms=W`; 
+  // const terms = TERMS.map(t => `terms=${t}`).join('&');
   const types = COURSE_TYPES.map(t => `types=${t}`).join('&');
   const years = YEARS.map(y => `years=${y}`).join('&');
   const depts = DEPARTMENTS.map(d => `depts=${d}`).join('&');

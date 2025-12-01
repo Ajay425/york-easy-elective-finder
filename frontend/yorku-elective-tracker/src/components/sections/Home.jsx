@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 
 function DisclaimerModal({ open, onContinue, onCancel }) {
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onCancel()}>
       <DialogContent className="bg-gradient-to-br from-gray-800/40 via-gray-900/40 to-black/40 backdrop-blur-xl border border-white/10 text-gray-200 rounded-2xl shadow-2xl shadow-black/40 max-w-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
@@ -113,9 +113,7 @@ const Home = () => {
             </SelectTrigger>
 
             <SelectContent className="bg-black/40 backdrop-blur-xl text-white border-white/10">
-              <SelectItem value="F">Fall (F)</SelectItem>
               <SelectItem value="W">Winter (W)</SelectItem>
-              <SelectItem value="Y">Year-Long (Y)</SelectItem>
             </SelectContent>
           </Select>
         </div>
