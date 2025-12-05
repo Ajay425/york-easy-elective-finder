@@ -9,6 +9,7 @@ import { CourseDetailPanel } from "./CourseDetailPanel";
 import { Pagination } from "./Pagination";
 import { useLocation } from "react-router-dom";
 import { Mail } from "lucide-react";
+import { ActiveUsers } from "../ActiveUsers";
 
 const Electives = () => {
   const { courses, loading, error } = useCourses();
@@ -179,6 +180,11 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
     Contact Us
     </div>
     </div>
+  </div>
+
+  {/* Active Users Badge */}
+  <div className="absolute top-4 right-4 z-20">
+    <ActiveUsers />
   </div>
 
 

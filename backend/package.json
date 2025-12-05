@@ -30,7 +30,8 @@
     "rate-limit-redis": "^1.7.0",
     "ratemyprofessor-api": "^1.0.1",
     "redis": "^4.6.7",
-    "resend": "^6.5.2"
+    "resend": "^6.5.2",
+    "socket.io": "^4.8.1"
   },
   "devDependencies": {
     "prisma": "^6.19.0"
