@@ -74,14 +74,6 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
         <p className="text-gray-300 text-sm">
           <strong className="text-white">Credits:</strong> {course.credits}
         </p>
-
-        {/* TERM-BASED POPULARITY */}
-        {termPopularity !== null && (
-          <p className="text-gray-300 text-sm">
-            <strong className="text-white">Popularity:</strong>{" "}
-            {termPopularity}
-          </p>
-        )}
       </div>
 
       {/* NOTES */}
