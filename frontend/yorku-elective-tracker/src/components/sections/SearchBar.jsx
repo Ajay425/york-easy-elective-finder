@@ -1,13 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Search, X, Sparkles } from "lucide-react";
+import {io} from "socket.io-client";
+
+const socket = io("http://localhost:4000/", {
+  transports: ["websocket"]
+});
+
+
 
 export function SearchBar({ onSearch, searchQuery }) {
   const [searchInput, setSearchInput] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [trendingSearches, setTrendingSearches] = useState([]);
+
+  useEffect(() => {
+    // Listen for trending searches from the socket server
+    socket.on("trendingSearches", (searches) => {
+    console.log("[TRENDING RECEIVED FROM SERVER]", searches);
+      setTrendingSearches(searches);
+    });
+    return () => {
+      socket.off("trendingSearches");
+    };
+  }, []);
 
   const handleSearch = () => {
     onSearch(searchInput);
+
+    if(searchInput.trim()) {
+      socket.emit("search", searchInput); // this should send a search request to the socket server
+    }
   };
 
   const handleClear = () => {
@@ -156,35 +179,40 @@ export function SearchBar({ onSearch, searchQuery }) {
         )}
       </div>
 
-      {/* Quick Search Suggestions */}
-      {!searchQuery && !searchInput && (
-        <div className="mt-6 flex flex-col items-center gap-3">
-          <p className="text-xs font-semibold text-white/40 uppercase tracking-wider">Popular Searches</p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {['ECON', 'STS', 'Psychology', 'Business', 'Games'].map((suggestion) => (
-              <button
-                key={suggestion}
-                onClick={() => {
-                  setSearchInput(suggestion);
-                  onSearch(suggestion);
-                }}
-                className="
-                  px-4 py-2 text-xs font-semibold
-                  bg-gradient-to-r from-purple-500/20 to-pink-500/10
-                  hover:from-purple-500/40 hover:to-pink-500/30
-                  border border-purple-400/30 hover:border-purple-400/60
-                  rounded-full
-                  text-purple-300 hover:text-purple-200
-                  transition-all duration-300
-                  hover:scale-110 hover:shadow-lg hover:shadow-purple-500/30
-                "
-              >
-                {suggestion}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Popular Searches (Live + Fallback) */}
+{!searchQuery && !searchInput && (
+  <div className="mt-6 flex flex-col items-center gap-3">
+    <p className="text-xs font-semibold text-white/40 uppercase tracking-wider">
+      Popular Searches
+    </p>
+
+    <div className="flex flex-wrap justify-center gap-2">
+      {(trendingSearches.length > 0 ? trendingSearches : ['ECON', 'STS', 'Psychology', 'Business', 'Games'])
+        .map((suggestion, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setSearchInput(suggestion);
+              onSearch(suggestion);
+              socket.emit("search", suggestion); // Count trending clicks too
+            }}
+            className="
+              px-4 py-2 text-xs font-semibold
+              bg-gradient-to-r from-purple-500/20 to-pink-500/10
+              hover:from-purple-500/40 hover:to-pink-500/30
+              border border-purple-400/30 hover:border-purple-400/60
+              rounded-full
+              text-purple-300 hover:text-purple-200
+              transition-all duration-300
+              hover:scale-110 hover:shadow-lg hover:shadow-purple-500/30
+            "
+          >
+            {suggestion}
+          </button>
+      ))}
+    </div>
+  </div>
+)}
     </div>
   );
 }
