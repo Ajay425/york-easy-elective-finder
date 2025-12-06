@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { Users } from "lucide-react";
 
-const socket = io("http://localhost:4000");
+const socket = io("york-easy-elective-finder-production.up.railway.app", {
+    transports: ["websocket"],
+    secure: true,   
+});
+
 
 export function ActiveUsers() {
     const [active, setActive] = useState(0);
