@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Search, X, Sparkles } from "lucide-react";
 import {io} from "socket.io-client";
 
-const socket = io("york-easy-elective-finder-production.up.railway.app", {
+const socket = io("https://york-easy-elective-finder-production.up.railway.app", {
   transports: ["websocket"]
 });
 
