@@ -182,21 +182,24 @@ export function SearchBar({ onSearch, searchQuery }) {
       </div>
 
       {/* Popular Searches (Live + Fallback) */}
-{!searchQuery && !searchInput && (
+{/* Popular Searches (Live + Fallback) */}
+{!searchInput.trim() && (
   <div className="mt-6 flex flex-col items-center gap-3">
     <p className="text-xs font-semibold text-white/40 uppercase tracking-wider">
       Popular Searches
     </p>
 
     <div className="flex flex-wrap justify-center gap-2">
-      {(trendingSearches.length > 0 ? trendingSearches : ['ECON', 'STS', 'Psychology', 'Business', 'Games'])
+      {(trendingSearches.length > 0 
+        ? trendingSearches 
+        : ['ECON', 'STS', 'Psychology', 'Business', 'Games'])
         .map((suggestion, index) => (
           <button
             key={index}
             onClick={() => {
               setSearchInput(suggestion);
               onSearch(suggestion);
-              socket.emit("search", suggestion); // Count trending clicks too
+              socket.emit("search", suggestion);
             }}
             className="
               px-4 py-2 text-xs font-semibold
@@ -215,6 +218,7 @@ export function SearchBar({ onSearch, searchQuery }) {
     </div>
   </div>
 )}
+
     </div>
   );
 }

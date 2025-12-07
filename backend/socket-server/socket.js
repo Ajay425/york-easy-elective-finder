@@ -20,7 +20,7 @@ io.on("connection", (socket) => {
         if (!query) return;
         trendingSearches[query] = (trendingSearches[query] || 0) + 1;
 
-        const sorted = Object.entries(trendingSearches).sort((a, b) => b[1] - a[1]).slice(0, 10);
+        const sorted = Object.entries(trendingSearches).sort((a, b) => b[1] - a[1]).slice(0, 5);
 
         const trendingList = sorted.map(([term]) => term);
         io.emit("trendingSearches", trendingList);
