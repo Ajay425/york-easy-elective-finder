@@ -35,34 +35,40 @@ let activeUsers = 0;
 
 io.on("connection", (socket) => {
     activeUsers++;
-    console.log(`A user connected. Active users: ${activeUsers}`);
     io.emit("activeUsers", activeUsers);
-    // Trend based search optimization for course searching 
-    socket.on("search", (query) => {
-        if (!query) return;
-        trendingSearches[query] = (trendingSearches[query] || 0) + 1;
 
-        const sorted = Object.entries(trendingSearches).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    // Sending current trending based searches to a user client
+    const sorted = Object.entries(trendingSearches)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+    const trendingList = sorted.map(([term]) => term);
+    socket.emit("trendingSearches", trendingList);
+
+    // Handle the search shit here
+    socket.on("search", (query) => {
+        if (!query.trim()) return;
+
+        trendingSearches[query] = (trendingSearches[query] || 0) + 1;
+        saveTrending();
+
+        const sorted = Object.entries(trendingSearches)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5);
 
         const trendingList = sorted.map(([term]) => term);
-        saveTrending();
-        io.emit("trendingSearches", trendingList);
 
-        console.log("Updated trending searches:", trendingList);
+        console.log("[SEARCH RECEIVED]", query);
+        console.log("[TRENDING UPDATED]", trendingList);
+
+        io.emit("trendingSearches", trendingList);
     });
 
-    // disconnect shit will be here 
     socket.on("disconnect", () => {
         activeUsers--;
-        console.log(`A user disconnected. Active users: ${activeUsers}`);
+        console.log(`[DISCONNECTED] Active users: ${activeUsers}`);
         io.emit("activeUsers", activeUsers);
-  
     });
-
-    const sorted = Object.entries(trendingSearches).sort((a, b) => b[1] - a[1]).slice(0, 5);
-
-    socket.emit("trendingSearches", sorted);
-
 });
 
 const PORT = process.env.PORT || 4000;
