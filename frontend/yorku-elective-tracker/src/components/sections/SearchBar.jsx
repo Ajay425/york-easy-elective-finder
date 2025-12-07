@@ -4,8 +4,10 @@ import { Search, X, Sparkles } from "lucide-react";
 import {io} from "socket.io-client";
 
 const socket = io("https://york-easy-elective-finder-production.up.railway.app", {
-  transports: ["websocket"]
+  transports: ["websocket"],
+  secure: true
 });
+
 
 
 
