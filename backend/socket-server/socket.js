@@ -67,9 +67,6 @@ io.on("connection", (socket) => {
     socket.on("search", (query) => {
         if (!query.trim()) return;
 
-        if (!isValidCourseQuery(query)) return;
-
-
         trendingSearches[query] = (trendingSearches[query] || 0) + 1;
         saveTrending();
 
