@@ -139,17 +139,23 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
                 {/* Copy Button */}
                 <div className="relative">
                   <Button
-                    size="icon"
-                    variant="outline"
+                    size="sm"
                     className="bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600
-                               border-purple-400 text-white shadow-lg shadow-purple-500/50
-                               hover:shadow-purple-500/80 transition-all duration-200 hover:scale-110"
+                               border border-purple-400 text-white shadow-lg shadow-purple-500/50
+                               hover:shadow-purple-500/80 transition-all duration-200 hover:scale-105
+                               flex items-center gap-1.5 px-3 py-1.5 h-auto text-xs font-semibold"
                     onClick={() => handleCopy(t.catNumber, idx)}
                   >
                     {copiedIndex === idx ? (
-                      <Check className="w-4 h-4" />
+                      <>
+                        <Check className="w-3.5 h-3.5" />
+                        Copied!
+                      </>
                     ) : (
-                      <Copy className="w-4 h-4" />
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        Copy Cat Number
+                      </>
                     )}
                   </Button>
                   
@@ -163,7 +169,7 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
                                  px-3 py-1.5 rounded-lg whitespace-nowrap font-semibold 
                                  shadow-lg"
                     >
-                      Copied!
+                      Cat Code in clipboard!
                     </motion.div>
                   )}
                 </div>

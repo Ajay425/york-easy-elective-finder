@@ -4,7 +4,6 @@ import { YEARS, DEPARTMENTS, COURSE_TYPES } from "../lib/courseFilters";
 export function useFilters(courses, initialFilters = null, initialSearch = "") {
   // Load from saved filters if provided, else use defaults
   const defaultFilters = {
-    Faculty: [],
     Credits: [],
     Year: [],
     Department: [],
@@ -16,7 +15,6 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
 
   // Generate filter options from courses
   const filterOptions = useMemo(() => {
-    const faculties = Array.from(new Set(courses.map((c) => c.faculty))).sort();
     const credits = Array.from(new Set(courses.map((c) => c.credits))).sort(
       (a, b) => parseFloat(a) - parseFloat(b)
     );
@@ -38,7 +36,6 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
     );
 
     return {
-      Faculty: faculties,
       Credits: credits,
       Year: courseLevels,
       Department: courseDepts,
@@ -63,8 +60,6 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
 
       return (
         matchesSearch &&
-        (filters.Faculty.length === 0 ||
-          filters.Faculty.includes(course.faculty)) &&
         (filters.Credits.length === 0 ||
           filters.Credits.includes(course.credits)) &&
         (filters.Year.length === 0 || filters.Year.includes(course.year)) &&

@@ -98,7 +98,7 @@ const Home = () => {
         "
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#7f5af0] drop-shadow-[0_0_15px_rgba(127,90,240,0.35)]">
-            Welcome to YorkU Elective Tracker
+            Welcome to YorkU Elective Finder
           </h1>
 
           <p className="text-gray-300 text-lg md:text-xl leading-relaxed drop-shadow-sm">
@@ -154,9 +154,9 @@ const Home = () => {
           </p>
           <p className="italic">📚 This tool is unofficial and not affiliated with York University.</p>
           <p className="italic">
-            📞 Feedback? Suggestions? Reach out to plebwastaken on discord or{" "}
+            📞 Feedback? Suggestions? Reach out to us using the {" "}
             <a href="/contact-us" className="underline hover:text-[#7f5af0] transition-colors">
-              Click Here
+              Contact Us form
             </a>.
           </p>
         </div>

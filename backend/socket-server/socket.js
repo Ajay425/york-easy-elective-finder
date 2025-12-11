@@ -28,6 +28,24 @@ function saveTrending(){
     fs.writeFileSync(filepath, JSON.stringify(trendingSearches, null, 2));
 }
 
+const badWords = [
+    "FUCK", "SHIT", "BITCH", "ASS", "CUNT", "NIGGER", "NIGGA",
+    "DICK", "PUSSY", "COCK", "WHORE", "SLUT"
+];
+
+function isValidCourseQuery(query) {
+    if (!query) return false;
+
+    const q = query.trim().toUpperCase();
+    if (q.length < 3) return false;
+    if (/^\d+$/.test(q)) return false;
+    const courseCodePattern = /^[A-Z]{2,5}\s?\d{3,4}$/;
+    if (courseCodePattern.test(q)) return true;
+    if (badWords.includes(q)) return false;
+    return false;
+}
+
+
 
 let activeUsers = 0;
 
@@ -48,6 +66,9 @@ io.on("connection", (socket) => {
     // Handle the search shit here
     socket.on("search", (query) => {
         if (!query.trim()) return;
+
+        if (!isValidCourseQuery(query)) return;
+
 
         trendingSearches[query] = (trendingSearches[query] || 0) + 1;
         saveTrending();

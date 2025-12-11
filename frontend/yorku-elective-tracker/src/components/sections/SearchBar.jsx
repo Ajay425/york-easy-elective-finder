@@ -70,7 +70,7 @@ export function SearchBar({ onSearch, searchQuery }) {
             
             <Input
               type="text"
-              placeholder="Try: EECS 1012, Psychology, Data Structures, 3.00 credits..."
+              placeholder="Try: EECS 1012, Psychology, Data Structures, Business"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={(e) => {
