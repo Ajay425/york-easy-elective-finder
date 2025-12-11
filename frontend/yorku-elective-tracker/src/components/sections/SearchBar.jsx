@@ -191,7 +191,7 @@ export function SearchBar({ onSearch, searchQuery }) {
     <div className="flex flex-wrap justify-center gap-2">
       {(trendingSearches.length > 0 
         ? trendingSearches 
-        : ['ECON', 'STS', 'Psychology', 'Business', 'Games'])
+        : ['ECON', 'STS', 'MODR', 'PSYC', 'PHIL'])
         .map((suggestion, index) => (
           <button
             key={index}
