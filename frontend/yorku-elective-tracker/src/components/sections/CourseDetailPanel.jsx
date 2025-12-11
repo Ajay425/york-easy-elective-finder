@@ -97,7 +97,7 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
         <p className="italic">
           To map this course into VSB visit{" "}
           <a
-            href="https://schedulebuilder.yorku.ca/vsb"
+            href="https://registrar.yorku.ca/enrol/guide/vsb"
             target="_blank"
             rel="noopener noreferrer"
             className="text-yellow-300 underline"
