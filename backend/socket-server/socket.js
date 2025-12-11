@@ -76,8 +76,6 @@ io.on("connection", (socket) => {
 
         const trendingList = sorted.map(([term]) => term);
 
-        console.log("[SEARCH RECEIVED]", query);
-        console.log("[TRENDING UPDATED]", trendingList);
 
         io.emit("trendingSearches", trendingList);
     });
