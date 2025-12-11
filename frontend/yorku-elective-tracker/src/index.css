@@ -13,7 +13,7 @@
 
 
 
-  color-scheme: light dark;
+  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
 
   font-synthesis: none;
@@ -80,19 +80,6 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #ffffff; 
-    background-color: #0a0a0a;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 @theme inline {

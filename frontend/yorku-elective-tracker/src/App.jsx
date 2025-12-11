@@ -12,11 +12,6 @@ import ContactUs from './components/sections/Contact.jsx';
 
 function App() {
 
-    useEffect(() => {
-    // Force Tailwind dark mode globally
-    document.documentElement.classList.add("dark");
-  }, [])
-
   return (
     <div className="min-h-screen bg-[#050509] w-full flex flex-col items-center justify-start">
       <Router>

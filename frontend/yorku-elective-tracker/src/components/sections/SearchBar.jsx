@@ -181,7 +181,6 @@ export function SearchBar({ onSearch, searchQuery }) {
         )}
       </div>
 
-      {/* Popular Searches (Live + Fallback) */}
 {/* Popular Searches (Live + Fallback) */}
 {!searchInput.trim() && (
   <div className="mt-6 flex flex-col items-center gap-3">
