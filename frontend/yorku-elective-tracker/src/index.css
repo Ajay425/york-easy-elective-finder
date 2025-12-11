@@ -9,6 +9,8 @@
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    background-color: #050509;
+
 
 
   color-scheme: light dark;
@@ -52,7 +54,10 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-body {
+html, body {
+ background-color: #050509 ;
+  color: white ;
+  
   margin: 0;
   padding: 0;
   min-width: 320px;
