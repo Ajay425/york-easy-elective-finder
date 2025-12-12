@@ -1,485 +1,134 @@
-2025-12-11 18:09:28,757 - INFO - 🚀 Launching Playwright browser (FAST_MODE=False)
-2025-12-11 18:09:28,874 - INFO - 🌐 Opening York course site...
-2025-12-11 18:09:32,599 - INFO - 📚 Found 217 subjects to scrape
-2025-12-11 18:09:32,599 - INFO - 🔁 Resuming — 0 subjects already completed
-2025-12-11 18:09:32,599 - INFO - 
-🎓 [1/217] Scraping subject: ACTG - Accounting - ( SB, ED )
-2025-12-11 18:09:32,599 - INFO -    🧭 Selecting subject ACTG - Accounting - ( SB, ED ) ...
-2025-12-11 18:09:58,937 - INFO -    → Found 36 courses
-2025-12-11 18:09:58,937 - INFO -    ↳ [1/36] SB/ACTG 2010 3.00 – Introduction To Financial Accounting I
-2025-12-11 18:09:59,629 - INFO -       💾 Saved SB_ACTG 2010 3.00_Introduction To Financial Accounting I.html
-2025-12-11 18:10:27,458 - INFO -    ↳ [2/36] SB/ACTG 2011 3.00 – Introduction To Financial Actg II
-2025-12-11 18:10:28,148 - INFO -       💾 Saved SB_ACTG 2011 3.00_Introduction To Financial Actg II.html
-2025-12-11 18:10:55,253 - INFO - 🚀 Launching Playwright browser (FAST_MODE=False)
-2025-12-11 18:10:55,366 - INFO - 🌐 Opening York course site...
-2025-12-11 18:10:59,197 - INFO - 📚 Found 217 subjects to scrape
-2025-12-11 18:10:59,197 - INFO - 🔁 Resuming — 0 subjects already completed
-2025-12-11 18:10:59,197 - INFO - 
-🎓 [1/217] Scraping subject: ACTG - Accounting - ( SB, ED )
-2025-12-11 18:10:59,197 - INFO -    🧭 Selecting subject ACTG - Accounting - ( SB, ED ) ...
-2025-12-11 18:11:11,551 - INFO -    → Found 36 courses
-2025-12-11 18:11:11,551 - INFO -    ↳ [1/36] SB/ACTG 2010 3.00 – Introduction To Financial Accounting I
-2025-12-11 18:11:12,278 - INFO -       💾 Saved SB_ACTG 2010 3.00_Introduction To Financial Accounting I.html
-2025-12-11 18:11:27,162 - INFO -    ↳ [2/36] SB/ACTG 2011 3.00 – Introduction To Financial Actg II
-2025-12-11 18:11:27,875 - INFO -       💾 Saved SB_ACTG 2011 3.00_Introduction To Financial Actg II.html
-2025-12-11 18:11:43,654 - INFO -    ↳ [3/36] SB/ACTG 2020 3.00 – Management Accounting Concepts
-2025-12-11 18:11:44,490 - INFO -       💾 Saved SB_ACTG 2020 3.00_Management Accounting Concepts.html
-2025-12-11 18:11:58,962 - INFO -    ↳ [4/36] SB/ACTG 3000 3.00 – Financial Reporting and Analysis
-2025-12-11 18:11:59,634 - INFO -       💾 Saved SB_ACTG 3000 3.00_Financial Reporting and Analysis.html
-2025-12-11 18:12:15,041 - INFO -    ↳ [5/36] SB/ACTG 3110 3.00 – Intermediate Financial Accounting I
-2025-12-11 18:12:15,728 - INFO -       💾 Saved SB_ACTG 3110 3.00_Intermediate Financial Accounting I.html
-2025-12-11 18:12:30,630 - INFO -    ↳ [6/36] SB/ACTG 3120 3.00 – Intermediate Financial Accounting II
-2025-12-11 18:12:31,338 - INFO -       💾 Saved SB_ACTG 3120 3.00_Intermediate Financial Accounting II.html
-2025-12-11 18:12:44,153 - INFO -    ↳ [7/36] ED/ACTG 4000 3.00 – Teaching Accounting in the Intermediate-Senior Divisions - A
-2025-12-11 18:12:44,805 - INFO -       💾 Saved ED_ACTG 4000 3.00_Teaching Accounting in the Intermediate-Senior Divisions - A.html
-2025-12-11 18:12:58,099 - INFO -    ↳ [8/36] ED/ACTG 4001 3.00 – Teaching Accounting in the Intermediate-Senior Divisions - B
-2025-12-11 18:12:58,765 - INFO -       💾 Saved ED_ACTG 4001 3.00_Teaching Accounting in the Intermediate-Senior Divisions - B.html
-2025-12-11 18:13:15,676 - INFO -    ↳ [9/36] SB/ACTG 4200 3.00 – Contemporary Issues In Accounting
-2025-12-11 18:13:16,348 - INFO -       💾 Saved SB_ACTG 4200 3.00_Contemporary Issues In Accounting.html
-2025-12-11 18:13:29,586 - INFO -    ↳ [10/36] SB/ACTG 4400 3.00 – Managerial Cost Accounting & Analysis
-2025-12-11 18:13:30,282 - INFO -       💾 Saved SB_ACTG 4400 3.00_Managerial Cost Accounting & Analysis.html
-2025-12-11 18:13:45,649 - INFO -    ↳ [11/36] SB/ACTG 4600 3.00 – Auditing Standards & Applications
-2025-12-11 18:13:46,329 - INFO -       💾 Saved SB_ACTG 4600 3.00_Auditing Standards & Applications.html
-2025-12-11 18:14:02,732 - INFO -    ↳ [12/36] SB/ACTG 4710 3.00 – Introduction To Income Taxation
-2025-12-11 18:14:03,438 - INFO -       💾 Saved SB_ACTG 4710 3.00_Introduction To Income Taxation.html
-2025-12-11 18:14:18,922 - INFO -    ↳ [13/36] SB/ACTG 4720 3.00 – Advanced Income Taxation
-2025-12-11 18:14:19,625 - INFO -       💾 Saved SB_ACTG 4720 3.00_Advanced Income Taxation.html
-2025-12-11 18:14:35,828 - INFO -    ↳ [14/36] SB/ACTG 4900 3.00 – Guided Study - Selected Problems in Accounting
-2025-12-11 18:14:36,516 - INFO -       💾 Saved SB_ACTG 4900 3.00_Guided Study - Selected Problems in Accounting.html
-2025-12-11 18:14:53,403 - INFO -    ↳ [15/36] SB/ACTG 5100 3.00 – Financial Accounting For Managers
-2025-12-11 18:14:54,243 - INFO -       💾 Saved SB_ACTG 5100 3.00_Financial Accounting For Managers.html
-2025-12-11 18:15:08,508 - INFO -    ↳ [16/36] SB/ACTG 5200 3.00 – Financial Decisions for Managers
-2025-12-11 18:15:09,207 - INFO -       💾 Saved SB_ACTG 5200 3.00_Financial Decisions for Managers.html
-2025-12-11 18:15:22,558 - INFO -    ↳ [17/36] SB/ACTG 5201 3.00 – Financial Reporting and Control in Technology Firms
-2025-12-11 18:15:23,241 - INFO -       💾 Saved SB_ACTG 5201 3.00_Financial Reporting and Control in Technology Firms.html
-2025-12-11 18:15:38,895 - INFO -    ↳ [18/36] SB/ACTG 5210 1.50 – Management Accounting
-2025-12-11 18:15:39,689 - INFO -       💾 Saved SB_ACTG 5210 1.50_Management Accounting.html
-2025-12-11 18:15:55,469 - INFO -    ↳ [19/36] SB/ACTG 6120 3.00 – Intermediate Financial Accounting I
-2025-12-11 18:15:56,171 - INFO -       💾 Saved SB_ACTG 6120 3.00_Intermediate Financial Accounting I.html
-2025-12-11 18:16:12,274 - INFO - 🚀 Launching Playwright browser (FAST_MODE=False)
-2025-12-11 18:16:12,393 - INFO - 🌐 Opening York course site...
-2025-12-11 18:16:16,034 - INFO - 📚 Found 217 subjects to scrape
-2025-12-11 18:16:16,034 - INFO - 🔁 Resuming — 0 subjects already completed
-2025-12-11 18:16:16,034 - INFO - 
-🎓 [1/217] Scraping subject: ACTG - Accounting - ( SB, ED )
-2025-12-11 18:16:16,034 - INFO -    🧭 Selecting subject ACTG - Accounting - ( SB, ED ) ...
-2025-12-11 18:16:31,785 - INFO -    → Found 36 courses
-2025-12-11 18:16:31,785 - INFO -    ↳ [1/36] SB/ACTG 2010 3.00 – Introduction To Financial Accounting I
-2025-12-11 18:16:32,507 - INFO -       💾 Saved SB_ACTG 2010 3.00_Introduction To Financial Accounting I.html
-2025-12-11 18:16:48,078 - INFO -    ↳ [2/36] SB/ACTG 2011 3.00 – Introduction To Financial Actg II
-2025-12-11 18:16:48,863 - INFO -       💾 Saved SB_ACTG 2011 3.00_Introduction To Financial Actg II.html
-2025-12-11 18:17:06,010 - INFO -    ↳ [3/36] SB/ACTG 2020 3.00 – Management Accounting Concepts
-2025-12-11 18:17:06,705 - INFO -       💾 Saved SB_ACTG 2020 3.00_Management Accounting Concepts.html
-2025-12-11 18:17:25,231 - INFO -    ↳ [4/36] SB/ACTG 3000 3.00 – Financial Reporting and Analysis
-2025-12-11 18:17:25,919 - INFO -       💾 Saved SB_ACTG 3000 3.00_Financial Reporting and Analysis.html
-2025-12-11 18:17:43,374 - INFO -    ↳ [5/36] SB/ACTG 3110 3.00 – Intermediate Financial Accounting I
-2025-12-11 18:17:44,074 - INFO -       💾 Saved SB_ACTG 3110 3.00_Intermediate Financial Accounting I.html
-2025-12-11 18:18:01,016 - INFO -    ↳ [6/36] SB/ACTG 3120 3.00 – Intermediate Financial Accounting II
-2025-12-11 18:18:01,707 - INFO -       💾 Saved SB_ACTG 3120 3.00_Intermediate Financial Accounting II.html
-2025-12-11 18:18:21,071 - INFO -    ↳ [7/36] ED/ACTG 4000 3.00 – Teaching Accounting in the Intermediate-Senior Divisions - A
-2025-12-11 18:18:21,724 - INFO -       💾 Saved ED_ACTG 4000 3.00_Teaching Accounting in the Intermediate-Senior Divisions - A.html
-2025-12-11 18:18:38,870 - INFO -    ↳ [8/36] ED/ACTG 4001 3.00 – Teaching Accounting in the Intermediate-Senior Divisions - B
-2025-12-11 18:18:39,539 - INFO -       💾 Saved ED_ACTG 4001 3.00_Teaching Accounting in the Intermediate-Senior Divisions - B.html
-2025-12-11 18:18:57,364 - INFO -    ↳ [9/36] SB/ACTG 4200 3.00 – Contemporary Issues In Accounting
-2025-12-11 18:18:58,050 - INFO -       💾 Saved SB_ACTG 4200 3.00_Contemporary Issues In Accounting.html
-2025-12-11 18:19:13,031 - INFO -    ↳ [10/36] SB/ACTG 4400 3.00 – Managerial Cost Accounting & Analysis
-2025-12-11 18:19:13,695 - INFO -       💾 Saved SB_ACTG 4400 3.00_Managerial Cost Accounting & Analysis.html
-2025-12-11 18:19:29,316 - INFO -    ↳ [11/36] SB/ACTG 4600 3.00 – Auditing Standards & Applications
-2025-12-11 18:19:30,021 - INFO -       💾 Saved SB_ACTG 4600 3.00_Auditing Standards & Applications.html
-2025-12-11 18:19:45,045 - INFO -    ↳ [12/36] SB/ACTG 4710 3.00 – Introduction To Income Taxation
-2025-12-11 18:19:45,772 - INFO -       💾 Saved SB_ACTG 4710 3.00_Introduction To Income Taxation.html
-2025-12-11 18:20:00,721 - INFO -    ↳ [13/36] SB/ACTG 4720 3.00 – Advanced Income Taxation
-2025-12-11 18:20:01,430 - INFO -       💾 Saved SB_ACTG 4720 3.00_Advanced Income Taxation.html
-2025-12-11 18:20:16,573 - INFO -    ↳ [14/36] SB/ACTG 4900 3.00 – Guided Study - Selected Problems in Accounting
-2025-12-11 18:20:17,266 - INFO -       💾 Saved SB_ACTG 4900 3.00_Guided Study - Selected Problems in Accounting.html
-2025-12-11 18:20:35,129 - INFO -    ↳ [15/36] SB/ACTG 5100 3.00 – Financial Accounting For Managers
-2025-12-11 18:20:35,843 - INFO -       💾 Saved SB_ACTG 5100 3.00_Financial Accounting For Managers.html
-2025-12-11 18:20:53,863 - INFO -    ↳ [16/36] SB/ACTG 5200 3.00 – Financial Decisions for Managers
-2025-12-11 18:20:54,548 - INFO -       💾 Saved SB_ACTG 5200 3.00_Financial Decisions for Managers.html
-2025-12-11 18:21:09,993 - INFO -    ↳ [17/36] SB/ACTG 5201 3.00 – Financial Reporting and Control in Technology Firms
-2025-12-11 18:21:10,677 - INFO -       💾 Saved SB_ACTG 5201 3.00_Financial Reporting and Control in Technology Firms.html
-2025-12-11 18:21:26,339 - INFO -    ↳ [18/36] SB/ACTG 5210 1.50 – Management Accounting
-2025-12-11 18:21:27,052 - INFO -       💾 Saved SB_ACTG 5210 1.50_Management Accounting.html
-2025-12-11 18:21:42,763 - INFO -    ↳ [19/36] SB/ACTG 6120 3.00 – Intermediate Financial Accounting I
-2025-12-11 18:21:43,481 - INFO -       💾 Saved SB_ACTG 6120 3.00_Intermediate Financial Accounting I.html
-2025-12-11 18:22:01,273 - INFO -    ↳ [20/36] SB/ACTG 6130 3.00 – Intermediate Financial Accounting for Finance Majors
-2025-12-11 18:22:02,108 - INFO -       💾 Saved SB_ACTG 6130 3.00_Intermediate Financial Accounting for Finance Majors.html
-2025-12-11 18:22:21,621 - INFO -    ↳ [21/36] SB/ACTG 6140 3.00 – Intermediate Financial Accounting II
-2025-12-11 18:22:22,356 - INFO -       💾 Saved SB_ACTG 6140 3.00_Intermediate Financial Accounting II.html
-2025-12-11 18:22:39,397 - INFO -    ↳ [22/36] SB/ACTG 6160 3.00 – Advanced Financial Accounting
-2025-12-11 18:22:40,098 - INFO -       💾 Saved SB_ACTG 6160 3.00_Advanced Financial Accounting.html
-2025-12-11 18:22:55,957 - INFO -    ↳ [23/36] SB/ACTG 6201 1.50 – Multi-Competency Case Analysis for Accountants
-2025-12-11 18:22:56,785 - INFO -       💾 Saved SB_ACTG 6201 1.50_Multi-Competency Case Analysis for Accountants.html
-2025-12-11 18:23:16,554 - INFO -    ↳ [24/36] SB/ACTG 6250 3.00 – Financial Reporting and Analysis
-2025-12-11 18:23:17,333 - INFO -       💾 Saved SB_ACTG 6250 3.00_Financial Reporting and Analysis.html
-2025-12-11 18:23:32,431 - INFO -    ↳ [25/36] SB/ACTG 6301 3.00 – Integrative Case Analysis for Accountants
-2025-12-11 18:23:33,193 - INFO -       💾 Saved SB_ACTG 6301 3.00_Integrative Case Analysis for Accountants.html
-2025-12-11 18:23:49,132 - INFO -    ↳ [26/36] SB/ACTG 6550 1.50 – Advanced Management Accounting
-2025-12-11 18:23:49,893 - INFO -       💾 Saved SB_ACTG 6550 1.50_Advanced Management Accounting.html
-2025-12-11 18:24:07,008 - INFO -    ↳ [27/36] SB/ACTG 6600 3.00 – Auditing Standards & Applications
-2025-12-11 18:24:07,756 - INFO -       💾 Saved SB_ACTG 6600 3.00_Auditing Standards & Applications.html
-2025-12-11 18:24:25,599 - INFO -    ↳ [28/36] SB/ACTG 6610 3.00 – Advanced Auditing
-2025-12-11 18:24:26,311 - INFO -       💾 Saved SB_ACTG 6610 3.00_Advanced Auditing.html
-2025-12-11 18:24:41,735 - INFO -    ↳ [29/36] SB/ACTG 6710 3.00 – Introduction to Income Taxation
-2025-12-11 18:24:42,539 - INFO -       💾 Saved SB_ACTG 6710 3.00_Introduction to Income Taxation.html
-2025-12-11 18:25:01,350 - INFO -    ↳ [30/36] SB/ACTG 6720 3.00 – Advanced Income Taxation
-2025-12-11 18:25:02,080 - INFO -       💾 Saved SB_ACTG 6720 3.00_Advanced Income Taxation.html
-2025-12-11 18:25:21,473 - INFO -    ↳ [31/36] SB/ACTG 6730 3.00 – Managerial Tax Planning
-2025-12-11 18:25:22,191 - INFO -       💾 Saved SB_ACTG 6730 3.00_Managerial Tax Planning.html
-2025-12-11 18:25:41,065 - INFO -    ↳ [32/36] SB/ACTG 6900 1.50 – Individual Study: Accounting
-2025-12-11 18:25:41,776 - INFO -       💾 Saved SB_ACTG 6900 1.50_Individual Study_ Accounting.html
-2025-12-11 18:26:00,487 - INFO -    ↳ [33/36] SB/ACTG 6900 3.00 – Individual Study - Accounting
-2025-12-11 18:26:01,195 - INFO -       💾 Saved SB_ACTG 6900 3.00_Individual Study - Accounting.html
-2025-12-11 18:26:16,212 - INFO -    ↳ [34/36] SB/ACTG 7020 3.00 – Empirical Methods in Accounting Research
-2025-12-11 18:26:16,979 - INFO -       💾 Saved SB_ACTG 7020 3.00_Empirical Methods in Accounting Research.html
-2025-12-11 18:26:35,582 - INFO -    ↳ [35/36] SB/ACTG 7040 3.00 – Advanced Topics in Accounting Research
-2025-12-11 18:26:36,293 - INFO -       💾 Saved SB_ACTG 7040 3.00_Advanced Topics in Accounting Research.html
-2025-12-11 18:26:54,492 - INFO -    ↳ [36/36] SB/ACTG 7900 3.00 – Independent Study - Accounting
-2025-12-11 18:26:55,222 - INFO -       💾 Saved SB_ACTG 7900 3.00_Independent Study - Accounting.html
-2025-12-11 18:27:14,012 - INFO -    ↩️ Returning to main search page...
-2025-12-11 18:27:16,083 - INFO - ✅ Finished ACTG - Accounting - ( SB, ED ) (saved to progress.txt)
-2025-12-11 18:27:26,637 - INFO - 
-🎓 [2/217] Scraping subject: ADLW - Administrative Law - ( GS )
-2025-12-11 18:27:26,637 - INFO -    🧭 Selecting subject ADLW - Administrative Law - ( GS ) ...
-2025-12-11 18:27:42,271 - INFO -    → Found 0 courses
-2025-12-11 18:27:42,271 - INFO -    ↩️ Returning to main search page...
-2025-12-11 18:27:44,154 - INFO - ✅ Finished ADLW - Administrative Law - ( GS ) (saved to progress.txt)
-2025-12-11 18:27:56,385 - INFO - 
-🎓 [3/217] Scraping subject: ADMS - Administrative Studies - ( AP )
-2025-12-11 18:27:56,386 - INFO -    🧭 Selecting subject ADMS - Administrative Studies - ( AP ) ...
-2025-12-11 18:28:12,442 - INFO -    → Found 125 courses
-2025-12-11 18:28:12,442 - INFO -    ↳ [1/125] AP/ADMS 1000 3.00 – Introduction to Business
-2025-12-11 18:28:13,332 - INFO -       💾 Saved AP_ADMS 1000 3.00_Introduction to Business.html
-2025-12-11 18:28:31,057 - INFO -    ↳ [2/125] AP/ADMS 1010 3.00 – Exploring the Functions of Business
-2025-12-11 18:28:31,939 - INFO -       💾 Saved AP_ADMS 1010 3.00_Exploring the Functions of Business.html
-2025-12-11 18:28:50,601 - INFO -    ↳ [3/125] AP/ADMS 1500 3.00 – An Introduction to Accounting for Human Resource Professionals
-2025-12-11 18:28:51,344 - INFO -       💾 Saved AP_ADMS 1500 3.00_An Introduction to Accounting for Human Resource Professionals.html
-2025-12-11 18:29:06,509 - INFO -    ↳ [4/125] AP/ADMS 1550 3.00 – Accounting for Non-Financial Managers
-2025-12-11 18:29:07,230 - INFO -       💾 Saved AP_ADMS 1550 3.00_Accounting for Non-Financial Managers.html
-2025-12-11 18:29:26,677 - INFO -    ↳ [5/125] AP/ADMS 1701 3.00 – Disasters: Case Studies of Causes and Impacts
-2025-12-11 18:29:27,545 - INFO -       💾 Saved AP_ADMS 1701 3.00_Disasters_ Case Studies of Causes and Impacts.html
-2025-12-11 18:29:46,606 - INFO -    ↳ [6/125] AP/ADMS 2200 3.00 – Introductory Marketing
-2025-12-11 18:29:47,454 - INFO -       💾 Saved AP_ADMS 2200 3.00_Introductory Marketing.html
-2025-12-11 18:30:02,255 - INFO -    ↳ [7/125] AP/ADMS 2310 3.00 – Business Statistics Through Applications
-2025-12-11 18:30:03,016 - INFO -       💾 Saved AP_ADMS 2310 3.00_Business Statistics Through Applications.html
-2025-12-11 18:30:18,642 - INFO -    ↳ [8/125] AP/ADMS 2320 3.00 – Business Statistics
-2025-12-11 18:30:19,593 - INFO -       💾 Saved AP_ADMS 2320 3.00_Business Statistics.html
-2025-12-11 18:30:37,001 - INFO -    ↳ [9/125] AP/ADMS 2400 3.00 – Introduction to Organizational Behaviour
-2025-12-11 18:30:37,930 - INFO -       💾 Saved AP_ADMS 2400 3.00_Introduction to Organizational Behaviour.html
-2025-12-11 18:30:54,642 - INFO -    ↳ [10/125] AP/ADMS 2500 3.00 – Introduction to Financial Accounting
-2025-12-11 18:30:55,566 - INFO -       💾 Saved AP_ADMS 2500 3.00_Introduction to Financial Accounting.html
-2025-12-11 18:31:13,343 - INFO -    ↳ [11/125] AP/ADMS 2510 3.00 – Introduction to Management Accounting
-2025-12-11 18:31:14,502 - INFO -       💾 Saved AP_ADMS 2510 3.00_Introduction to Management Accounting.html
-2025-12-11 18:31:34,404 - INFO -    ↳ [12/125] AP/ADMS 2511 3.00 – Management Information Systems
-2025-12-11 18:31:35,293 - INFO -       💾 Saved AP_ADMS 2511 3.00_Management Information Systems.html
-2025-12-11 18:31:53,445 - INFO -    ↳ [13/125] AP/ADMS 2541 3.00 – Introduction to Personal Finance
-2025-12-11 18:31:54,315 - INFO -       💾 Saved AP_ADMS 2541 3.00_Introduction to Personal Finance.html
-2025-12-11 18:32:10,516 - INFO -    ↳ [14/125] AP/ADMS 2610 3.00 – Elements of Law: Part One
-2025-12-11 18:32:11,329 - INFO -       💾 Saved AP_ADMS 2610 3.00_Elements of Law_ Part One.html
-2025-12-11 18:32:30,487 - INFO -    ↳ [15/125] AP/ADMS 2700 3.00 – Fundamentals of Emergency Management
-2025-12-11 18:32:31,311 - INFO -       💾 Saved AP_ADMS 2700 3.00_Fundamentals of Emergency Management.html
-2025-12-11 18:32:47,160 - INFO -    ↳ [16/125] AP/ADMS 2920 3.00 – Introduction to innovation and creativity
-2025-12-11 18:32:47,957 - INFO -       💾 Saved AP_ADMS 2920 3.00_Introduction to innovation and creativity.html
-2025-12-11 18:33:02,606 - INFO -    ↳ [17/125] AP/ADMS 3000 3.00 – Directed Reading
-2025-12-11 18:33:03,405 - INFO -       💾 Saved AP_ADMS 3000 3.00_Directed Reading.html
-2025-12-11 18:33:21,917 - INFO -    ↳ [18/125] AP/ADMS 3010 0.00 – Internship Work Term
-2025-12-11 18:33:22,808 - INFO -       💾 Saved AP_ADMS 3010 0.00_Internship Work Term.html
-2025-12-11 18:33:42,400 - INFO -    ↳ [19/125] AP/ADMS 3015 3.00 – Professional Communication in the Canadian Context
-2025-12-11 18:33:43,201 - INFO -       💾 Saved AP_ADMS 3015 3.00_Professional Communication in the Canadian Context.html
-2025-12-11 18:33:58,948 - INFO -    ↳ [20/125] AP/ADMS 3020 3.00 – Canadian Business Culture and Management Skills
-2025-12-11 18:33:59,705 - INFO -       💾 Saved AP_ADMS 3020 3.00_Canadian Business Culture and Management Skills.html
-2025-12-11 18:34:17,152 - INFO -    ↳ [21/125] AP/ADMS 3060 3.00 – Fundamentals of Canadian Business Law and Ethics
-2025-12-11 18:34:17,916 - INFO -       💾 Saved AP_ADMS 3060 3.00_Fundamentals of Canadian Business Law and Ethics.html
-2025-12-11 18:34:36,383 - INFO -    ↳ [22/125] AP/ADMS 3120 3.00 – Gender Issues in Management
-2025-12-11 18:34:37,296 - INFO -       💾 Saved AP_ADMS 3120 3.00_Gender Issues in Management.html
-2025-12-11 18:34:56,655 - INFO -    ↳ [23/125] AP/ADMS 3210 3.00 – Consumer Behaviour
-2025-12-11 18:34:57,556 - INFO -       💾 Saved AP_ADMS 3210 3.00_Consumer Behaviour.html
-2025-12-11 18:35:16,505 - INFO -    ↳ [24/125] AP/ADMS 3220 3.00 – Applied Marketing Management
-2025-12-11 18:35:17,325 - INFO -       💾 Saved AP_ADMS 3220 3.00_Applied Marketing Management.html
-2025-12-11 18:35:33,235 - INFO -    ↳ [25/125] AP/ADMS 3300 3.00 – Decision Analysis
-2025-12-11 18:35:34,011 - INFO -       💾 Saved AP_ADMS 3300 3.00_Decision Analysis.html
-2025-12-11 18:35:51,057 - INFO -    ↳ [26/125] AP/ADMS 3330 3.00 – Introduction to Management Science
-2025-12-11 18:35:51,885 - INFO -       💾 Saved AP_ADMS 3330 3.00_Introduction to Management Science.html
-2025-12-11 18:36:07,143 - INFO -    ↳ [27/125] AP/ADMS 3351 3.00 – Operations Management
-2025-12-11 18:36:08,107 - INFO -       💾 Saved AP_ADMS 3351 3.00_Operations Management.html
-2025-12-11 18:36:27,953 - INFO -    ↳ [28/125] AP/ADMS 3352 3.00 – Sampling Techniques and Survey Design
-2025-12-11 18:36:28,722 - INFO -       💾 Saved AP_ADMS 3352 3.00_Sampling Techniques and Survey Design.html
-2025-12-11 18:36:47,179 - INFO -    ↳ [29/125] AP/ADMS 3353 3.00 – Project Management
-2025-12-11 18:36:48,001 - INFO -       💾 Saved AP_ADMS 3353 3.00_Project Management.html
-2025-12-11 18:36:50,042 - ERROR - Future exception was never retrieved
-future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
-playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
-2025-12-11 18:37:41,739 - INFO - 🚀 Launching Playwright browser (FAST_MODE=False)
-2025-12-11 18:37:41,858 - INFO - 🌐 Opening York course site...
-2025-12-11 18:37:45,560 - INFO - 📚 Found 217 subjects to scrape
-2025-12-11 18:37:45,561 - INFO - 🔁 Resuming — 2 subjects already completed
-2025-12-11 18:37:45,561 - INFO - ⏭️ Skipping ACTG - Accounting - ( SB, ED ) — already completed.
-2025-12-11 18:37:45,561 - INFO - ⏭️ Skipping ADLW - Administrative Law - ( GS ) — already completed.
-2025-12-11 18:37:45,561 - INFO - 
-🎓 [3/217] Scraping subject: ADMS - Administrative Studies - ( AP )
-2025-12-11 18:37:45,561 - INFO -    🧭 Selecting subject ADMS - Administrative Studies - ( AP ) ...
-2025-12-11 18:38:00,844 - INFO - 🚀 Launching Playwright browser (FAST_MODE=False)
-2025-12-11 18:38:00,960 - INFO - 🌐 Opening York course site...
-2025-12-11 18:38:04,964 - INFO - 📚 Found 217 subjects to scrape
-2025-12-11 18:38:04,964 - INFO - 🔁 Resuming — 2 subjects already completed
-2025-12-11 18:38:04,964 - INFO - ⏭️ Skipping ACTG - Accounting - ( SB, ED ) — already completed.
-2025-12-11 18:38:04,964 - INFO - ⏭️ Skipping ADLW - Administrative Law - ( GS ) — already completed.
-2025-12-11 18:38:04,964 - INFO - 
-🎓 [3/217] Scraping subject: ADMS - Administrative Studies - ( AP )
-2025-12-11 18:38:04,964 - INFO -    🧭 Selecting subject ADMS - Administrative Studies - ( AP ) ...
-2025-12-11 18:38:21,130 - INFO -    → Found 125 courses
-2025-12-11 18:38:21,130 - INFO -    ↳ [1/125] AP/ADMS 1000 3.00 – Introduction to Business
-2025-12-11 18:38:22,012 - INFO -       💾 Saved AP_ADMS 1000 3.00_Introduction to Business.html
-2025-12-11 18:38:37,871 - INFO -    ↳ [2/125] AP/ADMS 1010 3.00 – Exploring the Functions of Business
-2025-12-11 18:38:38,642 - INFO -       💾 Saved AP_ADMS 1010 3.00_Exploring the Functions of Business.html
-2025-12-11 18:38:55,655 - INFO -    ↳ [3/125] AP/ADMS 1500 3.00 – An Introduction to Accounting for Human Resource Professionals
-2025-12-11 18:38:56,339 - INFO -       💾 Saved AP_ADMS 1500 3.00_An Introduction to Accounting for Human Resource Professionals.html
-2025-12-11 18:39:14,131 - INFO -    ↳ [4/125] AP/ADMS 1550 3.00 – Accounting for Non-Financial Managers
-2025-12-11 18:39:14,808 - INFO -       💾 Saved AP_ADMS 1550 3.00_Accounting for Non-Financial Managers.html
-2025-12-11 18:39:31,691 - INFO -    ↳ [5/125] AP/ADMS 1701 3.00 – Disasters: Case Studies of Causes and Impacts
-2025-12-11 18:39:32,387 - INFO -       💾 Saved AP_ADMS 1701 3.00_Disasters_ Case Studies of Causes and Impacts.html
-2025-12-11 18:39:49,011 - INFO -    ↳ [6/125] AP/ADMS 2200 3.00 – Introductory Marketing
-2025-12-11 18:39:49,812 - INFO -       💾 Saved AP_ADMS 2200 3.00_Introductory Marketing.html
-2025-12-11 18:40:06,021 - INFO -    ↳ [7/125] AP/ADMS 2310 3.00 – Business Statistics Through Applications
-2025-12-11 18:40:06,685 - INFO -       💾 Saved AP_ADMS 2310 3.00_Business Statistics Through Applications.html
-2025-12-11 18:40:23,564 - INFO -    ↳ [8/125] AP/ADMS 2320 3.00 – Business Statistics
-2025-12-11 18:40:24,436 - INFO -       💾 Saved AP_ADMS 2320 3.00_Business Statistics.html
-2025-12-11 18:40:40,371 - INFO -    ↳ [9/125] AP/ADMS 2400 3.00 – Introduction to Organizational Behaviour
-2025-12-11 18:40:41,184 - INFO -       💾 Saved AP_ADMS 2400 3.00_Introduction to Organizational Behaviour.html
-2025-12-11 18:40:55,549 - INFO -    ↳ [10/125] AP/ADMS 2500 3.00 – Introduction to Financial Accounting
-2025-12-11 18:40:56,382 - INFO -       💾 Saved AP_ADMS 2500 3.00_Introduction to Financial Accounting.html
-2025-12-11 18:41:11,012 - INFO -    ↳ [11/125] AP/ADMS 2510 3.00 – Introduction to Management Accounting
-2025-12-11 18:41:11,845 - INFO -       💾 Saved AP_ADMS 2510 3.00_Introduction to Management Accounting.html
-2025-12-11 18:41:26,599 - INFO -    ↳ [12/125] AP/ADMS 2511 3.00 – Management Information Systems
-2025-12-11 18:41:27,501 - INFO -       💾 Saved AP_ADMS 2511 3.00_Management Information Systems.html
-2025-12-11 18:41:46,919 - INFO -    ↳ [13/125] AP/ADMS 2541 3.00 – Introduction to Personal Finance
-2025-12-11 18:41:47,595 - INFO -       💾 Saved AP_ADMS 2541 3.00_Introduction to Personal Finance.html
-2025-12-11 18:42:03,877 - INFO -    ↳ [14/125] AP/ADMS 2610 3.00 – Elements of Law: Part One
-2025-12-11 18:42:04,660 - INFO -       💾 Saved AP_ADMS 2610 3.00_Elements of Law_ Part One.html
-2025-12-11 18:42:22,279 - INFO -    ↳ [15/125] AP/ADMS 2700 3.00 – Fundamentals of Emergency Management
-2025-12-11 18:42:22,976 - INFO -       💾 Saved AP_ADMS 2700 3.00_Fundamentals of Emergency Management.html
-2025-12-11 18:42:39,917 - INFO -    ↳ [16/125] AP/ADMS 2920 3.00 – Introduction to innovation and creativity
-2025-12-11 18:42:40,619 - INFO -       💾 Saved AP_ADMS 2920 3.00_Introduction to innovation and creativity.html
-2025-12-11 18:42:58,545 - INFO -    ↳ [17/125] AP/ADMS 3000 3.00 – Directed Reading
-2025-12-11 18:42:59,259 - INFO -       💾 Saved AP_ADMS 3000 3.00_Directed Reading.html
-2025-12-11 18:43:16,587 - INFO -    ↳ [18/125] AP/ADMS 3010 0.00 – Internship Work Term
-2025-12-11 18:43:17,284 - INFO -       💾 Saved AP_ADMS 3010 0.00_Internship Work Term.html
-2025-12-11 18:43:34,591 - INFO -    ↳ [19/125] AP/ADMS 3015 3.00 – Professional Communication in the Canadian Context
-2025-12-11 18:43:35,323 - INFO -       💾 Saved AP_ADMS 3015 3.00_Professional Communication in the Canadian Context.html
-2025-12-11 18:43:53,596 - INFO -    ↳ [20/125] AP/ADMS 3020 3.00 – Canadian Business Culture and Management Skills
-2025-12-11 18:43:54,276 - INFO -       💾 Saved AP_ADMS 3020 3.00_Canadian Business Culture and Management Skills.html
-2025-12-11 18:44:13,481 - INFO -    ↳ [21/125] AP/ADMS 3060 3.00 – Fundamentals of Canadian Business Law and Ethics
-2025-12-11 18:44:14,288 - INFO -       💾 Saved AP_ADMS 3060 3.00_Fundamentals of Canadian Business Law and Ethics.html
-2025-12-11 18:44:33,140 - INFO -    ↳ [22/125] AP/ADMS 3120 3.00 – Gender Issues in Management
-2025-12-11 18:44:33,845 - INFO -       💾 Saved AP_ADMS 3120 3.00_Gender Issues in Management.html
-2025-12-11 18:44:50,682 - INFO -    ↳ [23/125] AP/ADMS 3210 3.00 – Consumer Behaviour
-2025-12-11 18:44:51,382 - INFO -       💾 Saved AP_ADMS 3210 3.00_Consumer Behaviour.html
-2025-12-11 18:45:10,837 - INFO -    ↳ [24/125] AP/ADMS 3220 3.00 – Applied Marketing Management
-2025-12-11 18:45:11,560 - INFO -       💾 Saved AP_ADMS 3220 3.00_Applied Marketing Management.html
-2025-12-11 18:45:30,722 - INFO -    ↳ [25/125] AP/ADMS 3300 3.00 – Decision Analysis
-2025-12-11 18:45:31,411 - INFO -       💾 Saved AP_ADMS 3300 3.00_Decision Analysis.html
-2025-12-11 18:45:47,979 - INFO -    ↳ [26/125] AP/ADMS 3330 3.00 – Introduction to Management Science
-2025-12-11 18:45:48,823 - INFO -       💾 Saved AP_ADMS 3330 3.00_Introduction to Management Science.html
-2025-12-11 18:46:06,476 - INFO -    ↳ [27/125] AP/ADMS 3351 3.00 – Operations Management
-2025-12-11 18:46:07,467 - INFO -       💾 Saved AP_ADMS 3351 3.00_Operations Management.html
-2025-12-11 18:46:27,004 - INFO -    ↳ [28/125] AP/ADMS 3352 3.00 – Sampling Techniques and Survey Design
-2025-12-11 18:46:27,689 - INFO -       💾 Saved AP_ADMS 3352 3.00_Sampling Techniques and Survey Design.html
-2025-12-11 18:46:42,503 - INFO -    ↳ [29/125] AP/ADMS 3353 3.00 – Project Management
-2025-12-11 18:46:43,210 - INFO -       💾 Saved AP_ADMS 3353 3.00_Project Management.html
-2025-12-11 18:46:57,611 - INFO -    ↳ [30/125] AP/ADMS 3360 3.00 – Physical Distribution and Transportation
-2025-12-11 18:46:58,325 - INFO -       💾 Saved AP_ADMS 3360 3.00_Physical Distribution and Transportation.html
-2025-12-11 18:47:12,988 - INFO -    ↳ [31/125] AP/ADMS 3370 3.00 – Advanced Spreadsheets for Business Applications
-2025-12-11 18:47:13,713 - INFO -       💾 Saved AP_ADMS 3370 3.00_Advanced Spreadsheets for Business Applications.html
-2025-12-11 18:47:31,997 - INFO -    ↳ [32/125] AP/ADMS 3440 3.00 – Leadership and Management Skills
-2025-12-11 18:47:32,705 - INFO -       💾 Saved AP_ADMS 3440 3.00_Leadership and Management Skills.html
-2025-12-11 18:47:51,163 - INFO -    ↳ [33/125] AP/ADMS 3450 3.00 – Equity, Diversity and Inclusion in the Workplace
-2025-12-11 18:47:51,899 - INFO -       💾 Saved AP_ADMS 3450 3.00_Equity, Diversity and Inclusion in the Workplace.html
-2025-12-11 18:48:09,039 - INFO -    ↳ [34/125] AP/ADMS 3502 3.00 – Business Process Integration with Enterprise Resource Planning Systems
-2025-12-11 18:48:09,757 - INFO -       💾 Saved AP_ADMS 3502 3.00_Business Process Integration with Enterprise Resource Planning Systems.html
-2025-12-11 18:48:27,572 - INFO -    ↳ [35/125] AP/ADMS 3510 3.00 – Managerial Cost Accounting and Analysis
-2025-12-11 18:48:28,357 - INFO -       💾 Saved AP_ADMS 3510 3.00_Managerial Cost Accounting and Analysis.html
-2025-12-11 18:48:44,508 - INFO -    ↳ [36/125] AP/ADMS 3511 3.00 – Business Analytics: Introduction, Methods and Practical Approaches
-2025-12-11 18:48:45,237 - INFO -       💾 Saved AP_ADMS 3511 3.00_Business Analytics_ Introduction, Methods and Practical Approaches.html
-2025-12-11 18:49:00,751 - INFO -    ↳ [37/125] AP/ADMS 3520 3.00 – An Overview of Canadian Income Taxation
-2025-12-11 18:49:01,531 - INFO -       💾 Saved AP_ADMS 3520 3.00_An Overview of Canadian Income Taxation.html
-2025-12-11 18:49:18,503 - INFO -    ↳ [38/125] AP/ADMS 3521 3.00 – Management of Electronic Commerce Systems
-2025-12-11 18:49:19,236 - INFO -       💾 Saved AP_ADMS 3521 3.00_Management of Electronic Commerce Systems.html
-2025-12-11 18:49:36,259 - INFO -    ↳ [39/125] AP/ADMS 3524 3.00 – Public Sector Budget Process
-2025-12-11 18:49:37,039 - INFO -       💾 Saved AP_ADMS 3524 3.00_Public Sector Budget Process.html
-2025-12-11 18:49:52,889 - INFO -    ↳ [40/125] AP/ADMS 3530 3.00 – Finance
-2025-12-11 18:49:53,714 - INFO -       💾 Saved AP_ADMS 3530 3.00_Finance.html
-2025-12-11 18:50:10,325 - INFO -    ↳ [41/125] AP/ADMS 3531 3.00 – Personal Investment Management
-2025-12-11 18:50:11,107 - INFO -       💾 Saved AP_ADMS 3531 3.00_Personal Investment Management.html
-2025-12-11 18:50:30,302 - INFO -    ↳ [42/125] AP/ADMS 3541 3.00 – Personal Financial Planning
-2025-12-11 18:50:31,059 - INFO -       💾 Saved AP_ADMS 3541 3.00_Personal Financial Planning.html
-2025-12-11 18:50:48,627 - INFO -    ↳ [43/125] AP/ADMS 3585 3.00 – Intermediate Financial Accounting I
-2025-12-11 18:50:49,387 - INFO -       💾 Saved AP_ADMS 3585 3.00_Intermediate Financial Accounting I.html
-2025-12-11 18:51:09,155 - INFO -    ↳ [44/125] AP/ADMS 3595 3.00 – Intermediate Financial Accounting II
-2025-12-11 18:51:09,934 - INFO -       💾 Saved AP_ADMS 3595 3.00_Intermediate Financial Accounting II.html
-2025-12-11 18:51:25,104 - INFO -    ↳ [45/125] AP/ADMS 3660 3.00 – Business Ethics and Corporate Social Responsibility
-2025-12-11 18:51:25,980 - INFO -       💾 Saved AP_ADMS 3660 3.00_Business Ethics and Corporate Social Responsibility.html
-2025-12-11 18:51:40,318 - INFO -    ↳ [46/125] AP/ADMS 3701 3.00 – Disaster Risk Management
-2025-12-11 18:51:41,077 - INFO -       💾 Saved AP_ADMS 3701 3.00_Disaster Risk Management.html
-2025-12-11 18:52:00,302 - INFO -    ↳ [47/125] AP/ADMS 3702 3.00 – Comprehensive Emergency Management: Integrating Critical Knowledge with Practice
-2025-12-11 18:52:01,037 - INFO -       💾 Saved AP_ADMS 3702 3.00_Comprehensive Emergency Management_ Integrating Critical Knowledge with Practice.html
-2025-12-11 18:52:18,846 - INFO -    ↳ [48/125] AP/ADMS 3703 3.00 – Business Continuity Planning
-2025-12-11 18:52:19,595 - INFO -       💾 Saved AP_ADMS 3703 3.00_Business Continuity Planning.html
-2025-12-11 18:52:36,391 - INFO -    ↳ [49/125] AP/ADMS 3704 3.00 – Emergency Management Communications
-2025-12-11 18:52:37,170 - INFO -       💾 Saved AP_ADMS 3704 3.00_Emergency Management Communications.html
-2025-12-11 18:52:55,032 - INFO -    ↳ [50/125] AP/ADMS 3705 3.00 – Emergency Management: Field Experience
-2025-12-11 18:52:55,835 - INFO -       💾 Saved AP_ADMS 3705 3.00_Emergency Management_ Field Experience.html
-2025-12-11 18:53:14,970 - INFO -    ↳ [51/125] AP/ADMS 3706 3.00 – Disasters and Humans
-2025-12-11 18:53:15,960 - INFO -       💾 Saved AP_ADMS 3706 3.00_Disasters and Humans.html
-2025-12-11 18:53:31,246 - INFO -    ↳ [52/125] AP/ADMS 3707 3.00 – Ethics: Society, the Environment and Disasters
-2025-12-11 18:53:32,003 - INFO -       💾 Saved AP_ADMS 3707 3.00_Ethics_ Society, the Environment and Disasters.html
-2025-12-11 18:53:50,480 - INFO -    ↳ [53/125] AP/ADMS 3708 3.00 – Social Issues in Disaster Management
-2025-12-11 18:53:51,223 - INFO -       💾 Saved AP_ADMS 3708 3.00_Social Issues in Disaster Management.html
-2025-12-11 18:54:10,393 - INFO -    ↳ [54/125] AP/ADMS 3810 3.00 – Introduction to Real Estate
-2025-12-11 18:54:11,182 - INFO -       💾 Saved AP_ADMS 3810 3.00_Introduction to Real Estate.html
-2025-12-11 18:54:28,235 - INFO -    ↳ [55/125] AP/ADMS 3820 3.00 – Real Estate Law I
-2025-12-11 18:54:29,116 - INFO -       💾 Saved AP_ADMS 3820 3.00_Real Estate Law I.html
-2025-12-11 18:54:45,115 - INFO -    ↳ [56/125] AP/ADMS 3900 3.00 – The Practice of General Management
-2025-12-11 18:54:45,894 - INFO -       💾 Saved AP_ADMS 3900 3.00_The Practice of General Management.html
-2025-12-11 18:55:04,937 - INFO -    ↳ [57/125] AP/ADMS 3920 3.00 – New Venture and Small Business Management
-2025-12-11 18:55:05,803 - INFO -       💾 Saved AP_ADMS 3920 3.00_New Venture and Small Business Management.html
-2025-12-11 18:55:21,437 - INFO -    ↳ [58/125] AP/ADMS 3950 3.00 – Social entrepreneurship and innovation
-2025-12-11 18:55:22,199 - INFO -       💾 Saved AP_ADMS 3950 3.00_Social entrepreneurship and innovation.html
-2025-12-11 18:55:38,962 - INFO -    ↳ [59/125] AP/ADMS 3960 3.00 – International Business
-2025-12-11 18:55:39,769 - INFO -       💾 Saved AP_ADMS 3960 3.00_International Business.html
-2025-12-11 18:55:54,805 - INFO -    ↳ [60/125] AP/ADMS 3990 1.50 – Hackathon I
-2025-12-11 18:55:55,693 - INFO -       💾 Saved AP_ADMS 3990 1.50_Hackathon I.html
-2025-12-11 18:56:13,162 - INFO -    ↳ [61/125] AP/ADMS 4000 3.00 – Directed Reading
-2025-12-11 18:56:14,003 - INFO -       💾 Saved AP_ADMS 4000 3.00_Directed Reading.html
-2025-12-11 18:56:30,335 - INFO -    ↳ [62/125] AP/ADMS 4002 6.00 – Interdisciplinary Capstone Project
-2025-12-11 18:56:31,072 - INFO -       💾 Saved AP_ADMS 4002 6.00_Interdisciplinary Capstone Project.html
-2025-12-11 18:56:47,737 - INFO -    ↳ [63/125] AP/ADMS 4010 3.00 – Organization and Administrative Theory
-2025-12-11 18:56:48,495 - INFO -       💾 Saved AP_ADMS 4010 3.00_Organization and Administrative Theory.html
-2025-12-11 18:57:04,477 - INFO -    ↳ [64/125] AP/ADMS 4200 3.00 – Personal Selling and Sales Force Management
-2025-12-11 18:57:05,287 - INFO -       💾 Saved AP_ADMS 4200 3.00_Personal Selling and Sales Force Management.html
-2025-12-11 18:57:23,741 - INFO -    ↳ [65/125] AP/ADMS 4210 3.00 – International Marketing
-2025-12-11 18:57:24,515 - INFO -       💾 Saved AP_ADMS 4210 3.00_International Marketing.html
-2025-12-11 18:57:40,998 - INFO -    ↳ [66/125] AP/ADMS 4211 3.00 – Live-Client Learning Marketing
-2025-12-11 18:57:41,758 - INFO -       💾 Saved AP_ADMS 4211 3.00_Live-Client Learning Marketing.html
-2025-12-11 18:57:58,091 - INFO -    ↳ [67/125] AP/ADMS 4215 3.00 – Business to Business Marketing
-2025-12-11 18:57:58,865 - INFO -       💾 Saved AP_ADMS 4215 3.00_Business to Business Marketing.html
-2025-12-11 18:58:17,765 - INFO -    ↳ [68/125] AP/ADMS 4225 3.00 – Retailing Management
-2025-12-11 18:58:18,536 - INFO -       💾 Saved AP_ADMS 4225 3.00_Retailing Management.html
-2025-12-11 18:58:37,055 - INFO -    ↳ [69/125] AP/ADMS 4230 3.00 – Marketing Channels
-2025-12-11 18:58:37,861 - INFO -       💾 Saved AP_ADMS 4230 3.00_Marketing Channels.html
-2025-12-11 18:58:55,883 - INFO -    ↳ [70/125] AP/ADMS 4235 3.00 – New Product Management
-2025-12-11 18:58:56,620 - INFO -       💾 Saved AP_ADMS 4235 3.00_New Product Management.html
-2025-12-11 18:59:14,548 - INFO -    ↳ [71/125] AP/ADMS 4240 3.00 – Advertising and Communications
-2025-12-11 18:59:15,329 - INFO -       💾 Saved AP_ADMS 4240 3.00_Advertising and Communications.html
-2025-12-11 18:59:34,982 - INFO -    ↳ [72/125] AP/ADMS 4245 3.00 – Digital Marketing
-2025-12-11 18:59:35,797 - INFO -       💾 Saved AP_ADMS 4245 3.00_Digital Marketing.html
-2025-12-11 18:59:55,318 - INFO -    ↳ [73/125] AP/ADMS 4250 3.00 – Marketing Strategy Development and Implementation
-2025-12-11 18:59:56,112 - INFO -       💾 Saved AP_ADMS 4250 3.00_Marketing Strategy Development and Implementation.html
-2025-12-11 19:00:11,604 - INFO -    ↳ [74/125] AP/ADMS 4255 3.00 – Customer Relationship Management
-2025-12-11 19:00:12,508 - INFO -       💾 Saved AP_ADMS 4255 3.00_Customer Relationship Management.html
-2025-12-11 19:00:30,439 - INFO -    ↳ [75/125] AP/ADMS 4260 3.00 – Marketing Research
-2025-12-11 19:00:31,262 - INFO -       💾 Saved AP_ADMS 4260 3.00_Marketing Research.html
-2025-12-11 19:00:49,373 - INFO -    ↳ [76/125] AP/ADMS 4265 3.00 – Marketing Analytics
-2025-12-11 19:00:50,218 - INFO -       💾 Saved AP_ADMS 4265 3.00_Marketing Analytics.html
-2025-12-11 19:01:06,755 - INFO -    ↳ [77/125] AP/ADMS 4275 3.00 – Services Marketing
-2025-12-11 19:01:07,544 - INFO -       💾 Saved AP_ADMS 4275 3.00_Services Marketing.html
-2025-12-11 19:01:26,120 - INFO -    ↳ [78/125] AP/ADMS 4285 3.00 – Brand Management
-2025-12-11 19:01:26,940 - INFO -       💾 Saved AP_ADMS 4285 3.00_Brand Management.html
-2025-12-11 19:01:46,815 - INFO -    ↳ [79/125] AP/ADMS 4333 3.00 – Supply Chain Management
-2025-12-11 19:01:47,640 - INFO -       💾 Saved AP_ADMS 4333 3.00_Supply Chain Management.html
-2025-12-11 19:02:04,729 - INFO -    ↳ [80/125] AP/ADMS 4345 3.00 – Modeling and Simulation for Management
-2025-12-11 19:02:05,523 - INFO -       💾 Saved AP_ADMS 4345 3.00_Modeling and Simulation for Management.html
-2025-12-11 19:02:20,552 - INFO -    ↳ [81/125] AP/ADMS 4360 3.00 – Materials and Inventory Management
-2025-12-11 19:02:21,431 - INFO -       💾 Saved AP_ADMS 4360 3.00_Materials and Inventory Management.html
-2025-12-11 19:02:38,312 - INFO -    ↳ [82/125] AP/ADMS 4370 3.00 – Data Analysis Systems
-2025-12-11 19:02:39,107 - INFO -       💾 Saved AP_ADMS 4370 3.00_Data Analysis Systems.html
-2025-12-11 19:02:56,343 - INFO -    ↳ [83/125] AP/ADMS 4430 3.00 – Career Management
-2025-12-11 19:02:57,135 - INFO -       💾 Saved AP_ADMS 4430 3.00_Career Management.html
-2025-12-11 19:03:13,426 - INFO -    ↳ [84/125] AP/ADMS 4444 3.00 – Identity and Inclusivity in Organizations: Advanced Topics
-2025-12-11 19:03:14,276 - INFO -       💾 Saved AP_ADMS 4444 3.00_Identity and Inclusivity in Organizations_ Advanced Topics.html
-2025-12-11 19:03:29,276 - INFO -    ↳ [85/125] AP/ADMS 4480 3.00 – Cross Cultural Management
-2025-12-11 19:03:30,078 - INFO -       💾 Saved AP_ADMS 4480 3.00_Cross Cultural Management.html
-2025-12-11 19:03:47,708 - INFO -    ↳ [86/125] AP/ADMS 4481 3.00 – Organizational Communication
-2025-12-11 19:03:48,524 - INFO -       💾 Saved AP_ADMS 4481 3.00_Organizational Communication.html
-2025-12-11 19:04:04,363 - INFO -    ↳ [87/125] AP/ADMS 4485 3.00 – Executive Coaching
-2025-12-11 19:04:05,146 - INFO -       💾 Saved AP_ADMS 4485 3.00_Executive Coaching.html
-2025-12-11 19:04:20,982 - INFO -    ↳ [88/125] AP/ADMS 4490 3.00 – Negotiations for Human Resource Management
-2025-12-11 19:04:21,881 - INFO -       💾 Saved AP_ADMS 4490 3.00_Negotiations for Human Resource Management.html
-2025-12-11 19:04:37,267 - INFO -    ↳ [89/125] AP/ADMS 4495 3.00 – Managing Effective Groups and Teams
-2025-12-11 19:04:38,244 - INFO -       💾 Saved AP_ADMS 4495 3.00_Managing Effective Groups and Teams.html
-2025-12-11 19:04:55,537 - INFO -    ↳ [90/125] AP/ADMS 4501 3.00 – Advanced Portfolio Management
-2025-12-11 19:04:56,394 - INFO -       💾 Saved AP_ADMS 4501 3.00_Advanced Portfolio Management.html
-2025-12-11 19:05:14,867 - INFO -    ↳ [91/125] AP/ADMS 4502 3.00 – Ethics for Investment Managers
-2025-12-11 19:05:15,709 - INFO -       💾 Saved AP_ADMS 4502 3.00_Ethics for Investment Managers.html
-2025-12-11 19:05:31,096 - INFO -    ↳ [92/125] AP/ADMS 4503 3.00 – Derivative Securities
-2025-12-11 19:05:31,953 - INFO -       💾 Saved AP_ADMS 4503 3.00_Derivative Securities.html
-2025-12-11 19:05:47,200 - INFO -    ↳ [93/125] AP/ADMS 4504 3.00 – Fixed Income Securities and Risk Management
-2025-12-11 19:05:48,048 - INFO -       💾 Saved AP_ADMS 4504 3.00_Fixed Income Securities and Risk Management.html
-2025-12-11 19:06:05,537 - INFO -    ↳ [94/125] AP/ADMS 4505 3.00 – Retirement and Estate Planning
-2025-12-11 19:06:06,369 - INFO -       💾 Saved AP_ADMS 4505 3.00_Retirement and Estate Planning.html
-2025-12-11 19:06:25,416 - INFO -    ↳ [95/125] AP/ADMS 4506 3.00 – Professional Financial Planning
-2025-12-11 19:06:26,227 - INFO -       💾 Saved AP_ADMS 4506 3.00_Professional Financial Planning.html
-2025-12-11 19:06:45,849 - INFO -    ↳ [96/125] AP/ADMS 4507 3.00 – Insurance and Other Finance Topics
-2025-12-11 19:06:46,653 - INFO -       💾 Saved AP_ADMS 4507 3.00_Insurance and Other Finance Topics.html
-2025-12-11 19:07:01,371 - INFO -    ↳ [97/125] AP/ADMS 4508 3.00 – Money Behaviours and Client Communication
-2025-12-11 19:07:02,149 - INFO -       💾 Saved AP_ADMS 4508 3.00_Money Behaviours and Client Communication.html
-2025-12-11 19:07:21,055 - INFO -    ↳ [98/125] AP/ADMS 4509 3.00 – Financial Risk Management
-2025-12-11 19:07:21,950 - INFO -       💾 Saved AP_ADMS 4509 3.00_Financial Risk Management.html
-2025-12-11 19:07:38,717 - INFO -    ↳ [99/125] AP/ADMS 4510 3.00 – Accounting Theory and Contemporary Issues
-2025-12-11 19:07:39,589 - INFO -       💾 Saved AP_ADMS 4510 3.00_Accounting Theory and Contemporary Issues.html
-2025-12-11 19:07:57,522 - INFO -    ↳ [100/125] AP/ADMS 4511 3.00 – Managing and Implementing Strategic Information Systems
-2025-12-11 19:07:58,374 - INFO -       💾 Saved AP_ADMS 4511 3.00_Managing and Implementing Strategic Information Systems.html
-2025-12-11 19:08:13,490 - INFO -    ↳ [101/125] AP/ADMS 4515 3.00 – Internal Audit
-2025-12-11 19:08:14,293 - INFO -       💾 Saved AP_ADMS 4515 3.00_Internal Audit.html
-2025-12-11 19:08:32,756 - INFO -    ↳ [102/125] AP/ADMS 4520 3.00 – Advanced Financial Accounting
-2025-12-11 19:08:33,623 - INFO -       💾 Saved AP_ADMS 4520 3.00_Advanced Financial Accounting.html
-2025-12-11 19:08:48,768 - INFO -    ↳ [103/125] AP/ADMS 4535 3.00 – Financial Statement Analysis
-2025-12-11 19:08:49,570 - INFO -       💾 Saved AP_ADMS 4535 3.00_Financial Statement Analysis.html
-2025-12-11 19:09:08,079 - INFO -    ↳ [104/125] AP/ADMS 4536 3.00 – Security Valuation
-2025-12-11 19:09:08,888 - INFO -       💾 Saved AP_ADMS 4536 3.00_Security Valuation.html
-2025-12-11 19:09:24,166 - INFO -    ↳ [105/125] AP/ADMS 4537 3.00 – Sustainable Investing
-2025-12-11 19:09:24,978 - INFO -       💾 Saved AP_ADMS 4537 3.00_Sustainable Investing.html
-2025-12-11 19:09:44,126 - INFO -    ↳ [106/125] AP/ADMS 4540 3.00 – Financial Management
-2025-12-11 19:09:45,039 - INFO -       💾 Saved AP_ADMS 4540 3.00_Financial Management.html
-2025-12-11 19:10:01,600 - INFO -    ↳ [107/125] AP/ADMS 4541 3.00 – Applied Corporate Finance
-2025-12-11 19:10:02,401 - INFO -       💾 Saved AP_ADMS 4541 3.00_Applied Corporate Finance.html
-2025-12-11 19:10:17,250 - INFO -    ↳ [108/125] AP/ADMS 4542 3.00 – International Financial Management
-2025-12-11 19:10:18,073 - INFO -       💾 Saved AP_ADMS 4542 3.00_International Financial Management.html
-2025-12-11 19:10:36,379 - INFO -    ↳ [109/125] AP/ADMS 4551 3.00 – Auditing and Other Assurance Services
-2025-12-11 19:10:37,207 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:37,208 - INFO -    ↳ [110/125] AP/ADMS 4552 3.00 – Information Systems Audits
-2025-12-11 19:10:37,957 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:37,957 - INFO -    ↳ [111/125] AP/ADMS 4553 3.00 – Auditing: Advanced Topics
-2025-12-11 19:10:38,724 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:38,725 - INFO -    ↳ [112/125] AP/ADMS 4561 3.00 – Taxation Of Personal Income in Canada
-2025-12-11 19:10:39,516 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:39,516 - INFO -    ↳ [113/125] AP/ADMS 4562 3.00 – Corporate Taxation in Canada
-2025-12-11 19:10:40,280 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:40,280 - INFO -    ↳ [114/125] AP/ADMS 4570 3.00 – Management Planning and Control Systems
-2025-12-11 19:10:41,048 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:41,048 - INFO -    ↳ [115/125] AP/ADMS 4590 3.00 – Comprehensive and Multi-subject Accounting Problems
-2025-12-11 19:10:41,824 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:41,824 - INFO -    ↳ [116/125] AP/ADMS 4591 3.00 – Business technology management integration project
-2025-12-11 19:10:42,599 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:42,599 - INFO -    ↳ [117/125] AP/ADMS 4704 3.00 – Disaster and Logistics
-2025-12-11 19:10:43,379 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:43,379 - INFO -    ↳ [118/125] AP/ADMS 4705 3.00 – Comprehensive Emergency Management 2: The Canadian Context
-2025-12-11 19:10:44,108 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:44,108 - INFO -    ↳ [119/125] AP/ADMS 4707 3.00 – Managing Risks to Critical Infrastructure
-2025-12-11 19:10:44,859 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:44,859 - INFO -    ↳ [120/125] AP/ADMS 4709 3.00 – Terrorism: The New Threat
-2025-12-11 19:10:45,577 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:45,577 - INFO -    ↳ [121/125] AP/ADMS 4721 3.00 – Qualitative Methods
-2025-12-11 19:10:46,297 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:46,297 - INFO -    ↳ [122/125] AP/ADMS 4900 3.00 – Management Policy Part I
-2025-12-11 19:10:47,014 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:47,014 - INFO -    ↳ [123/125] AP/ADMS 4910 3.00 – Management Policy Part II
-2025-12-11 19:10:47,734 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:47,735 - INFO -    ↳ [124/125] AP/ADMS 4940 3.00 – Innovation Management
-2025-12-11 19:10:48,523 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:48,523 - INFO -    ↳ [125/125] AP/ADMS 4970 3.00 – Managing for Sustainability
-2025-12-11 19:10:49,239 - WARNING - ⚠️ York session timeout or access denied detected.
-2025-12-11 19:10:49,239 - INFO -    ↩️ Returning to main search page...
-2025-12-11 19:10:51,528 - INFO - ✅ Finished ADMS - Administrative Studies - ( AP ) (saved to progress.txt)
-2025-12-11 19:11:01,996 - INFO - 
-🎓 [4/217] Scraping subject: ALDR - Dispute Resolution - ( GS )
-2025-12-11 19:11:01,997 - WARNING - ⚠️ Too many errors — cooling down for 10 minutes...
+2025-12-11 20:11:14,150 - INFO -    ↳ [11/106] SC/BIOL 2050 3.00 – Ecology
+2025-12-11 20:11:14,320 - INFO -       💾 Saved SC_BIOL 2050 3.00_Ecology.html
+2025-12-11 20:11:22,852 - INFO -    ↳ [12/106] SC/BIOL 2060 3.00 – Statistics for Biologists
+2025-12-11 20:11:23,141 - INFO -       💾 Saved SC_BIOL 2060 3.00_Statistics for Biologists.html
+2025-12-11 20:11:31,289 - INFO -    ↳ [13/106] SC/BIOL 2070 3.00 – Research Methods in Cell and Molecular Biology
+2025-12-11 20:11:31,605 - INFO -       💾 Saved SC_BIOL 2070 3.00_Research Methods in Cell and Molecular Biology.html
+2025-12-11 20:11:40,377 - INFO -    ↳ [14/106] SC/BIOL 2080 3.00 – Ecology in Practice - Research Fundamentals in Ecology and Evolution
+2025-12-11 20:11:40,573 - INFO -       💾 Saved SC_BIOL 2080 3.00_Ecology in Practice - Research Fundamentals in Ecology and Evolution.html
+2025-12-11 20:11:51,051 - INFO -    ↳ [15/106] SC/BIOL 2090 3.00 – Current Topics in Biophysics
+2025-12-11 20:11:51,228 - INFO -       💾 Saved SC_BIOL 2090 3.00_Current Topics in Biophysics.html
+2025-12-11 20:12:01,572 - INFO -    ↳ [16/106] SC/BIOL 2601 0.00 – Research Practicum
+2025-12-11 20:12:01,782 - INFO -       💾 Saved SC_BIOL 2601 0.00_Research Practicum.html
+2025-12-11 20:12:10,903 - INFO -    ↳ [17/106] SC/BIOL 2602 0.00 – Research Practicum
+2025-12-11 20:12:11,099 - INFO -       💾 Saved SC_BIOL 2602 0.00_Research Practicum.html
+2025-12-11 20:12:18,989 - INFO -    ↳ [18/106] SC/BIOL 2900 3.00 – Clinical Microbiology for Nurses
+2025-12-11 20:12:19,254 - INFO -       💾 Saved SC_BIOL 2900 3.00_Clinical Microbiology for Nurses.html
+2025-12-11 20:12:29,496 - INFO -    ↳ [19/106] SC/BIOL 2905 3.00 – Introduction to Medical Microbiology
+2025-12-11 20:12:29,733 - INFO -       💾 Saved SC_BIOL 2905 3.00_Introduction to Medical Microbiology.html
+2025-12-11 20:12:38,273 - INFO -    ↳ [20/106] SC/BIOL 3010 3.00 – Advanced Biochemistry
+2025-12-11 20:12:38,488 - INFO -       💾 Saved SC_BIOL 3010 3.00_Advanced Biochemistry.html
+2025-12-11 20:12:46,622 - INFO -    ↳ [21/106] SC/BIOL 3030 4.00 – Physiology of the Invertebrates
+2025-12-11 20:12:46,821 - INFO -       💾 Saved SC_BIOL 3030 4.00_Physiology of the Invertebrates.html
+2025-12-11 20:12:57,646 - INFO -    ↳ [22/106] SC/BIOL 3051 3.00 – Macromolecules of Biochemical Interest
+2025-12-11 20:12:57,828 - INFO -       💾 Saved SC_BIOL 3051 3.00_Macromolecules of Biochemical Interest.html
+2025-12-11 20:13:05,323 - INFO -    ↳ [23/106] SC/BIOL 3060 4.00 – Animal Physiology I
+2025-12-11 20:13:05,572 - INFO -       💾 Saved SC_BIOL 3060 4.00_Animal Physiology I.html
+2025-12-11 20:13:15,076 - INFO -    ↳ [24/106] SC/BIOL 3070 4.00 – Animal Physiology II
+2025-12-11 20:13:15,291 - INFO -       💾 Saved SC_BIOL 3070 4.00_Animal Physiology II.html
+2025-12-11 20:13:22,937 - INFO -    ↳ [25/106] SC/BIOL 3075 3.00 – Introduction to Drug Discovery and Development
+2025-12-11 20:13:23,132 - INFO -       💾 Saved SC_BIOL 3075 3.00_Introduction to Drug Discovery and Development.html
+2025-12-11 20:13:33,895 - INFO -    ↳ [26/106] SC/BIOL 3095 3.00 – Introduction to Bioinformatics
+2025-12-11 20:13:34,109 - INFO -       💾 Saved SC_BIOL 3095 3.00_Introduction to Bioinformatics.html
+2025-12-11 20:13:45,094 - INFO -    ↳ [27/106] SC/BIOL 3110 3.00 – Molecular Biology I: Nucleic Acid Metabolism
+2025-12-11 20:13:45,292 - INFO -       💾 Saved SC_BIOL 3110 3.00_Molecular Biology I_ Nucleic Acid Metabolism.html
+2025-12-11 20:13:55,551 - INFO -    ↳ [28/106] SC/BIOL 3120 3.00 – Immunobiology
+2025-12-11 20:13:55,755 - INFO -       💾 Saved SC_BIOL 3120 3.00_Immunobiology.html
+2025-12-11 20:14:05,952 - INFO -    ↳ [29/106] SC/BIOL 3130 3.00 – Molecular Biology II: Regulation of Gene Expression
+2025-12-11 20:14:06,168 - INFO -       💾 Saved SC_BIOL 3130 3.00_Molecular Biology II_ Regulation of Gene Expression.html
+2025-12-11 20:14:13,638 - INFO -    ↳ [30/106] SC/BIOL 3140 4.00 – Advanced Biochemistry and Molecular Genetics Laboratory
+2025-12-11 20:14:13,870 - INFO -       💾 Saved SC_BIOL 3140 4.00_Advanced Biochemistry and Molecular Genetics Laboratory.html
+2025-12-11 20:14:23,680 - INFO -    ↳ [31/106] SC/BIOL 3150 4.00 – Microbiology
+2025-12-11 20:14:23,915 - INFO -       💾 Saved SC_BIOL 3150 4.00_Microbiology.html
+2025-12-11 20:14:31,554 - INFO -    ↳ [32/106] SC/BIOL 3155 3.00 – Virology
+2025-12-11 20:14:31,796 - INFO -       💾 Saved SC_BIOL 3155 3.00_Virology.html
+2025-12-11 20:14:39,917 - INFO -    ↳ [33/106] SC/BIOL 3171 3.00 – Population Ecology
+2025-12-11 20:14:40,147 - INFO -       💾 Saved SC_BIOL 3171 3.00_Population Ecology.html
+2025-12-11 20:14:47,837 - INFO -    ↳ [34/106] SC/BIOL 3172 3.00 – Community Ecology
+2025-12-11 20:14:48,039 - INFO -       💾 Saved SC_BIOL 3172 3.00_Community Ecology.html
+2025-12-11 20:14:55,657 - INFO -    ↳ [35/106] SC/BIOL 3200 3.00 – Processes of Evolution
+2025-12-11 20:14:55,852 - INFO -       💾 Saved SC_BIOL 3200 3.00_Processes of Evolution.html
+2025-12-11 20:15:04,194 - INFO -    ↳ [36/106] SC/BIOL 3350 4.00 – Comparative Chordate Anatomy
+2025-12-11 20:15:04,440 - INFO -       💾 Saved SC_BIOL 3350 4.00_Comparative Chordate Anatomy.html
+2025-12-11 20:15:14,713 - INFO -    ↳ [37/106] SC/BIOL 3380 3.00 – Sensory Systems
+2025-12-11 20:15:14,954 - INFO -       💾 Saved SC_BIOL 3380 3.00_Sensory Systems.html
+2025-12-11 20:15:23,746 - INFO -    ↳ [38/106] SC/BIOL 3500 3.00 – Biogeography
+2025-12-11 20:15:23,990 - INFO -       💾 Saved SC_BIOL 3500 3.00_Biogeography.html
+2025-12-11 20:15:33,288 - INFO -    ↳ [39/106] SC/BIOL 3601 0.00 – Research Practicum
+2025-12-11 20:15:33,493 - INFO -       💾 Saved SC_BIOL 3601 0.00_Research Practicum.html
+2025-12-11 20:15:42,121 - INFO -    ↳ [40/106] SC/BIOL 3602 0.00 – Research Practicum
+2025-12-11 20:15:42,322 - INFO -       💾 Saved SC_BIOL 3602 0.00_Research Practicum.html
+2025-12-11 20:15:53,169 - INFO -    ↳ [41/106] SC/BIOL 3901 0.00 – Biology Internship Work Term
+2025-12-11 20:15:53,388 - INFO -       💾 Saved SC_BIOL 3901 0.00_Biology Internship Work Term.html
+2025-12-11 20:16:01,469 - INFO -    ↳ [42/106] SC/BIOL 3902 0.00 – Biology Internship Work Term
+2025-12-11 20:16:01,716 - INFO -       💾 Saved SC_BIOL 3902 0.00_Biology Internship Work Term.html
+2025-12-11 20:16:11,392 - INFO -    ↳ [43/106] SC/BIOL 3903 0.00 – Biology Internship Work Term
+2025-12-11 20:16:11,774 - INFO -       💾 Saved SC_BIOL 3903 0.00_Biology Internship Work Term.html
+2025-12-11 20:16:20,098 - INFO -    ↳ [44/106] SC/BIOL 4000 3.00 – Honours Thesis
+2025-12-11 20:16:20,357 - INFO -       💾 Saved SC_BIOL 4000 3.00_Honours Thesis.html
+2025-12-11 20:16:29,580 - INFO -    ↳ [45/106] SC/BIOL 4000 8.00 – Honours Thesis
+2025-12-11 20:16:29,829 - INFO -       💾 Saved SC_BIOL 4000 8.00_Honours Thesis.html
+2025-12-11 20:16:40,657 - INFO -    ↳ [46/106] ED/BIOL 4000 3.00 – Teaching Biology in the Intermediate-Senior Divisions - A
+2025-12-11 20:16:40,912 - INFO -       💾 Saved ED_BIOL 4000 3.00_Teaching Biology in the Intermediate-Senior Divisions - A.html
+2025-12-11 20:16:51,036 - INFO -    ↳ [47/106] ED/BIOL 4001 3.00 – Teaching Biology in the Intermediate-Senior Divisions - B
+2025-12-11 20:16:51,239 - INFO -       💾 Saved ED_BIOL 4001 3.00_Teaching Biology in the Intermediate-Senior Divisions - B.html
+2025-12-11 20:17:00,960 - INFO -    ↳ [48/106] SC/BIOL 4005 3.00 – The Scientific Method: Applications and Controversies
+2025-12-11 20:17:01,204 - INFO -       💾 Saved SC_BIOL 4005 3.00_The Scientific Method_ Applications and Controversies.html
+2025-12-11 20:17:09,875 - INFO -    ↳ [49/106] SC/BIOL 4010 3.00 – Biology of Cancer
+2025-12-11 20:17:10,132 - INFO -       💾 Saved SC_BIOL 4010 3.00_Biology of Cancer.html
+2025-12-11 20:17:17,788 - INFO -    ↳ [50/106] SC/BIOL 4020 3.00 – Genomics
+2025-12-11 20:17:18,011 - INFO -       💾 Saved SC_BIOL 4020 3.00_Genomics.html
+2025-12-11 20:17:27,530 - INFO -    ↳ [51/106] SC/BIOL 4030 3.00 – Proteomics
+2025-12-11 20:17:27,790 - INFO -       💾 Saved SC_BIOL 4030 3.00_Proteomics.html
+2025-12-11 20:17:37,574 - INFO -    ↳ [52/106] SC/BIOL 4051 3.00 – Bioanalytical Chemistry
+2025-12-11 20:17:37,826 - INFO -       💾 Saved SC_BIOL 4051 3.00_Bioanalytical Chemistry.html
+2025-12-11 20:17:47,895 - INFO -    ↳ [53/106] SC/BIOL 4061 3.00 – Cell and Molecular Biology of Development
+2025-12-11 20:17:48,112 - INFO -       💾 Saved SC_BIOL 4061 3.00_Cell and Molecular Biology of Development.html
+2025-12-11 20:17:57,240 - INFO -    ↳ [54/106] SC/BIOL 4070 3.00 – Behavioural Ecology
+2025-12-11 20:17:57,480 - INFO -       💾 Saved SC_BIOL 4070 3.00_Behavioural Ecology.html
+2025-12-11 20:18:07,235 - INFO -    ↳ [55/106] SC/BIOL 4095 3.00 – Applied Plant Ecology
+2025-12-11 20:18:07,472 - INFO -       💾 Saved SC_BIOL 4095 3.00_Applied Plant Ecology.html
+2025-12-11 20:18:16,441 - INFO -    ↳ [56/106] SC/BIOL 4120 3.00 – Applied Immunology
+2025-12-11 20:18:16,702 - INFO -       💾 Saved SC_BIOL 4120 3.00_Applied Immunology.html
+2025-12-11 20:18:25,356 - INFO -    ↳ [57/106] SC/BIOL 4141 3.00 – Current Topics and Methods in Cell Biology
+2025-12-11 20:18:25,569 - INFO -       💾 Saved SC_BIOL 4141 3.00_Current Topics and Methods in Cell Biology.html
+2025-12-11 20:18:35,154 - INFO -    ↳ [58/106] SC/BIOL 4150 3.00 – Cellular Regulation
+2025-12-11 20:18:35,415 - INFO -       💾 Saved SC_BIOL 4150 3.00_Cellular Regulation.html
+2025-12-11 20:18:44,701 - INFO -    ↳ [59/106] SC/BIOL 4151 3.00 – Membrane Transport
+2025-12-11 20:18:45,025 - INFO -       💾 Saved SC_BIOL 4151 3.00_Membrane Transport.html
+2025-12-11 20:18:53,714 - INFO -    ↳ [60/106] SC/BIOL 4154 3.00 – The Human Microbiome
+2025-12-11 20:18:53,968 - INFO -       💾 Saved SC_BIOL 4154 3.00_The Human Microbiome.html
+2025-12-11 20:19:02,202 - INFO -    ↳ [61/106] SC/BIOL 4155 3.00 – Advanced Virology
+2025-12-11 20:19:02,465 - INFO -       💾 Saved SC_BIOL 4155 3.00_Advanced Virology.html
+2025-12-11 20:19:11,867 - INFO -    ↳ [62/106] SC/BIOL 4200 3.00 – Selected Readings in Biology
+2025-12-11 20:19:12,137 - INFO -       💾 Saved SC_BIOL 4200 3.00_Selected Readings in Biology.html
+2025-12-11 20:19:23,283 - INFO -    ↳ [63/106] SC/BIOL 4220 4.00 – Histology
+2025-12-11 20:19:23,561 - INFO -       💾 Saved SC_BIOL 4220 4.00_Histology.html
+2025-12-11 20:19:32,526 - INFO -    ↳ [64/106] SC/BIOL 4245 3.00 – Conservation Biology
+2025-12-11 20:19:32,792 - INFO -       💾 Saved SC_BIOL 4245 3.00_Conservation Biology.html
+2025-12-11 20:19:41,017 - INFO -    ↳ [65/106] SC/BIOL 4250 3.00 – Birds and the Environment
+2025-12-11 20:19:41,288 - INFO -       💾 Saved SC_BIOL 4250 3.00_Birds and the Environment.html
+2025-12-11 20:19:50,262 - INFO -    ↳ [66/106] SC/BIOL 4255 3.00 – Biodiversity
+2025-12-11 20:19:50,516 - INFO -       💾 Saved SC_BIOL 4255 3.00_Biodiversity.html
+2025-12-11 20:19:58,761 - INFO -    ↳ [67/106] SC/BIOL 4270 3.00 – Integrative Reproduction: Questions and Concepts
+2025-12-11 20:19:59,034 - INFO -       💾 Saved SC_BIOL 4270 3.00_Integrative Reproduction_ Questions and Concepts.html
+2025-12-11 20:20:09,128 - INFO -    ↳ [68/106] SC/BIOL 4275 4.00 – Fungi: Threads of Life
+2025-12-11 20:20:09,366 - INFO -       💾 Saved SC_BIOL 4275 4.00_Fungi_ Threads of Life.html
+2025-12-11 20:20:18,511 - INFO -    ↳ [69/106] SC/BIOL 4285 3.00 – Human Molecular Genetics
+2025-12-11 20:20:18,888 - INFO -       💾 Saved SC_BIOL 4285 3.00_Human Molecular Genetics.html
+2025-12-11 20:20:28,006 - INFO -    ↳ [70/106] SC/BIOL 4290 4.00 – Biotechnology
+2025-12-11 20:20:28,359 - INFO -       💾 Saved SC_BIOL 4290 4.00_Biotechnology.html
+2025-12-11 20:20:36,084 - INFO -    ↳ [71/106] SC/BIOL 4305 3.00 – Controversies in the Modern Life Sciences
+2025-12-11 20:20:36,335 - INFO -       💾 Saved SC_BIOL 4305 3.00_Controversies in the Modern Life Sciences.html
+2025-12-11 20:20:46,869 - INFO -    ↳ [72/106] SC/BIOL 4310 3.00 – Physiology of Circadian Timing
+2025-12-11 20:20:47,133 - INFO -       💾 Saved SC_BIOL 4310 3.00_Physiology of Circadian Timing.html
+2025-12-11 20:20:57,715 - INFO -    ↳ [73/106] SC/BIOL 4320 3.00 – Vertebrate Endocrinology
+2025-12-11 20:20:58,059 - INFO -       💾 Saved SC_BIOL 4320 3.00_Vertebrate Endocrinology.html
+2025-12-11 20:21:06,009 - INFO -    ↳ [74/106] SC/BIOL 4340 3.00 – Fish Biology
+2025-12-11 20:21:06,314 - INFO -       💾 Saved SC_BIOL 4340 3.00_Fish Biology.html
+2025-12-11 20:21:15,901 - INFO -    ↳ [75/106] SC/BIOL 4360 3.00 – Parasitology
+2025-12-11 20:21:16,227 - INFO -       💾 Saved SC_BIOL 4360 3.00_Parasitology.html
+2025-12-11 20:21:25,811 - INFO -    ↳ [76/106] SC/BIOL 4370 3.00 – Neurobiology
+2025-12-11 20:21:26,132 - INFO -       💾 Saved SC_BIOL 4370 3.00_Neurobiology.html
+2025-12-11 20:21:36,317 - INFO -    ↳ [77/106] SC/BIOL 4380 3.00 – Systems Neuroscience
+2025-12-11 20:21:36,633 - INFO -       💾 Saved SC_BIOL 4380 3.00_Systems Neuroscience.html

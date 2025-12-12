@@ -7,6 +7,7 @@ const __dirname = path.dirname(__filename);
 // Array of steps to execute in order
 const steps = [
   { num: 1, name: 'Extract Courses from HTML', path: './step1_extractAllCoursestoJson.js' },
+  { num: 1.5, name: 'Update Lecture Category Numbers', path: './step1.5_updateCatNumbers.js' },
   { num: 2, name: 'Import Courses to Database', path: './step2_JSONCoursestoDb.mjs' },
   { num: 3, name: 'Add Prerequisites', path: './step3_addPrereqsToCoursesInDb.js' },
   { num: 4, name: 'Import Instructors', path: './step4_JSONinstructorsToDb.js' },
@@ -25,11 +26,30 @@ async function runStep(stepNumber, stepName, modulePath) {
     
     const stepStartTime = Date.now();
     
-    // Dynamically import the module - it will execute its main() on import
-    await import(modulePath);
+    // Spawn the module in a child process to ensure it runs to completion
+    // This allows async operations like API calls to complete
+    const { spawn } = await import('child_process');
     
-    const stepDuration = ((Date.now() - stepStartTime) / 1000).toFixed(2);
-    console.log(`✅ Step ${stepNumber} completed in ${stepDuration}s\n`);
+    return new Promise((resolve, reject) => {
+      const child = spawn('node', [modulePath], {
+        stdio: 'inherit',
+        cwd: __dirname
+      });
+
+      child.on('close', (code) => {
+        if (code !== 0) {
+          reject(new Error(`Step exited with code ${code}`));
+        } else {
+          const stepDuration = ((Date.now() - stepStartTime) / 1000).toFixed(2);
+          console.log(`✅ Step ${stepNumber} completed in ${stepDuration}s\n`);
+          resolve();
+        }
+      });
+
+      child.on('error', (error) => {
+        reject(error);
+      });
+    });
   } catch (error) {
     console.error(`\n❌ Step ${stepNumber} (${stepName}) failed:`);
     console.error(error.message);
