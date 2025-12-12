@@ -1,13 +1,63 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Search, X, Sparkles } from "lucide-react";
+import {io} from "socket.io-client";
+
+const socket = io("https://york-easy-elective-finder-production.up.railway.app", {
+  transports: ["websocket"],
+  secure: true
+});
+
+
+
 
 export function SearchBar({ onSearch, searchQuery }) {
   const [searchInput, setSearchInput] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [trendingSearches, setTrendingSearches] = useState([]);
+  const [socketConnected, setSocketConnected] = useState(false);
+
+  useEffect(() => {
+    // Listen for socket connection status
+    const handleConnect = () => {
+      setSocketConnected(true);
+      console.log("[SOCKET] Connected");
+    };
+
+    const handleDisconnect = () => {
+      setSocketConnected(false);
+      console.log("[SOCKET] Disconnected");
+    };
+
+    // Listen for trending searches from the socket server
+    const handleTrendingSearches = (searches) => {
+      console.log("[TRENDING RECEIVED FROM SERVER]", searches);
+      // Deduplicate and limit to top 5
+      const uniqueSearches = Array.isArray(searches) 
+        ? [...new Set(searches)].slice(0, 5) 
+        : [];
+      setTrendingSearches(uniqueSearches);
+    };
+
+    socket.on("connect", handleConnect);
+    socket.on("disconnect", handleDisconnect);
+    socket.on("trendingSearches", handleTrendingSearches);
+
+    return () => {
+      socket.off("connect", handleConnect);
+      socket.off("disconnect", handleDisconnect);
+      socket.off("trendingSearches", handleTrendingSearches);
+    };
+  }, []);
 
   const handleSearch = () => {
-    onSearch(searchInput);
+    if (searchInput.trim()) {
+      onSearch(searchInput);
+      // Only emit if socket is connected
+      if (socketConnected) {
+        socket.emit("search", searchInput);
+      }
+    }
   };
 
   const handleClear = () => {
@@ -45,7 +95,7 @@ export function SearchBar({ onSearch, searchQuery }) {
             
             <Input
               type="text"
-              placeholder="Try: EECS 1012, Psychology, Data Structures, 3.00 credits..."
+              placeholder="Try: EECS 1012, Psychology, Data Structures, Business"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={(e) => {
@@ -156,35 +206,45 @@ export function SearchBar({ onSearch, searchQuery }) {
         )}
       </div>
 
-      {/* Quick Search Suggestions */}
-      {!searchQuery && !searchInput && (
-        <div className="mt-6 flex flex-col items-center gap-3">
-          <p className="text-xs font-semibold text-white/40 uppercase tracking-wider">Popular Searches</p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {['ECON', 'STS', 'Psychology', 'Business', 'Games'].map((suggestion) => (
-              <button
-                key={suggestion}
-                onClick={() => {
-                  setSearchInput(suggestion);
-                  onSearch(suggestion);
-                }}
-                className="
-                  px-4 py-2 text-xs font-semibold
-                  bg-gradient-to-r from-purple-500/20 to-pink-500/10
-                  hover:from-purple-500/40 hover:to-pink-500/30
-                  border border-purple-400/30 hover:border-purple-400/60
-                  rounded-full
-                  text-purple-300 hover:text-purple-200
-                  transition-all duration-300
-                  hover:scale-110 hover:shadow-lg hover:shadow-purple-500/30
-                "
-              >
-                {suggestion}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+{/* Popular Searches - Only show trending results */}
+{!searchInput.trim() && trendingSearches.length > 0 && (
+  <div className="mt-6 flex flex-col items-center gap-3 animate-in fade-in duration-300">
+    <p className="text-xs font-semibold text-white/40 uppercase tracking-wider flex items-center gap-2">
+      <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+      Trending Now
+    </p>
+
+    <div className="flex flex-wrap justify-center gap-2">
+      {trendingSearches.map((suggestion, index) => (
+          <button
+            key={`${suggestion}-${index}`}
+            onClick={() => {
+              setSearchInput(suggestion);
+              onSearch(suggestion);
+              if (socketConnected) {
+                socket.emit("search", suggestion);
+              }
+            }}
+            className="
+              px-4 py-2 text-xs font-semibold
+              bg-gradient-to-r from-purple-500/20 to-pink-500/10
+              hover:from-purple-500/40 hover:to-pink-500/30
+              border border-purple-400/30 hover:border-purple-400/60
+              rounded-full
+              text-purple-300 hover:text-purple-200
+              transition-all duration-300
+              hover:scale-110 hover:shadow-lg hover:shadow-purple-500/30
+              group
+            "
+          >
+            <span className="text-green-400 group-hover:text-green-300">📈 </span>
+            {suggestion}
+          </button>
+      ))}
+    </div>
+  </div>
+)}
+
     </div>
   );
 }

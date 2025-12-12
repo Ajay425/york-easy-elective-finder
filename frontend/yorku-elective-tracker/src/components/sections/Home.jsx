@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 
 function DisclaimerModal({ open, onContinue, onCancel }) {
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onCancel()}>
       <DialogContent className="bg-gradient-to-br from-gray-800/40 via-gray-900/40 to-black/40 backdrop-blur-xl border border-white/10 text-gray-200 rounded-2xl shadow-2xl shadow-black/40 max-w-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
@@ -98,7 +98,7 @@ const Home = () => {
         "
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#7f5af0] drop-shadow-[0_0_15px_rgba(127,90,240,0.35)]">
-            Welcome to YorkU Elective Tracker
+            Welcome to YorkU Elective Finder
           </h1>
 
           <p className="text-gray-300 text-lg md:text-xl leading-relaxed drop-shadow-sm">
@@ -113,9 +113,7 @@ const Home = () => {
             </SelectTrigger>
 
             <SelectContent className="bg-black/40 backdrop-blur-xl text-white border-white/10">
-              <SelectItem value="F">Fall (F)</SelectItem>
               <SelectItem value="W">Winter (W)</SelectItem>
-              <SelectItem value="Y">Year-Long (Y)</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -156,9 +154,9 @@ const Home = () => {
           </p>
           <p className="italic">📚 This tool is unofficial and not affiliated with York University.</p>
           <p className="italic">
-            📞 Feedback? Suggestions? Reach out to plebwastaken on discord or{" "}
+            📞 Feedback? Suggestions? Reach out to us using the {" "}
             <a href="/contact-us" className="underline hover:text-[#7f5af0] transition-colors">
-              Click Here
+              Contact Us form
             </a>.
           </p>
         </div>

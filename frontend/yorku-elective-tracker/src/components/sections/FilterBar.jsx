@@ -35,15 +35,24 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
             <DropdownMenu key={filterName}>
               <DropdownMenuTrigger asChild>
                 <Button
-                  variant="outline"
                   className={`
                     relative group
                     min-w-[140px] h-auto py-2.5 px-4
                     rounded-lg font-medium text-sm
                     border transition-all duration-300
                     ${hasActiveFilters 
-                      ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-400/40 text-white shadow-lg shadow-purple-500/10 group-hover:from-purple-500/35 group-hover:to-pink-500/35 group-hover:border-purple-400/70 group-hover:text-purple-100 group-hover:shadow-purple-500/20' 
-                      : 'bg-white/5 border-white/15 text-white/80 hover:bg-white/10 hover:border-white/25 hover:text-purple-300'
+  ? `
+        bg-gradient-to-r from-purple-500/20 to-pink-500/20 
+       border-purple-400/40 text-white shadow-lg shadow-purple-500/10
+      /* NO PURPLE HOVER EFFECT FOR ACTIVE FILTERS */
+      group-hover:shadow-purple-500/10
+    `
+  : `
+      bg-white/5 border-white/15 text-white/80 
+      hover:bg-white/10 hover:border-white/25 hover:text-purple-300
+    `
+}
+
                     }
                     hover:shadow-lg
                     active:scale-95

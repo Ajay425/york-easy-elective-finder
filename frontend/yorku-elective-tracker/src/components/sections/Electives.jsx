@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useCourses } from "../../hooks/useCourses";
 import { useFilters } from "../../hooks/useFilters";
@@ -9,6 +9,7 @@ import { CourseDetailPanel } from "./CourseDetailPanel";
 import { Pagination } from "./Pagination";
 import { useLocation } from "react-router-dom";
 import { Mail } from "lucide-react";
+import { ActiveUsers } from "../ActiveUsers";
 
 const Electives = () => {
   const { courses, loading, error } = useCourses();
@@ -29,7 +30,21 @@ const Electives = () => {
   // Filter courses that match the selected term
   const coursesForTerm = courses.filter((course) =>
     course.terms?.some((t) => t.term.startsWith(selectedTerm))
+
   );
+
+  // Load saved data
+  const savedFilters = (() => {
+  try {
+    return JSON.parse(localStorage.getItem("electiveFilters"));
+  } catch {
+    return null;
+  }
+})();
+
+const savedSearch = localStorage.getItem("electiveSearch") || "";
+
+
 
   // Pass ONLY term-matching courses into useFilters
   const {
@@ -40,11 +55,52 @@ const Electives = () => {
     filterOptions,
     filteredCourses,
     clearFilters,
-  } = useFilters(coursesForTerm);
+  } = useFilters(coursesForTerm, savedFilters, savedSearch);
+
+
+
 
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const coursesPerPage = 12;
+
+  // save current search filters
+
+  useEffect(() => {
+    const savedFilters = localStorage.getItem("electiveFilters");
+    const savedSearch = localStorage.getItem("electiveSearch");
+    const savedPage = localStorage.getItem("electivePage");
+
+    if (savedFilters) {
+      try {
+        setFilters(JSON.parse(savedFilters));
+      } catch {}
+  }
+
+  if (savedSearch) {
+    setSearchQuery(savedSearch);
+  }
+  if (savedPage) {
+    setCurrentPage(Number(savedPage));
+  }
+  }, []);
+
+
+  // now save the filters
+
+  useEffect(() => {
+    localStorage.setItem("electiveFilters", JSON.stringify(filters));
+  }, [filters]);
+
+  useEffect(() => {
+    localStorage.setItem("electiveSearch", searchQuery);
+  }, [searchQuery]);
+  useEffect(() => {
+    localStorage.setItem("electivePage", currentPage);
+  }, [currentPage]);
+
+
+
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -124,6 +180,11 @@ const Electives = () => {
     Contact Us
     </div>
     </div>
+  </div>
+
+  {/* Active Users Badge */}
+  <div className="absolute top-4 right-4 z-20">
+    <ActiveUsers />
   </div>
 
 
