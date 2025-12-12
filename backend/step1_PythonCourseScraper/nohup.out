@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/./step_1_open_subject.py", line 345, in <module>
+    main()
+  File "/var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/./step_1_open_subject.py", line 262, in main
+    human_pause()
+  File "/var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/./step_1_open_subject.py", line 42, in human_pause
+    time.sleep(random.uniform(min_sec or HUMAN_DELAY_MIN, max_sec or HUMAN_DELAY_MAX))
+KeyboardInterrupt
