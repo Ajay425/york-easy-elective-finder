@@ -51,11 +51,11 @@ function updateLectCatNumbers(courses) {
 
 
 // Update the course data with catNumbers for LECT
-const json = fs.readFileSync('all_courses2.json', {encoding:'utf-8'})
+const json = fs.readFileSync('all_courses.json', {encoding:'utf-8'})
 const obj = JSON.parse(json);
 const updatedObj = updateLectCatNumbers(obj)
 
 const newJson = JSON.stringify(updatedObj, null, 2); // The 'null, 2' adds indentation for readability
-fs.writeFileSync('all_courses2.json', newJson, { encoding: 'utf-8' });
+fs.writeFileSync('all_courses.json', newJson, { encoding: 'utf-8' });
 
 console.log('File has been updated!');
