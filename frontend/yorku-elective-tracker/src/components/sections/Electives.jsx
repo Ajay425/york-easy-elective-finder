@@ -182,10 +182,18 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
     </div>
   </div>
 
-  {/* Active Users Badge */}
-  <div className="absolute top-4 right-4 z-20">
+  {/* Powered by SSADC Badge */}
+  <div className="absolute top-4 right-4 z-20 flex flex-col items-end gap-2">
+    <a href="https://yorku.dev" className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-br from-gray-800/40 via-gray-900/40 to-black/40 backdrop-blur-xl border border-purple-500/30 hover:border-purple-400/60 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300 group hover:scale-105">
+      <span className="text-sm text-gray-300 group-hover:text-white transition-colors duration-300">Powered by</span>
+      <span className="text-sm font-bold text-[#7f5af0] group-hover:text-[#a855f7] transition-colors duration-300">SSADC</span>
+    </a>
+
+    {/* Active Users Badge */}
     <ActiveUsers />
   </div>
+
+
 
 
       {/* Search Bar */}

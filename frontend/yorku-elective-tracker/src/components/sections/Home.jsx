@@ -160,6 +160,27 @@ const Home = () => {
             </a>.
           </p>
         </div>
+
+        <div className="relative z-10 space-y-4 text-gray-400 max-w-2xl pt-8 border-t border-white/10">
+          <h3 className="italic text-2xl font-semibold text-white">
+            Powered by <a href="https://yorku.dev" className="underline hover:text-[#7f5af0] transition-colors">SSADC at YorkU</a>
+          </h3>
+          <p className="text-lg text-gray-300 pt-2">Check out our other projects!</p>
+          <div className="flex flex-wrap justify-center gap-8 pt-4">
+            <a href="https://study.yorku.dev" className="text-[#7f5af0] hover:text-[#a855f7] transition-colors duration-300 underline text-base font-medium hover:scale-105">
+              YUStudyBuddies
+            </a>
+            <a href="https://coursedelta.yorku.dev" className="text-[#7f5af0] hover:text-[#a855f7] transition-colors duration-300 underline text-base font-medium hover:scale-105">
+              CourseDelta for YorkU
+            </a>
+            <a href="https://rooms.yorku.dev" className="text-[#7f5af0] hover:text-[#a855f7] transition-colors duration-300 underline text-base font-medium hover:scale-105">
+              Empty Room Finder
+            </a>
+          </div>
+          <div className="border-t border-white/10 pt-4 mt-4">
+            <p className="text-sm text-gray-500 text-center">© 2025</p>
+          </div>
+        </div>
       </section>
     </>
   );
