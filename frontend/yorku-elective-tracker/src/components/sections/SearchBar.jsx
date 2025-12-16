@@ -95,7 +95,7 @@ export function SearchBar({ onSearch, searchQuery }) {
             
             <Input
               type="text"
-              placeholder="Try: EECS 1012, Psychology, Data Structures, Business"
+              placeholder="Try: Astronomy, STS 3730, Finance, Data Structures, Business"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={(e) => {
