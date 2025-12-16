@@ -78,63 +78,76 @@ export async function recomputeInstructorPopularity(instructorId) {
   }
 }
 
+export async function getPopularCoursesDb(terms, types, years, depts, faculties, credits) {
+  try {
+    const courses5 = await prisma.course.findMany({
+      where: {
+        year: { in: years },
+        deptAcronym: { in: depts },
+        faculty: { in: faculties },
+        credit: { in: credits },
+        prerequisites: { none: {} },
+        courseOfferings: { some: { term: { in: terms }, type: { in: types } } },
+      },
+      include: {
+        prerequisites: true,
+        courseOfferings: {
+          where: { term: { in: terms }, type: { in: types } },
+          include: {
+            courseTimes: true, // ✅ include times
+            instructors: {
+              include: { instructor: true },
+              orderBy: { instructor: { popularity: "desc" } },
+              take: 1, // only the most popular per offering
+            },
+          },
+        },
+      },
+    });
 
-export async function getPopularCoursesDb(terms,types,years,depts, faculties, credits){
-    try{
-        const courses5 = await prisma.course.findMany({
-                        where: {
-                            year: { in: years },
-                            deptAcronym: { in: depts },
-                            faculty: { in: faculties },
-                            credit: {in: credits},
-                            prerequisites: { none: {} },
-                            courseOfferings: { some: { term: { in: terms }, type: { in: types } } },
-                        },
-                        include: {
-                            prerequisites:true,
-                            courseOfferings: {
-                            where: { term: { in: terms }, type: { in: types } },
-                            include: {
-                                instructors: {
-                                include: { instructor: true },
-                                orderBy: { instructor: { popularity: 'desc' } },
-                                take: 1, // <-- only the most popular per offering
-                                },
-                            },
-                            },
-                        },
-                    });
-        // you already did this per course:
-        for (const c of courses5) {
-        c.courseOfferings.sort((a, b) => {
-            const popA = a.instructors[0]?.instructor?.popularity ?? -1
-            const popB = b.instructors[0]?.instructor?.popularity ?? -1
-            return popB - popA // most-popular offering first
-        })
-        }
+    // ✅ Sort times within each offering (dayOfWeek, then startTime)
+    // Day order map (adjust if your DB uses different letters)
+    const dayOrder = { M: 1, T: 2, W: 3, R: 4, Th: 4, F: 5, Sat: 6, Sun: 7 };
 
-        // now sort the WHOLE courses list by the top instructor of the top offering
-        courses5.sort((a, b) => {
-        const bestA = a.courseOfferings[0]?.instructors[0]?.instructor?.popularity ?? -1
-        const bestB = b.courseOfferings[0]?.instructors[0]?.instructor?.popularity ?? -1
-        if (bestB !== bestA) return bestB - bestA
+    for (const c of courses5) {
+      for (const o of c.courseOfferings) {
+        o.courseTimes.sort((a, b) => {
+          const da = dayOrder[a.dayOfWeek] ?? 99;
+          const db = dayOrder[b.dayOfWeek] ?? 99;
+          if (da !== db) return da - db;
+          return (a.startTime ?? "").localeCompare(b.startTime ?? "");
+        });
+      }
 
-        // optional tie-breakers:
-        const nA = a.courseOfferings[0]?.instructors[0]?.instructor?.numberOfRatings ?? -1
-        const nB = b.courseOfferings[0]?.instructors[0]?.instructor?.numberOfRatings ?? -1
-        if (nB !== nA) return nB - nA
-
-        // final stable tie-breaker (course code/alpha)
-        return `${a.deptAcronym}${a.courseCode}`.localeCompare(`${b.deptAcronym}${b.courseCode}`)
-        })
-
-        return courses5;
-
+      // you already did this per course:
+      c.courseOfferings.sort((a, b) => {
+        const popA = a.instructors[0]?.instructor?.popularity ?? -1;
+        const popB = b.instructors[0]?.instructor?.popularity ?? -1;
+        return popB - popA; // most-popular offering first
+      });
     }
-    catch(err){
-        throw err;
-    }
+
+    // now sort the WHOLE courses list by the top instructor of the top offering
+    courses5.sort((a, b) => {
+      const bestA = a.courseOfferings[0]?.instructors[0]?.instructor?.popularity ?? -1;
+      const bestB = b.courseOfferings[0]?.instructors[0]?.instructor?.popularity ?? -1;
+      if (bestB !== bestA) return bestB - bestA;
+
+      // optional tie-breakers:
+      const nA = a.courseOfferings[0]?.instructors[0]?.instructor?.numberOfRatings ?? -1;
+      const nB = b.courseOfferings[0]?.instructors[0]?.instructor?.numberOfRatings ?? -1;
+      if (nB !== nA) return nB - nA;
+
+      // final stable tie-breaker (course code/alpha)
+      return `${a.deptAcronym}${a.courseCode}`.localeCompare(`${b.deptAcronym}${b.courseCode}`);
+    });
+
+    return courses5;
+  } catch (err) {
+    throw err;
+  }
 }
+
 export async function getCourseFromIdDB(courseId) {
   try {
     const course = await prisma.course.findUnique({

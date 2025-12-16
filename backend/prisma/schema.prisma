@@ -11,7 +11,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Course {
@@ -79,7 +78,19 @@ model CurrentCourseOfferings{
   catNumber String?
   type String
   instructors InstructorOfferings[]
+  courseTimes  CourseTime[]
   @@unique([term,courseId, section, type])
+}
+
+
+model CourseTime {
+  id                  Int        @id @default(autoincrement())
+  currentCourseId     Int
+  currentCourse       CurrentCourseOfferings @relation(fields: [currentCourseId], references: [id])
+  dayOfWeek           String    // e.g., 'M', 'T', 'W', 'Th', 'F', 'Sat', 'Sun'
+  startTime           String    // e.g., '14:30'
+  durationMinutes     Int       // e.g., 50 minutes
+  endTime             String?   // Optional, calculated if needed
 }
 
 model InstructorOfferings{
