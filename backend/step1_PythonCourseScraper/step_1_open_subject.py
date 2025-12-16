@@ -11,7 +11,7 @@ from typing import List, Tuple, Set, Optional
 # ----------------------------------------------------------
 # ⚙️ USER SETTINGS
 # ----------------------------------------------------------
-FAST_MODE = True  # Set this to True for faster scraping (switch here)
+FAST_MODE = False  # Set this to True for faster scraping (switch here)
 MAX_SUBJECTS = None
 CAMPUS_NAME = "Keele"
 SAVE_DIR = "york_courses"
@@ -32,8 +32,8 @@ if FAST_MODE:
     HUMAN_DELAY_MIN = 3  # .1 and 0.4 bottom , #1 and 3 work well seems like
     HUMAN_DELAY_MAX = 6
 else:
-    HUMAN_DELAY_MIN = 13.0  # 15 and 25 work
-    HUMAN_DELAY_MAX = 18.0
+    HUMAN_DELAY_MIN = 15.0  # 15 and 25 work
+    HUMAN_DELAY_MAX = 25.0
 
 def human_pause(min_sec: Optional[float] = None, max_sec: Optional[float] = None) -> None:
     """Realistic random delay between actions, with jitter."""
