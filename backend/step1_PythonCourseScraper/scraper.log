@@ -8925,3 +8925,785 @@ Call log:
 2025-12-18 20:20:58,117 - INFO -       📄 Page ready: 20578 bytes HTML, 1122 chars text
 2025-12-18 20:20:58,131 - INFO -       💾 Saved GS_KAHS 6365 3.00_Mitochondria in Health and Disease_CourseSchedule.html
 2025-12-18 20:21:13,003 - INFO -    ↳ [19/28] GS/KAHS 6390 3.00 – Aging, Body Composition and Chronic Disease: Lifestyle Therapeutic Interventions
+2025-12-18 20:21:25,046 - INFO -       📄 Page ready: 20625 bytes HTML, 1169 chars text
+2025-12-18 20:21:25,056 - INFO -       💾 Saved GS_KAHS 6390 3.00_Aging, Body Composition and Chronic Disease_ Lifestyle Therapeutic Interventions_CourseSchedule.html
+2025-12-18 20:21:41,643 - INFO -    ↳ [20/28] GS/KAHS 6392 3.00 – Nutrition, Health and Exercise Performance
+2025-12-18 20:21:54,855 - INFO -       📄 Page ready: 20345 bytes HTML, 1043 chars text
+2025-12-18 20:21:54,863 - INFO -       💾 Saved GS_KAHS 6392 3.00_Nutrition, Health and Exercise Performance_CourseSchedule.html
+2025-12-18 20:22:13,741 - INFO -    ↳ [21/28] GS/KAHS 6430 3.00 – The Human Body in Social Theory
+2025-12-18 20:22:25,797 - INFO -       📄 Page ready: 21098 bytes HTML, 1641 chars text
+2025-12-18 20:22:25,807 - INFO -       💾 Saved GS_KAHS 6430 3.00_The Human Body in Social Theory_CourseSchedule.html
+2025-12-18 20:22:44,448 - INFO -    ↳ [22/28] GS/KAHS 6455 3.00 – Advanced Topics in Sport and Exercise Psychology
+2025-12-18 20:22:58,786 - INFO -       📄 Page ready: 20572 bytes HTML, 1116 chars text
+2025-12-18 20:22:58,795 - INFO -       💾 Saved GS_KAHS 6455 3.00_Advanced Topics in Sport and Exercise Psychology_CourseSchedule.html
+2025-12-18 20:23:15,648 - INFO -    ↳ [23/28] GS/KAHS 6456 1.50 – Graduate Diploma in Health Psychology - Seminar 1
+2025-12-18 20:23:28,806 - INFO -       📄 Page ready: 20625 bytes HTML, 1135 chars text
+2025-12-18 20:23:28,816 - INFO -       💾 Saved GS_KAHS 6456 1.50_Graduate Diploma in Health Psychology - Seminar 1_CourseSchedule.html
+2025-12-18 20:23:45,159 - INFO -    ↳ [24/28] GS/KAHS 6457 1.50 – Graduate Diploma in Health Psychology - Seminar 2
+2025-12-18 20:23:58,251 - INFO -       📄 Page ready: 20625 bytes HTML, 1135 chars text
+2025-12-18 20:23:58,259 - INFO -       💾 Saved GS_KAHS 6457 1.50_Graduate Diploma in Health Psychology - Seminar 2_CourseSchedule.html
+2025-12-18 20:24:15,527 - INFO -    ↳ [25/28] GS/KAHS 6465 3.00 – Stress, Coping and Health
+2025-12-18 20:24:29,113 - INFO -       📄 Page ready: 20609 bytes HTML, 1141 chars text
+2025-12-18 20:24:29,132 - INFO -       💾 Saved GS_KAHS 6465 3.00_Stress, Coping and Health_CourseSchedule.html
+2025-12-18 20:24:45,109 - INFO -    ↳ [26/28] GS/KAHS 6480 3.00 – Autonomic Function in Health and Disease
+2025-12-18 20:24:58,568 - INFO -       📄 Page ready: 20776 bytes HTML, 1320 chars text
+2025-12-18 20:24:58,578 - INFO -       💾 Saved GS_KAHS 6480 3.00_Autonomic Function in Health and Disease_CourseSchedule.html
+2025-12-18 20:25:15,121 - INFO -    ↳ [27/28] GS/KAHS 7200 3.00 – Ph.D. Graduate Seminar, Part I
+2025-12-18 20:25:26,763 - INFO -       📄 Page ready: 20251 bytes HTML, 950 chars text
+2025-12-18 20:25:26,771 - INFO -       💾 Saved GS_KAHS 7200 3.00_Ph.D. Graduate Seminar, Part I_CourseSchedule.html
+2025-12-18 20:25:40,926 - INFO -    ↳ [28/28] GS/KAHS 7210 3.00 – Ph.D. Graduate Seminar, Part II
+2025-12-18 20:25:52,939 - INFO -       📄 Page ready: 20252 bytes HTML, 951 chars text
+2025-12-18 20:25:52,949 - INFO -       💾 Saved GS_KAHS 7210 3.00_Ph.D. Graduate Seminar, Part II_CourseSchedule.html
+2025-12-18 20:26:07,354 - INFO - ✅ Finished KAHS - Kinesiology & Health Science - ( GS ) (saved to progress.txt)
+2025-12-18 20:26:07,354 - INFO - 🔄 Refreshing browser session between subjects...
+2025-12-18 20:26:17,710 - INFO - 
+🎓 [134/217] Scraping subject: KINE - Kinesiology & Health Science - ( HH )
+2025-12-18 20:26:25,813 - INFO -    → Found 94 courses
+2025-12-18 20:26:25,814 - INFO -    ↳ [1/94] HH/KINE 1000 6.00 – Sociocultural Perspectives in Kinesiology
+2025-12-18 20:26:38,925 - INFO -       📄 Page ready: 54180 bytes HTML, 4281 chars text
+2025-12-18 20:26:38,940 - INFO -       💾 Saved HH_KINE 1000 6.00_Sociocultural Perspectives in Kinesiology_CourseSchedule.html
+2025-12-18 20:26:52,957 - INFO -    ↳ [2/94] HH/KINE 1020 6.00 – Fitness and Health
+2025-12-18 20:27:05,540 - INFO -       📄 Page ready: 57013 bytes HTML, 4492 chars text
+2025-12-18 20:27:05,557 - INFO -       💾 Saved HH_KINE 1020 6.00_Fitness and Health_CourseSchedule.html
+2025-12-18 20:27:20,918 - INFO -    ↳ [3/94] HH/KINE 1101 3.00 – Applied Human Anatomy and Physiology for Health Professionals I
+2025-12-18 20:27:34,441 - INFO -       📄 Page ready: 21234 bytes HTML, 1780 chars text
+2025-12-18 20:27:34,451 - INFO -       💾 Saved HH_KINE 1101 3.00_Applied Human Anatomy and Physiology for Health Professionals I_CourseSchedule.html
+2025-12-18 20:27:50,166 - INFO -    ↳ [4/94] HH/KINE 1102 3.00 – Applied Human Anatomy and Physiology for Health Professionals II
+2025-12-18 20:28:03,398 - INFO -       📄 Page ready: 21211 bytes HTML, 1757 chars text
+2025-12-18 20:28:03,408 - INFO -       💾 Saved HH_KINE 1102 3.00_Applied Human Anatomy and Physiology for Health Professionals II_CourseSchedule.html
+2025-12-18 20:28:22,187 - INFO -    ↳ [5/94] HH/KINE 1900 3.00 – Integrated Physical Activity for Life I: Physical Fitness, Mental Health, Physical Literacy
+2025-12-18 20:28:35,341 - INFO -       📄 Page ready: 46305 bytes HTML, 4047 chars text
+2025-12-18 20:28:35,357 - INFO -       💾 Saved HH_KINE 1900 3.00_Integrated Physical Activity for Life I_ Physical Fitness, Mental Health, Physical Literacy_CourseSchedule.html
+2025-12-18 20:28:53,295 - INFO -    ↳ [6/94] HH/KINE 2011 3.00 – Human Physiology I
+2025-12-18 20:29:05,159 - INFO -       📄 Page ready: 24094 bytes HTML, 1541 chars text
+2025-12-18 20:29:05,170 - INFO -       💾 Saved HH_KINE 2011 3.00_Human Physiology I_CourseSchedule.html
+2025-12-18 20:29:20,584 - INFO -    ↳ [7/94] HH/KINE 2031 3.00 – Human Anatomy
+2025-12-18 20:29:33,498 - INFO -       📄 Page ready: 55607 bytes HTML, 4318 chars text
+2025-12-18 20:29:33,514 - INFO -       💾 Saved HH_KINE 2031 3.00_Human Anatomy_CourseSchedule.html
+2025-12-18 20:29:52,009 - INFO -    ↳ [8/94] HH/KINE 2049 3.00 – Research Methods in Kinesiology
+2025-12-18 20:30:03,331 - INFO -       📄 Page ready: 52114 bytes HTML, 4017 chars text
+2025-12-18 20:30:03,364 - INFO -       💾 Saved HH_KINE 2049 3.00_Research Methods in Kinesiology_CourseSchedule.html
+2025-12-18 20:30:18,604 - INFO -    ↳ [9/94] HH/KINE 2050 3.00 – Analysis of Data in Kinesiology I
+2025-12-18 20:30:30,746 - INFO -       📄 Page ready: 52512 bytes HTML, 4411 chars text
+2025-12-18 20:30:30,765 - INFO -       💾 Saved HH_KINE 2050 3.00_Analysis of Data in Kinesiology I_CourseSchedule.html
+2025-12-18 20:30:46,710 - INFO -    ↳ [10/94] HH/KINE 2380 3.00 – Introduction to Sport Administration
+2025-12-18 20:30:59,633 - INFO -       📄 Page ready: 20639 bytes HTML, 1176 chars text
+2025-12-18 20:30:59,643 - INFO -       💾 Saved HH_KINE 2380 3.00_Introduction to Sport Administration_CourseSchedule.html
+2025-12-18 20:31:17,818 - INFO -    ↳ [11/94] HH/KINE 2475 3.00 – Coaching: The Art and Science
+2025-12-18 20:31:30,283 - INFO -       📄 Page ready: 23736 bytes HTML, 1433 chars text
+2025-12-18 20:31:30,296 - INFO -       💾 Saved HH_KINE 2475 3.00_Coaching_ The Art and Science_CourseSchedule.html
+2025-12-18 20:31:44,598 - INFO -    ↳ [12/94] HH/KINE 2495 3.00 – Introduction to Sport Related Injuries
+2025-12-18 20:31:56,933 - INFO -       📄 Page ready: 24028 bytes HTML, 1609 chars text
+2025-12-18 20:31:56,957 - INFO -       💾 Saved HH_KINE 2495 3.00_Introduction to Sport Related Injuries_CourseSchedule.html
+2025-12-18 20:32:11,905 - INFO -    ↳ [13/94] HH/KINE 2500 3.00 – Athletic Therapy Field Inquiry-Based Tutorial
+2025-12-18 20:32:23,382 - INFO -       📄 Page ready: 27219 bytes HTML, 2044 chars text
+2025-12-18 20:32:23,391 - INFO -       💾 Saved HH_KINE 2500 3.00_Athletic Therapy Field Inquiry-Based Tutorial_CourseSchedule.html
+2025-12-18 20:32:42,344 - INFO -    ↳ [14/94] HH/KINE 2501 3.00 – Athletic Therapy Field Seminar and Skills
+2025-12-18 20:32:54,521 - INFO -       📄 Page ready: 23083 bytes HTML, 2132 chars text
+2025-12-18 20:32:54,533 - INFO -       💾 Saved HH_KINE 2501 3.00_Athletic Therapy Field Seminar and Skills_CourseSchedule.html
+2025-12-18 20:33:10,852 - INFO -    ↳ [15/94] HH/KINE 2502 3.00 – Athletic Therapy Extremities Inquiry-Based Tutorial
+2025-12-18 20:33:24,323 - INFO -       📄 Page ready: 27106 bytes HTML, 2007 chars text
+2025-12-18 20:33:24,349 - INFO -       💾 Saved HH_KINE 2502 3.00_Athletic Therapy Extremities Inquiry-Based Tutorial_CourseSchedule.html
+2025-12-18 20:33:42,703 - INFO -    ↳ [16/94] HH/KINE 2503 3.00 – Athletic Therapy Extremities Seminar and Skills
+2025-12-18 20:33:56,021 - INFO -       📄 Page ready: 23164 bytes HTML, 2166 chars text
+2025-12-18 20:33:56,038 - INFO -       💾 Saved HH_KINE 2503 3.00_Athletic Therapy Extremities Seminar and Skills_CourseSchedule.html
+2025-12-18 20:34:13,560 - INFO -    ↳ [17/94] HH/KINE 2900 3.00 – Integrated Physical Activity for Life II: Adapted & Inclusive Physical Activity, Leadership, & Safety
+2025-12-18 20:34:26,368 - INFO -       📄 Page ready: 44104 bytes HTML, 4075 chars text
+2025-12-18 20:34:26,384 - INFO -       💾 Saved HH_KINE 2900 3.00_Integrated Physical Activity for Life II_ Adapted & Inclusive Physical Activity, Leadership, & Safety_CourseSchedule.html
+2025-12-18 20:34:43,963 - INFO -    ↳ [18/94] HH/KINE 3000 3.00 – Psychology of Physical Activity and Health
+                                                                                                                                                                                                                             2025-12-18 22:36:34,558 - INFO - 🚀 Launching Playwright browser (FAST_MODE=False)
+2025-12-18 22:36:35,104 - INFO - 🌐 Opening York course site...
+2025-12-18 22:36:39,194 - INFO - 📚 Found 217 subjects to scrape
+2025-12-18 22:36:39,195 - INFO - 🔁 Resuming — 133 subjects already completed
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping ACTG - Accounting - ( SB, ED ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping ADLW - Administrative Law - ( GS ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping ADMS - Administrative Studies - ( AP ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping ALDR - Dispute Resolution - ( GS ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping ANTH - Anthropology - ( GS, AP ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping ARB - Arabic - ( AP ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping ARTH - Art History - ( GS, FA ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping ARTM - Arts and Media - ( SB ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping ASL - Asl American Sign Language - ( AP ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping AUCO - Aural Communication 1/2 - ( ED ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping BBED - Bilingual/Bicultural Education - ( ED ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping BC - Bethune College - ( SC ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping BCHM - Biochemistry - ( SC ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping BFSL - Banking And Financial Services Law - ( GS ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping BIOL - Biology - ( ED, SC, GS, GL ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping BIOT - Biotechnology - ( GS ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping BLIS - International Business Law - ( GS ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping BPHS - Biophysics - ( SC ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping BUEC - Business Economics - ( GL ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping BUSI - Business Studies - ( ED ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping CAPS - Capstone Course - ( SC ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping CCLW - Canadian Common Law - ( GS ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping CCY - Children, Childhood and Youth - ( AP ) — already completed.
+2025-12-18 22:36:39,195 - INFO - ⏭️ Skipping CDIS - Critical Disability - ( GS ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CDNS - Canadian Studies - ( GL ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CGTA - Canadian Univ. Graduate Transfer Agreement - ( GS ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CH - Chinese - ( AP ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CHEM - Chemistry - ( ED, GS, SC ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CIVL - Civil Engineering - ( GS, LE ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CLDR - Civil Litigation & Dispute Resolution - ( GS ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CLST - Classical Studies - ( AP ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CLTC - Constitutional Law and The Charter - ( GS ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CLTR - Culture - ( AP ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CLWP - Criminal and Law Procedure - ( GS ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CMA - Cinema and Media Arts - ( FA ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CMCT - Communication and Culture - ( GS ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CMDS - Communication and Media Studies - ( AP ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CNLW - Construction Law - ( GS ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping COGS - Cognitive Science - ( AP ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping COMS - Communications - ( GL ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping COOP - Cooperative Education - ( EU, LE, AP, HH, SC ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CORE - Common Core - ( GL ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping COST - Computer Studies - ( ED ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CRIM - Criminology - ( AP ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CRTE - Creative Technologies - ( FA ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CSSD - Computer Science for Software Development - ( LE ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping CWR - Creative Writing - ( AP ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping DANC - Dance - ( FA, GS, ED ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping DATT - Digital Media Program - ( FA ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping DCAD - Doctoral Cand Admin - ( SB ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping DDPR - Dual Degree Program - ( SB ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping DEMS - Disaster and Emergency Management - ( GS, AP ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping DESN - Design - ( FA, GS ) — already completed.
+2025-12-18 22:36:39,196 - INFO - ⏭️ Skipping DEST - Deaf Studies - ( ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping DIGM - Digital Media - ( GS ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping DIGT - Digital Technologies - ( LE ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping DLLL - Languages, Literatures and Linguistics - ( AP ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping DMGM - Management - ( GS ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping DRAA - Dramatic Arts - ( ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping DRCA - Drama & Creative Arts - ( GL ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping DRST - Drama Studies - ( GL ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping DVST - Development Studies Graduate Program - ( GS ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping ECON - Economics - ( AP, GL, ED, GS, SB ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EDFE - Foundations - ( ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EDFR - French - ( ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EDIN - Integration - ( ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EDIS - Intermediate Senior - ( ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EDJI - Junior Intermediate - ( ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EDPJ - Primary Junior - ( ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EDPR - Practicum - ( ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EDST - Educational Studies - ( ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EDUC - Education - ( GS, ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EECS - Electrical Engineering and Computer Science - ( LE, GS ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EIL - Energy and Infrastructure Law - ( GS ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EMBA - Executive Masters Business Administration - ( SB ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping EN - English - ( AP, GL, GS, ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping ENG - Engineering - ( GS, LE ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping ENSL - English As A Second Language - ( GL ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping ENTP - Entrepreneurship and Innovation - ( AP ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping ENTR - Entrepreneurial Studies - ( ED, SB ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping ENVB - Environmental Biology - ( SC ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping ENVS - Environmental Studies - ( EU, GS, ED ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping ESL - English As A Second Language - ( AP ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping ESS - Earth & Space Science - ( GS ) — already completed.
+2025-12-18 22:36:39,197 - INFO - ⏭️ Skipping ESSE - Earth, Space Science and Engineering - ( LE ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping EXCH - Exchange - ( SB ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FACC - Financial Accountability - ( GS ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FACS - Fine Arts Cultural Studies - ( FA ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FAST - Family Studies - ( ED ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FILM - Film - ( GS ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FINE - Finance - ( SB ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FINT - Financial Technologies - ( AP ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FND - Fundamentals of Learning - ( AP ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FNEN - Financial Engineering - ( SB ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FNMI - First Nations, Métis and Inuit Studies - ( ED ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FR - French Studies - ( AP ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FRAN - French Studies/Etudes Francaises - ( GL ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FREN - French - ( ED, GS ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping FSL - French As A Second Language - ( GL ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GBUS - Global Business - ( SB ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GDFC - GS Law PD GD in Foundations of Canadian Law - ( GS ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GEOG - Geography - ( EU, ED, SC, GS ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GER - German - ( AP ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GFWS - Gender, Feminist and Womens Studies - ( GS ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GH - Global Health - ( GS, HH ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GK - Greek - ( AP ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GKM - Modern Greek - ( AP ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GLBL - Global Political Studies - ( AP ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GNRL - General Law - ( GS ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping GWST - Gender and Women's Studies - ( AP, GL ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping HEB - Hebrew - ( ED, AP ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping HIMP - Health Industry Management Program - ( SB ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping HIST - History - ( GL, GS, ED, AP ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping HLST - Health Studies - ( HH ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping HLTH - Health - ( GS ) — already completed.
+2025-12-18 22:36:39,198 - INFO - ⏭️ Skipping HND - Hindi - ( AP ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping HREQ - Human Rights and Equity Studies - ( AP ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping HRM - Human Resources Management - ( GS, AP ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping HUMA - Humanities - ( GL, AP, GS ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping IBUS - International Business - ( SB ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping IHST - Interdisciplinary Health Studies - ( HH ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping ILST - International Studies - ( GL ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping INDG - Indigenous Studies - ( AP ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping INDV - Individualized Studies - ( AP ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping INST - Interdisciplinary Study - ( GS ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping INTE - Conference Interpreting - ( GS ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping INTL - International - ( SB ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping IT - Italian - ( AP ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping ITEC - Information Technology - ( AP, ED, GS, GL ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping JC - Jamaican Creole - ( AP ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping JP - Japanese - ( AP ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping JWST - Jewish Studies - ( AP ) — already completed.
+2025-12-18 22:36:39,199 - INFO - ⏭️ Skipping KAHS - Kinesiology & Health Science - ( GS ) — already completed.
+2025-12-18 22:36:39,199 - INFO - 
+🎓 [134/217] Scraping subject: KINE - Kinesiology & Health Science - ( HH )
+2025-12-18 22:36:46,664 - INFO -    → Found 94 courses
+2025-12-18 22:36:46,664 - INFO -    ↳ [1/94] HH/KINE 1000 6.00 – Sociocultural Perspectives in Kinesiology
+2025-12-18 22:36:46,664 - INFO -       ✅ Already have HH_KINE 1000 6.00_Sociocultural Perspectives in Kinesiology_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,664 - INFO -    ↳ [2/94] HH/KINE 1020 6.00 – Fitness and Health
+2025-12-18 22:36:46,664 - INFO -       ✅ Already have HH_KINE 1020 6.00_Fitness and Health_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,664 - INFO -    ↳ [3/94] HH/KINE 1101 3.00 – Applied Human Anatomy and Physiology for Health Professionals I
+2025-12-18 22:36:46,664 - INFO -       ✅ Already have HH_KINE 1101 3.00_Applied Human Anatomy and Physiology for Health Professionals I_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,664 - INFO -    ↳ [4/94] HH/KINE 1102 3.00 – Applied Human Anatomy and Physiology for Health Professionals II
+2025-12-18 22:36:46,664 - INFO -       ✅ Already have HH_KINE 1102 3.00_Applied Human Anatomy and Physiology for Health Professionals II_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,664 - INFO -    ↳ [5/94] HH/KINE 1900 3.00 – Integrated Physical Activity for Life I: Physical Fitness, Mental Health, Physical Literacy
+2025-12-18 22:36:46,664 - INFO -       ✅ Already have HH_KINE 1900 3.00_Integrated Physical Activity for Life I_ Physical Fitness, Mental Health, Physical Literacy_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,664 - INFO -    ↳ [6/94] HH/KINE 2011 3.00 – Human Physiology I
+2025-12-18 22:36:46,664 - INFO -       ✅ Already have HH_KINE 2011 3.00_Human Physiology I_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,664 - INFO -    ↳ [7/94] HH/KINE 2031 3.00 – Human Anatomy
+2025-12-18 22:36:46,664 - INFO -       ✅ Already have HH_KINE 2031 3.00_Human Anatomy_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,664 - INFO -    ↳ [8/94] HH/KINE 2049 3.00 – Research Methods in Kinesiology
+2025-12-18 22:36:46,664 - INFO -       ✅ Already have HH_KINE 2049 3.00_Research Methods in Kinesiology_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,665 - INFO -    ↳ [9/94] HH/KINE 2050 3.00 – Analysis of Data in Kinesiology I
+2025-12-18 22:36:46,665 - INFO -       ✅ Already have HH_KINE 2050 3.00_Analysis of Data in Kinesiology I_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,665 - INFO -    ↳ [10/94] HH/KINE 2380 3.00 – Introduction to Sport Administration
+2025-12-18 22:36:46,665 - INFO -       ✅ Already have HH_KINE 2380 3.00_Introduction to Sport Administration_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,665 - INFO -    ↳ [11/94] HH/KINE 2475 3.00 – Coaching: The Art and Science
+2025-12-18 22:36:46,665 - INFO -       ✅ Already have HH_KINE 2475 3.00_Coaching_ The Art and Science_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,665 - INFO -    ↳ [12/94] HH/KINE 2495 3.00 – Introduction to Sport Related Injuries
+2025-12-18 22:36:46,665 - INFO -       ✅ Already have HH_KINE 2495 3.00_Introduction to Sport Related Injuries_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,665 - INFO -    ↳ [13/94] HH/KINE 2500 3.00 – Athletic Therapy Field Inquiry-Based Tutorial
+2025-12-18 22:36:46,665 - INFO -       ✅ Already have HH_KINE 2500 3.00_Athletic Therapy Field Inquiry-Based Tutorial_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,665 - INFO -    ↳ [14/94] HH/KINE 2501 3.00 – Athletic Therapy Field Seminar and Skills
+2025-12-18 22:36:46,665 - INFO -       ✅ Already have HH_KINE 2501 3.00_Athletic Therapy Field Seminar and Skills_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,665 - INFO -    ↳ [15/94] HH/KINE 2502 3.00 – Athletic Therapy Extremities Inquiry-Based Tutorial
+2025-12-18 22:36:46,665 - INFO -       ✅ Already have HH_KINE 2502 3.00_Athletic Therapy Extremities Inquiry-Based Tutorial_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,665 - INFO -    ↳ [16/94] HH/KINE 2503 3.00 – Athletic Therapy Extremities Seminar and Skills
+2025-12-18 22:36:46,665 - INFO -       ✅ Already have HH_KINE 2503 3.00_Athletic Therapy Extremities Seminar and Skills_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,665 - INFO -    ↳ [17/94] HH/KINE 2900 3.00 – Integrated Physical Activity for Life II: Adapted & Inclusive Physical Activity, Leadership, & Safety
+2025-12-18 22:36:46,665 - INFO -       ✅ Already have HH_KINE 2900 3.00_Integrated Physical Activity for Life II_ Adapted & Inclusive Physical Activity, Leadership, & Safety_CourseSchedule.html (skipping)
+2025-12-18 22:36:46,665 - INFO -    ↳ [18/94] HH/KINE 3000 3.00 – Psychology of Physical Activity and Health
+2025-12-18 22:36:59,273 - INFO -       📄 Page ready: 24371 bytes HTML, 1532 chars text
+2025-12-18 22:36:59,283 - INFO -       💾 Saved HH_KINE 3000 3.00_Psychology of Physical Activity and Health_CourseSchedule.html
+2025-12-18 22:37:15,883 - INFO -    ↳ [19/94] HH/KINE 3012 3.00 – Human Physiology II
+2025-12-18 22:37:29,683 - INFO -       📄 Page ready: 63490 bytes HTML, 4846 chars text
+2025-12-18 22:37:29,702 - INFO -       💾 Saved HH_KINE 3012 3.00_Human Physiology II_CourseSchedule.html
+2025-12-18 22:37:48,500 - INFO -    ↳ [20/94] HH/KINE 3020 3.00 – Skilled Performance and Motor Learning
+2025-12-18 22:38:02,012 - INFO -       📄 Page ready: 52081 bytes HTML, 4138 chars text
+2025-12-18 22:38:02,029 - INFO -       💾 Saved HH_KINE 3020 3.00_Skilled Performance and Motor Learning_CourseSchedule.html
+2025-12-18 22:38:16,905 - INFO -    ↳ [21/94] HH/KINE 3030 3.00 – Biomechanics of Human Movement
+2025-12-18 22:38:29,892 - INFO -       📄 Page ready: 50636 bytes HTML, 3731 chars text
+2025-12-18 22:38:29,906 - INFO -       💾 Saved HH_KINE 3030 3.00_Biomechanics of Human Movement_CourseSchedule.html
+2025-12-18 22:38:44,769 - INFO -    ↳ [22/94] HH/KINE 3100 3.00 – Health Psychology and Kinesiology
+2025-12-18 22:38:56,875 - INFO -       📄 Page ready: 20633 bytes HTML, 1153 chars text
+2025-12-18 22:38:56,884 - INFO -       💾 Saved HH_KINE 3100 3.00_Health Psychology and Kinesiology_CourseSchedule.html
+2025-12-18 22:39:12,311 - INFO -    ↳ [23/94] HH/KINE 3240 3.00 – Behavioural Approach to Administration of Fitness and Sport
+2025-12-18 22:39:25,552 - INFO -       📄 Page ready: 20525 bytes HTML, 1069 chars text
+2025-12-18 22:39:25,566 - INFO -       💾 Saved HH_KINE 3240 3.00_Behavioural Approach to Administration of Fitness and Sport_CourseSchedule.html
+2025-12-18 22:39:42,846 - INFO -    ↳ [24/94] HH/KINE 3340 3.00 – Growth, Maturation and Physical Activity
+2025-12-18 22:39:57,314 - INFO -       📄 Page ready: 20147 bytes HTML, 1009 chars text
+2025-12-18 22:39:57,324 - INFO -       💾 Saved HH_KINE 3340 3.00_Growth, Maturation and Physical Activity_CourseSchedule.html
+2025-12-18 22:40:14,295 - INFO -    ↳ [25/94] HH/KINE 3345 3.00 – Adapted Physical Activity
+2025-12-18 22:40:27,758 - INFO -       📄 Page ready: 26952 bytes HTML, 1789 chars text
+2025-12-18 22:40:27,770 - INFO -       💾 Saved HH_KINE 3345 3.00_Adapted Physical Activity_CourseSchedule.html
+2025-12-18 22:40:44,762 - INFO -    ↳ [26/94] HH/KINE 3349 3.00 – Physiology of Aging
+2025-12-18 22:40:58,620 - INFO -       📄 Page ready: 20697 bytes HTML, 1240 chars text
+2025-12-18 22:40:58,629 - INFO -       💾 Saved HH_KINE 3349 3.00_Physiology of Aging_CourseSchedule.html
+2025-12-18 22:41:17,552 - INFO -    ↳ [27/94] HH/KINE 3350 3.00 – Physical Activity, Health and Aging
+2025-12-18 22:41:29,697 - INFO -       📄 Page ready: 23644 bytes HTML, 1331 chars text
+2025-12-18 22:41:29,709 - INFO -       💾 Saved HH_KINE 3350 3.00_Physical Activity, Health and Aging_CourseSchedule.html
+2025-12-18 22:41:44,843 - INFO -    ↳ [28/94] HH/KINE 3360 3.00 – Gender and Sexuality in Sport and Health
+2025-12-18 22:41:58,381 - INFO -       📄 Page ready: 28553 bytes HTML, 1908 chars text
+2025-12-18 22:41:58,391 - INFO -       💾 Saved HH_KINE 3360 3.00_Gender and Sexuality in Sport and Health_CourseSchedule.html
+2025-12-18 22:42:17,245 - INFO -    ↳ [29/94] HH/KINE 3400 3.00 – Fitness Consulting and Personal Fitness Training
+2025-12-18 22:42:30,329 - INFO -       📄 Page ready: 36355 bytes HTML, 2540 chars text
+2025-12-18 22:42:30,343 - INFO -       💾 Saved HH_KINE 3400 3.00_Fitness Consulting and Personal Fitness Training_CourseSchedule.html
+2025-12-18 22:42:44,881 - INFO -    ↳ [30/94] HH/KINE 3430 3.00 – Canadian Culture and Physical Activity
+2025-12-18 22:42:57,325 - INFO -       📄 Page ready: 23878 bytes HTML, 1603 chars text
+2025-12-18 22:42:57,337 - INFO -       💾 Saved HH_KINE 3430 3.00_Canadian Culture and Physical Activity_CourseSchedule.html
+2025-12-18 22:43:12,548 - INFO -    ↳ [31/94] HH/KINE 3440 3.00 – Olympic Games: Heroes and Villains at Play
+2025-12-18 22:43:26,446 - INFO -       📄 Page ready: 20638 bytes HTML, 1182 chars text
+2025-12-18 22:43:26,458 - INFO -       💾 Saved HH_KINE 3440 3.00_Olympic Games_ Heroes and Villains at Play_CourseSchedule.html
+2025-12-18 22:43:42,076 - INFO -    ↳ [32/94] HH/KINE 3460 3.00 – Regional Human Anatomy I
+2025-12-18 22:43:55,009 - INFO -       📄 Page ready: 23644 bytes HTML, 1270 chars text
+2025-12-18 22:43:55,017 - INFO -       💾 Saved HH_KINE 3460 3.00_Regional Human Anatomy I_CourseSchedule.html
+2025-12-18 22:44:10,465 - INFO -    ↳ [33/94] HH/KINE 3465 3.00 – Advanced Regional Human Anatomy: The Trunk and Visceral Systems
+2025-12-18 22:44:23,858 - INFO -       📄 Page ready: 20636 bytes HTML, 1179 chars text
+2025-12-18 22:44:23,869 - INFO -       💾 Saved HH_KINE 3465 3.00_Advanced Regional Human Anatomy_ The Trunk and Visceral Systems_CourseSchedule.html
+2025-12-18 22:44:38,971 - INFO -    ↳ [34/94] HH/KINE 3500 3.00 – Athletic Therapy Head, Trunk & Spine Inquiry-Based Tutorial
+2025-12-18 22:44:51,513 - INFO -       📄 Page ready: 26933 bytes HTML, 2004 chars text
+2025-12-18 22:44:51,528 - INFO -       💾 Saved HH_KINE 3500 3.00_Athletic Therapy Head, Trunk & Spine Inquiry-Based Tutorial_CourseSchedule.html
+2025-12-18 22:45:08,559 - INFO -    ↳ [35/94] HH/KINE 3501 3.00 – Athletic Therapy Head Trunk and Spine Seminar and Skills
+2025-12-18 22:45:22,400 - INFO -       📄 Page ready: 23057 bytes HTML, 2140 chars text
+2025-12-18 22:45:22,411 - INFO -       💾 Saved HH_KINE 3501 3.00_Athletic Therapy Head Trunk and Spine Seminar and Skills_CourseSchedule.html
+2025-12-18 22:45:40,555 - INFO -    ↳ [36/94] HH/KINE 3502 3.00 – Athletic Therapy Upper & Lower Quadrant Inquiry-Based Tutorial
+2025-12-18 22:45:53,337 - INFO -       📄 Page ready: 27123 bytes HTML, 2020 chars text
+2025-12-18 22:45:53,347 - INFO -       💾 Saved HH_KINE 3502 3.00_Athletic Therapy Upper & Lower Quadrant Inquiry-Based Tutorial_CourseSchedule.html
+2025-12-18 22:46:07,676 - INFO -    ↳ [37/94] HH/KINE 3503 3.00 – Athletic Therapy Upper & Lower Quadrant Seminar and Skills
+2025-12-18 22:46:20,650 - INFO -       📄 Page ready: 22985 bytes HTML, 2063 chars text
+2025-12-18 22:46:20,664 - INFO -       💾 Saved HH_KINE 3503 3.00_Athletic Therapy Upper & Lower Quadrant Seminar and Skills_CourseSchedule.html
+2025-12-18 22:46:36,694 - INFO -    ↳ [38/94] HH/KINE 3575 3.00 – Athletic Injuries - Extremities
+2025-12-18 22:46:49,201 - INFO -       📄 Page ready: 30277 bytes HTML, 2190 chars text
+2025-12-18 22:46:49,214 - INFO -       💾 Saved HH_KINE 3575 3.00_Athletic Injuries - Extremities_CourseSchedule.html
+2025-12-18 22:47:05,637 - INFO -    ↳ [39/94] HH/KINE 3620 3.00 – Sociology of Sport I
+2025-12-18 22:47:19,433 - INFO -       📄 Page ready: 20530 bytes HTML, 1065 chars text
+2025-12-18 22:47:19,443 - INFO -       💾 Saved HH_KINE 3620 3.00_Sociology of Sport I_CourseSchedule.html
+2025-12-18 22:47:35,287 - INFO -    ↳ [40/94] HH/KINE 3635 3.00 – Fundamentals of Epidemiology
+2025-12-18 22:47:47,887 - INFO -       📄 Page ready: 20592 bytes HTML, 1136 chars text
+2025-12-18 22:47:47,898 - INFO -       💾 Saved HH_KINE 3635 3.00_Fundamentals of Epidemiology_CourseSchedule.html
+2025-12-18 22:48:04,571 - INFO -    ↳ [41/94] HH/KINE 3650 3.00 – Functional Neuroanatomy
+2025-12-18 22:48:16,745 - INFO -       📄 Page ready: 20644 bytes HTML, 1163 chars text
+2025-12-18 22:48:16,755 - INFO -       💾 Saved HH_KINE 3650 3.00_Functional Neuroanatomy_CourseSchedule.html
+2025-12-18 22:48:32,609 - INFO -    ↳ [42/94] HH/KINE 3670 3.00 – Molecular and Cellular Neuroscience with Applications to Health
+2025-12-18 22:49:18,744 - WARNING -       ⚠️ Attempt took 46.1s before failing for HH/KINE 3670 3.00: Timeout 45000ms exceeded.
+=========================== logs ===========================
+"domcontentloaded" event fired
+"load" event fired
+============================================================
+2025-12-18 22:49:18,745 - WARNING -       ↻ Retry SAME course after short backoff 10s (1/5).
+2025-12-18 22:49:40,883 - INFO -       📄 Page ready: 21199 bytes HTML, 1741 chars text
+2025-12-18 22:49:40,894 - INFO -       💾 Saved HH_KINE 3670 3.00_Molecular and Cellular Neuroscience with Applications to Health_CourseSchedule.html
+2025-12-18 22:49:59,246 - INFO -    ↳ [43/94] HH/KINE 3710 3.00 – Immune System in Health and Disease
+2025-12-18 22:50:04,778 - WARNING -       ⚠️ Attempt took 5.5s before failing for HH/KINE 3710 3.00: Blocked/session-expired immediately after submitting search.
+2025-12-18 22:50:04,778 - WARNING -       ♻️ Bad state/blocked detected; relaunching browser/context.
+2025-12-18 22:50:19,918 - WARNING -       🛑 Adding extra cooldown: 24.7s
+2025-12-18 22:50:44,652 - WARNING -       ↻ Block detected - retry SAME course after 37.7s (1/5).
+2025-12-18 22:51:35,732 - INFO -       📄 Page ready: 20757 bytes HTML, 1300 chars text
+2025-12-18 22:51:35,741 - INFO -       💾 Saved HH_KINE 3710 3.00_Immune System in Health and Disease_CourseSchedule.html
+2025-12-18 22:51:52,247 - INFO -    ↳ [44/94] HH/KINE 3800 3.00 – Applied Human Movement
+2025-12-18 22:52:04,632 - INFO -       📄 Page ready: 25211 bytes HTML, 1904 chars text
+2025-12-18 22:52:04,644 - INFO -       💾 Saved HH_KINE 3800 3.00_Applied Human Movement_CourseSchedule.html
+2025-12-18 22:52:22,107 - INFO -    ↳ [45/94] HH/KINE 4006 3.00 – Part I: Healthy Aging Current Trends and Issues
+2025-12-18 22:52:35,583 - INFO -       📄 Page ready: 24462 bytes HTML, 2144 chars text
+2025-12-18 22:52:35,593 - INFO -       💾 Saved HH_KINE 4006 3.00_Part I_ Healthy Aging Current Trends and Issues_CourseSchedule.html
+2025-12-18 22:52:54,523 - INFO -    ↳ [46/94] HH/KINE 4010 3.00 – Exercise Physiology
+2025-12-18 22:53:08,967 - INFO -       📄 Page ready: 53650 bytes HTML, 3953 chars text
+2025-12-18 22:53:08,985 - INFO -       💾 Saved HH_KINE 4010 3.00_Exercise Physiology_CourseSchedule.html
+2025-12-18 22:53:27,565 - INFO -    ↳ [47/94] HH/KINE 4020 3.00 – Human Nutrition
+2025-12-18 22:53:42,093 - INFO -       📄 Page ready: 23811 bytes HTML, 1395 chars text
+2025-12-18 22:53:42,104 - INFO -       💾 Saved HH_KINE 4020 3.00_Human Nutrition_CourseSchedule.html
+2025-12-18 22:53:58,220 - INFO -    ↳ [48/94] HH/KINE 4060 3.00 – Independent Studies in Kinesiology and Health Science
+2025-12-18 22:54:12,122 - INFO -       📄 Page ready: 26476 bytes HTML, 1850 chars text
+2025-12-18 22:54:12,136 - INFO -       💾 Saved HH_KINE 4060 3.00_Independent Studies in Kinesiology and Health Science_CourseSchedule.html
+2025-12-18 22:54:29,600 - INFO -    ↳ [49/94] HH/KINE 4060 6.00 – Independent Studies in Kinesiology and Health Science
+2025-12-18 22:54:43,432 - INFO -       📄 Page ready: 26505 bytes HTML, 1850 chars text
+2025-12-18 22:54:43,441 - INFO -       💾 Saved HH_KINE 4060 6.00_Independent Studies in Kinesiology and Health Science_CourseSchedule.html
+2025-12-18 22:55:00,125 - INFO -    ↳ [50/94] HH/KINE 4100 6.00 – Honours Thesis
+2025-12-18 22:55:13,164 - INFO -       📄 Page ready: 26398 bytes HTML, 1772 chars text
+2025-12-18 22:55:13,175 - INFO -       💾 Saved HH_KINE 4100 6.00_Honours Thesis_CourseSchedule.html
+2025-12-18 22:55:31,668 - INFO -    ↳ [51/94] HH/KINE 4101 6.00 – Honours Thesis
+2025-12-18 22:55:44,859 - INFO -       📄 Page ready: 20644 bytes HTML, 1344 chars text
+2025-12-18 22:55:44,871 - INFO -       💾 Saved HH_KINE 4101 6.00_Honours Thesis_CourseSchedule.html
+2025-12-18 22:56:00,847 - INFO -    ↳ [52/94] HH/KINE 4120 3.00 – Nutritional Aids in Sport and Exercise
+2025-12-18 22:56:14,012 - INFO -       📄 Page ready: 20568 bytes HTML, 1112 chars text
+2025-12-18 22:56:14,020 - INFO -       💾 Saved HH_KINE 4120 3.00_Nutritional Aids in Sport and Exercise_CourseSchedule.html
+2025-12-18 22:56:30,682 - INFO -    ↳ [53/94] HH/KINE 4140 3.00 – Nutrition and Human Diseases
+2025-12-18 22:56:43,349 - INFO -       📄 Page ready: 20736 bytes HTML, 1280 chars text
+2025-12-18 22:56:43,362 - INFO -       💾 Saved HH_KINE 4140 3.00_Nutrition and Human Diseases_CourseSchedule.html
+2025-12-18 22:56:57,604 - INFO -    ↳ [54/94] HH/KINE 4150 3.00 – Nutrition in the Lifecycle
+2025-12-18 22:57:11,913 - INFO -       📄 Page ready: 20526 bytes HTML, 1070 chars text
+2025-12-18 22:57:11,920 - INFO -       💾 Saved HH_KINE 4150 3.00_Nutrition in the Lifecycle_CourseSchedule.html
+2025-12-18 22:57:26,564 - INFO -    ↳ [55/94] HH/KINE 4170 3.00 – Public Health Nutrition and Food Policy
+2025-12-18 22:57:40,580 - INFO -       📄 Page ready: 20823 bytes HTML, 1328 chars text
+2025-12-18 22:57:40,590 - INFO -       💾 Saved HH_KINE 4170 3.00_Public Health Nutrition and Food Policy_CourseSchedule.html
+2025-12-18 22:57:56,781 - INFO -    ↳ [56/94] HH/KINE 4210 3.00 – Disorders of Visual Cognition
+2025-12-18 22:58:11,334 - INFO -       📄 Page ready: 20645 bytes HTML, 1188 chars text
+2025-12-18 22:58:11,343 - INFO -       💾 Saved HH_KINE 4210 3.00_Disorders of Visual Cognition_CourseSchedule.html
+2025-12-18 22:58:28,282 - INFO -    ↳ [57/94] HH/KINE 4230 3.00 – Neuronal development for activity and health
+2025-12-18 22:58:40,886 - INFO -       📄 Page ready: 20619 bytes HTML, 1162 chars text
+2025-12-18 22:58:40,897 - INFO -       💾 Saved HH_KINE 4230 3.00_Neuronal development for activity and health_CourseSchedule.html
+2025-12-18 22:58:57,722 - INFO -    ↳ [58/94] HH/KINE 4310 3.00 – International Development and Sport
+2025-12-18 22:59:10,165 - INFO -       📄 Page ready: 20856 bytes HTML, 1374 chars text
+2025-12-18 22:59:10,173 - INFO -       💾 Saved HH_KINE 4310 3.00_International Development and Sport_CourseSchedule.html
+2025-12-18 22:59:28,441 - INFO -    ↳ [59/94] HH/KINE 4315 3.00 – Aboriginal Physical Activity and Community Health
+2025-12-18 22:59:41,416 - INFO -       📄 Page ready: 23871 bytes HTML, 1595 chars text
+2025-12-18 22:59:41,428 - INFO -       💾 Saved HH_KINE 4315 3.00_Aboriginal Physical Activity and Community Health_CourseSchedule.html
+2025-12-18 22:59:58,001 - INFO -    ↳ [60/94] HH/KINE 4340 3.00 – Sport, "Race" and Popular Culture in Canada
+2025-12-18 23:00:12,633 - INFO -       📄 Page ready: 23616 bytes HTML, 1341 chars text
+2025-12-18 23:00:12,643 - INFO -       💾 Saved HH_KINE 4340 3.00_Sport, _Race_ and Popular Culture in Canada_CourseSchedule.html
+2025-12-18 23:00:29,571 - INFO -    ↳ [61/94] HH/KINE 4370 3.00 – Body as Light: Meditation Practices
+2025-12-18 23:00:44,238 - INFO -       📄 Page ready: 20688 bytes HTML, 1232 chars text
+2025-12-18 23:00:44,250 - INFO -       💾 Saved HH_KINE 4370 3.00_Body as Light_ Meditation Practices_CourseSchedule.html
+2025-12-18 23:01:02,609 - INFO -    ↳ [62/94] HH/KINE 4375 3.00 – Body as Weapon: Martial Arts/Combat Training
+2025-12-18 23:01:16,469 - INFO -       📄 Page ready: 20686 bytes HTML, 1206 chars text
+2025-12-18 23:01:16,477 - INFO -       💾 Saved HH_KINE 4375 3.00_Body as Weapon_ Martial Arts_Combat Training_CourseSchedule.html
+2025-12-18 23:01:33,584 - INFO -    ↳ [63/94] HH/KINE 4400 6.00 – Advanced Fitness/Lifestyle Assessment and Counselling
+2025-12-18 23:01:47,336 - INFO -       📄 Page ready: 20716 bytes HTML, 1260 chars text
+2025-12-18 23:01:47,343 - INFO -       💾 Saved HH_KINE 4400 6.00_Advanced Fitness_Lifestyle Assessment and Counselling_CourseSchedule.html
+2025-12-18 23:02:04,104 - INFO -    ↳ [64/94] HH/KINE 4410 3.00 – Obesity: Assessment, Treatment and Implications
+2025-12-18 23:02:17,341 - INFO -       📄 Page ready: 20778 bytes HTML, 1298 chars text
+2025-12-18 23:02:17,350 - INFO -       💾 Saved HH_KINE 4410 3.00_Obesity_ Assessment, Treatment and Implications_CourseSchedule.html
+2025-12-18 23:02:31,809 - INFO -    ↳ [65/94] HH/KINE 4420 3.00 – Relaxation: Theory and Practice
+2025-12-18 23:02:44,550 - INFO -       📄 Page ready: 26896 bytes HTML, 1733 chars text
+2025-12-18 23:02:44,561 - INFO -       💾 Saved HH_KINE 4420 3.00_Relaxation_ Theory and Practice_CourseSchedule.html
+2025-12-18 23:03:01,537 - INFO -    ↳ [66/94] HH/KINE 4430 3.00 – Business Skills for Sport and Fitness Professionals
+2025-12-18 23:03:16,289 - INFO -       📄 Page ready: 20654 bytes HTML, 1174 chars text
+2025-12-18 23:03:16,298 - INFO -       💾 Saved HH_KINE 4430 3.00_Business Skills for Sport and Fitness Professionals_CourseSchedule.html
+2025-12-18 23:03:34,998 - INFO -    ↳ [67/94] HH/KINE 4442 3.00 – Advanced Exercise Physiology: Exercising and Surviving in Extreme Environments
+2025-12-18 23:03:48,583 - INFO -       📄 Page ready: 20618 bytes HTML, 1161 chars text
+2025-12-18 23:03:48,593 - INFO -       💾 Saved HH_KINE 4442 3.00_Advanced Exercise Physiology_ Exercising and Surviving in Extreme Environments_CourseSchedule.html
+2025-12-18 23:04:04,263 - INFO -    ↳ [68/94] HH/KINE 4443 3.00 – Living and performing at high altitude: The physiology of human adaptation to altitude hypoxia
+2025-12-18 23:04:17,055 - INFO -       📄 Page ready: 20901 bytes HTML, 1445 chars text
+2025-12-18 23:04:17,065 - INFO -       💾 Saved HH_KINE 4443 3.00_Living and performing at high altitude_ The physiology of human adaptation to altitude hypoxia_CourseSchedule.html
+2025-12-18 23:04:32,589 - INFO -    ↳ [69/94] HH/KINE 4447 3.00 – Sex Differences in Exercise Physiology
+2025-12-18 23:04:47,901 - INFO -       📄 Page ready: 20906 bytes HTML, 1309 chars text
+2025-12-18 23:04:47,909 - INFO -       💾 Saved HH_KINE 4447 3.00_Sex Differences in Exercise Physiology_CourseSchedule.html
+2025-12-18 23:05:05,261 - INFO -    ↳ [70/94] HH/KINE 4448 3.00 – Advanced Human Physiology: Endocrinology
+2025-12-18 23:05:18,242 - INFO -       📄 Page ready: 20535 bytes HTML, 1079 chars text
+2025-12-18 23:05:18,254 - INFO -       💾 Saved HH_KINE 4448 3.00_Advanced Human Physiology_ Endocrinology_CourseSchedule.html
+2025-12-18 23:05:34,299 - INFO -    ↳ [71/94] HH/KINE 4449 3.00 – Advanced Human Physiology: The Respiratory System in Health and Disease
+2025-12-18 23:05:47,946 - INFO -       📄 Page ready: 20676 bytes HTML, 1220 chars text
+2025-12-18 23:05:47,958 - INFO -       💾 Saved HH_KINE 4449 3.00_Advanced Human Physiology_ The Respiratory System in Health and Disease_CourseSchedule.html
+2025-12-18 23:06:05,118 - INFO -    ↳ [72/94] HH/KINE 4450 3.00 – Advanced Exercise Physiology: Cardiovascular
+2025-12-18 23:06:17,452 - INFO -       📄 Page ready: 20600 bytes HTML, 1144 chars text
+2025-12-18 23:06:17,462 - INFO -       💾 Saved HH_KINE 4450 3.00_Advanced Exercise Physiology_ Cardiovascular_CourseSchedule.html
+2025-12-18 23:06:33,163 - INFO -    ↳ [73/94] HH/KINE 4452 3.00 – Autonomic Function in Health and Disease
+2025-12-18 23:06:47,640 - INFO -       📄 Page ready: 20892 bytes HTML, 1411 chars text
+2025-12-18 23:06:47,653 - INFO -       💾 Saved HH_KINE 4452 3.00_Autonomic Function in Health and Disease_CourseSchedule.html
+2025-12-18 23:07:04,678 - INFO -    ↳ [74/94] HH/KINE 4453 3.00 – Vascular Function in Health and Disease
+2025-12-18 23:07:18,840 - INFO -       📄 Page ready: 20645 bytes HTML, 1188 chars text
+2025-12-18 23:07:18,851 - INFO -       💾 Saved HH_KINE 4453 3.00_Vascular Function in Health and Disease_CourseSchedule.html
+2025-12-18 23:07:34,538 - INFO -    ↳ [75/94] HH/KINE 4460 3.00 – Occupational Biomechanics
+2025-12-18 23:07:47,898 - INFO -       📄 Page ready: 22120 bytes HTML, 1318 chars text
+2025-12-18 23:07:47,909 - INFO -       💾 Saved HH_KINE 4460 3.00_Occupational Biomechanics_CourseSchedule.html
+2025-12-18 23:08:03,011 - INFO -    ↳ [76/94] HH/KINE 4472 3.00 – Low Back Performance and Disorders
+2025-12-18 23:08:16,570 - INFO -       📄 Page ready: 22391 bytes HTML, 1489 chars text
+2025-12-18 23:08:16,581 - INFO -       💾 Saved HH_KINE 4472 3.00_Low Back Performance and Disorders_CourseSchedule.html
+2025-12-18 23:08:34,408 - INFO -    ↳ [77/94] HH/KINE 4485 3.00 – Social Determinants of Physical Activity and Health in Canada
+2025-12-18 23:08:47,815 - INFO -       📄 Page ready: 23691 bytes HTML, 1387 chars text
+2025-12-18 23:08:47,827 - INFO -       💾 Saved HH_KINE 4485 3.00_Social Determinants of Physical Activity and Health in Canada_CourseSchedule.html
+2025-12-18 23:09:06,572 - INFO -    ↳ [78/94] HH/KINE 4505 3.00 – Neurophysiology of Movement in Health and Disease
+2025-12-18 23:09:20,009 - INFO -       📄 Page ready: 20679 bytes HTML, 1220 chars text
+2025-12-18 23:09:20,017 - INFO -       💾 Saved HH_KINE 4505 3.00_Neurophysiology of Movement in Health and Disease_CourseSchedule.html
+2025-12-18 23:09:35,262 - INFO -    ↳ [79/94] HH/KINE 4516 3.00 – Mitochondria in Health and Disease
+2025-12-18 23:09:49,080 - INFO -       📄 Page ready: 20611 bytes HTML, 1155 chars text
+2025-12-18 23:09:49,088 - INFO -       💾 Saved HH_KINE 4516 3.00_Mitochondria in Health and Disease_CourseSchedule.html
+2025-12-18 23:10:03,426 - INFO -    ↳ [80/94] HH/KINE 4518 3.00 – Molecular Link Between Obesity and Cancer
+2025-12-18 23:10:18,506 - INFO -       📄 Page ready: 20841 bytes HTML, 1359 chars text
+2025-12-18 23:10:18,517 - INFO -       💾 Saved HH_KINE 4518 3.00_Molecular Link Between Obesity and Cancer_CourseSchedule.html
+2025-12-18 23:10:33,810 - INFO -    ↳ [81/94] HH/KINE 4520 3.00 – Sport Psychology Seminar
+2025-12-18 23:10:46,168 - INFO -       📄 Page ready: 20163 bytes HTML, 1003 chars text
+2025-12-18 23:10:46,179 - INFO -       💾 Saved HH_KINE 4520 3.00_Sport Psychology Seminar_CourseSchedule.html
+2025-12-18 23:11:00,706 - INFO -    ↳ [82/94] HH/KINE 4565 3.00 – Epidemiology of Injury Prevention
+2025-12-18 23:11:14,465 - INFO -       📄 Page ready: 20533 bytes HTML, 1076 chars text
+2025-12-18 23:11:14,475 - INFO -       💾 Saved HH_KINE 4565 3.00_Epidemiology of Injury Prevention_CourseSchedule.html
+2025-12-18 23:11:32,004 - INFO -    ↳ [83/94] HH/KINE 4593 3.00 – Athletic Therapy Integrative Seminar & Skills
+2025-12-18 23:11:44,982 - INFO -       📄 Page ready: 22759 bytes HTML, 1850 chars text
+2025-12-18 23:11:44,994 - INFO -       💾 Saved HH_KINE 4593 3.00_Athletic Therapy Integrative Seminar & Skills_CourseSchedule.html
+2025-12-18 23:12:02,079 - INFO -    ↳ [84/94] HH/KINE 4635 3.00 – Immigration and Culture: Implications for Sport, Physical Activity and Health
+2025-12-18 23:12:15,178 - INFO -       📄 Page ready: 20830 bytes HTML, 1349 chars text
+2025-12-18 23:12:15,189 - INFO -       💾 Saved HH_KINE 4635 3.00_Immigration and Culture_ Implications for Sport, Physical Activity and Health_CourseSchedule.html
+2025-12-18 23:12:31,338 - INFO -    ↳ [85/94] HH/KINE 4636 3.00 – Crises of Capitalism: Health, Sport, and the Political Economy
+2025-12-18 23:12:45,102 - INFO -       📄 Page ready: 21144 bytes HTML, 1663 chars text
+2025-12-18 23:12:45,110 - INFO -       💾 Saved HH_KINE 4636 3.00_Crises of Capitalism_ Health, Sport, and the Political Economy_CourseSchedule.html
+2025-12-18 23:13:03,451 - INFO -    ↳ [86/94] HH/KINE 4645 3.00 – Active Living and Ageing
+2025-12-18 23:13:17,868 - INFO -       📄 Page ready: 20679 bytes HTML, 1223 chars text
+2025-12-18 23:13:17,878 - INFO -       💾 Saved HH_KINE 4645 3.00_Active Living and Ageing_CourseSchedule.html
+2025-12-18 23:13:36,679 - INFO -    ↳ [87/94] HH/KINE 4646 3.00 – Delivering Exercise to the Aging: Knowledge to Action
+2025-12-18 23:13:50,399 - INFO -       📄 Page ready: 23912 bytes HTML, 1609 chars text
+2025-12-18 23:13:50,409 - INFO -       💾 Saved HH_KINE 4646 3.00_Delivering Exercise to the Aging_ Knowledge to Action_CourseSchedule.html
+2025-12-18 23:14:04,597 - INFO -    ↳ [88/94] HH/KINE 4650 3.00 – Sport, Physical Activity and Youth Development
+2025-12-18 23:14:16,415 - INFO -       📄 Page ready: 20758 bytes HTML, 1302 chars text
+2025-12-18 23:14:16,426 - INFO -       💾 Saved HH_KINE 4650 3.00_Sport, Physical Activity and Youth Development_CourseSchedule.html
+2025-12-18 23:14:33,788 - INFO -    ↳ [89/94] HH/KINE 4680 3.00 – Advanced Social and Psychological Contributors to Exercise Behaviour
+2025-12-18 23:14:47,085 - INFO -       📄 Page ready: 20636 bytes HTML, 1179 chars text
+2025-12-18 23:14:47,108 - INFO -       💾 Saved HH_KINE 4680 3.00_Advanced Social and Psychological Contributors to Exercise Behaviour_CourseSchedule.html
+2025-12-18 23:15:05,241 - INFO -    ↳ [90/94] HH/KINE 4710 3.00 – Psychology of Health and Chronic Disease
+2025-12-18 23:15:19,113 - INFO -       📄 Page ready: 32993 bytes HTML, 2221 chars text
+2025-12-18 23:15:19,128 - INFO -       💾 Saved HH_KINE 4710 3.00_Psychology of Health and Chronic Disease_CourseSchedule.html
+2025-12-18 23:15:36,637 - INFO -    ↳ [91/94] HH/KINE 4720 3.00 – Secondary Prevention of Heart Disease: Cardiac Rehabilitation in a Global Context
+2025-12-18 23:15:49,946 - INFO -       📄 Page ready: 21041 bytes HTML, 1564 chars text
+2025-12-18 23:15:49,960 - INFO -       💾 Saved HH_KINE 4720 3.00_Secondary Prevention of Heart Disease_ Cardiac Rehabilitation in a Global Context_CourseSchedule.html
+2025-12-18 23:16:07,090 - INFO -    ↳ [92/94] HH/KINE 4740 3.00 – Psychology of Sport Injury and Rehabilitation
+2025-12-18 23:16:12,235 - WARNING -       ⚠️ Attempt took 5.1s before failing for HH/KINE 4740 3.00: Blocked/session-expired immediately after submitting search.
+2025-12-18 23:16:12,235 - WARNING -       ♻️ Bad state/blocked detected; relaunching browser/context.
+2025-12-18 23:16:27,381 - WARNING -       🛑 Adding extra cooldown: 20.6s
+2025-12-18 23:16:48,025 - WARNING -       ↻ Block detected - retry SAME course after 27.5s (1/5).
+2025-12-18 23:17:29,318 - INFO -       📄 Page ready: 20940 bytes HTML, 1343 chars text
+2025-12-18 23:17:29,327 - INFO -       💾 Saved HH_KINE 4740 3.00_Psychology of Sport Injury and Rehabilitation_CourseSchedule.html
+2025-12-18 23:17:45,231 - INFO -    ↳ [93/94] HH/KINE 4900 3.00 – Exercise Therapy for Chronic Diseases
+2025-12-18 23:17:58,006 - INFO -       📄 Page ready: 29331 bytes HTML, 1736 chars text
+2025-12-18 23:17:58,031 - INFO -       💾 Saved HH_KINE 4900 3.00_Exercise Therapy for Chronic Diseases_CourseSchedule.html
+2025-12-18 23:18:16,170 - INFO -    ↳ [94/94] HH/KINE 4901 3.00 – Exercise Therapy for Chronic Diseases: Cardiovascular Diseases
+2025-12-18 23:18:29,899 - INFO -       📄 Page ready: 20774 bytes HTML, 1318 chars text
+2025-12-18 23:18:29,910 - INFO -       💾 Saved HH_KINE 4901 3.00_Exercise Therapy for Chronic Diseases_ Cardiovascular Diseases_CourseSchedule.html
+2025-12-18 23:18:47,161 - INFO - ✅ Finished KINE - Kinesiology & Health Science - ( HH ) (saved to progress.txt)
+2025-12-18 23:18:47,162 - INFO - 🔄 Refreshing browser session between subjects...
+2025-12-18 23:19:01,992 - INFO - 
+🎓 [135/217] Scraping subject: KOR - Korean - ( AP )
+2025-12-18 23:19:08,499 - INFO -    → Found 10 courses
+2025-12-18 23:19:08,499 - INFO -    ↳ [1/10] AP/KOR 1000 6.00 – Elementary Modern Standard Korean
+2025-12-18 23:19:21,737 - INFO -       📄 Page ready: 30114 bytes HTML, 2146 chars text
+2025-12-18 23:19:21,752 - INFO -       💾 Saved AP_KOR 1000 6.00_Elementary Modern Standard Korean_CourseSchedule.html
+2025-12-18 23:19:39,492 - INFO -    ↳ [2/10] AP/KOR 2000 6.00 – Intermediate Modern Standard Korean
+2025-12-18 23:19:51,780 - INFO -       📄 Page ready: 23979 bytes HTML, 1638 chars text
+2025-12-18 23:19:51,789 - INFO -       💾 Saved AP_KOR 2000 6.00_Intermediate Modern Standard Korean_CourseSchedule.html
+2025-12-18 23:20:08,621 - INFO -    ↳ [3/10] AP/KOR 3000 6.00 – Advanced Modern Standard Korean
+2025-12-18 23:20:20,736 - INFO -       📄 Page ready: 20882 bytes HTML, 1247 chars text
+2025-12-18 23:20:20,744 - INFO -       💾 Saved AP_KOR 3000 6.00_Advanced Modern Standard Korean_CourseSchedule.html
+2025-12-18 23:20:35,490 - INFO -    ↳ [4/10] AP/KOR 3600 3.00 – Contemporary Korea: Identity, Society, and Culture
+2025-12-18 23:20:49,492 - INFO -       📄 Page ready: 20723 bytes HTML, 1157 chars text
+2025-12-18 23:20:49,499 - INFO -       💾 Saved AP_KOR 3600 3.00_Contemporary Korea_ Identity, Society, and Culture_CourseSchedule.html
+2025-12-18 23:21:07,000 - INFO -    ↳ [5/10] AP/KOR 3610 3.00 – Contemporary Korea: Korean Popular Culture and Korean Wave
+2025-12-18 23:21:19,981 - INFO -       📄 Page ready: 20633 bytes HTML, 1092 chars text
+2025-12-18 23:21:19,991 - INFO -       💾 Saved AP_KOR 3610 3.00_Contemporary Korea_ Korean Popular Culture and Korean Wave_CourseSchedule.html
+2025-12-18 23:21:34,406 - INFO -    ↳ [6/10] AP/KOR 3650 3.00 – Understanding Korea through Korean Films
+2025-12-18 23:21:47,072 - INFO -       📄 Page ready: 23665 bytes HTML, 1540 chars text
+2025-12-18 23:21:47,084 - INFO -       💾 Saved AP_KOR 3650 3.00_Understanding Korea through Korean Films_CourseSchedule.html
+2025-12-18 23:22:05,265 - INFO -    ↳ [7/10] AP/KOR 4200 3.00 – Contested Terrain: Gender and Sexuality in Contemporary Korean Culture
+2025-12-18 23:22:18,064 - INFO -       📄 Page ready: 20693 bytes HTML, 1153 chars text
+2025-12-18 23:22:18,073 - INFO -       💾 Saved AP_KOR 4200 3.00_Contested Terrain_ Gender and Sexuality in Contemporary Korean Culture_CourseSchedule.html
+2025-12-18 23:22:35,213 - INFO -    ↳ [8/10] AP/KOR 4500 3.00 – A Taste of Korea: Korean Foodways and Culture
+2025-12-18 23:22:47,093 - INFO -       📄 Page ready: 20900 bytes HTML, 1360 chars text
+2025-12-18 23:22:47,102 - INFO -       💾 Saved AP_KOR 4500 3.00_A Taste of Korea_ Korean Foodways and Culture_CourseSchedule.html
+2025-12-18 23:23:04,865 - INFO -    ↳ [9/10] AP/KOR 4700 3.00 – Korean popular music as transnational cultural phenomenon
+2025-12-18 23:23:16,810 - INFO -       📄 Page ready: 20802 bytes HTML, 1237 chars text
+2025-12-18 23:23:16,817 - INFO -       💾 Saved AP_KOR 4700 3.00_Korean popular music as transnational cultural phenomenon_CourseSchedule.html
+2025-12-18 23:23:31,791 - INFO -    ↳ [10/10] AP/KOR 4800 3.00 – Power of Image: Visual Culture of North and South Korea
+2025-12-18 23:23:44,619 - INFO -       📄 Page ready: 20695 bytes HTML, 1152 chars text
+2025-12-18 23:23:44,629 - INFO -       💾 Saved AP_KOR 4800 3.00_Power of Image_ Visual Culture of North and South Korea_CourseSchedule.html
+2025-12-18 23:24:01,866 - INFO - ✅ Finished KOR - Korean - ( AP ) (saved to progress.txt)
+2025-12-18 23:24:01,866 - INFO - 🔄 Refreshing browser session between subjects...
+2025-12-18 23:24:12,819 - INFO - 
+🎓 [136/217] Scraping subject: LA - Latin - ( AP )
+2025-12-18 23:24:19,846 - INFO -    → Found 9 courses
+2025-12-18 23:24:19,846 - INFO -    ↳ [1/9] AP/LA 1000 6.00 – Elementary Latin
+2025-12-18 23:24:32,859 - INFO -       📄 Page ready: 20563 bytes HTML, 1023 chars text
+2025-12-18 23:24:32,867 - INFO -       💾 Saved AP_LA 1000 6.00_Elementary Latin_CourseSchedule.html
+2025-12-18 23:24:50,192 - INFO -    ↳ [2/9] AP/LA 2000 6.00 – Intermediate Latin
+2025-12-18 23:25:03,031 - INFO -       📄 Page ready: 20922 bytes HTML, 1363 chars text
+2025-12-18 23:25:03,042 - INFO -       💾 Saved AP_LA 2000 6.00_Intermediate Latin_CourseSchedule.html
+2025-12-18 23:25:20,076 - INFO -    ↳ [3/9] AP/LA 3030 3.00 – Roman Elegiac Poetry
+2025-12-18 23:25:31,294 - INFO -       📄 Page ready: 20748 bytes HTML, 1205 chars text
+2025-12-18 23:25:31,303 - INFO -       💾 Saved AP_LA 3030 3.00_Roman Elegiac Poetry_CourseSchedule.html
+2025-12-18 23:25:47,923 - INFO -    ↳ [4/9] AP/LA 3060 3.00 – Roman Historians
+2025-12-18 23:26:00,474 - INFO -       📄 Page ready: 20619 bytes HTML, 1079 chars text
+2025-12-18 23:26:00,485 - INFO -       💾 Saved AP_LA 3060 3.00_Roman Historians_CourseSchedule.html
+2025-12-18 23:26:16,517 - INFO -    ↳ [5/9] AP/LA 4030 3.00 – Roman Elegiac Poetry
+2025-12-18 23:26:28,464 - INFO -       📄 Page ready: 20798 bytes HTML, 1255 chars text
+2025-12-18 23:26:28,473 - INFO -       💾 Saved AP_LA 4030 3.00_Roman Elegiac Poetry_CourseSchedule.html
+2025-12-18 23:26:47,021 - INFO -    ↳ [6/9] AP/LA 4060 3.00 – Roman Historians
+2025-12-18 23:27:00,550 - INFO -       📄 Page ready: 20631 bytes HTML, 1091 chars text
+2025-12-18 23:27:00,558 - INFO -       💾 Saved AP_LA 4060 3.00_Roman Historians_CourseSchedule.html
+2025-12-18 23:27:16,839 - INFO -    ↳ [7/9] AP/LA 4130 6.00 – Guided Readings in Roman Authors
+2025-12-18 23:27:29,115 - INFO -       📄 Page ready: 20440 bytes HTML, 1117 chars text
+2025-12-18 23:27:29,137 - INFO -       💾 Saved AP_LA 4130 6.00_Guided Readings in Roman Authors_CourseSchedule.html
+2025-12-18 23:27:44,597 - INFO -    ↳ [8/9] AP/LA 4130 3.00 – Guided Readings in Roman Authors
+2025-12-18 23:27:57,055 - INFO -       📄 Page ready: 23315 bytes HTML, 1354 chars text
+2025-12-18 23:27:57,078 - INFO -       💾 Saved AP_LA 4130 3.00_Guided Readings in Roman Authors_CourseSchedule.html
+2025-12-18 23:28:15,823 - INFO -    ↳ [9/9] AP/LA 4140 6.00 – Honours Essay
+2025-12-18 23:28:28,639 - INFO -       📄 Page ready: 20374 bytes HTML, 990 chars text
+2025-12-18 23:28:28,649 - INFO -       💾 Saved AP_LA 4140 6.00_Honours Essay_CourseSchedule.html
+2025-12-18 23:28:44,757 - INFO - ✅ Finished LA - Latin - ( AP ) (saved to progress.txt)
+2025-12-18 23:28:44,757 - INFO - 🔄 Refreshing browser session between subjects...
+2025-12-18 23:28:58,966 - INFO - 
+🎓 [137/217] Scraping subject: LAL - Linguistics and Applied Linguistics - ( GS )
+2025-12-18 23:29:05,871 - INFO -    → Found 19 courses
+2025-12-18 23:29:05,871 - INFO -    ↳ [1/19] GS/LAL 5120 3.00 – Advanced Phonology
+2025-12-18 23:29:11,261 - WARNING -       ⚠️ Attempt took 5.4s before failing for GS/LAL 5120 3.00: Blocked/session-expired immediately after submitting search.
+2025-12-18 23:29:11,261 - WARNING -       ♻️ Bad state/blocked detected; relaunching browser/context.
+2025-12-18 23:29:26,403 - WARNING -       🛑 Adding extra cooldown: 32.1s
+2025-12-18 23:29:58,509 - WARNING -       ↻ Block detected - retry SAME course after 33.0s (1/5).
+2025-12-18 23:30:44,815 - INFO -       📄 Page ready: 20522 bytes HTML, 1067 chars text
+2025-12-18 23:30:44,835 - INFO -       💾 Saved GS_LAL 5120 3.00_Advanced Phonology_CourseSchedule.html
+2025-12-18 23:31:03,143 - INFO -    ↳ [2/19] GS/LAL 5140 3.00 – Advanced Syntax
+2025-12-18 23:31:15,480 - INFO -       📄 Page ready: 20793 bytes HTML, 1338 chars text
+2025-12-18 23:31:15,492 - INFO -       💾 Saved GS_LAL 5140 3.00_Advanced Syntax_CourseSchedule.html
+2025-12-18 23:31:32,699 - INFO -    ↳ [3/19] GS/LAL 5230 3.00 – Topics in Second Language Acquisition
+2025-12-18 23:31:43,620 - INFO -       📄 Page ready: 21171 bytes HTML, 1713 chars text
+2025-12-18 23:31:43,631 - INFO -       💾 Saved GS_LAL 5230 3.00_Topics in Second Language Acquisition_CourseSchedule.html
+2025-12-18 23:31:58,758 - INFO -    ↳ [4/19] GS/LAL 5350 3.00 – Pidgins and Creoles
+2025-12-18 23:32:11,554 - INFO -       📄 Page ready: 20321 bytes HTML, 842 chars text
+2025-12-18 23:32:11,561 - INFO -       💾 Saved GS_LAL 5350 3.00_Pidgins and Creoles_CourseSchedule.html
+2025-12-18 23:32:26,824 - INFO -    ↳ [5/19] GS/LAL 5440 3.00 – Syntactic Change
+2025-12-18 23:32:39,370 - INFO -       📄 Page ready: 20298 bytes HTML, 819 chars text
+2025-12-18 23:32:39,378 - INFO -       💾 Saved GS_LAL 5440 3.00_Syntactic Change_CourseSchedule.html
+2025-12-18 23:32:56,235 - INFO -    ↳ [6/19] GS/LAL 5670 3.00 – Second Language Instruction
+2025-12-18 23:33:09,130 - INFO -       📄 Page ready: 20291 bytes HTML, 836 chars text
+2025-12-18 23:33:09,143 - INFO -       💾 Saved GS_LAL 5670 3.00_Second Language Instruction_CourseSchedule.html
+2025-12-18 23:33:23,166 - INFO -    ↳ [7/19] GS/LAL 6120 3.00 – Phonetic and Phonological Analysis
+2025-12-18 23:33:35,966 - INFO -       📄 Page ready: 20540 bytes HTML, 1080 chars text
+2025-12-18 23:33:35,988 - INFO -       💾 Saved GS_LAL 6120 3.00_Phonetic and Phonological Analysis_CourseSchedule.html
+2025-12-18 23:33:50,304 - INFO -    ↳ [8/19] GS/LAL 6235 3.00 – English for Specific Purposes: Theory and Practice
+2025-12-18 23:34:01,837 - INFO -       📄 Page ready: 20608 bytes HTML, 1152 chars text
+2025-12-18 23:34:01,858 - INFO -       💾 Saved GS_LAL 6235 3.00_English for Specific Purposes_ Theory and Practice_CourseSchedule.html
+2025-12-18 23:34:19,503 - INFO -    ↳ [9/19] GS/LAL 6275 3.00 – Corrective Feedback in Second Language Learning and Teaching
+2025-12-18 23:34:31,270 - INFO -       📄 Page ready: 20637 bytes HTML, 1180 chars text
+2025-12-18 23:34:31,279 - INFO -       💾 Saved GS_LAL 6275 3.00_Corrective Feedback in Second Language Learning and Teaching_CourseSchedule.html
+2025-12-18 23:34:47,529 - INFO -    ↳ [10/19] GS/LAL 6283 3.00 – Education in Urban Contexts
+2025-12-18 23:34:59,919 - INFO -       📄 Page ready: 22014 bytes HTML, 2525 chars text
+2025-12-18 23:34:59,927 - INFO -       💾 Saved GS_LAL 6283 3.00_Education in Urban Contexts_CourseSchedule.html
+2025-12-18 23:35:14,905 - INFO -    ↳ [11/19] GS/LAL 6290 3.00 – Multilingual Education
+2025-12-18 23:35:27,384 - INFO -       📄 Page ready: 21211 bytes HTML, 2045 chars text
+2025-12-18 23:35:27,394 - INFO -       💾 Saved GS_LAL 6290 3.00_Multilingual Education_CourseSchedule.html
+2025-12-18 23:35:44,179 - INFO -    ↳ [12/19] GS/LAL 6300 3.00 – Multimodal Literacies
+2025-12-18 23:35:55,916 - INFO -       📄 Page ready: 20668 bytes HTML, 1201 chars text
+2025-12-18 23:35:55,924 - INFO -       💾 Saved GS_LAL 6300 3.00_Multimodal Literacies_CourseSchedule.html
+2025-12-18 23:36:10,615 - INFO -    ↳ [13/19] GS/LAL 6350 3.00 – Technology-Mediated Language Teaching & Learning
+2025-12-18 23:36:16,218 - WARNING -       ⚠️ Attempt took 5.6s before failing for GS/LAL 6350 3.00: Blocked/session-expired immediately after submitting search.
+2025-12-18 23:36:16,218 - WARNING -       ♻️ Bad state/blocked detected; relaunching browser/context.
+2025-12-18 23:36:31,358 - WARNING -       🛑 Adding extra cooldown: 37.1s
+2025-12-18 23:37:08,472 - WARNING -       ↻ Block detected - retry SAME course after 30.1s (1/5).
+2025-12-18 23:37:51,194 - INFO -       📄 Page ready: 20806 bytes HTML, 1321 chars text
+2025-12-18 23:37:51,203 - INFO -       💾 Saved GS_LAL 6350 3.00_Technology-Mediated Language Teaching & Learning_CourseSchedule.html
+2025-12-18 23:38:08,550 - INFO -    ↳ [14/19] GS/LAL 6410 3.00 – "Language, Culture and Ideology
+2025-12-18 23:38:19,955 - INFO -       📄 Page ready: 20335 bytes HTML, 854 chars text
+2025-12-18 23:38:19,963 - INFO -       💾 Saved GS_LAL 6410 3.00__Language, Culture and Ideology_CourseSchedule.html
+2025-12-18 23:38:38,900 - INFO -    ↳ [15/19] GS/LAL 6460 3.00 – Language Policy and Planning
+2025-12-18 23:38:51,267 - INFO -       📄 Page ready: 23231 bytes HTML, 1263 chars text
+2025-12-18 23:38:51,291 - INFO -       💾 Saved GS_LAL 6460 3.00_Language Policy and Planning_CourseSchedule.html
+2025-12-18 23:39:06,642 - INFO -    ↳ [16/19] GS/LAL 6480 3.00 – "Language, Gender and Sexuality
+2025-12-18 23:39:18,582 - INFO -       📄 Page ready: 20742 bytes HTML, 1283 chars text
+2025-12-18 23:39:18,592 - INFO -       💾 Saved GS_LAL 6480 3.00__Language, Gender and Sexuality_CourseSchedule.html
+2025-12-18 23:39:37,490 - INFO -    ↳ [17/19] GS/LAL 6500 3.00 – Research Methods in Applied Linguistics
+2025-12-18 23:39:49,046 - INFO -       📄 Page ready: 20702 bytes HTML, 1221 chars text
+2025-12-18 23:39:49,057 - INFO -       💾 Saved GS_LAL 6500 3.00_Research Methods in Applied Linguistics_CourseSchedule.html
+2025-12-18 23:40:05,429 - INFO -    ↳ [18/19] GS/LAL 6600 3.00 – Research Seminar in Theoretical Linguistics
+2025-12-18 23:40:16,797 - INFO -       📄 Page ready: 20307 bytes HTML, 850 chars text
+2025-12-18 23:40:16,805 - INFO -       💾 Saved GS_LAL 6600 3.00_Research Seminar in Theoretical Linguistics_CourseSchedule.html
+2025-12-18 23:40:34,872 - INFO -    ↳ [19/19] GS/LAL 6900 3.00 – Independent Study
+2025-12-18 23:40:47,154 - INFO -       📄 Page ready: 23011 bytes HTML, 1047 chars text
+2025-12-18 23:40:47,165 - INFO -       💾 Saved GS_LAL 6900 3.00_Independent Study_CourseSchedule.html
+2025-12-18 23:41:04,443 - INFO - ✅ Finished LAL - Linguistics and Applied Linguistics - ( GS ) (saved to progress.txt)
+2025-12-18 23:41:04,443 - INFO - 🔄 Refreshing browser session between subjects...
+2025-12-18 23:41:14,506 - INFO - 
+🎓 [138/217] Scraping subject: LASO - Law And Society - ( AP )
+2025-12-18 23:41:20,954 - INFO -    → Found 1 courses
+2025-12-18 23:41:20,954 - INFO -    ↳ [1/1] AP/LASO 3365 6.00 – Privacy and the Law
+2025-12-18 23:41:33,382 - INFO -       📄 Page ready: 26213 bytes HTML, 1763 chars text
+2025-12-18 23:41:33,394 - INFO -       💾 Saved AP_LASO 3365 6.00_Privacy and the Law_CourseSchedule.html
+2025-12-18 23:41:48,715 - INFO - ✅ Finished LASO - Law And Society - ( AP ) (saved to progress.txt)
+2025-12-18 23:41:48,715 - INFO - 🔄 Refreshing browser session between subjects...
+2025-12-18 23:41:59,800 - INFO - 
+🎓 [139/217] Scraping subject: LAW - Law - ( ED, GS )
+2025-12-18 23:42:07,273 - INFO -    → Found 12 courses
+2025-12-18 23:42:07,273 - INFO -    ↳ [1/12] ED/LAW 4000 3.00 – Teaching Law in the Intermediate-Senior Divisions - A
+2025-12-18 23:42:20,398 - INFO -       📄 Page ready: 23800 bytes HTML, 1527 chars text
+2025-12-18 23:42:20,410 - INFO -       💾 Saved ED_LAW 4000 3.00_Teaching Law in the Intermediate-Senior Divisions - A_CourseSchedule.html
+2025-12-18 23:42:36,171 - INFO -    ↳ [2/12] ED/LAW 4001 3.00 – Teaching Law in the Intermediate-Senior Division - B
+2025-12-18 23:42:49,276 - INFO -       📄 Page ready: 23905 bytes HTML, 1632 chars text
+2025-12-18 23:42:49,287 - INFO -       💾 Saved ED_LAW 4001 3.00_Teaching Law in the Intermediate-Senior Division - B_CourseSchedule.html
+2025-12-18 23:43:04,568 - INFO -    ↳ [3/12] GS/LAW 6030 3.00 – Guided Study
+2025-12-18 23:43:17,521 - INFO -       📄 Page ready: 23438 bytes HTML, 1478 chars text
+2025-12-18 23:43:17,533 - INFO -       💾 Saved GS_LAW 6030 3.00_Guided Study_CourseSchedule.html
+2025-12-18 23:43:33,542 - INFO -    ↳ [4/12] GS/LAW 6033 0.00 – Guided Study: LL.B. Number and Name of Course (Non-Credit)
+2025-12-18 23:43:45,457 - INFO -       📄 Page ready: 23353 bytes HTML, 1392 chars text
+2025-12-18 23:43:45,467 - INFO -       💾 Saved GS_LAW 6033 0.00_Guided Study_ LL.B. Number and Name of Course (Non-Credit)_CourseSchedule.html
+2025-12-18 23:44:00,028 - INFO -    ↳ [5/12] GS/LAW 6040 3.00 – Directed Reading
+2025-12-18 23:44:13,335 - INFO -       📄 Page ready: 23004 bytes HTML, 1041 chars text
+2025-12-18 23:44:13,347 - INFO -       💾 Saved GS_LAW 6040 3.00_Directed Reading_CourseSchedule.html
+2025-12-18 23:44:29,674 - INFO -    ↳ [6/12] GS/LAW 6131 3.00 – Study Group on Law in a Global Context I
+2025-12-18 23:44:42,939 - INFO -       📄 Page ready: 21356 bytes HTML, 1896 chars text
+2025-12-18 23:44:42,948 - INFO -       💾 Saved GS_LAW 6131 3.00_Study Group on Law in a Global Context I_CourseSchedule.html
+2025-12-18 23:45:00,167 - INFO -    ↳ [7/12] GS/LAW 6151 3.00 – Study Group on Law and Social Justice I
+2025-12-18 23:45:12,810 - INFO -       📄 Page ready: 20995 bytes HTML, 1540 chars text
+2025-12-18 23:45:12,820 - INFO -       💾 Saved GS_LAW 6151 3.00_Study Group on Law and Social Justice I_CourseSchedule.html
+2025-12-18 23:45:27,321 - INFO -    ↳ [8/12] GS/LAW 6155 3.00 – Study Group on Theoretical Perspectives I
+2025-12-18 23:45:40,579 - INFO -       📄 Page ready: 21318 bytes HTML, 1819 chars text
+2025-12-18 23:45:40,589 - INFO -       💾 Saved GS_LAW 6155 3.00_Study Group on Theoretical Perspectives I_CourseSchedule.html
+2025-12-18 23:45:56,861 - INFO -    ↳ [9/12] GS/LAW 6610 3.00 – Graduate Seminar
+2025-12-18 23:46:08,986 - INFO -       📄 Page ready: 20286 bytes HTML, 827 chars text
+2025-12-18 23:46:08,995 - INFO -       💾 Saved GS_LAW 6610 3.00_Graduate Seminar_CourseSchedule.html
+2025-12-18 23:46:25,329 - INFO -    ↳ [10/12] GS/LAW 6611 3.00 – Graduate Seminar II: Advanced Legal Research Methodologies
+2025-12-18 23:46:38,343 - INFO -       📄 Page ready: 20689 bytes HTML, 1231 chars text
+2025-12-18 23:46:38,353 - INFO -       💾 Saved GS_LAW 6611 3.00_Graduate Seminar II_ Advanced Legal Research Methodologies_CourseSchedule.html
+2025-12-18 23:46:53,638 - INFO -    ↳ [11/12] GS/LAW 6680 3.00 – Democratic Administration
+2025-12-18 23:47:05,420 - INFO -       📄 Page ready: 20409 bytes HTML, 936 chars text
+2025-12-18 23:47:05,426 - INFO -       💾 Saved GS_LAW 6680 3.00_Democratic Administration_CourseSchedule.html
+2025-12-18 23:47:21,957 - INFO -    ↳ [12/12] GS/LAW 6719 3.00 – Court Organization and Management
+2025-12-18 23:47:33,511 - INFO -       📄 Page ready: 20918 bytes HTML, 1310 chars text
+2025-12-18 23:47:33,522 - INFO -       💾 Saved GS_LAW 6719 3.00_Court Organization and Management_CourseSchedule.html
+2025-12-18 23:47:50,999 - INFO - ✅ Finished LAW - Law - ( ED, GS ) (saved to progress.txt)
+2025-12-18 23:47:50,999 - INFO - 🔄 Refreshing browser session between subjects...
+2025-12-18 23:47:59,606 - INFO - 
+🎓 [140/217] Scraping subject: LAWB - Business Law - ( GS )
+2025-12-18 23:48:06,015 - INFO -    ℹ️ No courses found for this subject (empty subject)
+2025-12-18 23:48:06,018 - INFO -    ✅ Subject has no courses - marking as complete
+2025-12-18 23:48:06,018 - INFO - 🔄 Refreshing browser session...
+2025-12-18 23:48:16,882 - INFO - 
+🎓 [141/217] Scraping subject: LAWH - Health Law - ( GS )
+2025-12-18 23:48:22,763 - INFO -    ℹ️ No courses found for this subject (empty subject)
+2025-12-18 23:48:22,766 - INFO -    ✅ Subject has no courses - marking as complete
+2025-12-18 23:48:22,766 - INFO - 🔄 Refreshing browser session...
+2025-12-18 23:48:34,392 - INFO - 
+🎓 [142/217] Scraping subject: LAWL - Intellectual Property - ( GS )
+2025-12-18 23:48:40,937 - INFO -    ℹ️ No courses found for this subject (empty subject)
+2025-12-18 23:48:40,940 - INFO -    ✅ Subject has no courses - marking as complete
+2025-12-18 23:48:40,940 - INFO - 🔄 Refreshing browser session...
+2025-12-18 23:48:52,964 - INFO - 
+🎓 [143/217] Scraping subject: LIN - Linguistics and Language Studies - ( GL )
+2025-12-18 23:48:59,110 - WARNING - ⚠️ Subject load failed: Blocked/session-expired immediately after submitting search.
+2025-12-18 23:49:45,365 - WARNING - ⚠️ Subject load failed: Timeout 45000ms exceeded.
+=========================== logs ===========================
+"domcontentloaded" event fired
+"load" event fired
+============================================================
+2025-12-18 23:49:50,995 - INFO -    → Found 1 courses
+2025-12-18 23:49:50,995 - INFO -    ↳ [1/1] GL/LIN 2922 6.00 – Intermediate Latin
+2025-12-18 23:50:04,223 - INFO -       📄 Page ready: 20946 bytes HTML, 1363 chars text
+2025-12-18 23:50:04,234 - INFO -       💾 Saved GL_LIN 2922 6.00_Intermediate Latin_CourseSchedule.html
+2025-12-18 23:50:21,082 - INFO - ✅ Finished LIN - Linguistics and Language Studies - ( GL ) (saved to progress.txt)
+2025-12-18 23:50:21,083 - INFO - 🔄 Refreshing browser session between subjects...
+2025-12-18 23:50:36,059 - INFO - 
+🎓 [144/217] Scraping subject: LING - Linguistics - ( AP )
+2025-12-18 23:50:42,712 - INFO -    → Found 26 courses
+2025-12-18 23:50:42,712 - INFO -    ↳ [1/26] AP/LING 1000 6.00 – Introduction to Linguistics
+2025-12-18 23:50:47,931 - WARNING -       ⚠️ Attempt took 5.2s before failing for AP/LING 1000 6.00: Blocked/session-expired immediately after submitting search.
+2025-12-18 23:50:47,931 - WARNING -       ♻️ Bad state/blocked detected; relaunching browser/context.
+2025-12-18 23:51:03,062 - WARNING -       🛑 Adding extra cooldown: 28.7s
+2025-12-18 23:51:31,804 - WARNING -       ↻ Block detected - retry SAME course after 37.3s (1/5).
+2025-12-18 23:52:21,852 - INFO -       📄 Page ready: 33090 bytes HTML, 2655 chars text
+2025-12-18 23:52:21,862 - INFO -       💾 Saved AP_LING 1000 6.00_Introduction to Linguistics_CourseSchedule.html
+2025-12-18 23:52:35,956 - INFO -    ↳ [2/26] AP/LING 1430 3.00 – Language, Power and Persuasion
+2025-12-18 23:52:48,510 - INFO -       📄 Page ready: 26293 bytes HTML, 1811 chars text
+2025-12-18 23:52:48,535 - INFO -       💾 Saved AP_LING 1430 3.00_Language, Power and Persuasion_CourseSchedule.html
+2025-12-18 23:53:07,082 - INFO -    ↳ [3/26] AP/LING 2110 3.00 – Phonetics
+2025-12-18 23:53:19,441 - INFO -       📄 Page ready: 26229 bytes HTML, 1914 chars text
+2025-12-18 23:53:19,451 - INFO -       💾 Saved AP_LING 2110 3.00_Phonetics_CourseSchedule.html
+2025-12-18 23:53:36,183 - INFO -    ↳ [4/26] AP/LING 2120 3.00 – Phonology 1: Analysis
+2025-12-18 23:53:48,073 - INFO -       📄 Page ready: 20797 bytes HTML, 1233 chars text
+2025-12-18 23:53:48,082 - INFO -       💾 Saved AP_LING 2120 3.00_Phonology 1_ Analysis_CourseSchedule.html
+2025-12-18 23:54:05,649 - INFO -    ↳ [5/26] AP/LING 2130 3.00 – Morphology 1: Analysis
+2025-12-18 23:54:17,779 - INFO -       📄 Page ready: 20670 bytes HTML, 1130 chars text
+2025-12-18 23:54:17,789 - INFO -       💾 Saved AP_LING 2130 3.00_Morphology 1_ Analysis_CourseSchedule.html
+2025-12-18 23:54:35,378 - INFO -    ↳ [6/26] AP/LING 2140 3.00 – Syntax 1: Analysis
+2025-12-18 23:54:47,063 - INFO -       📄 Page ready: 20796 bytes HTML, 1253 chars text
+2025-12-18 23:54:47,084 - INFO -       💾 Saved AP_LING 2140 3.00_Syntax 1_ Analysis_CourseSchedule.html
+2025-12-18 23:55:02,643 - INFO -    ↳ [7/26] AP/LING 2200 3.00 – Introduction to Speech and Language Sciences
+2025-12-18 23:55:14,437 - INFO -       📄 Page ready: 20810 bytes HTML, 1270 chars text
+2025-12-18 23:55:14,445 - INFO -       💾 Saved AP_LING 2200 3.00_Introduction to Speech and Language Sciences_CourseSchedule.html
+2025-12-18 23:55:30,212 - INFO -    ↳ [8/26] AP/LING 2410 3.00 – Language and Gender
+2025-12-18 23:55:42,955 - INFO -       📄 Page ready: 25527 bytes HTML, 2076 chars text
+2025-12-18 23:55:42,966 - INFO -       💾 Saved AP_LING 2410 3.00_Language and Gender_CourseSchedule.html
+2025-12-18 23:55:59,413 - INFO -    ↳ [9/26] AP/LING 2450 3.00 – Language and the Law
+2025-12-18 23:56:12,189 - INFO -       📄 Page ready: 25000 bytes HTML, 1624 chars text
+2025-12-18 23:56:12,199 - INFO -       💾 Saved AP_LING 2450 3.00_Language and the Law_CourseSchedule.html
+2025-12-18 23:56:26,602 - INFO -    ↳ [10/26] AP/LING 2800 3.00 – Language and Mind
+2025-12-18 23:56:37,979 - INFO -       📄 Page ready: 25318 bytes HTML, 1814 chars text
+2025-12-18 23:56:37,992 - INFO -       💾 Saved AP_LING 2800 3.00_Language and Mind_CourseSchedule.html
+2025-12-18 23:56:54,108 - INFO -    ↳ [11/26] AP/LING 3120 3.00 – Phonology 2: Theory
+2025-12-18 23:57:06,642 - INFO -       📄 Page ready: 20699 bytes HTML, 1133 chars text
+2025-12-18 23:57:06,651 - INFO -       💾 Saved AP_LING 3120 3.00_Phonology 2_ Theory_CourseSchedule.html
+2025-12-18 23:57:23,993 - INFO -    ↳ [12/26] AP/LING 3140 3.00 – Syntax 2: Theory
+2025-12-18 23:57:36,794 - INFO -       📄 Page ready: 20753 bytes HTML, 1211 chars text
+2025-12-18 23:57:36,801 - INFO -       💾 Saved AP_LING 3140 3.00_Syntax 2_ Theory_CourseSchedule.html
+2025-12-18 23:57:52,263 - INFO -    ↳ [13/26] AP/LING 3160 3.00 – Discourse Analysis
+2025-12-18 23:58:05,218 - INFO -       📄 Page ready: 20944 bytes HTML, 1402 chars text
+2025-12-18 23:58:05,227 - INFO -       💾 Saved AP_LING 3160 3.00_Discourse Analysis_CourseSchedule.html
+2025-12-18 23:58:20,009 - INFO -    ↳ [14/26] AP/LING 3210 3.00 – First Language Acquisition
+2025-12-18 23:58:33,040 - INFO -       📄 Page ready: 20693 bytes HTML, 1151 chars text
+2025-12-18 23:58:33,048 - INFO -       💾 Saved AP_LING 3210 3.00_First Language Acquisition_CourseSchedule.html
+2025-12-18 23:58:52,037 - INFO -    ↳ [15/26] AP/LING 3220 3.00 – Psycholinguistics
+2025-12-18 23:59:04,583 - INFO -       📄 Page ready: 20810 bytes HTML, 1343 chars text
+2025-12-18 23:59:04,591 - INFO -       💾 Saved AP_LING 3220 3.00_Psycholinguistics_CourseSchedule.html
+2025-12-18 23:59:18,886 - INFO -    ↳ [16/26] AP/LING 3240 3.00 – Second Language Acquisition
+2025-12-18 23:59:32,260 - INFO -       📄 Page ready: 21008 bytes HTML, 1438 chars text
+2025-12-18 23:59:32,280 - INFO -       💾 Saved AP_LING 3240 3.00_Second Language Acquisition_CourseSchedule.html
+2025-12-18 23:59:49,730 - INFO -    ↳ [17/26] AP/LING 3300 3.00 – Statistical Methods for Language Science
+2025-12-19 00:00:01,644 - INFO -       📄 Page ready: 21023 bytes HTML, 1481 chars text
+2025-12-19 00:00:01,655 - INFO -       💾 Saved AP_LING 3300 3.00_Statistical Methods for Language Science_CourseSchedule.html
+2025-12-19 00:00:17,181 - INFO - 🕐 Maintenance window detected (00:00 → 1:45 a.m.).
+2025-12-19 00:00:17,182 - INFO - 💤 Sleeping for 104.7 minutes...
