@@ -16,6 +16,27 @@ const teachingTypes = ["LECT", "SEMR", "BLEN", "ONLN", "ONCA", "HYFX"];
 const clean = (s) => (s ?? "").replace(/\u00A0/g, " ").trim();
 const normType = (s) => clean(s).replace(/\s+/g, "");
 
+// Calculate end time from start time (HH:MM format) and duration in minutes
+function calculateEndTime(startTime, durationMinutes) {
+  try {
+    const [hours, mins] = String(startTime).split(':').map(Number);
+    const durationInt = Math.floor(Number(durationMinutes));
+    
+    if (isNaN(hours) || isNaN(mins) || isNaN(durationInt)) {
+      console.warn(`⚠️  Invalid time calculation: startTime=${startTime}, durationMinutes=${durationMinutes}`);
+      return null;
+    }
+    
+    const totalMinutes = hours * 60 + mins + durationInt;
+    const endHours = Math.floor(totalMinutes / 60);
+    const endMins = totalMinutes % 60;
+    return `${String(endHours).padStart(2, '0')}:${String(endMins).padStart(2, '0')}`;
+  } catch (err) {
+    console.warn(`⚠️  Error calculating endTime:`, err.message);
+    return null;
+  }
+}
+
 // Global stats
 let stats = {
   filesProcessed: 0,
@@ -150,7 +171,7 @@ async function processHtmlFile(filePath) {
 
       const dayOfWeek = clean($(cells[0]).text());
       const startTime = clean($(cells[1]).text());
-      const durationMinutes = parseInt(clean($(cells[2]).text()), 10);
+      const durationMinutes = Math.floor(parseInt(clean($(cells[2]).text()), 10));
 
       if (!dayOfWeek || !startTime || Number.isNaN(durationMinutes)) continue;
       times.push({ dayOfWeek, startTime, durationMinutes });
@@ -202,13 +223,20 @@ async function processHtmlFile(filePath) {
 
     // 3) Insert / update CourseTime
     for (const t of times) {
+      const endTime = calculateEndTime(t.startTime, t.durationMinutes);
+      
+      // Debug logging
+      if (!endTime) {
+        console.warn(`⚠️  Failed to calculate endTime for ${t.startTime} + ${t.durationMinutes} min`);
+      }
+      
       const existing = await prisma.courseTime.findFirst({
         where: {
           currentCourseId: offering.id,
           dayOfWeek: t.dayOfWeek,
           startTime: t.startTime,
         },
-        select: { id: true, durationMinutes: true },
+        select: { id: true, durationMinutes: true, endTime: true },
       });
 
       if (!existing) {
@@ -219,15 +247,19 @@ async function processHtmlFile(filePath) {
               dayOfWeek: t.dayOfWeek,
               startTime: t.startTime,
               durationMinutes: t.durationMinutes,
+              endTime: endTime,
             },
           });
         }
         stats.timeInserted++;
-      } else if (existing.durationMinutes !== t.durationMinutes) {
+      } else if (existing.durationMinutes !== t.durationMinutes || existing.endTime !== endTime) {
         if (!DRY_RUN) {
           await prisma.courseTime.update({
             where: { id: existing.id },
-            data: { durationMinutes: t.durationMinutes },
+            data: { 
+              durationMinutes: t.durationMinutes,
+              endTime: endTime,
+            },
           });
         }
         stats.timeUpdated++;
