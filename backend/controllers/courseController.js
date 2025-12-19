@@ -1,5 +1,6 @@
 import * as db from '../database/dbPrismaCourses.js';
 import rmp from 'ratemyprofessor-api';
+import { incrementApiUsage } from '../utils/apiUsageTracker.js';
 
 // Helpers copied/adapted from the RMP scraper script for name matching
 function normalizeName(name){
@@ -73,6 +74,8 @@ export async function getPopularCourses(req,res) {
         const credits = Array.isArray(req.query.credits) ? req.query.credits.map(Number) : [Number(req.query.credits)];
 
     try{
+        // Track API usage
+        incrementApiUsage('getPopularCourses');
 
         const courses = await db.getPopularCoursesDb(terms,types,years,depts,faculties,credits)
 
