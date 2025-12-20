@@ -55,9 +55,9 @@ export function UpdatesPopup() {
           {/* Updates List */}
           <div className="space-y-4 mb-6">
             <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/30 rounded-lg p-4 hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-300 group">
-              <h3 className="font-semibold text-purple-200 mb-1 group-hover:text-purple-100 transition-colors">⏰ Time-Based Filtering</h3>
+              <h3 className="font-semibold text-purple-200 mb-1 group-hover:text-purple-100 transition-colors">⏰ Timing-Based Filtering</h3>
               <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">
-                Filter courses by start and end times to find classes that fit your schedule perfectly.
+                Filter courses by timing preferences (Morning, Afternoon, or Evening) to find classes that match your schedule.
               </p>
             </div>
 

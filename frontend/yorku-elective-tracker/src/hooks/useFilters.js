@@ -15,8 +15,7 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
     Department: [],
     CourseType: [],
     Day: [],     // ✅ added
-    StartTime: null,
-    EndTime: null,
+    Timings: [],  // ✅ Morning, Afternoon, Evening
   };
 
   // Merge initialFilters with defaultFilters to handle old localStorage data
@@ -66,36 +65,29 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
       .filter((d) => dayKeys.has(d))
       .map((d) => DAY_LABELS[d] || d);
 
-    // ✅ Start Time and End Time options - collect all unique times from meetings and courseTimes
-    const timeSet = new Set();
-    courses.forEach((c) => {
-      c.terms?.forEach((t) => {
-        // Check meetings for startTime
-        t.meetings?.forEach((m) => {
-          if (m?.startTime) timeSet.add(m.startTime);
-        });
-        // Also check courseTimes for startTime
-        t.courseTimes?.forEach((ct) => {
-          if (ct?.startTime) timeSet.add(ct.startTime);
-        });
-      });
-    });
-
-    // Convert times to array and sort them
-    const timeSlots = Array.from(timeSet).sort((a, b) => {
-      const aMin = timeToMinutes(a);
-      const bMin = timeToMinutes(b);
-      return (aMin ?? 999999) - (bMin ?? 999999);
-    });
+    // ✅ Time Bucket options - check if any courses have classes in Morning/Afternoon/Evening
+    const timeBuckets = TIME_BUCKETS.filter((bucket) =>
+      courses.some((c) =>
+        c.terms?.some((t) =>
+          t.meetings?.some((m) => {
+            const mins = timeToMinutes(m?.startTime);
+            return mins != null && bucket.test(mins);
+          }) ||
+          t.courseTimes?.some((ct) => {
+            const mins = timeToMinutes(ct?.startTime);
+            return mins != null && bucket.test(mins);
+          })
+        )
+      )
+    ).map((bucket) => bucket.label);
 
     return {
       Credits: credits,
       Year: courseLevels,
       Department: courseDepts,
       CourseType: courseTypes,
-      Day: days,     // ✅ added
-      StartTime: timeSlots,
-      EndTime: timeSlots,
+      Day: days,
+      Timings: timeBuckets,
     };
   }, [courses]);
 
@@ -114,70 +106,61 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
           t.meetings?.some((m) => filters.CourseType.includes(m.type))
         );
 
-      // ✅ Day filter
+      // ✅ Day filter - when day is selected, show ONLY sections offered on that specific day(s)
+      // A section should only be shown if ALL of its meetings are on the selected day(s)
       const hasMatchingDay =
         filters.Day.length === 0 ||
         course.terms?.some((t) => {
-          // Check meetings for dayOfWeek
-          const hasDayInMeetings = t.meetings?.some((m) => {
-            const label = DAY_LABELS[m?.dayOfWeek] || m?.dayOfWeek;
-            return label && filters.Day.includes(label);
+          // Get all days for all meetings in this term
+          const meetingDays = new Set();
+          t.meetings?.forEach((m) => {
+            if (m?.dayOfWeek) {
+              const label = DAY_LABELS[m.dayOfWeek] || m.dayOfWeek;
+              if (label) meetingDays.add(label);
+            }
           });
-          // Also check courseTimes for dayOfWeek
-          const hasDayInCourseTimes = t.courseTimes?.some((ct) => {
-            const label = DAY_LABELS[ct?.dayOfWeek] || ct?.dayOfWeek;
-            return label && filters.Day.includes(label);
-          });
-          return hasDayInMeetings || hasDayInCourseTimes;
-        });
-
-      // ✅ Start Time filter - classes must start at or after the selected time
-      const hasMatchingStartTime =
-        filters.StartTime === null ||
-        course.terms?.some((t) => {
-          // Check meetings for startTime
-          const hasStartInMeetings = t.meetings?.some((m) => {
-            const classMin = timeToMinutes(m?.startTime);
-            const filterMin = timeToMinutes(filters.StartTime);
-            if (classMin == null || filterMin == null) return false;
-            return classMin >= filterMin;
-          });
-          // Also check courseTimes for startTime
-          const hasStartInCourseTimes = t.courseTimes?.some((ct) => {
-            const classMin = timeToMinutes(ct?.startTime);
-            const filterMin = timeToMinutes(filters.StartTime);
-            if (classMin == null || filterMin == null) return false;
-            return classMin >= filterMin;
-          });
-          return hasStartInMeetings || hasStartInCourseTimes;
-        });
-
-      // ✅ End Time filter - classes must start before the selected time
-      // Edge case: if both StartTime and EndTime are set, EndTime must be > StartTime
-      const hasMatchingEndTime =
-        filters.EndTime === null ||
-        course.terms?.some((t) => {
-          const startMin = filters.StartTime ? timeToMinutes(filters.StartTime) : null;
-          const endMin = timeToMinutes(filters.EndTime);
           
-          // Edge case check: EndTime should be greater than StartTime if both are set
-          if (startMin != null && endMin != null && endMin <= startMin) {
-            return false; // Invalid range
-          }
+          // Get all days for all courseTimes in this term
+          t.courseTimes?.forEach((ct) => {
+            if (ct?.dayOfWeek) {
+              const label = DAY_LABELS[ct.dayOfWeek] || ct.dayOfWeek;
+              if (label) meetingDays.add(label);
+            }
+          });
+          
+          // If no days found, skip this term
+          if (meetingDays.size === 0) return false;
+          
+          // Only include this term if its days exactly match the selected days
+          return meetingDays.size === filters.Day.length && 
+                 Array.from(meetingDays).every(day => filters.Day.includes(day));
+        });
 
-          // Check meetings for startTime
-          const hasEndInMeetings = t.meetings?.some((m) => {
-            const classMin = timeToMinutes(m?.startTime);
-            if (classMin == null || endMin == null) return false;
-            return classMin < endMin;
+      // ✅ Timings filter - filter by Morning/Afternoon/Evening
+      const hasMatchingTimings =
+        filters.Timings.length === 0 ||
+        course.terms?.some((t) => {
+          // Check meetings for timing
+          const hasTimeInMeetings = t.meetings?.some((m) => {
+            const mins = timeToMinutes(m?.startTime);
+            if (mins == null) return false;
+            return filters.Timings.some((timing) => {
+              const timingDef = TIME_BUCKETS.find((b) => b.label === timing);
+              return timingDef && timingDef.test(mins);
+            });
           });
-          // Also check courseTimes for startTime
-          const hasEndInCourseTimes = t.courseTimes?.some((ct) => {
-            const classMin = timeToMinutes(ct?.startTime);
-            if (classMin == null || endMin == null) return false;
-            return classMin < endMin;
+          
+          // Also check courseTimes
+          const hasTimeInCourseTimes = t.courseTimes?.some((ct) => {
+            const mins = timeToMinutes(ct?.startTime);
+            if (mins == null) return false;
+            return filters.Timings.some((timing) => {
+              const timingDef = TIME_BUCKETS.find((b) => b.label === timing);
+              return timingDef && timingDef.test(mins);
+            });
           });
-          return hasEndInMeetings || hasEndInCourseTimes;
+          
+          return hasTimeInMeetings || hasTimeInCourseTimes;
         });
 
       return (
@@ -188,8 +171,7 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
           filters.Department.includes(course.deptAcronym)) &&
         hasMatchingType &&
         hasMatchingDay &&
-        hasMatchingStartTime &&
-        hasMatchingEndTime
+        hasMatchingTimings
       );
     });
   }, [courses, filters, searchQuery]);

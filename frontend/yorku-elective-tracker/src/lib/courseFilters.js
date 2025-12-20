@@ -50,9 +50,9 @@ export const DAY_LABELS = {
 export const DAYS = ["M", "T", "W", "R", "F", "S", "U"];
 
 export const TIME_BUCKETS = [
-  { key: "Morning", test: (mins) => mins >= 0 && mins < 12 * 60 },
-  { key: "Afternoon", test: (mins) => mins >= 12 * 60 && mins < 17 * 60 },
-  { key: "Evening", test: (mins) => mins >= 17 * 60 },
+  { key: "Morning", label: "Morning (Before 12:00 PM)", test: (mins) => mins >= 0 && mins < 12 * 60 },
+  { key: "Afternoon", label: "Afternoon (12:00 PM - 5:00 PM)", test: (mins) => mins >= 12 * 60 && mins < 17 * 60 },
+  { key: "Evening", label: "Evening (5:00 PM & Later)", test: (mins) => mins >= 17 * 60 },
 ];
 
 // Helper function - pass ALL values to get ALL popular courses
