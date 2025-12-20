@@ -1,12 +1,1 @@
-[
-  {
-    "file": "ED_AUCO 3555 3.00_Educational Audiology.html",
-    "reason": "Could not parse heading",
-    "path": "/var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/york_courses/AUCO - Aural Communication 1_2 - ( ED )/ED_AUCO 3555 3.00_Educational Audiology.html"
-  },
-  {
-    "file": "SC_BCHM 2020 3.00_Biochemistry.html",
-    "reason": "Could not parse heading",
-    "path": "/var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/york_courses/BCHM - Biochemistry - ( SC )/SC_BCHM 2020 3.00_Biochemistry.html"
-  }
-]
+[]
