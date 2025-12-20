@@ -3,6 +3,17 @@ import { X, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
+const DAY_LABELS = {
+  M: "Monday",
+  T: "Tuesday",
+  W: "Wednesday",
+  R: "Thursday",
+  Th: "Thursday",
+  F: "Friday",
+  Sat: "Saturday",
+  Sun: "Sunday",
+};
+
 export function CourseDetailPanel({ course, selectedTerm, onClose }) {
   const [copiedIndex, setCopiedIndex] = useState(null);
 
@@ -205,6 +216,51 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
                   </div>
                 </div>
               )}
+
+{/* 🕒 TIMINGS SECTION */}
+              {t.courseTimes && t.courseTimes.length > 0 ? (
+                <div className="mb-4 pb-4 border-b border-white/10">
+                  <p className="text-gray-300 text-xs mb-2">
+                    <strong className="text-white">📅 Class Times:</strong>
+                  </p>
+                  <div className="space-y-1.5 text-xs">
+                    {t.courseTimes.map((timing, i) => (
+                      <div key={i} className="flex items-center gap-2 text-gray-200">
+                        <span className="px-2 py-0.5 rounded bg-white/10 border border-white/20 font-semibold min-w-fit text-[10px]">
+                          {DAY_LABELS[timing.dayOfWeek] || timing.dayOfWeek}
+                        </span>
+                        <span className="text-gray-300">
+                          {timing.startTime}
+                          {timing.endTime ? ` – ${timing.endTime}` : ""}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : t.meetings?.some((m) => m.dayOfWeek && m.startTime) ? (
+                <div className="mb-4 pb-4 border-b border-white/10">
+                  <p className="text-gray-300 text-xs mb-2">
+                    <strong className="text-white">📅 Class Times:</strong>
+                  </p>
+                  <div className="space-y-1 text-sm text-gray-200">
+                    {t.meetings.map((m, i) =>
+                      m.dayOfWeek && m.startTime ? (
+                        <div key={i} className="flex items-center gap-2">
+                          <span className="px-2 py-0.5 rounded bg-white/10 border border-white/20 text-xs">
+                            {DAY_LABELS[m.dayOfWeek] || m.dayOfWeek}
+                          </span>
+                          <span className="text-xs">
+                            {m.startTime}
+                            {m.endTime ? ` – ${m.endTime}` : ""}
+                          </span>
+                        </div>
+                      ) : null
+                    )}
+                  </div>
+                </div>
+              ) : null}
+
+              
 
               {/* INSTRUCTORS */}
               {t.meetings?.length > 0 ? (
