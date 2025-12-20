@@ -17,6 +17,7 @@ export function useCourses() {
   useEffect(() => {
   console.log('Course data sample:', courses[0]);
   console.log('First course terms:', courses[0]?.terms);
+  console.log('First term courseTimes:', courses[0]?.terms?.[0]?.courseTimes);
   console.log('First meeting:', courses[0]?.terms?.[0]?.meetings?.[0]);
 }, [courses]);
 
@@ -34,6 +35,14 @@ export function useCourses() {
           throw new Error('Invalid data format');
         }
 
+        // Debug: Log the raw backend data structure
+        if (data.length > 0) {
+          console.log('🔍 RAW BACKEND DATA - First course:', JSON.stringify(data[0], null, 2));
+          console.log('🔍 First offering:', data[0].courseOfferings?.[0]);
+          console.log('🔍 Course times in first offering:', data[0].courseOfferings?.[0]?.courseTimes);
+          console.log('🔍 Instructors in first offering:', data[0].courseOfferings?.[0]?.instructors);
+        }
+
         const formatted = data.map((c) => ({
           code: `${c.faculty}/${c.deptAcronym} ${c.courseCode}`,
           title: c.name,
@@ -49,8 +58,9 @@ export function useCourses() {
           terms: (c.courseOfferings || []).map((offering) => ({
             term: offering.term,
             section: offering.section,
-            catNumber:offering.catNumber,
-            meetings: (offering.instructors || []).map((io) => ({
+            catNumber: offering.catNumber,
+            courseTimes: offering.courseTimes || [], // 🔍 Add courseTimes from backend
+            meetings: (offering.instructors || []).map((io, idx) => ({
               type: offering.type,
               firstName: io.instructor?.firstname || "TBA",
               lastName: io.instructor?.lastname || "",
@@ -59,7 +69,10 @@ export function useCourses() {
               wouldTakeAgainPercent: io.instructor?.wouldTakeAgainPercent,
               numberOfRatings: io.instructor?.numberOfRatings,
               rateMyProfLink: io.instructor?.rateMyProfLink,
-              popularity: io.instructor?.popularity,
+              popularity: io.instructor?.popularity
+
+              // Removed: dayOfWeek, startTime, endTime, durationMinutes
+              // These come from courseTimes array, not per-instructor
             })),
           })),
         }));

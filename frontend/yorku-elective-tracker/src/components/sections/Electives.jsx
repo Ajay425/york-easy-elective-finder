@@ -7,9 +7,9 @@ import { FilterBar } from "./FilterBar";
 import { CourseCard } from "./CourseCard";
 import { CourseDetailPanel } from "./CourseDetailPanel";
 import { Pagination } from "./Pagination";
+import { UpdatesPopup } from "../UpdatesPopup";
 import { useLocation } from "react-router-dom";
 import { Mail } from "lucide-react";
-import { ActiveUsers } from "../ActiveUsers";
 
 const Electives = () => {
   const { courses, loading, error } = useCourses();
@@ -158,6 +158,9 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
   return (
     <div className="relative min-h-screen w-full bg-gradient-to-br from-[#050505] via-[#0a0a0a] to-[#1a1a1a] text-white flex flex-col items-center overflow-x-hidden overflow-y-hidden">
 
+      {/* Updates Popup */}
+      <UpdatesPopup />
+
       {/* Background Glows */}
       <div className="absolute w-[500px] h-[500px] bg-purple-800 rounded-full blur-[180px] opacity-25 top-[-120px] left-1/2 -translate-x-1/2 animate-pulse"></div>
       <div className="absolute w-[500px] h-[500px] bg-blue-700 rounded-full blur-[180px] opacity-20 bottom-[-150px] left-1/2 -translate-x-1/2 animate-pulse"></div>
@@ -182,15 +185,12 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
     </div>
   </div>
 
-  {/* Powered by SSADC Badge */}
+      {/* Powered By SSADC  styling here*/}
   <div className="absolute top-4 right-4 z-20 flex flex-col items-end gap-2">
     <a href="https://yorku.dev" className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-br from-gray-800/40 via-gray-900/40 to-black/40 backdrop-blur-xl border border-purple-500/30 hover:border-purple-400/60 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300 group hover:scale-105">
       <span className="text-sm text-gray-300 group-hover:text-white transition-colors duration-300">Powered by</span>
       <span className="text-sm font-bold text-[#7f5af0] group-hover:text-[#a855f7] transition-colors duration-300">SSADC</span>
     </a>
-
-    {/* Active Users Badge */}
-    <ActiveUsers />
   </div>
 
 

@@ -29,10 +29,31 @@ export const DEPARTMENTS = [
   "TESL", "THST", "TRON", "URST", "VISA", "WKST", "WRIT"
 ];
 
+
+
+
 export const TERMS = ['F', 'W', 'S', 'Y'];
 export const COURSE_TYPES = ['LECT', 'TUTR', 'LAB', 'SEMR', 'BLEN', 'ONLN', 'ONCA', 'HYFX'];
 export const YEARS = [1, 2, 3, 4];
 export const CREDITS = [0.5, 1, 1.5, 2, 3, 4, 4.5, 6, 9];
+
+export const DAY_LABELS = {
+  M: "Monday",
+  T: "Tuesday",
+  W: "Wednesday",
+  R: "Thursday",
+  F: "Friday",
+  S: "Saturday",
+  U: "Sunday",
+};
+
+export const DAYS = ["M", "T", "W", "R", "F", "S", "U"];
+
+export const TIME_BUCKETS = [
+  { key: "Morning", test: (mins) => mins >= 0 && mins < 12 * 60 },
+  { key: "Afternoon", test: (mins) => mins >= 12 * 60 && mins < 17 * 60 },
+  { key: "Evening", test: (mins) => mins >= 17 * 60 },
+];
 
 // Helper function - pass ALL values to get ALL popular courses
 export function buildCoursesURL() {

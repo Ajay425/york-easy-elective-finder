@@ -8,7 +8,12 @@ import {
 import { ChevronDown, X, Filter } from "lucide-react";
 
 export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilterChange }) {
-  const totalActiveFilters = Object.values(filters).flat().length;
+  const totalActiveFilters = Object.entries(filters).reduce((count, [key, value]) => {
+    if (key === "StartTime" || key === "EndTime") {
+      return count + (value != null ? 1 : 0);
+    }
+    return count + (Array.isArray(value) ? value.length : 0);
+  }, 0);
 
   return (
     <div className="w-full px-4 sm:px-8 mb-6">
@@ -27,8 +32,10 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
 
       {/* Filter Buttons */}
       <div className="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
-        {Object.entries(filterOptions).map(([filterName, options]) => {
-          const activeCount = filters[filterName].length;
+        {Object.entries(filterOptions)
+          .filter(([filterName]) => filterName !== "StartTime" && filterName !== "EndTime")
+          .map(([filterName, options]) => {
+          const activeCount = Array.isArray(filters[filterName]) ? filters[filterName].length : (filters[filterName] != null ? 1 : 0);
           const hasActiveFilters = activeCount > 0;
 
           return (
@@ -150,6 +157,204 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
           );
         })}
 
+        {/* Start Time Filter */}
+        {filterOptions.StartTime && filterOptions.StartTime.length > 0 && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                className={`
+                  relative group
+                  min-w-[140px] h-auto py-2.5 px-4
+                  rounded-lg font-medium text-sm
+                  border transition-all duration-300
+                  ${filters.StartTime
+                    ? `
+                      bg-gradient-to-r from-purple-500/20 to-pink-500/20 
+                      border-purple-400/40 text-white shadow-lg shadow-purple-500/10
+                      group-hover:shadow-purple-500/10
+                    `
+                    : `
+                      bg-white/5 border-white/15 text-white/80 
+                      hover:bg-white/10 hover:border-white/25 hover:text-purple-300
+                    `
+                  }
+                  hover:shadow-lg
+                  active:scale-95
+                  group-hover:animate-pulse
+                `}
+              >
+                <div className="flex flex-col items-start w-full gap-1">
+                  <div className="flex items-center justify-between w-full">
+                    <span className="font-semibold transition-all duration-300 group-hover:text-purple-300">
+                      Start Time
+                    </span>
+                    <div className="flex items-center gap-1">
+                      {filters.StartTime && (
+                        <span className="px-2 py-0.5 text-xs font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-black rounded-full text-[10px] transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-400/50">
+                          1
+                        </span>
+                      )}
+                      <ChevronDown className="w-4 h-4 transition-all duration-300 group-data-[state=open]:rotate-180 group-hover:text-purple-300" />
+                    </div>
+                  </div>
+                  {filters.StartTime && (
+                    <div className="flex flex-wrap gap-1 w-full mt-1">
+                      <span
+                        className="px-2 py-0.5 text-[10px] font-medium bg-purple-400/30 text-purple-200 rounded-md truncate max-w-[80px]"
+                        title={filters.StartTime}
+                      >
+                        {filters.StartTime}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent 
+              className="
+                bg-gray-900/98 backdrop-blur-md
+                text-white border border-white/10
+                rounded-lg shadow-xl
+                max-h-72 overflow-y-auto
+                min-w-[200px]
+              "
+            >
+              <div className="p-2">
+                <div className="text-xs font-semibold text-white/60 px-2 py-2 mb-1 uppercase tracking-wider">
+                  Start Time
+                </div>
+                {filterOptions.StartTime.map((time) => (
+                  <DropdownMenuItem
+                    key={time}
+                    onClick={() => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        StartTime: prev.StartTime === time ? null : time,
+                      }));
+                      onFilterChange();
+                    }}
+                    className={`
+                      cursor-pointer rounded-md px-3 py-2 my-0.5
+                      transition-all duration-200 group
+                      ${filters.StartTime === time
+                        ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white font-medium group-hover:from-purple-500/50 group-hover:to-pink-500/50 group-hover:text-purple-100' 
+                        : 'hover:bg-white/5 text-white/70 hover:text-purple-300 hover:bg-white/10'
+                      }
+                    `}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <span className="transition-all duration-200">{time}</span>
+                      {filters.StartTime === time && (
+                        <span className="text-purple-400 transition-all duration-200 group-hover:scale-110 group-hover:text-purple-300">✓</span>
+                      )}
+                    </div>
+                  </DropdownMenuItem>
+                ))}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+
+        {/* End Time Filter */}
+        {filterOptions.EndTime && filterOptions.EndTime.length > 0 && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                className={`
+                  relative group
+                  min-w-[140px] h-auto py-2.5 px-4
+                  rounded-lg font-medium text-sm
+                  border transition-all duration-300
+                  ${filters.EndTime
+                    ? `
+                      bg-gradient-to-r from-purple-500/20 to-pink-500/20 
+                      border-purple-400/40 text-white shadow-lg shadow-purple-500/10
+                      group-hover:shadow-purple-500/10
+                    `
+                    : `
+                      bg-white/5 border-white/15 text-white/80 
+                      hover:bg-white/10 hover:border-white/25 hover:text-purple-300
+                    `
+                  }
+                  hover:shadow-lg
+                  active:scale-95
+                  group-hover:animate-pulse
+                `}
+              >
+                <div className="flex flex-col items-start w-full gap-1">
+                  <div className="flex items-center justify-between w-full">
+                    <span className="font-semibold transition-all duration-300 group-hover:text-purple-300">
+                      End Time
+                    </span>
+                    <div className="flex items-center gap-1">
+                      {filters.EndTime && (
+                        <span className="px-2 py-0.5 text-xs font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-black rounded-full text-[10px] transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-400/50">
+                          1
+                        </span>
+                      )}
+                      <ChevronDown className="w-4 h-4 transition-all duration-300 group-data-[state=open]:rotate-180 group-hover:text-purple-300" />
+                    </div>
+                  </div>
+                  {filters.EndTime && (
+                    <div className="flex flex-wrap gap-1 w-full mt-1">
+                      <span
+                        className="px-2 py-0.5 text-[10px] font-medium bg-purple-400/30 text-purple-200 rounded-md truncate max-w-[80px]"
+                        title={filters.EndTime}
+                      >
+                        {filters.EndTime}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent 
+              className="
+                bg-gray-900/98 backdrop-blur-md
+                text-white border border-white/10
+                rounded-lg shadow-xl
+                max-h-72 overflow-y-auto
+                min-w-[200px]
+              "
+            >
+              <div className="p-2">
+                <div className="text-xs font-semibold text-white/60 px-2 py-2 mb-1 uppercase tracking-wider">
+                  End Time
+                </div>
+                {filterOptions.EndTime.map((time) => (
+                  <DropdownMenuItem
+                    key={time}
+                    onClick={() => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        EndTime: prev.EndTime === time ? null : time,
+                      }));
+                      onFilterChange();
+                    }}
+                    className={`
+                      cursor-pointer rounded-md px-3 py-2 my-0.5
+                      transition-all duration-200 group
+                      ${filters.EndTime === time
+                        ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white font-medium group-hover:from-purple-500/50 group-hover:to-pink-500/50 group-hover:text-purple-100' 
+                        : 'hover:bg-white/5 text-white/70 hover:text-purple-300 hover:bg-white/10'
+                      }
+                    `}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <span className="transition-all duration-200">{time}</span>
+                      {filters.EndTime === time && (
+                        <span className="text-purple-400 transition-all duration-200 group-hover:scale-110 group-hover:text-purple-300">✓</span>
+                      )}
+                    </div>
+                  </DropdownMenuItem>
+                ))}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+
         {/* Clear All Button */}
         {totalActiveFilters > 0 && (
           <Button
@@ -184,8 +389,45 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
       {/* Active Filters Summary Pills */}
       {totalActiveFilters > 0 && (
         <div className="flex flex-wrap justify-center gap-2 mt-4 max-w-5xl mx-auto">
-          {Object.entries(filters).map(([filterName, values]) =>
-            values.map((value) => (
+          {Object.entries(filters).map(([filterName, values]) => {
+            if (filterName === "StartTime" || filterName === "EndTime") {
+              return values ? (
+                <div
+                  key={`${filterName}-${values}`}
+                  className="
+                    flex items-center gap-2 px-3 py-1.5
+                    bg-gradient-to-r from-purple-500/20 to-pink-500/20
+                    border border-purple-400/30
+                    rounded-full text-xs text-purple-100
+                    shadow-sm hover:shadow-md hover:from-purple-500/40 hover:to-pink-500/40 hover:border-purple-400/60 hover:text-purple-200
+                    transition-all duration-300
+                    group
+                    hover:animate-pulse
+                  "
+                >
+                  <span className="font-medium transition-all duration-300">{filterName}:</span>
+                  <span className="font-semibold transition-all duration-300">{values}</span>
+                  <button
+                    onClick={() => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        [filterName]: null,
+                      }));
+                      onFilterChange();
+                    }}
+                    className="
+                      ml-1 p-0.5 rounded-full
+                      bg-red-500/30 hover:bg-red-500/50
+                      transition-all duration-200
+                      group-hover:scale-110
+                    "
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </div>
+              ) : null;
+            }
+            return Array.isArray(values) ? values.map((value) => (
               <div
                 key={`${filterName}-${value}`}
                 className="
@@ -219,8 +461,8 @@ export function FilterBar({ filters, setFilters, filterOptions, onClear, onFilte
                   <X className="w-3 h-3" />
                 </button>
               </div>
-            ))
-          )}
+            )) : null;
+          })}
         </div>
       )}
     </div>
