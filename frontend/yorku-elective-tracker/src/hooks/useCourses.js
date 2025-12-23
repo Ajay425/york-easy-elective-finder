@@ -18,7 +18,6 @@ export function useCourses() {
     setLoading(true);  // Start loading
 
     const url = buildCoursesURL();
-    console.log("Generated URL:", url);  // Log the URL being used
 
     fetch(url)
       .then((res) => {
