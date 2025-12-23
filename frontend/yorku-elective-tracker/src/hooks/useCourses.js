@@ -15,34 +15,27 @@ export function useCourses() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-  console.log('Course data sample:', courses[0]);
-  console.log('First course terms:', courses[0]?.terms);
-  console.log('First term courseTimes:', courses[0]?.terms?.[0]?.courseTimes);
-  console.log('First meeting:', courses[0]?.terms?.[0]?.meetings?.[0]);
-}, [courses]);
+    setLoading(true);  // Start loading
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(buildCoursesURL())
+    const url = buildCoursesURL();
+    console.log("Generated URL:", url);  // Log the URL being used
+
+    fetch(url)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch courses');
         return res.json();
       })
       .then((responseData) => {
+        console.log("Received data:", responseData);  // Log the API response data
+
         const data = responseData.courses;
 
+        // Check if the data is an array
         if (!data || !Array.isArray(data)) {
           throw new Error('Invalid data format');
         }
 
-        // Debug: Log the raw backend data structure
-        if (data.length > 0) {
-          console.log('🔍 RAW BACKEND DATA - First course:', JSON.stringify(data[0], null, 2));
-          console.log('🔍 First offering:', data[0].courseOfferings?.[0]);
-          console.log('🔍 Course times in first offering:', data[0].courseOfferings?.[0]?.courseTimes);
-          console.log('🔍 Instructors in first offering:', data[0].courseOfferings?.[0]?.instructors);
-        }
-
+        // Format the courses data
         const formatted = data.map((c) => ({
           code: `${c.faculty}/${c.deptAcronym} ${c.courseCode}`,
           title: c.name,
@@ -59,7 +52,7 @@ export function useCourses() {
             term: offering.term,
             section: offering.section,
             catNumber: offering.catNumber,
-            courseTimes: offering.courseTimes || [], // 🔍 Add courseTimes from backend
+            courseTimes: offering.courseTimes || [],
             meetings: (offering.instructors || []).map((io, idx) => ({
               type: offering.type,
               firstName: io.instructor?.firstname || "TBA",
@@ -70,22 +63,21 @@ export function useCourses() {
               numberOfRatings: io.instructor?.numberOfRatings,
               rateMyProfLink: io.instructor?.rateMyProfLink,
               popularity: io.instructor?.popularity
-
-              // Removed: dayOfWeek, startTime, endTime, durationMinutes
-              // These come from courseTimes array, not per-instructor
-            })),
-          })),
+            }))
+          }))
         }));
 
-        setCourses(formatted);
-        setLoading(false);
+        console.log('Setting courses with formatted data:', formatted);  // Log the formatted data
+
+        setCourses(formatted);  // Set the state with the formatted data
+        setLoading(false);  // End loading
       })
       .catch((err) => {
         console.error("Failed to load courses:", err);
-        setError(err.message);
-        setLoading(false);
+        setError(err.message);  // Set the error message
+        setLoading(false);  // End loading
       });
-  }, []);
+  }, []);  // Empty dependency array means this will run once on mount
 
   return { courses, loading, error };
 }
