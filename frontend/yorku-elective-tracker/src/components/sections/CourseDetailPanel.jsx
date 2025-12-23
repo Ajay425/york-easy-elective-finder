@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { X, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const DAY_LABELS = {
   M: "Monday",
@@ -16,6 +16,17 @@ const DAY_LABELS = {
 
 export function CourseDetailPanel({ course, selectedTerm, onClose }) {
   const [copiedIndex, setCopiedIndex] = useState(null);
+
+  // Close panel on Escape key
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === "Escape" || e.key === "Esc") {
+        onClose && onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
 
   if (!course) return null;
 
