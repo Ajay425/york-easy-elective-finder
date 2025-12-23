@@ -1,6 +1,8 @@
 import { useState, useMemo } from "react";
 import { YEARS, DEPARTMENTS, COURSE_TYPES, DAY_LABELS } from "../lib/courseFilters";
 
+// Author: --Jon
+
 function timeToMinutes(t) {
   if (!t) return null;
   const [h, m] = t.split(":").map(Number);

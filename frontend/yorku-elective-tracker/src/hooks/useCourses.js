@@ -26,7 +26,6 @@ export function useCourses() {
         return res.json();
       })
       .then((responseData) => {
-        console.log("Received data:", responseData);  // Log the API response data
 
         const data = responseData.courses;
 
@@ -67,7 +66,6 @@ export function useCourses() {
           }))
         }));
 
-        console.log('Setting courses with formatted data:', formatted);  // Log the formatted data
 
         setCourses(formatted);  // Set the state with the formatted data
         setLoading(false);  // End loading
