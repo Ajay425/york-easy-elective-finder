@@ -42,7 +42,7 @@
       const subject = `${faculty}/${dept}`;
 
       // ✅ Extract year from first digit of the numeric code
-      const year = parseInt(code[0], 10) || null;
+      const year = parseInt(code[0], 10);
 
       // Push the main match
       results.push({

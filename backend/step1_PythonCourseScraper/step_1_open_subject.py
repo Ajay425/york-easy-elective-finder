@@ -13,6 +13,7 @@ from typing import List, Tuple, Set, Optional
 # ----------------------------------------------------------
 FAST_MODE = False
 MAX_SUBJECTS = None
+SESSION_SELECT = "1"              # "0" for Fall/Winter 2025-2026, "1" for Summer 2026
 CAMPUS_NAME = "Keele"
 SAVE_DIR = "york_courses"
 PROGRESS_FILE = "progress.txt"
@@ -133,6 +134,12 @@ def open_search_by_subject(page, start_url: str) -> None:
     
     # Wait for the page to load after clicking
     page.wait_for_load_state("networkidle", timeout=45000)
+    page.wait_for_selector("#sessionSelect", timeout=30000)
+    
+    # Select the session (e.g., Summer 2026)
+    page.select_option("#sessionSelect", value=SESSION_SELECT)
+    human_pause(0.5, 1.0)
+    
     page.wait_for_selector("#subjectSelect", timeout=30000)
 
     if page_looks_blocked_or_expired(page):

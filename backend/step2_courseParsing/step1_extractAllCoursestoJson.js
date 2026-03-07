@@ -14,7 +14,7 @@ function extracttermInfo($, termRows) {
 
   termRows.each((_, elem) => {
     const text = $(elem).text().trim();
-    const termMatch = text.match(/Term\s+([A-Z])\s+Section\s+([A-Z0-9]+)/);
+    const termMatch = text.match(/Term\s+([A-Z][A-Z0-9]*)\s+Section\s+([A-Z0-9]+)/);
     if (!termMatch) return;
 
     const [, term, section] = termMatch;
