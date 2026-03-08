@@ -1,0 +1,93 @@
+2026-03-08 14:09:56,690 - INFO - 🚀 Launching Playwright browser (FAST_MODE=False)
+2026-03-08 14:09:56,808 - INFO - 🌐 Opening York course site...
+2026-03-08 14:10:01,350 - INFO - 📚 Found 148 subjects to scrape
+2026-03-08 14:10:01,351 - INFO - 🔁 Resuming — 0 subjects already completed
+2026-03-08 14:10:01,351 - INFO - 
+🎓 [1/148] Scraping subject: ACTG - Accounting - ( SB )
+2026-03-08 14:10:09,500 - INFO -    → Found 19 courses
+2026-03-08 14:10:09,500 - INFO -    ↳ [1/19] SB/ACTG 2010 3.00 – Introduction To Financial Accounting I
+2026-03-08 14:10:23,438 - INFO -       📄 Page ready: 21881 bytes HTML, 1820 chars text
+2026-03-08 14:10:23,450 - INFO -       💾 Saved SB_ACTG 2010 3.00_Introduction To Financial Accounting I_CourseSchedule.html
+2026-03-08 14:10:41,591 - INFO -    ↳ [2/19] SB/ACTG 2011 3.00 – Introduction To Financial Actg II
+2026-03-08 14:10:54,092 - INFO -       📄 Page ready: 21707 bytes HTML, 1647 chars text
+2026-03-08 14:10:54,100 - INFO -       💾 Saved SB_ACTG 2011 3.00_Introduction To Financial Actg II_CourseSchedule.html
+2026-03-08 14:11:12,419 - INFO -    ↳ [3/19] SB/ACTG 3110 3.00 – Intermediate Financial Accounting I
+2026-03-08 14:11:26,141 - INFO -       📄 Page ready: 21561 bytes HTML, 1473 chars text
+2026-03-08 14:11:26,149 - INFO -       💾 Saved SB_ACTG 3110 3.00_Intermediate Financial Accounting I_CourseSchedule.html
+2026-03-08 14:11:44,720 - INFO -    ↳ [4/19] SB/ACTG 5101 3.00 – Financial Accounting Fundamentals
+2026-03-08 14:11:58,088 - INFO -       📄 Page ready: 24919 bytes HTML, 1727 chars text
+2026-03-08 14:11:58,107 - INFO -       💾 Saved SB_ACTG 5101 3.00_Financial Accounting Fundamentals_CourseSchedule.html
+2026-03-08 14:12:13,664 - INFO -    ↳ [5/19] SB/ACTG 5200 3.00 – Financial Decisions for Managers
+2026-03-08 14:12:27,288 - INFO -       📄 Page ready: 20677 bytes HTML, 1241 chars text
+2026-03-08 14:12:27,300 - INFO -       💾 Saved SB_ACTG 5200 3.00_Financial Decisions for Managers_CourseSchedule.html
+2026-03-08 14:12:43,167 - INFO -    ↳ [6/19] SB/ACTG 5210 1.50 – Management Accounting
+2026-03-08 14:12:56,717 - INFO -       📄 Page ready: 20855 bytes HTML, 1418 chars text
+2026-03-08 14:12:56,739 - INFO -       💾 Saved SB_ACTG 5210 1.50_Management Accounting_CourseSchedule.html
+2026-03-08 14:13:10,927 - INFO -    ↳ [7/19] SB/ACTG 5211 3.00 – Management Accounting Fundamentals
+2026-03-08 14:13:22,483 - INFO -       📄 Page ready: 24880 bytes HTML, 1687 chars text
+2026-03-08 14:13:22,507 - INFO -       💾 Saved SB_ACTG 5211 3.00_Management Accounting Fundamentals_CourseSchedule.html
+2026-03-08 14:13:36,802 - INFO -    ↳ [8/19] SB/ACTG 6120 3.00 – Intermediate Financial Accounting I
+2026-03-08 14:13:50,604 - INFO -       📄 Page ready: 24726 bytes HTML, 1501 chars text
+2026-03-08 14:13:50,619 - INFO -       💾 Saved SB_ACTG 6120 3.00_Intermediate Financial Accounting I_CourseSchedule.html
+2026-03-08 14:14:08,631 - INFO -    ↳ [9/19] SB/ACTG 6160 3.00 – Advanced Financial Accounting
+2026-03-08 14:14:21,500 - INFO -       📄 Page ready: 23593 bytes HTML, 1465 chars text
+2026-03-08 14:14:21,512 - INFO -       💾 Saved SB_ACTG 6160 3.00_Advanced Financial Accounting_CourseSchedule.html
+2026-03-08 14:14:38,372 - INFO -    ↳ [10/19] SB/ACTG 6301 3.00 – Integrative Case Analysis for Accountants
+2026-03-08 14:14:51,349 - INFO -       📄 Page ready: 23678 bytes HTML, 1581 chars text
+2026-03-08 14:14:51,358 - INFO -       💾 Saved SB_ACTG 6301 3.00_Integrative Case Analysis for Accountants_CourseSchedule.html
+2026-03-08 14:15:05,885 - INFO -    ↳ [11/19] SB/ACTG 6401 3.00 – Advanced Integrative Case Analysis
+2026-03-08 14:15:20,003 - INFO -       📄 Page ready: 26699 bytes HTML, 1935 chars text
+2026-03-08 14:15:20,029 - INFO -       💾 Saved SB_ACTG 6401 3.00_Advanced Integrative Case Analysis_CourseSchedule.html
+2026-03-08 14:15:34,378 - INFO -    ↳ [12/19] SB/ACTG 6501 3.00 – Integrative Case Analysis: The Capstone
+2026-03-08 14:16:07,083 - INFO - 🚀 Launching Playwright browser (FAST_MODE=False)
+2026-03-08 14:16:07,204 - INFO - 🌐 Opening York course site...
+2026-03-08 14:17:01,011 - INFO - 🚀 Launching Playwright browser (FAST_MODE=False)
+2026-03-08 14:17:01,129 - INFO - 🌐 Opening York course site...
+2026-03-08 14:17:04,945 - INFO - 📚 Found 148 subjects to scrape
+2026-03-08 14:17:04,945 - INFO - 🔁 Resuming — 0 subjects already completed
+2026-03-08 14:17:04,945 - INFO - 
+🎓 [1/148] Scraping subject: ACTG - Accounting - ( SB )
+2026-03-08 14:17:50,972 - WARNING - ⚠️ Subject load failed: Timeout 45000ms exceeded.
+=========================== logs ===========================
+"domcontentloaded" event fired
+"load" event fired
+============================================================
+2026-03-08 14:18:23,862 - WARNING - ⚠️ Subject load failed: Page.wait_for_selector: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#subjectSelect") to be visible
+
+2026-03-08 14:18:56,180 - WARNING - ⚠️ Subject load failed: Page.wait_for_selector: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#subjectSelect") to be visible
+
+2026-03-08 14:19:28,596 - WARNING - ⚠️ Subject load failed: Page.wait_for_selector: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#subjectSelect") to be visible
+
+2026-03-08 14:19:35,115 - INFO -    → Found 19 courses
+2026-03-08 14:19:35,115 - INFO -    ↳ [1/19] SB/ACTG 2010 3.00 – Introduction To Financial Accounting I
+2026-03-08 14:19:35,115 - INFO -       ✅ Already have SB_ACTG 2010 3.00_Introduction To Financial Accounting I_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,115 - INFO -    ↳ [2/19] SB/ACTG 2011 3.00 – Introduction To Financial Actg II
+2026-03-08 14:19:35,115 - INFO -       ✅ Already have SB_ACTG 2011 3.00_Introduction To Financial Actg II_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,115 - INFO -    ↳ [3/19] SB/ACTG 3110 3.00 – Intermediate Financial Accounting I
+2026-03-08 14:19:35,115 - INFO -       ✅ Already have SB_ACTG 3110 3.00_Intermediate Financial Accounting I_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,116 - INFO -    ↳ [4/19] SB/ACTG 5101 3.00 – Financial Accounting Fundamentals
+2026-03-08 14:19:35,116 - INFO -       ✅ Already have SB_ACTG 5101 3.00_Financial Accounting Fundamentals_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,116 - INFO -    ↳ [5/19] SB/ACTG 5200 3.00 – Financial Decisions for Managers
+2026-03-08 14:19:35,116 - INFO -       ✅ Already have SB_ACTG 5200 3.00_Financial Decisions for Managers_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,116 - INFO -    ↳ [6/19] SB/ACTG 5210 1.50 – Management Accounting
+2026-03-08 14:19:35,116 - INFO -       ✅ Already have SB_ACTG 5210 1.50_Management Accounting_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,116 - INFO -    ↳ [7/19] SB/ACTG 5211 3.00 – Management Accounting Fundamentals
+2026-03-08 14:19:35,116 - INFO -       ✅ Already have SB_ACTG 5211 3.00_Management Accounting Fundamentals_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,116 - INFO -    ↳ [8/19] SB/ACTG 6120 3.00 – Intermediate Financial Accounting I
+2026-03-08 14:19:35,116 - INFO -       ✅ Already have SB_ACTG 6120 3.00_Intermediate Financial Accounting I_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,116 - INFO -    ↳ [9/19] SB/ACTG 6160 3.00 – Advanced Financial Accounting
+2026-03-08 14:19:35,116 - INFO -       ✅ Already have SB_ACTG 6160 3.00_Advanced Financial Accounting_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,116 - INFO -    ↳ [10/19] SB/ACTG 6301 3.00 – Integrative Case Analysis for Accountants
+2026-03-08 14:19:35,116 - INFO -       ✅ Already have SB_ACTG 6301 3.00_Integrative Case Analysis for Accountants_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,116 - INFO -    ↳ [11/19] SB/ACTG 6401 3.00 – Advanced Integrative Case Analysis
+2026-03-08 14:19:35,116 - INFO -       ✅ Already have SB_ACTG 6401 3.00_Advanced Integrative Case Analysis_CourseSchedule.html (skipping)
+2026-03-08 14:19:35,116 - INFO -    ↳ [12/19] SB/ACTG 6501 3.00 – Integrative Case Analysis: The Capstone
+2026-03-08 14:19:48,480 - INFO -       📄 Page ready: 26417 bytes HTML, 1624 chars text
+2026-03-08 14:19:48,491 - INFO -       💾 Saved SB_ACTG 6501 3.00_Integrative Case Analysis_ The Capstone_CourseSchedule.html
+2026-03-08 14:20:05,528 - INFO -    ↳ [13/19] SB/ACTG 6601 3.00 – Management Accounting: Strategy & Performance
