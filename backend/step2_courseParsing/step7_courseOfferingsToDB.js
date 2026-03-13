@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs/promises';  // Importing fs.promises for reading files
-import { PrismaClient } from '../generated/prisma/index.js';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -52,11 +52,13 @@ async function main() {
                 }
 
                 // 2) upsert the CurrentCourseOfferings
+                const termAndYear = course.termAndYear ?? `${terms.term}`;
+
                 const offering = await prisma.currentCourseOfferings.upsert({
                 where: {
                     // Prisma uses underscore-joined name for composite unique inputs
-                    term_courseId_section_type: {
-                    term: terms.term,
+                    termAndYear_courseId_section_type: {
+                    termAndYear,
                     courseId: courseRecord.id,
                     section: terms.section,
                     type: sanitizedType,
@@ -64,6 +66,7 @@ async function main() {
                 },
                 update: {
                     term: terms.term,
+                    termAndYear,
                     courseId: courseRecord.id,
                     section: terms.section,
                     type: sanitizedType,
@@ -72,6 +75,7 @@ async function main() {
                 }, // empty -> do nothing if already exists
                 create: {
                     term: terms.term,
+                    termAndYear,
                     courseId: courseRecord.id,
                     section: terms.section,
                     type: sanitizedType,

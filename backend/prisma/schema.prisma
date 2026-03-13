@@ -6,11 +6,12 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  engineType = "binary"
 }
 
 datasource db {
   provider = "postgresql"
+  url = env("DATABASE_URL")
 }
 
 model Course {
@@ -70,16 +71,19 @@ model Instructors{
 }
 
 model CurrentCourseOfferings{
-  id Int @id @default(autoincrement())
-  term String
-  courseId Int
-  course Course @relation(fields:[courseId], references: [id])
-  section String
-  catNumber String?
-  type String
+  id          Int                    @id @default(autoincrement())
+  term        String
+  termAndYear String?                // e.g. "Summer 2026" (session selected in scraper)  (nullable for existing rows)
+  courseId    Int
+  course      Course                 @relation(fields:[courseId], references: [id])
+  section     String
+  catNumber   String?
+  type        String
   instructors InstructorOfferings[]
   courseTimes  CourseTime[]
-  @@unique([term,courseId, section, type])
+
+  // Use termAndYear to disambiguate between identical term codes (e.g. S1) across years
+  @@unique([termAndYear, courseId, section, type])
 }
 
 

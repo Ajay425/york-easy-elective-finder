@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'url';
 import path from 'path';
+import fs from 'fs/promises';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,6 +58,46 @@ async function runStep(stepNumber, stepName, modulePath) {
   }
 }
 
+async function archiveAllCourses() {
+  const src = path.join(__dirname, 'all_courses.json');
+  const archiveDir = path.join(__dirname, 'archive');
+
+  try {
+    await fs.mkdir(archiveDir, { recursive: true });
+
+    let termAndYear;
+    const sessionMetaPath = path.join(__dirname, '../step1_PythonCourseScraper/session_meta.json');
+    try {
+      const meta = JSON.parse(await fs.readFile(sessionMetaPath, 'utf-8'));
+      termAndYear = meta?.termAndYear;
+    } catch {
+      // ignore
+    }
+
+    if (!termAndYear) {
+      try {
+        const allCourses = JSON.parse(await fs.readFile(src, 'utf-8'));
+        if (Array.isArray(allCourses) && allCourses.length > 0) {
+          termAndYear = allCourses[0].termAndYear;
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    const safeTerm = (termAndYear ? String(termAndYear) : 'unknown')
+      .replace(/\s+/g, '_')
+      .replace(/[^a-zA-Z0-9_-]/g, '');
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const dest = path.join(archiveDir, `all_courses_${safeTerm}_${timestamp}.json`);
+
+    await fs.rename(src, dest);
+    console.log(`📦 Archived all_courses.json → ${dest}`);
+  } catch (err) {
+    console.warn(`⚠️ Failed to archive all_courses.json: ${err.message}`);
+  }
+}
+
 async function main() {
   const pipelineStart = Date.now();
   
@@ -67,6 +108,7 @@ async function main() {
   console.log(`Started at: ${new Date().toLocaleString()}\n`);
   
   let completedSteps = 0;
+  let success = false;
   
   try {
     for (const step of steps) {
@@ -83,7 +125,7 @@ async function main() {
     console.log(`Completed at: ${new Date().toLocaleString()}`);
     console.log('█'.repeat(60) + '\n');
     
-    process.exit(0);
+    success = true;
   } catch (error) {
     console.error('\n' + '█'.repeat(60));
     console.error('█ ❌ PIPELINE FAILED');
@@ -91,7 +133,9 @@ async function main() {
     console.error(`Completed ${completedSteps}/${steps.length} steps`);
     console.error(`Failed at step: ${completedSteps + 1}`);
     console.error('█'.repeat(60) + '\n');
-    process.exit(1);
+  } finally {
+    await archiveAllCourses();
+    process.exit(success ? 0 : 1);
   }
 }
 

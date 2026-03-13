@@ -5,6 +5,7 @@ import re
 import time
 import random
 import datetime
+import json
 import logging
 from typing import List, Tuple, Set, Optional
 
@@ -18,6 +19,14 @@ CAMPUS_NAME = "Keele"
 SAVE_DIR = "york_courses"
 PROGRESS_FILE = "progress.txt"
 LOG_FILE = "scraper.log"
+RUN_COMPLETE_MARKER = "run_complete.marker"
+# Persist session metadata so downstream steps can tag offerings with term+year
+SESSION_META_FILE = "session_meta.json"
+
+# Use absolute paths so paths are consistent regardless of cwd.
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SAVE_DIR_PATH = os.path.join(BASE_DIR, SAVE_DIR)
+PROGRESS_FILE_PATH = os.path.join(BASE_DIR, PROGRESS_FILE)
 
 COOLDOWN_SECONDS = 300              # 5 minutes (only after many consecutive fails)
 SUBJECT_ERROR_THRESHOLD = 5
@@ -139,7 +148,18 @@ def open_search_by_subject(page, start_url: str) -> None:
     # Select the session (e.g., Summer 2026)
     page.select_option("#sessionSelect", value=SESSION_SELECT)
     human_pause(0.5, 1.0)
-    
+
+    # Persist what session/term+year we selected (to later tag offerings in DB)
+    try:
+        session_label = page.locator("#sessionSelect option:checked").inner_text().strip()
+        if session_label:
+            meta_path = os.path.join(BASE_DIR, SESSION_META_FILE)
+            with open(meta_path, "w", encoding="utf-8") as f:
+                json.dump({"termAndYear": session_label}, f, indent=2)
+            logging.info(f"📝 Saved session metadata: {meta_path} -> {session_label}")
+    except Exception as e:
+        logging.warning(f"⚠️ Failed to write {SESSION_META_FILE}: {e}")
+
     page.wait_for_selector("#subjectSelect", timeout=30000)
 
     if page_looks_blocked_or_expired(page):
@@ -427,12 +447,51 @@ def main() -> None:
             subjects = subjects[:MAX_SUBJECTS]
         logging.info(f"📚 Found {len(subjects)} subjects to scrape")
 
-        os.makedirs(SAVE_DIR, exist_ok=True)
-
+        # Load prior progress, if any.
         completed_subjects: Set[str] = set()
-        if os.path.exists(PROGRESS_FILE):
-            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
-                completed_subjects = {line.strip() for line in f if line.strip()}
+        if os.path.exists(PROGRESS_FILE_PATH):
+            try:
+                with open(PROGRESS_FILE_PATH, "r", encoding="utf-8") as f:
+                    completed_subjects = {line.strip() for line in f if line.strip()}
+            except Exception as e:
+                logging.warning(f"⚠️ Failed to read {PROGRESS_FILE_PATH}: {e}")
+
+        # Determine if the prior run finished completely; if so, archive its output.
+        run_complete_marker = os.path.join(BASE_DIR, RUN_COMPLETE_MARKER)
+        run_finished_cleanly = os.path.exists(run_complete_marker)
+        run_finished_by_progress = len(completed_subjects) == len(subjects) and len(subjects) > 0
+
+        if (run_finished_cleanly or run_finished_by_progress) and os.path.isdir(SAVE_DIR_PATH):
+            try:
+                ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                archive_root = os.path.join(BASE_DIR, "archive")
+                os.makedirs(archive_root, exist_ok=True)
+                base = os.path.basename(os.path.normpath(SAVE_DIR))
+                archive_dir = os.path.join(archive_root, f"{base}_completed_{ts}")
+                if os.path.exists(archive_dir):
+                    suffix = 1
+                    while os.path.exists(f"{archive_dir}_{suffix}"):
+                        suffix += 1
+                    archive_dir = f"{archive_dir}_{suffix}"
+                os.rename(SAVE_DIR_PATH, archive_dir)
+                logging.info(f"🧹 Archived previous scraper output to {archive_dir}")
+            except Exception as e:
+                logging.warning(f"⚠️ Failed to archive existing {SAVE_DIR_PATH}: {e}")
+
+            try:
+                open(PROGRESS_FILE_PATH, "w", encoding="utf-8").close()
+                logging.info(f"🧹 Cleared {PROGRESS_FILE_PATH}")
+            except Exception as e:
+                logging.warning(f"⚠️ Failed to clear {PROGRESS_FILE_PATH}: {e}")
+
+            try:
+                os.remove(run_complete_marker)
+            except Exception:
+                pass
+
+            completed_subjects = set()
+
+        os.makedirs(SAVE_DIR_PATH, exist_ok=True)
         logging.info(f"🔁 Resuming — {len(completed_subjects)} subjects already completed")
 
         for idx, (subject_name, subject_value) in enumerate(subjects, start=1):
@@ -444,7 +503,7 @@ def main() -> None:
 
             logging.info(f"\n🎓 [{idx}/{len(subjects)}] Scraping subject: {subject_name}")
 
-            subj_dir = os.path.join(SAVE_DIR, sanitize_filename(subject_name))
+            subj_dir = os.path.join(SAVE_DIR_PATH, sanitize_filename(subject_name))
             os.makedirs(subj_dir, exist_ok=True)
 
             subject_errors = 0
@@ -607,10 +666,13 @@ def main() -> None:
                     continue
 
         logging.info("\n🎉 Done! All subjects processed.")
+
+        # Mark this run as complete so the next run can archive its output.
         try:
-            input("Press ENTER to close...")
-        except Exception:
-            pass
+            open(os.path.join(BASE_DIR, RUN_COMPLETE_MARKER), "w", encoding="utf-8").close()
+        except Exception as e:
+            logging.warning(f"⚠️ Failed to write run-complete marker: {e}")
+
         close_session(browser, context)
 
 if __name__ == "__main__":

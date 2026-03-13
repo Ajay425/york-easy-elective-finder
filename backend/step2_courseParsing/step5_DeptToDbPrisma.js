@@ -1,7 +1,7 @@
 //Put dept into prisma, based on folder names . I.e "ENG - Engineering - ( GS, LE )" gets dept ENG and longform Engineering
 import fs from "fs";
 import path from "path";
-import { PrismaClient } from "../generated/prisma/index.js";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 

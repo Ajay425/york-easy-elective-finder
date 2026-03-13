@@ -6,6 +6,28 @@ import { fileURLToPath } from "url";
 import { extractPrereqsWithCredits } from "./parsePrereqsHelperFunc.js";
 import { Console } from "console";
 
+// ES module setup for __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Include session metadata from step1 so we can tag offerings with term+year
+const sessionMetaPath = path.join(__dirname, "../step1_PythonCourseScraper/session_meta.json");
+let termAndYear = null;
+try {
+  if (fs.existsSync(sessionMetaPath)) {
+    const raw = fs.readFileSync(sessionMetaPath, "utf-8");
+    const meta = JSON.parse(raw);
+    termAndYear = meta.termAndYear || meta.sessionName || null;
+  }
+} catch (err) {
+  console.warn(`⚠️ Failed to read session metadata from ${sessionMetaPath}: ${err.message}`);
+}
+
+if (!termAndYear) {
+  console.warn(`⚠️ termAndYear is missing from session metadata; falling back to 'unknown'.`);
+  termAndYear = 'unknown';
+}
+
 /**
  * Extract meeting/term info from each course HTML table
  */
@@ -108,15 +130,13 @@ const match = heading.match(/^([A-Z]{1,3})\/([A-Z]+)\s+(\d{4}[A-Z]?)\s+([\d.]+)\
     description,
     terms,
     prereqs,
+    termAndYear,
   };
 }
 
 // ------------------------------------------------------
 //  EXECUTION: Parse all HTML files recursively
 // ------------------------------------------------------
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Root folder where all subjects are stored
 const baseDir = path.resolve(__dirname, "../step1_PythonCourseScraper/york_courses");

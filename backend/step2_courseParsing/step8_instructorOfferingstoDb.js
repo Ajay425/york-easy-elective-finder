@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs/promises';  // Importing fs.promises for reading files
-import { PrismaClient } from '../generated/prisma/index.js';
+import { PrismaClient } from '@prisma/client';
 import { connect } from 'http2';
 
 const prisma = new PrismaClient();
@@ -49,12 +49,13 @@ async function main() {
             if (teachingTypes.includes(sanitizedType)){
       
                     
-                    console.log(`${terms.term} ${course.facultyPrefix} ${course.dept} ${course.code} ${terms.section} ${sanitizedType} `)
+                    const termAndYear = course.termAndYear ?? `${terms.term}`;
+                console.log(`${termAndYear} ${course.facultyPrefix} ${course.dept} ${course.code} ${terms.section} ${sanitizedType} `)
                     
                     const courseOfferingId = await prisma.CurrentCourseOfferings.findUnique({
                         where:{
-                            term_courseId_section_type:{
-                                    term: terms.term,
+                            termAndYear_courseId_section_type:{
+                                    termAndYear,
                                     courseId : courseRow.id,
                                     section: terms.section,
                                     type: sanitizedType,

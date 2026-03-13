@@ -7,3 +7,7 @@ node_modules
 # API usage tracking
 data/apiUsage.json
 
+# Scraper output (should not be committed)
+step1_PythonCourseScraper/york_courses/
+step1_PythonCourseScraper/archive/
+
