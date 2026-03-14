@@ -4,8 +4,25 @@ import * as db from '../database/dbPrismaCourses.js';
 const adminRouter = express.Router();
 
 // Search page (EJS) - client-side will call /courses/search
-adminRouter.get('/', (req, res) => {
-  res.render('admin_search', { title: 'Course Admin - Search' });
+adminRouter.get('/', async (req, res) => {
+  try {
+    const filterOptions = await db.getCourseSearchFilterOptionsDb();
+    res.render('admin_search', { title: 'Course Admin - Search', filterOptions });
+  } catch (err) {
+    console.error('Failed loading admin search filters:', err);
+    res.render('admin_search', {
+      title: 'Course Admin - Search',
+      filterOptions: {
+        depts: [],
+        faculties: [],
+        years: [],
+        credits: [],
+        languages: [],
+        terms: [],
+        types: [],
+      },
+    });
+  }
 });
 
 // Course detail page - server-side fetch and render
@@ -14,7 +31,13 @@ adminRouter.get('/course/:id', async (req, res) => {
   try {
     const course = await db.getCourseFromIdDB(id);
     if (!course) return res.status(404).send('Course not found');
-    res.render('admin_course', { title: `Course ${course.deptAcronym} ${course.courseCode}`, course });
+    const returnToRaw = typeof req.query.returnTo === 'string' ? req.query.returnTo : '';
+    const returnTo = returnToRaw.startsWith('/admin') ? returnToRaw : '/admin';
+    res.render('admin_course', {
+      title: `Course ${course.deptAcronym} ${course.courseCode}`,
+      course,
+      returnTo,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');

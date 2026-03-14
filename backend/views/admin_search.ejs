@@ -4,93 +4,535 @@
     <meta charset="utf-8" />
     <title><%= title %></title>
     <style>
-      :root{ --bg:#f7f8fb; --card:#fff; --muted:#6b7280; --accent:#2b6cb0 }
-      body{font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); margin:0; padding:24px}
-      .container{max-width:1100px;margin:0 auto}
-      h1{font-size:20px;margin:0 0 12px}
-      .search-bar{display:flex;gap:10px;align-items:center;margin-bottom:18px}
-      .search-input{flex:1;padding:10px 12px;border:1px solid #e6edf8;border-radius:8px;background:#fff}
-      .btn{padding:9px 12px;border-radius:8px;border:1px solid transparent;cursor:pointer}
-      .btn-primary{background:var(--accent);color:#fff}
-      .results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
-      .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(16,24,40,0.04);border:1px solid #edf2f9;display:flex;flex-direction:column;gap:12px}
-      .code-badge{display:inline-block;background:#eef6ff;color:var(--accent);font-weight:700;padding:6px 8px;border-radius:6px}
-      .card-title{font-weight:700;margin-top:2px;font-size:15px}
-      .meta{color:var(--muted);font-size:13px}
-      .small{color:var(--muted);font-size:13px}
-      .pager{margin-top:18px;display:flex;align-items:center;gap:12px}
-      .pager button{padding:6px 10px;border-radius:8px;border:1px solid #e6edf8;background:#fff;cursor:pointer}
-      .top-pop{margin-left:auto;color:#111;font-weight:600}
-      .no-results{color:var(--muted)}
-      @media (max-width:640px){.search-bar{flex-direction:column;align-items:stretch}.top-pop{margin-left:0}}
+      :root {
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --muted: #5b6575;
+        --ink: #152033;
+        --accent: #1f5ea8;
+        --accent-soft: #e7f1ff;
+        --line: #dce6f3;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: radial-gradient(circle at top, #ffffff 0%, var(--bg) 55%);
+        margin: 0;
+        padding: 24px;
+        color: var(--ink);
+      }
+      .container { max-width: 1180px; margin: 0 auto; }
+      .top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+      h1 { font-size: 22px; margin: 0; letter-spacing: 0.2px; }
+
+      .panel {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: 0 8px 22px rgba(12, 27, 54, 0.05);
+        padding: 14px;
+        margin-bottom: 16px;
+      }
+      .search-row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; }
+      .search-input {
+        padding: 11px 12px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: #fff;
+        font-size: 14px;
+      }
+
+      .btn {
+        padding: 9px 12px;
+        border-radius: 9px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .btn-primary { background: var(--accent); color: #fff; }
+      .btn-ghost { background: #fff; border-color: var(--line); color: var(--ink); }
+
+      .filter-toggle {
+        margin-top: 10px;
+        display: inline-block;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .filters {
+        margin-top: 12px;
+        display: none;
+        grid-template-columns: repeat(4, minmax(190px, 1fr));
+        gap: 10px;
+      }
+      .filters.open { display: grid; }
+      .filter-box label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+      .filter-box select {
+        width: 100%;
+        min-height: 120px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        padding: 6px;
+        background: #fff;
+      }
+      .hint { margin-top: 8px; color: var(--muted); font-size: 12px; }
+      .boolean-filters { margin-top: 10px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+      .boolean-filters label { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; color: var(--ink); }
+
+      .active-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        border: 1px solid #c8dcfb;
+        border-radius: 999px;
+        padding: 5px 9px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+      .card {
+        background: var(--card);
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .code-badge {
+        display: inline-block;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-weight: 700;
+        padding: 5px 8px;
+        border-radius: 7px;
+      }
+      .card-title { font-weight: 700; margin-top: 2px; font-size: 15px; }
+      .meta { color: var(--muted); font-size: 13px; }
+      .desc { color: #283246; font-size: 13px; line-height: 1.45; white-space: pre-wrap; }
+      .small { color: var(--muted); font-size: 13px; }
+      .pager { margin-top: 18px; display: flex; align-items: center; gap: 12px; }
+      .pager button { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
+      .no-results { color: var(--muted); }
+
+      @media (max-width: 980px) {
+        .filters { grid-template-columns: repeat(2, minmax(170px, 1fr)); }
+      }
+      @media (max-width: 640px) {
+        .search-row { grid-template-columns: 1fr; }
+        .filters { grid-template-columns: 1fr; }
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <div style="display:flex;align-items:center;gap:12px;justify-content:space-between">
-        <h1 style="margin:0">Course Admin — Search</h1>
+      <div class="top-row">
+        <h1>Course Admin Search</h1>
         <div><a href="/admin/logout" style="color:#2b6cb0;text-decoration:none">Logout</a></div>
       </div>
-      <div class="search-bar">
-        <input id="q" class="search-input" placeholder="Search by name, dept (EECS), code (2101) or faculty" />
-        <button id="go" class="btn btn-primary">Search</button>
+
+      <div class="panel">
+        <div class="search-row">
+          <input id="q" class="search-input" placeholder="Search name, dept, code, faculty..." />
+          <button id="go" class="btn btn-primary">Search</button>
+          <button id="clearAll" class="btn btn-ghost">Clear</button>
+        </div>
+        <a id="toggleFilters" class="filter-toggle">Hide filters</a>
+
+        <div id="filters" class="filters open">
+          <div class="filter-box">
+            <label>Departments</label>
+            <select id="f-depts" multiple></select>
+          </div>
+          <div class="filter-box">
+            <label>Faculties</label>
+            <select id="f-faculties" multiple></select>
+          </div>
+          <div class="filter-box">
+            <label>Years</label>
+            <select id="f-years" multiple></select>
+          </div>
+          <div class="filter-box">
+            <label>Credits</label>
+            <select id="f-credits" multiple></select>
+          </div>
+          <div class="filter-box">
+            <label>Languages</label>
+            <select id="f-languages" multiple></select>
+          </div>
+          <div class="filter-box">
+            <label>Terms</label>
+            <select id="f-terms" multiple></select>
+          </div>
+          <div class="filter-box">
+            <label>Offering Types</label>
+            <select id="f-types" multiple></select>
+          </div>
+        </div>
+
+        <div class="boolean-filters">
+          <label>
+            <input id="f-has-electives" type="checkbox" />
+            Has electives
+          </label>
+          <label>
+            <input id="f-has-no-electives" type="checkbox" />
+            Has no electives
+          </label>
+        </div>
+
+        <div class="hint">Tip: hold Ctrl (or Cmd on Mac) to select multiple values in each list.</div>
       </div>
 
+      <div id="activeFilters" class="active-filters"></div>
       <div id="results" class="results-grid"></div>
       <div id="pager" class="pager"></div>
     </div>
 
     <script>
+      const initialFilterOptions = <%- JSON.stringify(typeof filterOptions !== 'undefined' ? filterOptions : {}) %>;
       const qInput = document.getElementById('q');
       const results = document.getElementById('results');
       const pager = document.getElementById('pager');
       const go = document.getElementById('go');
-      go.addEventListener('click', ()=> renderPage(1));
-      qInput.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') renderPage(1) });
+      const clearAll = document.getElementById('clearAll');
+      const activeFilters = document.getElementById('activeFilters');
+      const toggleFilters = document.getElementById('toggleFilters');
+      const filtersWrap = document.getElementById('filters');
+      const hasElectivesCheckbox = document.getElementById('f-has-electives');
+      const hasNoElectivesCheckbox = document.getElementById('f-has-no-electives');
 
-      let currentPage = 1; const pageSize = 20;
+      const filterSelectIds = {
+        depts: 'f-depts',
+        faculties: 'f-faculties',
+        years: 'f-years',
+        credits: 'f-credits',
+        languages: 'f-languages',
+        terms: 'f-terms',
+        types: 'f-types',
+      };
 
-      function createCard(it){
-        const el = document.createElement('div'); el.className = 'card';
-        const header = document.createElement('div'); header.style.display = 'flex'; header.style.alignItems='center';
-        const badge = document.createElement('div'); badge.className='code-badge'; badge.textContent = it.code || '';
-        const title = document.createElement('div'); title.style.marginLeft='10px';
+      const filterLabels = {
+        depts: 'Dept',
+        faculties: 'Faculty',
+        years: 'Year',
+        credits: 'Credit',
+        languages: 'Lang',
+        terms: 'Term',
+        types: 'Type',
+      };
+      const DESC_PREVIEW_LIMIT = 280;
+
+      go.addEventListener('click', () => renderPage(1));
+      clearAll.addEventListener('click', clearEverything);
+      qInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') renderPage(1); });
+
+      toggleFilters.addEventListener('click', () => {
+        const isOpen = filtersWrap.classList.toggle('open');
+        toggleFilters.textContent = isOpen ? 'Hide filters' : 'Show filters';
+      });
+
+      Object.values(filterSelectIds).forEach((id) => {
+        const el = document.getElementById(id);
+        el.addEventListener('change', () => renderPage(1));
+      });
+      hasElectivesCheckbox.addEventListener('change', () => renderPage(1));
+      hasNoElectivesCheckbox.addEventListener('change', () => renderPage(1));
+
+      // Keep these two boolean filters mutually exclusive for predictable behavior.
+      hasElectivesCheckbox.addEventListener('change', () => {
+        if (hasElectivesCheckbox.checked) hasNoElectivesCheckbox.checked = false;
+      });
+      hasNoElectivesCheckbox.addEventListener('change', () => {
+        if (hasNoElectivesCheckbox.checked) hasElectivesCheckbox.checked = false;
+      });
+
+      let currentPage = 1;
+      const pageSize = 20;
+
+      function getMultiValues(selectId) {
+        const select = document.getElementById(selectId);
+        return Array.from(select.selectedOptions).map((o) => o.value).filter(Boolean);
+      }
+
+      function getSelectedFilters() {
+        return {
+          depts: getMultiValues(filterSelectIds.depts),
+          faculties: getMultiValues(filterSelectIds.faculties),
+          years: getMultiValues(filterSelectIds.years),
+          credits: getMultiValues(filterSelectIds.credits),
+          languages: getMultiValues(filterSelectIds.languages),
+          terms: getMultiValues(filterSelectIds.terms),
+          types: getMultiValues(filterSelectIds.types),
+          hasElectives: hasElectivesCheckbox.checked,
+          hasNoElectives: hasNoElectivesCheckbox.checked,
+        };
+      }
+
+      function activeFilterCount(filters) {
+        let count = 0;
+        for (const val of Object.values(filters)) {
+          if (Array.isArray(val)) count += val.length;
+          else if (val === true) count += 1;
+        }
+        return count;
+      }
+
+      function renderActiveChips(filters) {
+        activeFilters.innerHTML = '';
+        for (const [key, values] of Object.entries(filters)) {
+          if (Array.isArray(values)) {
+            for (const val of values) {
+              const chip = document.createElement('div');
+              chip.className = 'chip';
+              chip.textContent = `${filterLabels[key]}: ${val}`;
+              activeFilters.appendChild(chip);
+            }
+          } else if (key === 'hasElectives' && values === true) {
+            const chip = document.createElement('div');
+            chip.className = 'chip';
+            chip.textContent = 'Has electives';
+            activeFilters.appendChild(chip);
+          } else if (key === 'hasNoElectives' && values === true) {
+            const chip = document.createElement('div');
+            chip.className = 'chip';
+            chip.textContent = 'Has no electives';
+            activeFilters.appendChild(chip);
+          }
+        }
+      }
+
+      function buildSearchUrl(page) {
+        const params = new URLSearchParams();
+        const q = qInput.value.trim();
+        const filters = getSelectedFilters();
+
+        if (q) params.set('q', q);
+        params.set('page', String(page));
+        params.set('pageSize', String(pageSize));
+
+        for (const [key, values] of Object.entries(filters)) {
+          if (Array.isArray(values)) {
+            values.forEach((value) => params.append(key, value));
+          } else if (key === 'hasElectives' && values === true) {
+            params.set('hasElectives', 'true');
+          } else if (key === 'hasNoElectives' && values === true) {
+            params.set('hasNoElectives', 'true');
+          }
+        }
+
+        return { url: `/courses/search?${params.toString()}`, params, filters, q };
+      }
+
+      function applyUrlState() {
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q') || '';
+        const page = Math.max(1, Number(params.get('page')) || 1);
+
+        qInput.value = q;
+        hasElectivesCheckbox.checked = params.get('hasElectives') === 'true';
+        hasNoElectivesCheckbox.checked = params.get('hasNoElectives') === 'true';
+        if (hasElectivesCheckbox.checked && hasNoElectivesCheckbox.checked) {
+          hasNoElectivesCheckbox.checked = false;
+        }
+
+        Object.entries(filterSelectIds).forEach(([key, id]) => {
+          const values = params.getAll(key);
+          if (!values.length) return;
+          const wanted = new Set(values);
+          const select = document.getElementById(id);
+          Array.from(select.options).forEach((opt) => {
+            opt.selected = wanted.has(opt.value);
+          });
+        });
+
+        return { q, page };
+      }
+
+      function clearEverything() {
+        qInput.value = '';
+        Object.values(filterSelectIds).forEach((id) => {
+          const select = document.getElementById(id);
+          Array.from(select.options).forEach((o) => { o.selected = false; });
+        });
+        hasElectivesCheckbox.checked = false;
+        hasNoElectivesCheckbox.checked = false;
+        activeFilters.innerHTML = '';
+        results.innerHTML = '<div class="no-results">Search by text and/or filters.</div>';
+        pager.innerHTML = '';
+      }
+
+      function populateSelect(id, values) {
+        const select = document.getElementById(id);
+        select.innerHTML = '';
+        values.forEach((value) => {
+          const option = document.createElement('option');
+          option.value = String(value);
+          option.textContent = String(value);
+          select.appendChild(option);
+        });
+      }
+
+      async function loadFilterOptions() {
+        const initialArrays = initialFilterOptions && typeof initialFilterOptions === 'object'
+          ? Object.values(initialFilterOptions).filter((v) => Array.isArray(v))
+          : [];
+        const hasInitialData = initialArrays.some((arr) => arr.length > 0);
+
+        if (hasInitialData) {
+          populateSelect(filterSelectIds.depts, initialFilterOptions.depts || []);
+          populateSelect(filterSelectIds.faculties, initialFilterOptions.faculties || []);
+          populateSelect(filterSelectIds.years, initialFilterOptions.years || []);
+          populateSelect(filterSelectIds.credits, initialFilterOptions.credits || []);
+          populateSelect(filterSelectIds.languages, initialFilterOptions.languages || []);
+          populateSelect(filterSelectIds.terms, initialFilterOptions.terms || []);
+          populateSelect(filterSelectIds.types, initialFilterOptions.types || []);
+          return;
+        }
+
+        try {
+          const res = await fetch('/courses/search/options');
+          const json = await res.json();
+          const options = json.options || {};
+
+          populateSelect(filterSelectIds.depts, options.depts || []);
+          populateSelect(filterSelectIds.faculties, options.faculties || []);
+          populateSelect(filterSelectIds.years, options.years || []);
+          populateSelect(filterSelectIds.credits, options.credits || []);
+          populateSelect(filterSelectIds.languages, options.languages || []);
+          populateSelect(filterSelectIds.terms, options.terms || []);
+          populateSelect(filterSelectIds.types, options.types || []);
+        } catch (err) {
+          console.error('Failed to load filter options', err);
+        }
+      }
+
+      function createCard(it) {
+        const el = document.createElement('div');
+        el.className = 'card';
+
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.alignItems = 'center';
+
+        const badge = document.createElement('div');
+        badge.className = 'code-badge';
+        badge.textContent = it.code || '';
+
+        const title = document.createElement('div');
+        title.style.marginLeft = '10px';
         title.innerHTML = `<div class='card-title'>${it.title || 'Untitled'}</div><div class='meta'>${it.faculty || ''}</div>`;
-        header.appendChild(badge); header.appendChild(title);
+
+        header.appendChild(badge);
+        header.appendChild(title);
         el.appendChild(header);
 
-        const mid = document.createElement('div'); mid.className='meta'; mid.textContent = `Credits: ${it.credit ?? '—'}`;
+        const mid = document.createElement('div');
+        mid.className = 'meta';
+        mid.textContent = `Year: ${it.year ?? '—'} | Credits: ${it.credit ?? '—'} | Language: ${it.language || '—'}`;
         el.appendChild(mid);
 
-        const foot = document.createElement('div'); foot.style.display='flex'; foot.style.alignItems='center';
-        const open = document.createElement('button'); open.className='btn'; open.textContent='Open';
-        open.addEventListener('click', ()=> window.location = `/admin/course/${it.id}`);
+        const desc = document.createElement('div');
+        desc.className = 'desc';
+        const fullDesc = it.desc && it.desc.trim() ? it.desc.trim() : 'No description available.';
+        desc.textContent = fullDesc.length > DESC_PREVIEW_LIMIT
+          ? `${fullDesc.slice(0, DESC_PREVIEW_LIMIT).trim()}...`
+          : fullDesc;
+        el.appendChild(desc);
+
+        const foot = document.createElement('div');
+        foot.style.display = 'flex';
+        foot.style.alignItems = 'center';
+
+        const open = document.createElement('button');
+        open.className = 'btn';
+        open.textContent = 'Open';
+        open.addEventListener('click', () => {
+          const built = buildSearchUrl(currentPage);
+          const returnTo = `/admin?${built.params.toString()}`;
+          window.location = `/admin/course/${it.id}?returnTo=${encodeURIComponent(returnTo)}`;
+        });
+
         foot.appendChild(open);
         el.appendChild(foot);
-
         return el;
       }
 
-      async function renderPage(page){
-        const q = qInput.value.trim();
-        if (!q) { results.innerHTML = '<div class="no-results">Type something to search.</div>'; pager.innerHTML=''; return }
-        results.innerHTML = '<div class="no-results">Searching…</div>'; pager.innerHTML='';
-        try{
-          const res = await fetch(`/courses/search?q=${encodeURIComponent(q)}&page=${page}&pageSize=${pageSize}`);
-          const json = await res.json();
-          const list = json.results || []; const total = json.total || 0; currentPage = json.page || page;
-          results.innerHTML = '';
-          if (!list.length){ results.innerHTML = '<div class="no-results">No results</div>'; return }
-          for (const it of list) results.appendChild(createCard(it));
+      async function renderPage(page) {
+        const built = buildSearchUrl(page);
+        const filterCount = activeFilterCount(built.filters);
 
-            const totalPages = Math.max(1, Math.ceil(total / pageSize));
+        renderActiveChips(built.filters);
+
+        if (!built.q && filterCount === 0) {
+          window.history.replaceState({}, '', '/admin');
+          results.innerHTML = '<div class="no-results">Search by text and/or filters.</div>';
           pager.innerHTML = '';
-          const prev = document.createElement('button'); prev.textContent='Prev'; prev.disabled = currentPage <= 1; prev.addEventListener('click', ()=> renderPage(currentPage-1));
-          const next = document.createElement('button'); next.textContent='Next'; next.disabled = currentPage >= totalPages; next.addEventListener('click', ()=> renderPage(currentPage+1));
-          const info = document.createElement('div'); info.className='small'; info.textContent = `Page ${currentPage} of ${totalPages} — ${total} results`;
-              pager.appendChild(prev); pager.appendChild(info); pager.appendChild(next);
-        }catch(err){ results.innerHTML = '<div class="no-results">Search failed</div>'; pager.innerHTML=''; }
+          return;
+        }
+
+        window.history.replaceState({}, '', `/admin?${built.params.toString()}`);
+
+        results.innerHTML = '<div class="no-results">Searching...</div>';
+        pager.innerHTML = '';
+
+        try {
+          const res = await fetch(built.url);
+          const json = await res.json();
+          const list = json.results || [];
+          const total = json.total || 0;
+          currentPage = json.page || page;
+
+          results.innerHTML = '';
+          if (!list.length) {
+            results.innerHTML = '<div class="no-results">No results for the selected filters.</div>';
+            return;
+          }
+
+          for (const it of list) {
+            results.appendChild(createCard(it));
+          }
+
+          const totalPages = Math.max(1, Math.ceil(total / pageSize));
+          pager.innerHTML = '';
+
+          const prev = document.createElement('button');
+          prev.textContent = 'Prev';
+          prev.disabled = currentPage <= 1;
+          prev.addEventListener('click', () => renderPage(currentPage - 1));
+
+          const next = document.createElement('button');
+          next.textContent = 'Next';
+          next.disabled = currentPage >= totalPages;
+          next.addEventListener('click', () => renderPage(currentPage + 1));
+
+          const info = document.createElement('div');
+          info.className = 'small';
+          info.textContent = `Page ${currentPage} of ${totalPages} | ${total} results`;
+
+          pager.appendChild(prev);
+          pager.appendChild(info);
+          pager.appendChild(next);
+        } catch (err) {
+          results.innerHTML = '<div class="no-results">Search failed</div>';
+          pager.innerHTML = '';
+        }
       }
+
+      loadFilterOptions().then(() => {
+        const state = applyUrlState();
+        const filters = getSelectedFilters();
+        const hasAnyFilter = activeFilterCount(filters) > 0;
+        if (state.q || hasAnyFilter) {
+          renderPage(state.page || 1);
+        } else {
+          results.innerHTML = '<div class="no-results">Search by text and/or filters.</div>';
+        }
+      });
     </script>
   </body>
 </html>

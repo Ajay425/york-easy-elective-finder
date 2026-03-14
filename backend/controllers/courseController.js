@@ -121,9 +121,40 @@ export async function searchCourses(req, res) {
     const q = req.query.q || '';
     const page = req.query.page ? Number(req.query.page) : 1;
     const pageSize = req.query.pageSize ? Number(req.query.pageSize) : 50;
+
+    const parseMulti = (value) => {
+        if (value === undefined || value === null) return [];
+        const raw = Array.isArray(value) ? value : [value];
+        return raw
+            .flatMap((v) => String(v).split(','))
+            .map((v) => v.trim())
+            .filter(Boolean);
+    };
+
+    const filters = {
+        depts: parseMulti(req.query.depts),
+        years: parseMulti(req.query.years),
+        faculties: parseMulti(req.query.faculties),
+        credits: parseMulti(req.query.credits),
+        languages: parseMulti(req.query.languages),
+        terms: parseMulti(req.query.terms),
+        types: parseMulti(req.query.types),
+        hasElectives: String(req.query.hasElectives || '').toLowerCase() === 'true',
+        hasNoElectives: String(req.query.hasNoElectives || '').toLowerCase() === 'true',
+    };
+
     try {
-        const { results, total } = await db.searchCoursesDb(q, page, pageSize);
+        const { results, total } = await db.searchCoursesDb(q, page, pageSize, filters);
         return res.status(200).json({ msg: 'success', results, total, page, pageSize });
+    } catch (err) {
+        return res.status(500).json({ msg: err.message || err });
+    }
+}
+
+export async function getCourseSearchFilterOptions(req, res) {
+    try {
+        const options = await db.getCourseSearchFilterOptionsDb();
+        return res.status(200).json({ msg: 'success', options });
     } catch (err) {
         return res.status(500).json({ msg: err.message || err });
     }

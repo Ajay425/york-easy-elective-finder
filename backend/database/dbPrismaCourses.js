@@ -275,42 +275,80 @@ catch(err){
 
 }
 
-export async function searchCoursesDb(query, page = 1, pageSize = 50) {
+export async function searchCoursesDb(query, page = 1, pageSize = 50, filters = {}) {
   try {
     const q = String(query || '').trim();
-    if (!q) return { results: [], total: 0 };
 
-    // Split query into tokens and require that each token matches at least one field.
-    // This allows searches like "EECS 2101" to match deptAcronym==EECS and courseCode==2101.
-    // normalize tokens by trimming and removing punctuation so 'EECS-2101' -> ['EECS','2101']
-    const rawTokens = q.split(/\s+/).map(t => t.trim()).filter(Boolean);
-    const tokens = rawTokens.map(t => t.replace(/[^a-z0-9]/gi, '')).filter(Boolean);
-    let where;
-    if (tokens.length === 0) {
-      where = {};
-    } else {
-      // For each token, create an OR clause that checks all searchable fields.
-      // Then combine those with AND so ALL tokens must be present somewhere.
-      where = {
-        AND: tokens.map((t) => {
-          const or = [];
-          // token normalized (already stripped punctuation)
-          const tn = t;
-          // if the token looks numeric, prefer exact match on courseCode
-          if (/^\d+$/.test(tn)) {
-            or.push({ courseCode: { equals: tn } });
-          }
+    const andClauses = [];
 
-          // match against name, deptAcronym, courseCode, faculty (case-insensitive)
-          or.push({ name: { contains: tn, mode: 'insensitive' } });
-          or.push({ deptAcronym: { contains: tn, mode: 'insensitive' } });
-          or.push({ courseCode: { contains: tn, mode: 'insensitive' } });
-          or.push({ faculty: { contains: tn, mode: 'insensitive' } });
-
-          return { OR: or };
-        }),
-      };
+    // Split query into tokens and require each token to match at least one searchable field.
+    if (q) {
+      const rawTokens = q.split(/\s+/).map((t) => t.trim()).filter(Boolean);
+      const tokens = rawTokens.map((t) => t.replace(/[^a-z0-9]/gi, '')).filter(Boolean);
+      if (tokens.length) {
+        andClauses.push(
+          ...tokens.map((t) => {
+            const or = [];
+            if (/^\d+$/.test(t)) {
+              or.push({ courseCode: { equals: t } });
+            }
+            or.push({ name: { contains: t, mode: 'insensitive' } });
+            or.push({ deptAcronym: { contains: t, mode: 'insensitive' } });
+            or.push({ courseCode: { contains: t, mode: 'insensitive' } });
+            or.push({ faculty: { contains: t, mode: 'insensitive' } });
+            return { OR: or };
+          })
+        );
+      }
     }
+
+    const depts = Array.isArray(filters.depts)
+      ? filters.depts.map((v) => String(v).trim()).filter(Boolean)
+      : [];
+    const faculties = Array.isArray(filters.faculties)
+      ? filters.faculties.map((v) => String(v).trim()).filter(Boolean)
+      : [];
+    const languages = Array.isArray(filters.languages)
+      ? filters.languages.map((v) => String(v).trim()).filter(Boolean)
+      : [];
+    const years = Array.isArray(filters.years)
+      ? filters.years.map((v) => Number(v)).filter((v) => Number.isFinite(v))
+      : [];
+    const credits = Array.isArray(filters.credits)
+      ? filters.credits.map((v) => Number(v)).filter((v) => Number.isFinite(v))
+      : [];
+    const terms = Array.isArray(filters.terms)
+      ? filters.terms.map((v) => String(v).trim()).filter(Boolean)
+      : [];
+    const types = Array.isArray(filters.types)
+      ? filters.types.map((v) => String(v).trim()).filter(Boolean)
+      : [];
+    const hasElectives = filters.hasElectives === true;
+    const hasNoElectives = filters.hasNoElectives === true;
+
+    if (depts.length) andClauses.push({ deptAcronym: { in: depts } });
+    if (faculties.length) andClauses.push({ faculty: { in: faculties } });
+    if (languages.length) andClauses.push({ language: { in: languages } });
+    if (years.length) andClauses.push({ year: { in: years } });
+    if (credits.length) andClauses.push({ credit: { in: credits } });
+
+    if (terms.length || types.length) {
+      const offeringWhere = {};
+      if (terms.length) offeringWhere.term = { in: terms };
+      if (types.length) offeringWhere.type = { in: types };
+      andClauses.push({ courseOfferings: { some: offeringWhere } });
+    }
+
+    if (hasElectives && !hasNoElectives) {
+      // In this schema, a course has prerequisites if it has at least one row in CoursePrerequisite.
+      andClauses.push({ prerequisites: { some: {} } });
+    }
+
+    if (hasNoElectives && !hasElectives) {
+      andClauses.push({ prerequisites: { none: {} } });
+    }
+
+    const where = andClauses.length ? { AND: andClauses } : {};
 
     // total count for pagination
     const total = await prisma.course.count({ where });
@@ -324,6 +362,10 @@ export async function searchCoursesDb(query, page = 1, pageSize = 50) {
       where,
       skip,
       take: size,
+      orderBy: [
+        { deptAcronym: 'asc' },
+        { courseCode: 'asc' },
+      ],
     });
 
     const results = items.map((c) => {
@@ -331,12 +373,61 @@ export async function searchCoursesDb(query, page = 1, pageSize = 50) {
         id: c.id,
         title: c.name,
         code: `${c.deptAcronym} ${c.courseCode}`,
+        deptAcronym: c.deptAcronym,
+        year: c.year,
+        language: c.language,
+        desc: c.desc,
         faculty: c.faculty,
         credit: c.credit,
       };
     });
 
     return { results, total };
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function getCourseSearchFilterOptionsDb() {
+  try {
+    const [
+      deptRows,
+      facultyRows,
+      yearRows,
+      creditRows,
+      languageRows,
+      termRows,
+      typeRows,
+    ] = await Promise.all([
+      prisma.course.findMany({ select: { deptAcronym: true }, distinct: ['deptAcronym'] }),
+      prisma.course.findMany({ select: { faculty: true }, distinct: ['faculty'] }),
+      prisma.course.findMany({ select: { year: true }, distinct: ['year'] }),
+      prisma.course.findMany({ select: { credit: true }, distinct: ['credit'] }),
+      prisma.course.findMany({ select: { language: true }, distinct: ['language'], where: { language: { not: null } } }),
+      prisma.currentCourseOfferings.findMany({ select: { term: true }, distinct: ['term'] }),
+      prisma.currentCourseOfferings.findMany({ select: { type: true }, distinct: ['type'] }),
+    ]);
+
+    const toSortedStrings = (rows, key) => rows
+      .map((r) => r[key])
+      .filter((v) => typeof v === 'string' && v.trim() !== '')
+      .sort((a, b) => a.localeCompare(b));
+
+    return {
+      depts: toSortedStrings(deptRows, 'deptAcronym'),
+      faculties: toSortedStrings(facultyRows, 'faculty'),
+      languages: toSortedStrings(languageRows, 'language'),
+      terms: toSortedStrings(termRows, 'term'),
+      types: toSortedStrings(typeRows, 'type'),
+      years: yearRows
+        .map((r) => r.year)
+        .filter((v) => Number.isFinite(v))
+        .sort((a, b) => b - a),
+      credits: creditRows
+        .map((r) => r.credit)
+        .filter((v) => Number.isFinite(v))
+        .sort((a, b) => a - b),
+    };
   } catch (err) {
     throw err;
   }

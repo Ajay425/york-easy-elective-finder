@@ -7,6 +7,7 @@
       body { font-family: Arial, sans-serif; padding: 18px; background: #f7f8fb }
       label { display:block; margin-top:8px }
       input[type=text], textarea { width: 60%; padding:6px }
+      .desc-box { width: 100%; min-height: 240px; box-sizing: border-box; }
       .meta { color:#666; margin-bottom:8px }
       .section { margin-top:18px; padding:14px; border:1px solid #eee; background:#fff; border-radius:6px }
       table { border-collapse: collapse; width:100% }
@@ -53,7 +54,7 @@
   <body>
     <div class="container">
       <div style="display:flex;align-items:center;gap:12px;justify-content:space-between">
-        <div><a href="/admin">← Back to search</a></div>
+        <div><a href="<%= returnTo || '/admin' %>">← Back to search</a></div>
         <div><a href="/admin/logout" style="color:#2b6cb0;text-decoration:none">Logout</a></div>
       </div>
       <h1 class="page-title"><span class="code"><%= course.deptAcronym %> <%= course.courseCode %></span> — <span class="coursename"><%= course.name %></span></h1>
@@ -68,7 +69,7 @@
         <label>Credits <input name="credit" value="<%= course.credit %>" /></label>
         <label>Year <input name="year" value="<%= course.year %>" /></label>
         <label>Name <input name="name" value="<%= course.name || '' %>" /></label>
-        <label>Description <textarea name="desc" rows="4"><%= course.desc || '' %></textarea></label>
+        <label>Description <textarea class="desc-box" name="desc" rows="12"><%= course.desc || '' %></textarea></label>
         <label>Language <input name="language" value="<%= course.language || '' %>" /></label>
         <div style="margin-top:8px"><button type="submit">Save</button></div>
       </form>
@@ -234,7 +235,6 @@
       document.querySelectorAll('.delete-prereq').forEach(btn => {
         btn.addEventListener('click', async (e) => {
           const id = btn.dataset.id;
-          if (!confirm('Delete this prerequisite link?')) return;
           try {
             const res = await fetch(`/prereq/${id}`, { method: 'DELETE' });
             if (res.status === 204) location.reload(); else alert('Failed to delete');
