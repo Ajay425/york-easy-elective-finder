@@ -13,7 +13,7 @@ const steps = [
   { num: 3, name: 'Add Prerequisites', path: './step3_addPrereqsToCoursesInDb.js' },
   { num: 4, name: 'Import Instructors', path: './step4_JSONinstructorsToDb.js' },
   { num: 5, name: 'Import Departments', path: './step5_DeptToDbPrisma.js' },
-  // { num: 6, name: 'Add Professor Ratings', path: './step6_rmpAddprofessorRatingsToDb.js' },
+   { num: 6, name: 'Add Professor Ratings', path: './step6_rmpAddprofessorRatingsToDb.js' },
   { num: 7, name: 'Import Course Offerings', path: './step7_courseOfferingsToDB.js' },
   { num: 8, name: 'Import Instructor Offerings', path: './step8_instructorOfferingstoDb.js' },
   { num: 9, name: 'Add Instructor Popularity', path: './step9_addInstructorPopularity.js' },
@@ -23,7 +23,6 @@ const steps = [
   { num: 13, name: 'Remove Prereqs From Approved Course List', path: './step13_removeApprovedCoursePrereqs.js' },
 ];
 
-// Temporarily skip step 10.
 
 async function runStep(stepNumber, stepName, modulePath, progressIndex) {
   try {

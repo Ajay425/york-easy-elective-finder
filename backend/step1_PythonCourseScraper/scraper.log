@@ -21072,3 +21072,121 @@ Call log:
   - waiting for locator("img[alt='Search By Subject']") to be visible
 
 2026-03-14 17:58:25,818 - WARNING -       ♻️ Bad state/blocked detected; relaunching browser/context.
+2026-03-14 17:58:40,968 - WARNING -       ↻ Retry SAME course after short backoff 10s (1/5).
+2026-03-14 17:58:53,886 - INFO - 📝 Saved session metadata: /var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/session_meta.json -> Summer 2026
+2026-03-14 17:59:04,095 - INFO -       📄 Page ready: 29282 bytes HTML, 1862 chars text
+2026-03-14 17:59:04,109 - INFO -       💾 Saved GS_ESS 5010 3.00_Directed Reading_CourseSchedule.html
+2026-03-14 17:59:19,801 - INFO - ✅ Finished ESS - Earth & Space Science - ( GS ) (saved to progress.txt)
+2026-03-14 17:59:19,801 - INFO - 🔄 Refreshing browser session between subjects...
+2026-03-14 17:59:34,909 - INFO - 
+🎓 [60/149] Scraping subject: ESSE - Earth, Space Science and Engineering - ( LE )
+2026-03-14 17:59:37,548 - INFO - 📝 Saved session metadata: /var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/session_meta.json -> Summer 2026
+2026-03-14 17:59:42,567 - INFO -    → Found 2 courses
+2026-03-14 17:59:42,567 - INFO -    ↳ [1/2] LE/ESSE 1012 3.00 – The Earth Environment
+2026-03-14 18:00:14,927 - WARNING - ⚠️ Failed to write session_meta.json: Locator.inner_text: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#sessionSelect option:checked")
+
+2026-03-14 18:00:44,929 - WARNING -       ⚠️ Attempt took 62.4s before failing for LE/ESSE 1012 3.00: Page.wait_for_selector: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#subjectSelect") to be visible
+
+2026-03-14 18:00:44,929 - WARNING -       ↻ Retry SAME course after short backoff 10s (1/5).
+2026-03-14 18:00:57,776 - INFO - 📝 Saved session metadata: /var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/session_meta.json -> Summer 2026
+2026-03-14 18:01:07,280 - INFO -       📄 Page ready: 25341 bytes HTML, 2013 chars text
+2026-03-14 18:01:07,302 - INFO -       💾 Saved LE_ESSE 1012 3.00_The Earth Environment_CourseSchedule.html
+2026-03-14 18:01:25,414 - INFO -    ↳ [2/2] LE/ESSE 2635 3.00 – Land Surveying for Civil Engineers
+2026-03-14 18:01:28,332 - INFO - 📝 Saved session metadata: /var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/session_meta.json -> Summer 2026
+2026-03-14 18:01:37,493 - INFO -       📄 Page ready: 21430 bytes HTML, 1837 chars text
+2026-03-14 18:01:37,514 - INFO -       💾 Saved LE_ESSE 2635 3.00_Land Surveying for Civil Engineers_CourseSchedule.html
+2026-03-14 18:01:52,519 - INFO - ✅ Finished ESSE - Earth, Space Science and Engineering - ( LE ) (saved to progress.txt)
+2026-03-14 18:01:52,519 - INFO - 🔄 Refreshing browser session between subjects...
+2026-03-14 18:02:06,927 - INFO - 
+🎓 [61/149] Scraping subject: EXCH - Exchange - ( SB )
+2026-03-14 18:02:09,976 - INFO - 📝 Saved session metadata: /var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/session_meta.json -> Summer 2026
+2026-03-14 18:02:14,291 - INFO -    → Found 23 courses
+2026-03-14 18:02:14,291 - INFO -    ↳ [1/23] SB/EXCH 4901 3.00 – Exchange - Schulich Business Elective
+2026-03-14 18:02:16,840 - INFO - 📝 Saved session metadata: /var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/session_meta.json -> Summer 2026
+2026-03-14 18:02:27,049 - INFO -       📄 Page ready: 20266 bytes HTML, 830 chars text
+2026-03-14 18:02:27,058 - INFO -       💾 Saved SB_EXCH 4901 3.00_Exchange - Schulich Business Elective_CourseSchedule.html
+2026-03-14 18:02:41,406 - INFO -    ↳ [2/23] SB/EXCH 4902 3.00 – Exchange - Schulich Business Elective
+2026-03-14 18:03:01,190 - INFO - 🚀 Launching Playwright browser (FAST_MODE=False)
+2026-03-14 18:03:01,349 - INFO - 🌐 Opening York course site...
+2026-03-14 18:03:04,028 - INFO - 📝 Saved session metadata: /var/www/gitProjects/york-easy-elective-finder/backend/step1_PythonCourseScraper/session_meta.json -> Summer 2026
+2026-03-14 18:03:05,186 - INFO - 📚 Found 149 subjects to scrape
+2026-03-14 18:03:05,186 - INFO - 🔁 Resuming — 60 subjects already completed
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping ACTG - Accounting - ( SB ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping ADLW - Administrative Law - ( GS ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping ADMS - Administrative Studies - ( AP ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping ALDR - Dispute Resolution - ( GS ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping ANTH - Anthropology - ( GS, AP ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping ARB - Arabic - ( AP ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping ARTH - Art History - ( GS, FA ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping ARTM - Arts and Media - ( SB ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping ASL - Asl American Sign Language - ( AP ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping AUCO - Aural Communication 1/2 - ( ED ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping BCHM - Biochemistry - ( SC ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping BFSL - Banking And Financial Services Law - ( GS ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping BIOL - Biology - ( SC, GL ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping BLIS - International Business Law - ( GS ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping BUEC - Business Economics - ( GL ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CCLW - Canadian Common Law - ( GS ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CCY - Children, Childhood and Youth - ( AP ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CDIS - Critical Disability - ( GS ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CDNS - Canadian Studies - ( GL ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CGTA - Canadian Univ. Graduate Transfer Agreement - ( GS ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CH - Chinese - ( AP ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CHEM - Chemistry - ( GS, SC ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CIVL - Civil Engineering - ( GS, LE ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CLST - Classical Studies - ( AP ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CLTC - Constitutional Law and The Charter - ( GS ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CLTR - Culture - ( AP ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CLWP - Criminal and Law Procedure - ( GS ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CMA - Cinema and Media Arts - ( FA ) — already completed.
+2026-03-14 18:03:05,187 - INFO - ⏭️ Skipping CMCT - Communication and Culture - ( GS ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping CMDS - Communication and Media Studies - ( AP ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping CNLW - Construction Law - ( GS ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping COMS - Communications - ( GL ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping COOP - Cooperative Education - ( EU, LE, SC ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping CORE - Common Core - ( GL ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping CRIM - Criminology - ( AP ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping CRTE - Creative Technologies - ( FA ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping CWR - Creative Writing - ( AP ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping DANC - Dance - ( FA ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping DEMS - Disaster and Emergency Management - ( GS, AP ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping DESN - Design - ( FA ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping DIGT - Digital Technologies - ( LE ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping DRCA - Drama & Creative Arts - ( GL ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping ECON - Economics - ( AP, GS, SB ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping EDFE - Foundations - ( ED ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping EDJI - Junior Intermediate - ( ED ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping EDPJ - Primary Junior - ( ED ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping EDPR - Practicum - ( ED ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping EDST - Educational Studies - ( ED ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping EDUC - Education - ( GS, ED ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping EECS - Electrical Engineering and Computer Science - ( LE, GS ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping EIL - Energy and Infrastructure Law - ( GS ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping EMBA - Executive Masters Business Administration - ( SB ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping EN - English - ( AP, GL, GS ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping ENG - Engineering - ( LE ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping ENTR - Entrepreneurial Studies - ( SB ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping ENVB - Environmental Biology - ( SC ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping ENVS - Environmental Studies - ( EU, GS ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping ESL - English As A Second Language - ( AP ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping ESS - Earth & Space Science - ( GS ) — already completed.
+2026-03-14 18:03:05,188 - INFO - ⏭️ Skipping ESSE - Earth, Space Science and Engineering - ( LE ) — already completed.
+2026-03-14 18:03:05,188 - INFO - 
+🎓 [61/149] Scraping subject: EXCH - Exchange - ( SB )
+2026-03-14 18:03:25,269 - WARNING - ⚠️ Subject load failed: Page.wait_for_selector: Timeout 20000ms exceeded.
+Call log:
+  - waiting for locator("img[alt='Search By Subject']") to be visible
+
+2026-03-14 18:03:33,267 - INFO -    → Found 23 courses
+2026-03-14 18:03:33,267 - INFO -    ↳ [1/23] SB/EXCH 4901 3.00 – Exchange - Schulich Business Elective
+2026-03-14 18:03:33,267 - INFO -       ✅ Already have SB_EXCH 4901 3.00_Exchange - Schulich Business Elective_CourseSchedule.html (skipping)
+2026-03-14 18:03:33,267 - INFO -    ↳ [2/23] SB/EXCH 4902 3.00 – Exchange - Schulich Business Elective
+2026-03-14 18:04:06,127 - WARNING -       ⚠️ Attempt took 32.9s before failing for SB/EXCH 4902 3.00: Page.wait_for_selector: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#subjectSelect") to be visible
+
+2026-03-14 18:04:06,127 - WARNING -       ↻ Retry SAME course after short backoff 10s (1/5).

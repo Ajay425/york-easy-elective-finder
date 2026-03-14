@@ -248276,3 +248276,4 @@ Completed at: 3/14/2026, 3:47:36 AM
 📦 Archived all_courses.json → /var/www/gitProjects/york-easy-elective-finder/backend/step2_courseParsing/archive/all_courses_Summer_2026_2026-03-14T07-47-36-195Z.json
 ==> [Sat Mar 14 03:47:36 AM EDT 2026] pipeline finished
 ==> [Sat 14 Mar 2026 01:03:48 PM EDT] running step1 (scrape subjects)
+==> [Sat 14 Mar 2026 06:03:00 PM EDT] running step1 (scrape subjects)

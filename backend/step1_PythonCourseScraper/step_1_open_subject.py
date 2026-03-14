@@ -22,6 +22,7 @@ LOG_FILE = "scraper.log"
 RUN_COMPLETE_MARKER = "run_complete.marker"
 # Persist session metadata so downstream steps can tag offerings with term+year
 SESSION_META_FILE = "session_meta.json"
+SESSION_META_SAVED = False
 
 # Use absolute paths so paths are consistent regardless of cwd.
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -131,6 +132,8 @@ def page_is_dead(page) -> bool:
 # 🌐 NAV HELPERS (optimized timeouts)
 # ----------------------------------------------------------
 def open_search_by_subject(page, start_url: str) -> None:
+    global SESSION_META_SAVED
+
     page.goto(start_url, wait_until="domcontentloaded", timeout=30000)
 
     if page_looks_blocked_or_expired(page):
@@ -149,16 +152,21 @@ def open_search_by_subject(page, start_url: str) -> None:
     page.select_option("#sessionSelect", value=SESSION_SELECT)
     human_pause(0.5, 1.0)
 
-    # Persist what session/term+year we selected (to later tag offerings in DB)
-    try:
-        session_label = page.locator("#sessionSelect option:checked").inner_text().strip()
-        if session_label:
-            meta_path = os.path.join(BASE_DIR, SESSION_META_FILE)
-            with open(meta_path, "w", encoding="utf-8") as f:
-                json.dump({"termAndYear": session_label}, f, indent=2)
-            logging.info(f"📝 Saved session metadata: {meta_path} -> {session_label}")
-    except Exception as e:
-        logging.warning(f"⚠️ Failed to write {SESSION_META_FILE}: {e}")
+    # Persist session term/year only once per script run.
+    if not SESSION_META_SAVED:
+        try:
+            session_label = page.eval_on_selector(
+                "#sessionSelect option:checked",
+                "el => (el.textContent || '').trim()"
+            )
+            if session_label:
+                meta_path = os.path.join(BASE_DIR, SESSION_META_FILE)
+                with open(meta_path, "w", encoding="utf-8") as f:
+                    json.dump({"termAndYear": session_label}, f, indent=2)
+                SESSION_META_SAVED = True
+                logging.info(f"📝 Saved session metadata: {meta_path} -> {session_label}")
+        except Exception as e:
+            logging.warning(f"⚠️ Failed to write {SESSION_META_FILE}: {e}")
 
     page.wait_for_selector("#subjectSelect", timeout=30000)
 
