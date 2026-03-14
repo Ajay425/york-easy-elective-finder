@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import * as cheerio from "cheerio";
-import { PrismaClient } from "../generated/prisma/index.js";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -204,14 +204,12 @@ async function processHtmlFile(filePath) {
     }
 
     // 2) Find Offering
-    const offering = await prisma.currentCourseOfferings.findUnique({
+    const offering = await prisma.currentCourseOfferings.findFirst({
       where: {
-        term_courseId_section_type: {
-          term: currentTerm,
-          courseId: course.id,
-          section: lastSection,
-          type: typeText,
-        },
+        term: currentTerm,
+        courseId: course.id,
+        section: lastSection,
+        type: typeText,
       },
       select: { id: true },
     });

@@ -1,6 +1,59 @@
-import { PrismaClient } from '../generated/prisma/index.js';
+import { PrismaClient } from '@prisma/client';
+import { fileURLToPath } from 'url';
+import path from 'path';
+import fs from 'fs/promises';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+async function readSessionTermAndYear() {
+  const sessionMetaPath = path.join(__dirname, '../step1_PythonCourseScraper/session_meta.json');
+  try {
+    const raw = await fs.readFile(sessionMetaPath, 'utf-8');
+    const meta = JSON.parse(raw);
+    return meta?.termAndYear ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function parseTermAndYear(termAndYear) {
+  // Expected format: "Season YYYY" (e.g. "Summer 2026")
+  if (!termAndYear || typeof termAndYear !== 'string') return null;
+  const parts = termAndYear.trim().split(/\s+/);
+  if (parts.length < 2) return null;
+  const year = Number(parts[parts.length - 1]);
+  const season = parts.slice(0, -1).join(' ');
+  if (Number.isNaN(year)) return null;
+  const seasonOrder = {
+    Winter: 1,
+    Spring: 2,
+    Summer: 3,
+    Fall: 4,
+    Autumn: 4,
+  };
+  const seasonRank = seasonOrder[season] ?? 0;
+  return { year, season, seasonRank, raw: termAndYear };
+}
+
+async function getLatestTermAndYearFromDb() {
+  const rows = await prisma.currentCourseOfferings.findMany({
+    where: { termAndYear: { not: null } },
+    select: { termAndYear: true },
+    distinct: ['termAndYear'],
+  });
+  const uniqueTerms = [...new Set(rows.map((r) => r.termAndYear).filter(Boolean))];
+  const parsed = uniqueTerms
+    .map(parseTermAndYear)
+    .filter(Boolean)
+    .sort((a, b) => {
+      if (a.year !== b.year) return b.year - a.year;
+      return b.seasonRank - a.seasonRank;
+    });
+  return parsed[0]?.raw ?? null;
+}
 
 // Popularity computation (ported from step9_addInstructorPopularity.js)
 const clamp = (x, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, x))
@@ -78,8 +131,23 @@ export async function recomputeInstructorPopularity(instructorId) {
   }
 }
 
-export async function getPopularCoursesDb(terms, types, years, depts, faculties, credits) {
+export async function getPopularCoursesDb(terms, types, years, depts, faculties, credits, termAndYear) {
   try {
+    const normalizedRequestedTermAndYear =
+      typeof termAndYear === 'string' ? termAndYear.trim() : termAndYear;
+    const effectiveTermAndYear =
+      normalizedRequestedTermAndYear || (await getLatestTermAndYearFromDb());
+
+    if (!effectiveTermAndYear) {
+      return [];
+    }
+
+    const offeringWhere = {
+      term: { in: terms },
+      type: { in: types },
+      termAndYear: { equals: effectiveTermAndYear },
+    };
+
     const courses5 = await prisma.course.findMany({
       where: {
         year: { in: years },
@@ -87,12 +155,12 @@ export async function getPopularCoursesDb(terms, types, years, depts, faculties,
         faculty: { in: faculties },
         credit: { in: credits },
         prerequisites: { none: {} },
-        courseOfferings: { some: { term: { in: terms }, type: { in: types } } },
+        courseOfferings: { some: offeringWhere },
       },
       include: {
         prerequisites: true,
         courseOfferings: {
-          where: { term: { in: terms }, type: { in: types } },
+          where: offeringWhere,
           include: {
             courseTimes: true, // ✅ include times
             instructors: {

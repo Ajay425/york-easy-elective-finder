@@ -17,12 +17,18 @@ const steps = [
   { num: 7, name: 'Import Course Offerings', path: './step7_courseOfferingsToDB.js' },
   { num: 8, name: 'Import Instructor Offerings', path: './step8_instructorOfferingstoDb.js' },
   { num: 9, name: 'Add Instructor Popularity', path: './step9_addInstructorPopularity.js' },
+   { num: 10, name: 'Add Course Times', path: './step10_addTimes.js' },
+  { num: 11, name: 'Cleanup Self Prerequisites', path: './step11_cleanupSelfPrereqs.js' },
+  { num: 12, name: 'Course Prerequisites to DB', path: './step12_coursePrereqsToDb.js' },
+  { num: 13, name: 'Remove Prereqs From Approved Course List', path: './step13_removeApprovedCoursePrereqs.js' },
 ];
 
-async function runStep(stepNumber, stepName, modulePath) {
+// Temporarily skip step 10.
+
+async function runStep(stepNumber, stepName, modulePath, progressIndex) {
   try {
     console.log(`\n${'='.repeat(60)}`);
-    console.log(`▶️  Step ${stepNumber}/9: ${stepName}`);
+    console.log(`▶️  Step ${progressIndex}/${steps.length}: ${stepName}`);
     console.log(`${'='.repeat(60)}`);
     
     const stepStartTime = Date.now();
@@ -42,7 +48,7 @@ async function runStep(stepNumber, stepName, modulePath) {
           reject(new Error(`Step exited with code ${code}`));
         } else {
           const stepDuration = ((Date.now() - stepStartTime) / 1000).toFixed(2);
-          console.log(`✅ Step ${stepNumber} completed in ${stepDuration}s\n`);
+          console.log(`✅ Step ${progressIndex}/${steps.length} completed in ${stepDuration}s\n`);
           resolve();
         }
       });
@@ -52,7 +58,7 @@ async function runStep(stepNumber, stepName, modulePath) {
       });
     });
   } catch (error) {
-    console.error(`\n❌ Step ${stepNumber} (${stepName}) failed:`);
+    console.error(`\n❌ Step ${progressIndex}/${steps.length} (${stepName}) failed:`);
     console.error(error.message);
     throw error;
   }
@@ -111,8 +117,8 @@ async function main() {
   let success = false;
   
   try {
-    for (const step of steps) {
-      await runStep(step.num, step.name, step.path);
+    for (const [index, step] of steps.entries()) {
+      await runStep(step.num, step.name, step.path, index + 1);
       completedSteps++;
     }
     
@@ -134,7 +140,9 @@ async function main() {
     console.error(`Failed at step: ${completedSteps + 1}`);
     console.error('█'.repeat(60) + '\n');
   } finally {
-    await archiveAllCourses();
+    if (success) {
+      await archiveAllCourses();
+    }
     process.exit(success ? 0 : 1);
   }
 }

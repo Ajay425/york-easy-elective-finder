@@ -77,7 +77,8 @@ export async function getPopularCourses(req,res) {
         // Track API usage
         incrementApiUsage('getPopularCourses');
 
-        const courses = await db.getPopularCoursesDb(terms,types,years,depts,faculties,credits)
+        const termAndYear = req.query.termAndYear;
+        const courses = await db.getPopularCoursesDb(terms, types, years, depts, faculties, credits, termAndYear);
 
         return res.status(200).json({msg:"success", courses:courses})
     }

@@ -1,8 +1,7 @@
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs/promises';  // Importing fs.promises for reading files
-import { PrismaClient } from '../generated/prisma/index.js';
-import { franc } from 'franc';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -37,6 +36,7 @@ async function main() {
 
             }
         })
+        if (!courseDB) continue;
         // console.log(courseDB)
         for (let preqreq of course.prereqs){
             // console.log(preqreq)
@@ -50,8 +50,6 @@ async function main() {
                 }
                     }
                 })
-            console.log(preqreq)
-            console.log(prereqInDb)
             if (!prereqInDb){
                 prereqInDb = await prisma.course.create({
                     data:{
@@ -63,19 +61,25 @@ async function main() {
                     }
                 })
             }
-            console.log(prereqInDb)
-            const createCoursePrereqInDb = await prisma.CoursePrerequisite.create({
-                data:{
+            await prisma.coursePrerequisite.upsert({
+                where: {
+                    courseId_prereqId: {
+                        courseId: courseDB.id,
+                        prereqId: prereqInDb.id,
+                    },
+                },
+                update: {},
+                create: {
                     courseId: courseDB.id,
                     prereqId: prereqInDb.id,
-                }
+                },
             })
-            console.log(createCoursePrereqInDb)
         }
     }
 }
 catch(err){
     console.log(err)
+    throw err;
 }
 
 }

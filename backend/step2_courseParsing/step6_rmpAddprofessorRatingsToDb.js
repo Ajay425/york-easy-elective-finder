@@ -1,6 +1,6 @@
 // step6_rmpAddprofessorRatingsToDb_safe.js
 import rmp from "ratemyprofessor-api";
-import { PrismaClient } from '../generated/prisma/index.js';
+import { PrismaClient } from '@prisma/client';
 import { promises as fs } from "fs";
 import path from "path";
 
