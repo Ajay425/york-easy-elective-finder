@@ -275,6 +275,19 @@ catch(err){
 
 }
 
+export async function clearCoursePrereqsDB(courseId) {
+try {
+    const deleted = await prisma.coursePrerequisite.deleteMany({
+      where: {
+        courseId: Number(courseId),
+      },
+    });
+    return deleted;
+} catch (err) {
+    throw err;
+}
+}
+
 export async function searchCoursesDb(query, page = 1, pageSize = 50, filters = {}) {
   try {
     const q = String(query || '').trim();

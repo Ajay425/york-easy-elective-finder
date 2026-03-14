@@ -317,6 +317,30 @@
       "credit": 3,
       "reason": "Description explicitly allows equivalent programming experience instead of the stored EECS prerequisite. Under the aggressive cleanup rule, the linked course row is not universal.",
       "courseDescription": "Treatment of discrete sampled data involving correlation, convolution, spectral density estimation, frequency, domain filtering, and Fast Fourier Transforms. Prerequisites: LE/EECS 1011 3.00 or equivalent programming experience; SC/MATH 2015 3.00; SC/MATH 2271 3.00. PRIOR TO SUMMER 2014: Prerequisites: LE/CSE 1540 3.00 or SC/CSE 1540 3.00 or equivalent programming experience; SC/MATH 2015 3.00; SC/MATH 2271 3.00. Course credit exclusions: LE/CSE 3451 4.00, SC/CSE 3451 4.00 LE/CSE 3451 3.00, SC/CSE 3451 3.00, SC/MATH 4130B 3.00, SC/MATH 4930C 3.00."
+    },
+    {
+      "faculty": "LE",
+      "deptAcronym": "EECS",
+      "courseCode": "1570",
+      "credit": 3,
+      "reason": "Added from admin UI. Fill in reason after manual review.",
+      "courseDescription": "An introduction to computing concepts with applications to problems drawn from psychology, including concepts of computer programming in an integrated computing and visualization environment. Prerequisite: SC/MATH 1505 6.00. Course credit exclusions: LE/EECS 1541 3.00, LE/EECS 1560 3.00. PRIOR TO FALL 2014: course credit exclusions: LE/CSE 1541 3.00, LE/CSE 1560 3.00. PRIOR TO SUMMER 2013: course credit exclusions: SC/CSE 1541 3.00, SC/CSE 1560 3.00."
+    },
+    {
+      "faculty": "LE",
+      "deptAcronym": "ESSE",
+      "courseCode": "1012",
+      "credit": 3,
+      "reason": "Added from admin UI. Fill in reason after manual review.",
+      "courseDescription": "Provides essential topics in Earth environment (Earth and oceanic science, atmospheric science, and geology) and explores the role played by global and local scale processes in shaping our planet. Concepts are described; the latest technology discussed, and links between engineering disciplines are provided. The course lectures are complemented by hands-on laboratory and field experience. Prerequisites: 12U calculus and vectors or 12U advanced functions, or SC/MATH 1515 3.00; 12U physics or SC/PHYS 1510 4.00. Corequisites: LE/ENG 1101 4.00; LE/ENG 1102 4.00; SC/PHYS 1800 3.00, SC/PHYS 1801 3.00. **FALL 2025 Students: Please note that LE/ENG 1102 4.00 and SC/PHYS 1801 3.00 are no longer corequisites for this course."
+    },
+    {
+      "faculty": "SC",
+      "deptAcronym": "MATH",
+      "courseCode": "1506",
+      "credit": 3,
+      "reason": "Added from admin UI. Fill in reason after manual review.",
+      "courseDescription": "A presentation of functions, systems of linear equations, and an in-depth presentation of single variable differential calculus. Emphasis is placed on basic mathematical skills and their applications. Prerequisites: 12U Advanced Functions (MHF4U) or equivalent, or SC/MATH 1510 6.00. Course Credit exclusions: SC/MATH 1013 3.00, SC/MATH 1300 3.00, SC/MATH 1530 3.00, SC/MATH 1550 6.00, GL/MATH/MODR 1930 3.00, AP/ECON 1530 3.00, SC/ISCI 1401 3.00, SC/ISCI 1410 6.00, SC/MATH 1505 6.00."
     }
   ]
 }

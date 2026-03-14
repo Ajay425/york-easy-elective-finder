@@ -43,6 +43,9 @@
       .btn-primary { background:#2b6cb0; color:#fff }
       .btn-ghost { background:transparent; border-color:#d6e4fb }
       .btn-danger { background:#c53030; color:#fff }
+      .status-pill { display:inline-flex; align-items:center; padding:5px 8px; border-radius:999px; font-size:12px; font-weight:600; }
+      .status-pill.in-list { background:#e9f9ef; color:#166534; border:1px solid #b7ebc6; }
+      .status-pill.not-in-list { background:#fff7e6; color:#92400e; border:1px solid #f5d59c; }
 
       /* Responsive: stack offering columns on smaller screens */
       @media (max-width: 880px) {
@@ -62,6 +65,14 @@
 
     <div class="section">
       <h2>Edit basic info</h2>
+      <div style="margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <button id="add-no-real-prereq" type="button" class="btn btn-ghost">
+          <%= isInNoRealPrereqList ? 'Clear prereqs (already in step13 list)' : 'Clear prereqs + Add To step13_coursesWithoutRealPrereqs' %>
+        </button>
+        <span id="step13-status" class="status-pill <%= isInNoRealPrereqList ? 'in-list' : 'not-in-list' %>">
+          <%= isInNoRealPrereqList ? 'Already in step13 list' : 'Not in step13 list' %>
+        </span>
+      </div>
       <form method="post" action="/admin/course/<%= course.id %>/update">
         <label>Faculty <input name="faculty" value="<%= course.faculty || '' %>" /></label>
         <label>Dept Acronym <input name="deptAcronym" value="<%= course.deptAcronym || '' %>" /></label>
@@ -232,6 +243,28 @@
     </div>
     <script>
       // Prereq delete handler
+      const addNoRealPrereqBtn = document.getElementById('add-no-real-prereq');
+      const step13Status = document.getElementById('step13-status');
+      addNoRealPrereqBtn && addNoRealPrereqBtn.addEventListener('click', async () => {
+        try {
+          const res = await fetch(`/admin/course/<%= course.id %>/add-no-real-prereq`, { method: 'POST' });
+          const json = await res.json();
+          if (res.ok) {
+            alert(json.msg || 'Course added');
+            addNoRealPrereqBtn.textContent = 'Clear prereqs (already in step13 list)';
+            if (step13Status) {
+              step13Status.textContent = 'Already in step13 list';
+              step13Status.classList.remove('not-in-list');
+              step13Status.classList.add('in-list');
+            }
+          } else {
+            alert(json.msg || 'Failed to add course');
+          }
+        } catch (err) {
+          alert('Failed to add course');
+        }
+      });
+
       document.querySelectorAll('.delete-prereq').forEach(btn => {
         btn.addEventListener('click', async (e) => {
           const id = btn.dataset.id;
