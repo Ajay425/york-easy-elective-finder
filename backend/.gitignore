@@ -10,4 +10,5 @@ data/apiUsage.json
 # Scraper output (should not be committed)
 step1_PythonCourseScraper/york_courses/
 step1_PythonCourseScraper/archive/
+step1_PythonCourseScraper/scraper.log
 
