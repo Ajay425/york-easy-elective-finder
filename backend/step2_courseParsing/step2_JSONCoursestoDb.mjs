@@ -7,19 +7,22 @@ const prisma = new PrismaClient();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const PROGRESS_EVERY = 250;
 
 // Path to the single JSON file
 const allCoursesPath = path.join(__dirname, 'all_courses.json');
 
 async function main() {
   const failedUpserts = [];
+  let successCount = 0;
+  let processedCount = 0;
 
   try {
     // Load only all_courses.json
     const fileContent = await fs.readFile(allCoursesPath, 'utf-8');
     const data = JSON.parse(fileContent);
 
-    for (let course of data) {
+    for (const course of data) {
       
       const faculty = course.facultyPrefix;
       const deptAcronym = course.dept;
@@ -59,8 +62,8 @@ async function main() {
             year,
           },
         });
+        successCount++;
       } catch (error) {
-        console.log("failed")
         failedUpserts.push({
           faculty,
           deptAcronym,
@@ -70,15 +73,26 @@ async function main() {
           error: error.message,
         });
       }
+
+      processedCount++;
+      if (
+        processedCount === 1 ||
+        processedCount % PROGRESS_EVERY === 0 ||
+        processedCount === data.length
+      ) {
+        console.log(
+          `[step2] Progress ${processedCount}/${data.length} | success=${successCount} failed=${failedUpserts.length}`
+        );
+      }
     }
 
-    console.log("Completed course insert");
+    console.log(`[step2] Completed upserts. Success=${successCount}, Failed=${failedUpserts.length}`);
 
     // Save failed upserts to file
     const failedPath = path.join(__dirname, 'failed_upserts.json');
     await fs.writeFile(failedPath, JSON.stringify(failedUpserts, null, 2));
 
-    console.log(`Failed upserts saved to ${failedPath}`);
+    console.log(`[step2] Failed upserts report: ${failedPath}`);
 
   } catch (err) {
     console.error('Error while processing courses:', err);

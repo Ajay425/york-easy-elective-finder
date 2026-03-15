@@ -12,6 +12,7 @@ const __dirname = path.dirname(__filename);
 // --- config/tweak these thresholds if needed ---
 const FULLNAME_DISTANCE_THRESHOLD = 0.18; // relative Levenshtein (0 exact -> 1 very different)
 const DELAY_MS = 150; // polite delay between requests
+const PROGRESS_EVERY = 50;
 
 // --- utils ---
 function delay(ms){ return new Promise(res => setTimeout(res, ms)); }
@@ -93,30 +94,36 @@ async function main(){
 
   const matches = [];
   const ambiguous = [];
+  const stats = {
+    totalProfessors: 0,
+    processed: 0,
+    confidentMatches: 0,
+    ambiguousMatches: 0,
+    dbUpdateErrors: 0,
+    apiErrors: 0,
+  };
 
-  console.log("🔍 searching for school...");
+  console.log("[step6] Looking up school in RMP...");
   const schoolSearch = await rmp.searchSchool("York University - Keele Campus");
   if (!schoolSearch || !schoolSearch[0]) {
     console.error("School not found via RMP API. Aborting.");
     return;
   }
   const schoolId = schoolSearch[0].node?.id ?? schoolSearch[0].id;
-  console.log("Using schoolId:", schoolId);
+  console.log(`[step6] Using schoolId: ${schoolId}`);
 
   const professors = await prisma.instructors.findMany();
+  stats.totalProfessors = professors.length;
+  console.log(`[step6] Processing ${stats.totalProfessors} instructors.`);
 
   for (const prof of professors) {
     const requestedFirst = prof.firstname;
     const requestedLast = prof.lastname;
-    console.log(`\n🔍 Checking: ${requestedFirst} ${requestedLast}`);
 
     try {
       await delay(DELAY_MS);
       const fullName = `${requestedFirst} ${requestedLast}`;
       const currProfInfo = await rmp.getProfessorRatingAtSchoolId(fullName, schoolId);
-
-      // Log the raw API result for diagnostics (we'll also store in JSON)
-      console.log("RMP returned:", currProfInfo);
 
       // Decide whether to accept
       const confident = isConfidentMatch(requestedFirst, requestedLast, currProfInfo, schoolId);
@@ -124,7 +131,6 @@ async function main(){
       // If not confident, we will set rating fields to null (clear bad DB values)
       let dataToUpdate;
       if (!confident) {
-        console.warn(`→ Not confident for ${fullName}; updating DB fields to null and logging to ambiguous.json`);
         dataToUpdate = {
           avgRating: null,
           avgDifficulty: null,
@@ -140,6 +146,7 @@ async function main(){
           rmpResult: currProfInfo ?? null,
           reason: "not confident match - cleared rating fields"
         });
+        stats.ambiguousMatches++;
       } else {
         // Map currProfInfo fields to your Prisma model fields.
         dataToUpdate = {
@@ -161,6 +168,7 @@ async function main(){
           rmpResult: currProfInfo,
           updatedFields: dataToUpdate
         });
+        stats.confidentMatches++;
       }
 
       // Perform update in DB (instructors come from DB so record exists)
@@ -175,14 +183,11 @@ async function main(){
           data: dataToUpdate
         });
 
-        console.log(`→ Updated ${requestedFirst} ${requestedLast}:`, {
-          avgRating: updated.avgRating,
-          avgDifficulty: updated.avgDifficulty,
-          numberOfRatings: updated.numberOfRatings
-        });
+        void updated;
       } catch (dbErr) {
         // If update fails (e.g., record missing somehow), log to ambiguous and continue
         console.error(`DB update failed for ${requestedFirst} ${requestedLast}:`, dbErr?.message || dbErr);
+        stats.dbUpdateErrors++;
         ambiguous.push({
           requested: { firstname: requestedFirst, lastname: requestedLast },
           rmpResult: currProfInfo ?? null,
@@ -192,6 +197,7 @@ async function main(){
 
     } catch (err) {
       console.error(`Error processing ${requestedFirst} ${requestedLast}:`, err?.message || err);
+      stats.apiErrors++;
       ambiguous.push({
         requested: { firstname: requestedFirst, lastname: requestedLast },
         rmpResult: null,
@@ -199,13 +205,25 @@ async function main(){
       });
       // continue to next professor
     }
+
+    stats.processed++;
+    if (
+      stats.processed === 1 ||
+      stats.processed % PROGRESS_EVERY === 0 ||
+      stats.processed === stats.totalProfessors
+    ) {
+      console.log(
+        `[step6] Progress ${stats.processed}/${stats.totalProfessors} | confident=${stats.confidentMatches} ambiguous=${stats.ambiguousMatches} dbErrors=${stats.dbUpdateErrors} apiErrors=${stats.apiErrors}`
+      );
+    }
   } // end loop
 
   // write logs
   try {
     await fs.writeFile(matchesPath, JSON.stringify(matches, null, 2), 'utf8');
     await fs.writeFile(ambiguousPath, JSON.stringify(ambiguous, null, 2), 'utf8');
-    console.log(`\n✅ Done. Wrote ${matches.length} matches to ${matchesPath} and ${ambiguous.length} ambiguous to ${ambiguousPath}`);
+    console.log(`[step6] Summary: ${JSON.stringify(stats)}`);
+    console.log(`[step6] Wrote matches to ${matchesPath} and ambiguous cases to ${ambiguousPath}`);
   } catch (e) {
     console.error("Failed to write logs:", e?.message || e);
   }

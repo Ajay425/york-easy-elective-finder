@@ -6,6 +6,8 @@ import { fileURLToPath } from "url";
 import { extractPrereqsWithCredits } from "./parsePrereqsHelperFunc.js";
 import { Console } from "console";
 
+const PROGRESS_EVERY = 100;
+
 // ES module setup for __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -173,23 +175,23 @@ if (!fs.existsSync(baseDir)) {
   process.exit(1);
 }
 
-console.log(`🔍 Searching for .html files in:\n${baseDir}\n`);
+console.log(`[step1] Scanning HTML files under: ${baseDir}`);
 
 const allHtmlFiles = getAllHtmlFiles(baseDir);
 
 if (allHtmlFiles.length === 0) {
-  console.log("⚠️ No HTML files found in:", baseDir);
+  console.log(`[step1] No HTML files found in: ${baseDir}`);
   process.exit(0);
 }
 
-console.log(`📚 Found ${allHtmlFiles.length} HTML files total.\n`);
+console.log(`[step1] Found ${allHtmlFiles.length} HTML files.`);
 
 const allCourses = [];
 const failedFiles = [];
 
-for (const filePath of allHtmlFiles) {
+for (let i = 0; i < allHtmlFiles.length; i++) {
+  const filePath = allHtmlFiles[i];
   const fileName = path.basename(filePath);
-  console.log(`📄 Parsing ${fileName}...`);
 
   try {
     const html = fs.readFileSync(filePath, "utf-8");
@@ -211,6 +213,13 @@ for (const filePath of allHtmlFiles) {
       path: filePath,
     });
   }
+
+  const processed = i + 1;
+  if (processed === 1 || processed % PROGRESS_EVERY === 0 || processed === allHtmlFiles.length) {
+    console.log(
+      `[step1] Progress ${processed}/${allHtmlFiles.length} files | parsed=${allCourses.length} failed=${failedFiles.length}`
+    );
+  }
 }
 
 // ------------------------------------------------------
@@ -218,8 +227,8 @@ for (const filePath of allHtmlFiles) {
 // ------------------------------------------------------
 try {
   fs.writeFileSync(outputFile, JSON.stringify(allCourses, null, 2), "utf-8");
-  console.log(`\n✅ Parsed ${allCourses.length} courses successfully.`);
-  console.log(`💾 Saved to: ${outputFile}`);
+  console.log(`[step1] Parsed ${allCourses.length} courses.`);
+  console.log(`[step1] Wrote output to: ${outputFile}`);
 } catch (err) {
   console.error("❌ Failed to write all_courses.json:", err.message);
 }
@@ -229,9 +238,7 @@ try {
 // ------------------------------------------------------
 try {
   fs.writeFileSync(failedFilePath, JSON.stringify(failedFiles, null, 2), "utf-8");
-  console.log(
-    `⚠️ ${failedFiles.length} files failed to parse. Details saved to: ${failedFilePath}\n`
-  );
+  console.log(`[step1] Failed parses: ${failedFiles.length}. Report: ${failedFilePath}`);
 } catch (err) {
   console.error("❌ Failed to write failedParsing.json:", err.message);
 }

@@ -8,6 +8,8 @@ const prisma = new PrismaClient();
 // ================= CONFIG =================
 const HTML_DIR = "./courseTimesHtml";
 const DRY_RUN = false;
+const PROGRESS_EVERY = 25;
+const MAX_INVALID_TIME_WARNINGS = 5;
 
 // ✅ ONLY these teaching types are allowed
 const teachingTypes = ["LECT", "SEMR", "BLEN", "ONLN", "ONCA", "HYFX"];
@@ -23,7 +25,7 @@ function calculateEndTime(startTime, durationMinutes) {
     const durationInt = Math.floor(Number(durationMinutes));
     
     if (isNaN(hours) || isNaN(mins) || isNaN(durationInt)) {
-      console.warn(`⚠️  Invalid time calculation: startTime=${startTime}, durationMinutes=${durationMinutes}`);
+      noteInvalidTimeWarning(`⚠️ Invalid time input: startTime=${startTime}, durationMinutes=${durationMinutes}`);
       return null;
     }
     
@@ -32,7 +34,7 @@ function calculateEndTime(startTime, durationMinutes) {
     const endMins = totalMinutes % 60;
     return `${String(endHours).padStart(2, '0')}:${String(endMins).padStart(2, '0')}`;
   } catch (err) {
-    console.warn(`⚠️  Error calculating endTime:`, err.message);
+    noteInvalidTimeWarning(`⚠️ Error calculating endTime: ${err.message}`);
     return null;
   }
 }
@@ -48,7 +50,15 @@ let stats = {
   timeUpdated: 0,
   timeUnchanged: 0,
   timeSkippedNoTimes: 0,
+  invalidTimeCalculations: 0,
 };
+
+function noteInvalidTimeWarning(message) {
+  stats.invalidTimeCalculations++;
+  if (stats.invalidTimeCalculations <= MAX_INVALID_TIME_WARNINGS) {
+    console.warn(message);
+  }
+}
 
 // ✅ Decode HTML that might be UTF-16 (BE/LE) or UTF-8
 function readHtmlSmart(filePath) {
@@ -223,11 +233,6 @@ async function processHtmlFile(filePath) {
     for (const t of times) {
       const endTime = calculateEndTime(t.startTime, t.durationMinutes);
       
-      // Debug logging
-      if (!endTime) {
-        console.warn(`⚠️  Failed to calculate endTime for ${t.startTime} + ${t.durationMinutes} min`);
-      }
-      
       const existing = await prisma.courseTime.findFirst({
         where: {
           currentCourseId: offering.id,
@@ -273,28 +278,36 @@ async function processHtmlFile(filePath) {
 const files = listHtmlFiles(HTML_DIR);
 
 if (files.length === 0) {
-  console.log(`❌ No .html files found in ${HTML_DIR}`);
+  console.log(`[step10] No .html files found in ${HTML_DIR}`);
   await prisma.$disconnect();
   process.exit(1);
 }
 
-console.log(`📂 Found ${files.length} HTML files in ${HTML_DIR}`);
-console.log(`DRY_RUN = ${DRY_RUN}\n`);
+console.log(`[step10] Found ${files.length} HTML files in ${HTML_DIR}. DRY_RUN=${DRY_RUN}`);
 
-for (const f of files) {
+for (let i = 0; i < files.length; i++) {
+  const f = files[i];
   try {
-    console.log(`➡️  Processing ${f} ...`);
-    const blocks = await processHtmlFile(f);
+    await processHtmlFile(f);
     stats.filesProcessed++;
-    console.log(`   ✅ Parsed blocks from file: ${blocks}\n`);
   } catch (err) {
     stats.filesErrored++;
-    console.error(`   ❌ Error processing ${f}:`, err?.message ?? err);
-    console.log();
+    console.error(`[step10] Error processing ${f}:`, err?.message ?? err);
+  }
+
+  const processed = i + 1;
+  if (processed === 1 || processed % PROGRESS_EVERY === 0 || processed === files.length) {
+    console.log(
+      `[step10] Progress ${processed}/${files.length} | parsedBlocks=${stats.parsedBlocks} inserted=${stats.timeInserted} updated=${stats.timeUpdated} unchanged=${stats.timeUnchanged} missingCourse=${stats.courseMissing} missingOffering=${stats.offeringMissing}`
+    );
   }
 }
 
 await prisma.$disconnect();
 
-console.log("✅ All done.");
-console.log(stats);
+if (stats.invalidTimeCalculations > MAX_INVALID_TIME_WARNINGS) {
+  console.warn(
+    `[step10] Suppressed ${stats.invalidTimeCalculations - MAX_INVALID_TIME_WARNINGS} additional invalid time warnings.`
+  );
+}
+console.log(`[step10] Summary: ${JSON.stringify(stats)}`);

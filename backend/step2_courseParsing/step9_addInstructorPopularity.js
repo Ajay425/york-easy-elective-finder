@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
+const PROGRESS_EVERY = 250
 
 const clamp = (x, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, x))
 const isMissing = (v) => v == null || v === -1
@@ -84,18 +85,28 @@ async function main() {
     },
   })
 
-  for (const prof of data) {
+  const stats = {
+    totalInstructors: data.length,
+    updated: 0,
+  }
+
+  for (let i = 0; i < data.length; i++) {
+    const prof = data[i]
     const popularity = computePopularity(prof)
 
     await prisma.instructors.update({
       where: { id: prof.id },
       data: { popularity },
     })
+    stats.updated++
 
-    console.log(
-      `[${prof.id}] ${prof.firstname ?? ''} ${prof.lastname ?? ''} -> popularity ${popularity}`
-    )
+    const processed = i + 1
+    if (processed === 1 || processed % PROGRESS_EVERY === 0 || processed === data.length) {
+      console.log(`[step9] Progress ${processed}/${data.length} | updated=${stats.updated}`)
+    }
   }
+
+  console.log(`[step9] Summary: ${JSON.stringify(stats)}`)
 }
 
 main()

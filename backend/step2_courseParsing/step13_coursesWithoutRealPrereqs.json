@@ -341,6 +341,14 @@
       "credit": 3,
       "reason": "Added from admin UI. Fill in reason after manual review.",
       "courseDescription": "A presentation of functions, systems of linear equations, and an in-depth presentation of single variable differential calculus. Emphasis is placed on basic mathematical skills and their applications. Prerequisites: 12U Advanced Functions (MHF4U) or equivalent, or SC/MATH 1510 6.00. Course Credit exclusions: SC/MATH 1013 3.00, SC/MATH 1300 3.00, SC/MATH 1530 3.00, SC/MATH 1550 6.00, GL/MATH/MODR 1930 3.00, AP/ECON 1530 3.00, SC/ISCI 1401 3.00, SC/ISCI 1410 6.00, SC/MATH 1505 6.00."
+    },
+    {
+      "faculty": "SC",
+      "deptAcronym": "MATH",
+      "courseCode": "1190",
+      "credit": 3,
+      "reason": "Added from admin UI. Fill in reason after manual review.",
+      "courseDescription": "Topics include logic, sets, functions, relations, modular arithmetic and applications of elementary number theory, proof techniques, induction. Prerequisite: Advanced Functions (MHF4U) or equivalent, or SC/MATH 1510 6.00, or GL/MATH 1670 6.00. NCR Note: This course may not be taken for degree credit by any student who has passed SC/MATH 1019 3.00, SC/MATH 1200 3.00, SC/MATH 2200 3.00, or any 3000- or higher-level mathematics course. Course credit exclusion: GL/CSLA/MATH/MODR 1650 3.00"
     }
   ]
 }

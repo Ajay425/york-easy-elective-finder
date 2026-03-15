@@ -16,6 +16,7 @@ export const RUNTIME_REPORTS_DIR = path.join(RUNTIME_DIR, 'reports');
 export const COUNT_FILE = path.join(RUNTIME_STATE_DIR, 'count.json');
 export const API_USAGE_FILE = path.join(RUNTIME_STATE_DIR, 'apiUsage.json');
 export const STEP13_FILE = path.join(STEP2_DIR, 'step13_coursesWithoutRealPrereqs.json');
+export const STEP14_FILE = path.join(STEP2_DIR, 'step14_uniqueValues.json');
 export const TRENDING_FILE = path.join(RUNTIME_STATE_DIR, 'trending.json');
 export const PIPELINE_LOG_FILE = path.join(RUNTIME_PIPELINE_DIR, 'pipeline.log');
 export const PIPELINE_HARDCOPY_FILE = path.join(RUNTIME_PIPELINE_DIR, 'hardcopy.0');

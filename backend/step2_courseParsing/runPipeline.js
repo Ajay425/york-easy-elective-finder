@@ -13,7 +13,7 @@ const steps = [
   { num: 3, name: 'Add Prerequisites', path: './step3_addPrereqsToCoursesInDb.js' },
   { num: 4, name: 'Import Instructors', path: './step4_JSONinstructorsToDb.js' },
   { num: 5, name: 'Import Departments', path: './step5_DeptToDbPrisma.js' },
-   { num: 6, name: 'Add Professor Ratings', path: './step6_rmpAddprofessorRatingsToDb.js' },
+  { num: 6, name: 'Add Professor Ratings', path: './step6_rmpAddprofessorRatingsToDb.js' },
   { num: 7, name: 'Import Course Offerings', path: './step7_courseOfferingsToDB.js' },
   { num: 8, name: 'Import Instructor Offerings', path: './step8_instructorOfferingstoDb.js' },
   { num: 9, name: 'Add Instructor Popularity', path: './step9_addInstructorPopularity.js' },
@@ -21,6 +21,7 @@ const steps = [
   { num: 11, name: 'Cleanup Self Prerequisites', path: './step11_cleanupSelfPrereqs.js' },
   { num: 12, name: 'Course Prerequisites to DB', path: './step12_coursePrereqsToDb.js' },
   { num: 13, name: 'Remove Prereqs From Approved Course List', path: './step13_removeApprovedCoursePrereqs.js' },
+  { num: 14, name: 'Extract Unique DB Values', path: './step14_uniqueValues.js' },
 ];
 
 

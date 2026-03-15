@@ -11,17 +11,25 @@ const __dirname = path.dirname(__filename);
 
 // Course data directory
 const filePath = path.join(__dirname, 'all_courses.json');
+const PROGRESS_EVERY = 200;
 
 
 async function main() {
-    console.log(filePath)
+    const stats = {
+      coursesScanned: 0,
+      coursesFoundInDb: 0,
+      missingCourses: 0,
+      prereqCoursesCreated: 0,
+      prereqLinksUpserted: 0,
+    };
 
    try {
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const data = JSON.parse(fileContent)
-    for (let course of data){
-        
-        console.log(`Course ${course.dept} ${course.code}`)
+    for (let i = 0; i < data.length; i++) {
+        const course = data[i];
+        stats.coursesScanned++;
+
         const courseDB = await prisma.course.findUnique({
             where:{
                 faculty_deptAcronym_courseCode_credit:{
@@ -33,7 +41,11 @@ async function main() {
 
             }
         })
-        if (!courseDB) continue;
+        if (!courseDB) {
+            stats.missingCourses++;
+            continue;
+        }
+        stats.coursesFoundInDb++;
         // console.log(courseDB)
         for (let preqreq of course.prereqs){
             // console.log(preqreq)
@@ -57,6 +69,7 @@ async function main() {
                         year: parseInt(preqreq.code[0],10)
                     }
                 })
+                stats.prereqCoursesCreated++;
             }
             await prisma.coursePrerequisite.upsert({
                 where: {
@@ -71,11 +84,21 @@ async function main() {
                     prereqId: prereqInDb.id,
                 },
             })
+            stats.prereqLinksUpserted++;
+        }
+
+        const processed = i + 1;
+        if (processed === 1 || processed % PROGRESS_EVERY === 0 || processed === data.length) {
+            console.log(
+                `[step12] Progress ${processed}/${data.length} | coursesFound=${stats.coursesFoundInDb} missingCourses=${stats.missingCourses} prereqCoursesCreated=${stats.prereqCoursesCreated} prereqLinksUpserted=${stats.prereqLinksUpserted}`
+            );
         }
     }
+
+    console.log(`[step12] Summary: ${JSON.stringify(stats)}`);
 }
 catch(err){
-    console.log(err)
+    console.error(err)
     throw err;
 }
 

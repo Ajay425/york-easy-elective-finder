@@ -14,18 +14,27 @@ const __dirname = path.dirname(__filename);
 
 // ✅ Path to your single JSON file (adjust file name here)
 const filePath = path.join(__dirname, 'all_courses.json');
-console.log(filePath)
+const PROGRESS_EVERY = 100;
 
 
 async function main() {
-    console.log(filePath)
+        const stats = {
+            coursesScanned: 0,
+            teachingMeetingsScanned: 0,
+            instructorPairsProcessed: 0,
+            instructorOfferingsUpserted: 0,
+            missingCourses: 0,
+            missingOfferings: 0,
+            missingInstructors: 0,
+        };
 
    try {
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const data = JSON.parse(fileContent)
 
-    for (let course of data){
-        console.log(`Course ${course.dept} ${course.code}`)
+        for (let i = 0; i < data.length; i++) {
+                const course = data[i];
+                stats.coursesScanned++;
 
         const courseRow = await prisma.course.findUnique({
                 where: {
@@ -38,19 +47,22 @@ async function main() {
                 },
                 select: { id: true },
                 });
-            console.log(courseRow.id)
-        for (let terms of course.terms){
+                        if (!courseRow) {
+                            stats.missingCourses++;
+                            continue;
+                        }
+                for (const terms of course.terms){
             //     console.log(terms.term)
             // console.log(terms.section)
         const teachingTypes = ["LECT", "SEMR", "BLEN", "ONLN", "ONCA", "HYFX"];
-          for (let meeting of terms.meetings){
+                    for (const meeting of terms.meetings){
             // console.log(meeting.type)
             const sanitizedType = meeting.type.replace(/[^A-Za-z]/g, '').toUpperCase();
             if (teachingTypes.includes(sanitizedType)){
+                                        stats.teachingMeetingsScanned++;
       
                     
                     const termAndYear = course.termAndYear ?? `${terms.term}`;
-                console.log(`${termAndYear} ${course.facultyPrefix} ${course.dept} ${course.code} ${terms.section} ${sanitizedType} `)
                     
                     const courseOfferingId = await prisma.CurrentCourseOfferings.findUnique({
                         where:{
@@ -68,8 +80,14 @@ async function main() {
                     }
                 })
 
+                if (!courseOfferingId) {
+                  stats.missingOfferings++;
+                  continue;
+                }
 
-                for (let instructor of meeting.instructors){
+
+                for (const instructor of meeting.instructors){
+                    stats.instructorPairsProcessed++;
                     const instructorPRISMA = await prisma.Instructors.findUnique({
                         where:{
                                 firstname_lastname:{
@@ -78,7 +96,11 @@ async function main() {
                                 }
                             }
                     })
-                    console.log(instructorPRISMA)
+
+                                        if (!instructorPRISMA) {
+                                            stats.missingInstructors++;
+                                            continue;
+                                        }
 
                     const isntrID= instructorPRISMA.id
                     
@@ -97,7 +119,7 @@ async function main() {
                             },
                         });
 
-                        console.log('Upserted instructorOffering id:', instructorOffering.id);
+                        if (instructorOffering) stats.instructorOfferingsUpserted++;
                         } catch (err) {
                         console.error('Failed to upsert instructorOffering:', err);
                         throw err;
@@ -106,10 +128,22 @@ async function main() {
             }
           }
         }
+
+                if (
+                    stats.coursesScanned === 1 ||
+                    stats.coursesScanned % PROGRESS_EVERY === 0 ||
+                    stats.coursesScanned === data.length
+                ) {
+                    console.log(
+                        `[step8] Progress ${stats.coursesScanned}/${data.length} | meetings=${stats.teachingMeetingsScanned} pairs=${stats.instructorPairsProcessed} upserts=${stats.instructorOfferingsUpserted} missingCourses=${stats.missingCourses} missingOfferings=${stats.missingOfferings} missingInstructors=${stats.missingInstructors}`
+                    );
+                }
     }
+
+        console.log(`[step8] Summary: ${JSON.stringify(stats)}`);
 }
 catch(err){
-    console.log(err)
+        console.error(err)
 }
 }
 main()

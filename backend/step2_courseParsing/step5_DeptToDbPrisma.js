@@ -18,23 +18,33 @@ const baseDir = path.resolve(
 const folderPattern = /^([A-Z&]+)\s*-\s*(.*?)\s*-\s*\(.*\)$/;
 
 async function main() {
+  const stats = {
+    foldersFound: 0,
+    foldersParsed: 0,
+    departmentsUpserted: 0,
+    parseSkipped: 0,
+    upsertErrors: 0,
+  };
+
   try {
     const folders = fs.readdirSync(baseDir, { withFileTypes: true })
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name);
 
-    console.log(`📁 Found ${folders.length} department folders`);
+    stats.foldersFound = folders.length;
+    console.log(`[step5] Found ${folders.length} department folders.`);
 
-    for (const folder of folders) {
+    for (let i = 0; i < folders.length; i++) {
+      const folder = folders[i];
       const match = folder.match(folderPattern);
       if (!match) {
         console.warn(`⚠️ Could not parse folder name: ${folder}`);
+        stats.parseSkipped++;
         continue;
       }
+      stats.foldersParsed++;
 
       const [_, deptAcronym, deptFull] = match;
-
-      console.log(`➡️ Inserting: ${deptAcronym} — ${deptFull}`);
 
       try {
         
@@ -55,12 +65,21 @@ async function main() {
           }
 
         });
+        stats.departmentsUpserted++;
       } catch (err) {
+        stats.upsertErrors++;
         console.error(`❌ Failed to insert ${deptAcronym}: ${err.message}`);
+      }
+
+      const processed = i + 1;
+      if (processed === 1 || processed % 50 === 0 || processed === folders.length) {
+        console.log(
+          `[step5] Progress ${processed}/${folders.length} | upserted=${stats.departmentsUpserted} parseSkipped=${stats.parseSkipped} errors=${stats.upsertErrors}`
+        );
       }
     }
 
-    console.log("✅ Done inserting departments.");
+    console.log(`[step5] Summary: ${JSON.stringify(stats)}`);
   } catch (err) {
     console.error("❌ Error scanning folders:", err);
   } finally {

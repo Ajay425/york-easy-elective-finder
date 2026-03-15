@@ -11,11 +11,17 @@ const __dirname = path.dirname(__filename);
 
 // ✅ Path to your single JSON file (adjust file name here)
 const filePath = path.join(__dirname, 'all_courses.json');
-console.log(filePath)
+const PROGRESS_EVERY = 500;
 
 
 async function main() {
   const teachingTypes = ["LECT", "SEMR", "BLEN", "ONLN", "ONCA", "HYFX"];
+  const stats = {
+    coursesScanned: 0,
+    teachingMeetingsScanned: 0,
+    instructorsSeen: 0,
+    instructorsUpserted: 0,
+  };
 
   try {
     // Read and parse the JSON file
@@ -24,20 +30,22 @@ async function main() {
         
     
 
-    for (let course of data) {
+    for (const course of data) {
+      stats.coursesScanned++;
 
 
-      for (let term of course.terms){
+      for (const term of course.terms){
 
-        for (let meeting of term.meetings){
+        for (const meeting of term.meetings){
 
             const sanitizedType = meeting.type.replace(/[^A-Za-z]/g, '').toUpperCase();
 
             //Only teaching instructors are put in the database, removing lab and otherwise.
             if (teachingTypes.includes(sanitizedType)){
+              stats.teachingMeetingsScanned++;
 
-              for (let instr of meeting.instructors){
-                  console.log(`${instr.firstName} ${instr.lastName}`)
+              for (const instr of meeting.instructors){
+                  stats.instructorsSeen++;
 
                   const upsertProf = await prisma.instructors.upsert({
                       where: {
@@ -52,8 +60,16 @@ async function main() {
                           lastname:instr.lastName
                       }
                       });
+                  if (upsertProf) stats.instructorsUpserted++;
 
-                  console.log("SUCCESS " , upsertProf);
+                  if (
+                    stats.instructorsSeen === 1 ||
+                    stats.instructorsSeen % PROGRESS_EVERY === 0
+                  ) {
+                    console.log(
+                      `[step4] Progress instructors=${stats.instructorsSeen} upserts=${stats.instructorsUpserted}`
+                    );
+                  }
               }
             }
         }
@@ -61,7 +77,7 @@ async function main() {
     
 
 }
-    console.log('🎉 All profs inserted successfully!');
+    console.log(`[step4] Summary: ${JSON.stringify(stats)}`);
   } catch (err) {
     console.error('❌ Error while processing profs:', err);
   } finally {

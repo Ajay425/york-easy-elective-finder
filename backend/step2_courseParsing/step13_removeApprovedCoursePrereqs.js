@@ -50,7 +50,7 @@ async function main() {
       totalPrereqRowsDeleted: 0,
     };
     await fs.writeFile(reportPath, JSON.stringify(emptyReport, null, 2), 'utf-8');
-    console.log('No courses listed in step13_coursesWithoutRealPrereqs.json. Nothing to remove.');
+    console.log('[step13] No listed courses. Nothing to remove.');
     return;
   }
 
@@ -113,9 +113,9 @@ async function main() {
   };
 
   await fs.writeFile(reportPath, JSON.stringify(report, null, 2), 'utf-8');
-  console.log(`Processed ${courses.length} listed courses.`);
-  console.log(`Removed ${totalPrereqRowsDeleted} prerequisite rows.`);
-  console.log(`Saved report to ${reportPath}`);
+  console.log(
+    `[step13] Processed=${courses.length}, removedPrereqRows=${totalPrereqRowsDeleted}, skippedCourses=${skippedCourses.length}, report=${reportPath}`
+  );
 }
 
 main()

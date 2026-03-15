@@ -7,6 +7,8 @@ const __dirname = path.dirname(__filename);
 const allCoursesPath = path.join(__dirname, 'all_courses.json');
 
 function updateLectCatNumbers(courses) {
+  let updatedCatNumbers = 0;
+
   courses.forEach(course => {
     // Iterate over terms
     course.terms.forEach(term => {
@@ -47,22 +49,23 @@ function updateLectCatNumbers(courses) {
           // Only update if a matching catNumber exists for that section
           if (sectionCatNumberMap[section]) {
             meeting.catNumber = sectionCatNumberMap[section];  // Assign the catNumber from LAB/TUTR with the same section
+            updatedCatNumbers++;
           }
         }
       });
     });
   });
 
-  return courses;
+  return { courses, updatedCatNumbers };
 }
 
 
 // Update the course data with catNumbers for LECT
 const json = fs.readFileSync(allCoursesPath, {encoding:'utf-8'})
 const obj = JSON.parse(json);
-const updatedObj = updateLectCatNumbers(obj)
+const { courses: updatedObj, updatedCatNumbers } = updateLectCatNumbers(obj)
 
 const newJson = JSON.stringify(updatedObj, null, 2); // The 'null, 2' adds indentation for readability
 fs.writeFileSync(allCoursesPath, newJson, { encoding: 'utf-8' });
 
-console.log('File has been updated!');
+console.log(`[step1.5] Updated ${updatedCatNumbers} missing cat numbers across ${updatedObj.length} courses.`);

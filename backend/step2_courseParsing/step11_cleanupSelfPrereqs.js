@@ -6,7 +6,7 @@ async function main() {
   const deleted = await prisma.$executeRawUnsafe(
     `DELETE FROM "CoursePrerequisite" WHERE "courseId" = "prereqId";`
   );
-  console.log(`Deleted ${deleted} self-referential prereq rows.`);
+  console.log(`[step11] Deleted ${deleted} self-referential prerequisite rows.`);
 }
 
 main().finally(() => prisma.$disconnect());

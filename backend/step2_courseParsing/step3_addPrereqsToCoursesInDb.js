@@ -7,6 +7,8 @@ const prisma = new PrismaClient();
 
 import { extractPrereqsWithCredits } from "./parsePrereqsHelperFunc.js";
 
+const PROGRESS_EVERY = 200;
+
 // Helper: create the course or fetch it if it already exists
 async function getOrCreateCourse(prisma, pr) {
   try {
@@ -41,11 +43,21 @@ async function getOrCreateCourse(prisma, pr) {
 }
 
 async function processCourses(prisma, courses6) {
+  const stats = {
+    coursesScanned: 0,
+    coursesWithPrereqs: 0,
+    prereqLinksCreated: 0,
+    selfPrereqsSkipped: 0,
+    duplicateLinksSkipped: 0,
+  };
+
   for (const c of courses6) {
+    stats.coursesScanned++;
     if (!c.desc) continue;
 
     const prereqs = extractPrereqsWithCredits(c.desc);
     if (prereqs.length === 0) continue;
+    stats.coursesWithPrereqs++;
 
     // Make sure the "target" course (the one that has prereqs) exists & we have its id
     // (since your query pulled existing courses, c.id should already exist,
@@ -62,7 +74,7 @@ async function processCourses(prisma, courses6) {
 
       //Skip if it's a self-prereq
       if (courseId === prereqCourse.id) {
-        console.log(`Skipping self-prerequisite: ${courseId}`);
+        stats.selfPrereqsSkipped++;
         continue;
       }
       // 2) Link: c (courseId) requires prereqCourse (prereqId)
@@ -75,22 +87,29 @@ async function processCourses(prisma, courses6) {
         });
       } catch (e) {
         // Duplicate relation → skip
-        if (e.code === 'P2002') continue;
+        if (e.code === 'P2002') {
+          stats.duplicateLinksSkipped++;
+          continue;
+        }
         throw e;
       }
+
+      stats.prereqLinksCreated++;
     }
 
-    console.log(`Processed course ${c.courseCode}: added ${prereqs.length} prereqs (deduped by constraints).`);
+    if (
+      stats.coursesScanned === 1 ||
+      stats.coursesScanned % PROGRESS_EVERY === 0 ||
+      stats.coursesScanned === courses6.length
+    ) {
+      console.log(
+        `[step3] Progress ${stats.coursesScanned}/${courses6.length} | coursesWithPrereqs=${stats.coursesWithPrereqs} linksCreated=${stats.prereqLinksCreated}`
+      );
+    }
   }
+
+  return stats;
 }
-
-// Example usage:
-const courses6 = await prisma.course.findMany({
-  where: { prerequisites: { none: {} } }, // only those with no prereq links yet
-});
-
-// Run it
-await processCourses(prisma, courses6);
 
 
 async function main() {
@@ -102,7 +121,8 @@ const courses6 = await prisma.course.findMany({
     prerequisites: { none: {} },
   },
 })
-await processCourses(prisma, courses6);
+const stats = await processCourses(prisma, courses6);
+console.log(`[step3] Summary: ${JSON.stringify(stats)}`);
 }
 
 main()
