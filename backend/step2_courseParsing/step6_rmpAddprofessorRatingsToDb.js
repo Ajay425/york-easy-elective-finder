@@ -3,8 +3,11 @@ import rmp from "ratemyprofessor-api";
 import { PrismaClient } from '@prisma/client';
 import { promises as fs } from "fs";
 import path from "path";
+import { fileURLToPath } from 'url';
 
 const prisma = new PrismaClient();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // --- config/tweak these thresholds if needed ---
 const FULLNAME_DISTANCE_THRESHOLD = 0.18; // relative Levenshtein (0 exact -> 1 very different)
@@ -82,7 +85,7 @@ function isConfidentMatch(requestedFirst, requestedLast, currProfInfo, schoolId)
 // --- main logic ---
 async function main(){
   // Ensure logs dir exists
-  const logsDir = path.join(process.cwd(), 'logs');
+  const logsDir = path.join(__dirname, 'logs');
   try { await fs.mkdir(logsDir); } catch(e){ /* ignore if exists */ }
 
   const matchesPath = path.join(logsDir, 'matches.json');

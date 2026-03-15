@@ -1,12 +1,9 @@
 import express from 'express';
 import * as db from '../database/dbPrismaCourses.js';
 import fs from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { STEP13_FILE } from '../utils/paths.js';
 
 const adminRouter = express.Router();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Search page (EJS) - client-side will call /courses/search
 adminRouter.get('/', async (req, res) => {
@@ -37,10 +34,9 @@ adminRouter.get('/course/:id', async (req, res) => {
     const course = await db.getCourseFromIdDB(id);
     if (!course) return res.status(404).send('Course not found');
 
-    const jsonPath = path.join(__dirname, '../step2_courseParsing/step13_coursesWithoutRealPrereqs.json');
     let isInNoRealPrereqList = false;
     try {
-      const raw = await fs.readFile(jsonPath, 'utf-8');
+      const raw = await fs.readFile(STEP13_FILE, 'utf-8');
       const parsed = JSON.parse(raw);
       const list = Array.isArray(parsed.courses) ? parsed.courses : [];
       isInNoRealPrereqList = list.some((c) =>
@@ -116,8 +112,7 @@ adminRouter.post('/course/:id/add-no-real-prereq', async (req, res) => {
     const deleted = await db.clearCoursePrereqsDB(id);
     const deletedCount = deleted?.count ?? 0;
 
-    const jsonPath = path.join(__dirname, '../step2_courseParsing/step13_coursesWithoutRealPrereqs.json');
-    const raw = await fs.readFile(jsonPath, 'utf-8');
+    const raw = await fs.readFile(STEP13_FILE, 'utf-8');
     const parsed = JSON.parse(raw);
 
     if (!Array.isArray(parsed.courses)) parsed.courses = [];
@@ -146,7 +141,7 @@ adminRouter.post('/course/:id/add-no-real-prereq', async (req, res) => {
       courseDescription: course.desc || '',
     });
 
-    await fs.writeFile(jsonPath, `${JSON.stringify(parsed, null, 2)}\n`, 'utf-8');
+    await fs.writeFile(STEP13_FILE, `${JSON.stringify(parsed, null, 2)}\n`, 'utf-8');
     return res.status(201).json({
       msg: `Removed ${deletedCount} prerequisite link(s). Course appended to step13 list`,
       added: true,

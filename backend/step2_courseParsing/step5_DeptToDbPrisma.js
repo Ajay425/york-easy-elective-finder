@@ -1,13 +1,17 @@
 //Put dept into prisma, based on folder names . I.e "ENG - Engineering - ( GS, LE )" gets dept ENG and longform Engineering
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from 'url';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Path where your folders are located
 const baseDir = path.resolve(
-  "../step1_PythonCourseScraper/york_courses"
+  __dirname,
+  '../step1_PythonCourseScraper/york_courses'
 );
 
 // Regex pattern to extract parts like "ENG - Engineering - ( GS, LE )"

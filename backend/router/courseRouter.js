@@ -9,6 +9,8 @@ courseRouter.get("/", courseController.getPopularCourses)
 // search endpoint for autocomplete / suggestions
 courseRouter.get("/search", courseController.searchCourses)
 courseRouter.get('/search/options', courseController.getCourseSearchFilterOptions)
+courseRouter.get('/trending', courseController.getTrendingSearches)
+courseRouter.post('/trending/track', courseController.trackTrendingSearch)
 
 courseRouter.get("/:id", courseController.getCourseFromParams)
 

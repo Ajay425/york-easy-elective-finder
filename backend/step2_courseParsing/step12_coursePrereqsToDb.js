@@ -7,13 +7,10 @@ const prisma = new PrismaClient();
 
 // Current file and directory paths in ES Module scope
 const __filename = fileURLToPath(import.meta.url);
-console.log(`${__filename} FILENAME`)
-
 const __dirname = path.dirname(__filename);
-console.log(`${__dirname} DIRNAME`)
 
 // Course data directory
-const filePath = path.join(__dirname, '../data/all_courses.json');
+const filePath = path.join(__dirname, 'all_courses.json');
 
 
 async function main() {

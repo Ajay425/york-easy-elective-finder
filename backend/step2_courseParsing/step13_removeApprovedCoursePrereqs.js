@@ -1,15 +1,12 @@
-import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs/promises';
 import { PrismaClient } from '@prisma/client';
+import { RUNTIME_REPORTS_DIR, STEP13_FILE } from '../utils/paths.js';
 
 const prisma = new PrismaClient();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const listPath = path.join(__dirname, 'step13_coursesWithoutRealPrereqs.json');
-const reportPath = path.join(__dirname, 'step13_removedPrereqsReport.json');
+const listPath = STEP13_FILE;
+const reportPath = path.join(RUNTIME_REPORTS_DIR, 'step13_removedPrereqsReport.json');
 
 function normalizeCourseEntry(entry) {
   return {
@@ -41,6 +38,7 @@ async function loadCourseList() {
 }
 
 async function main() {
+  await fs.mkdir(RUNTIME_REPORTS_DIR, { recursive: true });
   const courses = await loadCourseList();
 
   if (courses.length === 0) {

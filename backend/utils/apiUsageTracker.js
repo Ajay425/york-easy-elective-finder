@@ -1,9 +1,7 @@
 import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { API_USAGE_FILE } from './paths.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const USAGE_FILE = path.join(__dirname, '../data/apiUsage.json');
+const USAGE_FILE = API_USAGE_FILE;
 
 // Ensure data directory exists
 const dataDir = path.dirname(USAGE_FILE);

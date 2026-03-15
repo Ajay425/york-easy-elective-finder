@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "type": "module",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup": "npm ci && npm run bootstrap && npm run db:generate",
+    "bootstrap": "node scripts/prepareBackend.js",
+    "start": "node app.js",
+    "pipeline": "node step2_courseParsing/runPipeline.js",
+    "pipeline:full": "bash ./run_full_pipeline.sh",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "test": "echo \"No tests configured\""
   },
   "keywords": [],
   "author": "",
@@ -34,8 +41,7 @@
     "rate-limit-redis": "^4.3.1",
     "ratemyprofessor-api": "^1.0.1",
     "redis": "^4.6.7",
-    "resend": "^6.5.2",
-    "socket.io": "^4.8.1"
+    "resend": "^6.5.2"
   },
   "devDependencies": {
     "prisma": "^5.22.0"

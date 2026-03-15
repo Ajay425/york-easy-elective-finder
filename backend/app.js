@@ -1,10 +1,9 @@
-import dotenv from 'dotenv';
 import express from 'express';
 import courseRouter from './router/courseRouter.js';
 import prereqRouter from './router/prereqRouter.js';
 import "dotenv/config";
 import cors from 'cors';
-import fs from 'fs'
+import fs from 'fs/promises';
 
 import passport from 'passport';
 import { Strategy as JwtStrategy } from 'passport-jwt';
@@ -13,11 +12,12 @@ import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
 
 import adminRouter from './router/adminRouter.js';
+import { COUNT_FILE, RUNTIME_STATE_DIR, VIEWS_DIR } from './utils/paths.js';
 
 const app = express();
 
 // view engine
-app.set('views', './views');
+app.set('views', VIEWS_DIR);
 app.set('view engine', 'ejs');
 
 // middleware
@@ -47,22 +47,37 @@ const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5, standardHeade
 
 const PORT = process.env.PORT || 3000;
 
-app.get("/api",(req,res)=>{
+async function ensureCountFile() {
+    await fs.mkdir(RUNTIME_STATE_DIR, { recursive: true });
+    try {
+        await fs.access(COUNT_FILE);
+    } catch {
+        await fs.writeFile(COUNT_FILE, JSON.stringify({ visits: 0 }, null, 2), 'utf-8');
+    }
+}
+
+app.get("/api", async (req, res) => {
         if (req.url === '/favicon.ico') {
                 res.end();
         }
-        // Ends request for favicon without counting
-        const json1 = fs.readFileSync('./data/count.json', 'utf-8');
-        const obj = JSON.parse(json1);
+        try {
+            // Keep visit counter in runtime/state regardless of process cwd.
+            await ensureCountFile();
+            const json1 = await fs.readFile(COUNT_FILE, 'utf-8');
+            const obj = JSON.parse(json1);
 
-        if (req.query.type == 'new-visit'){
-                obj.visits = obj.visits + 1
+            if (req.query.type == 'new-visit') {
+                obj.visits = obj.visits + 1;
+            }
+
+            const newJson = JSON.stringify(obj);
+            await fs.writeFile(COUNT_FILE, newJson, 'utf-8');
+            res.send(newJson);
+        } catch (err) {
+            console.error('Failed to process /api visit counter:', err);
+            res.status(500).json({ msg: 'Failed to read visit counter' });
         }
-        const newJson = JSON.stringify(obj)
-
-        fs.writeFileSync('./data/count.json', newJson);
-        res.send(newJson)
-})
+});
 
 // Auth routes: login page and handlers (public)
 app.get('/admin/login', (req, res) => {

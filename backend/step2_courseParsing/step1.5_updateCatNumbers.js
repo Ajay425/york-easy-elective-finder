@@ -1,4 +1,11 @@
 import fs from 'fs'
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const allCoursesPath = path.join(__dirname, 'all_courses.json');
+
 function updateLectCatNumbers(courses) {
   courses.forEach(course => {
     // Iterate over terms
@@ -51,11 +58,11 @@ function updateLectCatNumbers(courses) {
 
 
 // Update the course data with catNumbers for LECT
-const json = fs.readFileSync('all_courses.json', {encoding:'utf-8'})
+const json = fs.readFileSync(allCoursesPath, {encoding:'utf-8'})
 const obj = JSON.parse(json);
 const updatedObj = updateLectCatNumbers(obj)
 
 const newJson = JSON.stringify(updatedObj, null, 2); // The 'null, 2' adds indentation for readability
-fs.writeFileSync('all_courses.json', newJson, { encoding: 'utf-8' });
+fs.writeFileSync(allCoursesPath, newJson, { encoding: 'utf-8' });
 
 console.log('File has been updated!');

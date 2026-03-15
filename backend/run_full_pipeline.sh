@@ -18,7 +18,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STEP1_DIR="$SCRIPT_DIR/step1_PythonCourseScraper"
 STEP2_DIR="$SCRIPT_DIR/step2_courseParsing"
 SCREEN_SESSION="york_pipeline"
-LOGFILE="$SCRIPT_DIR/pipeline.log"
+RUNTIME_PIPELINE_DIR="$SCRIPT_DIR/runtime/pipeline"
+LOGFILE="$RUNTIME_PIPELINE_DIR/pipeline.log"
+
+mkdir -p "$RUNTIME_PIPELINE_DIR"
 
 # Use the venv from step1 for the python run.
 VENV_PYTHON="$STEP1_DIR/venv/bin/python"

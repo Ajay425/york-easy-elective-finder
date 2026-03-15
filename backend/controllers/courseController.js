@@ -1,6 +1,57 @@
 import * as db from '../database/dbPrismaCourses.js';
 import rmp from 'ratemyprofessor-api';
 import { incrementApiUsage } from '../utils/apiUsageTracker.js';
+import fs from 'fs/promises';
+import path from 'path';
+import { TRENDING_FILE } from '../utils/paths.js';
+
+const TRENDING_LIMIT = 5;
+const badWords = new Set([
+    'FUCK', 'SHIT', 'BITCH', 'ASS', 'CUNT', 'NIGGER', 'NIGGA',
+    'DICK', 'PUSSY', 'COCK', 'WHORE', 'SLUT'
+]);
+
+async function ensureTrendingFile() {
+    await fs.mkdir(path.dirname(TRENDING_FILE), { recursive: true });
+    try {
+        await fs.access(TRENDING_FILE);
+    } catch {
+        await fs.writeFile(TRENDING_FILE, JSON.stringify({}, null, 2), 'utf-8');
+    }
+}
+
+async function readTrendingMap() {
+    await ensureTrendingFile();
+    const raw = await fs.readFile(TRENDING_FILE, 'utf-8');
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+}
+
+async function writeTrendingMap(data) {
+    await fs.writeFile(TRENDING_FILE, JSON.stringify(data, null, 2), 'utf-8');
+}
+
+function isValidCourseQuery(query) {
+    if (!query) return false;
+
+    const q = String(query).trim().toUpperCase();
+    if (q.length < 3) return false;
+    if (/^\d+$/.test(q)) return false;
+    if (badWords.has(q)) return false;
+
+    const courseCodePattern = /^[A-Z]{2,5}\s?\d{3,4}$/;
+    if (courseCodePattern.test(q)) return true;
+
+    // Support non-course-code keyword style searches as long as they are clean.
+    return /^[A-Z0-9\s&\-]{3,40}$/.test(q);
+}
+
+function topTrendingTerms(map, limit = TRENDING_LIMIT) {
+    return Object.entries(map)
+        .sort((a, b) => Number(b[1]) - Number(a[1]))
+        .slice(0, limit)
+        .map(([term]) => term);
+}
 
 // Helpers copied/adapted from the RMP scraper script for name matching
 function normalizeName(name){
@@ -300,6 +351,35 @@ export async function generateInstructorPopularity(req, res) {
     try {
         const updated = await db.recomputeInstructorPopularity(instructorId);
         return res.status(200).json({ msg: 'success', instructor: updated });
+    } catch (err) {
+        return res.status(500).json({ msg: err.message || err });
+    }
+}
+
+export async function getTrendingSearches(req, res) {
+    try {
+        const data = await readTrendingMap();
+        const trending = topTrendingTerms(data);
+        return res.status(200).json({ msg: 'success', trending });
+    } catch (err) {
+        return res.status(500).json({ msg: err.message || err });
+    }
+}
+
+export async function trackTrendingSearch(req, res) {
+    const query = typeof req.body?.query === 'string' ? req.body.query.trim() : '';
+    if (!isValidCourseQuery(query)) {
+        return res.status(400).json({ msg: 'Invalid search query' });
+    }
+
+    try {
+        const normalized = query.toUpperCase();
+        const data = await readTrendingMap();
+        data[normalized] = (Number(data[normalized]) || 0) + 1;
+        await writeTrendingMap(data);
+
+        const trending = topTrendingTerms(data);
+        return res.status(200).json({ msg: 'success', trending });
     } catch (err) {
         return res.status(500).json({ msg: err.message || err });
     }

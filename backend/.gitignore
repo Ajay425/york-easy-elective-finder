@@ -1,14 +1,18 @@
 node_modules
 # Keep environment variables out of version control
 .env
+.env.local
+
+# Local runtime/generated artifacts
+runtime/
+step2_courseParsing/logs/
+step2_courseParsing/archive/
 
 /generated/prisma
-
-# API usage tracking
-data/apiUsage.json
 
 # Scraper output (should not be committed)
 step1_PythonCourseScraper/york_courses/
 step1_PythonCourseScraper/archive/
 step1_PythonCourseScraper/scraper.log
+step1_PythonCourseScraper/venv/
 
