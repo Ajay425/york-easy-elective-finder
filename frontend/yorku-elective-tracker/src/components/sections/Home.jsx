@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "../ui/select";
+import { TERMS } from "../../lib/courseFilters";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "../ui/dialog";
 
 function DisclaimerModal({ open, onContinue, onCancel }) {
@@ -113,7 +114,9 @@ const Home = () => {
             </SelectTrigger>
 
             <SelectContent className="bg-black/40 backdrop-blur-xl text-white border-white/10">
-              <SelectItem value="W">Winter (W)</SelectItem>
+              {TERMS.map((term) => (
+                <SelectItem key={term} value={term}>{term}</SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>

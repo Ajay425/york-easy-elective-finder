@@ -74,7 +74,7 @@ export function useCourses() {
         setError(err.message);  // Set the error message
         setLoading(false);  // End loading
       });
-  }, []);  // Empty dependency array means this will run once on mount
+  }, []);  // Fetch once on mount
 
   return { courses, loading, error };
 }

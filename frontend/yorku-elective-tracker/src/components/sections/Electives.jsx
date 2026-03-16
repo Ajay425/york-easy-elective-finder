@@ -12,9 +12,9 @@ import { useLocation } from "react-router-dom";
 import { Mail } from "lucide-react";
 
 const Electives = () => {
-  const { courses, loading, error } = useCourses();
   const location = useLocation();
   const selectedTerm = location.state?.term || null;
+  const { courses, loading, error } = useCourses();
 
   // Stop users from bypassing Home page
   if (!selectedTerm) {
