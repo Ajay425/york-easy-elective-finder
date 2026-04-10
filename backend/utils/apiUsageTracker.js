@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import { API_USAGE_FILE } from './paths.js';
 
 const USAGE_FILE = API_USAGE_FILE;
