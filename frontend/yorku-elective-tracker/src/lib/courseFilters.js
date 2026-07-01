@@ -32,7 +32,7 @@ export const DEPARTMENTS = [
 
 
 
-export const TERMS = ['F', 'W', 'S', 'Y'];
+export const TERMS = ['S1', 'S2', 'S3', 'SU'];
 export const COURSE_TYPES = ['LECT', 'TUTR', 'LAB', 'SEMR', 'BLEN', 'ONLN', 'ONCA', 'HYFX'];
 export const YEARS = [1, 2, 3, 4];
 export const CREDITS = [0.5, 1, 1.5, 2, 3, 4, 4.5, 6, 9];
@@ -57,8 +57,7 @@ export const TIME_BUCKETS = [
 
 // Helper function - pass ALL values to get ALL popular courses
 export function buildCoursesURL() {
-  const terms = `terms=W`; 
-  // const terms = TERMS.map(t => `terms=${t}`).join('&');
+  const terms = TERMS.map(t => `terms=${t}`).join('&');
   const types = COURSE_TYPES.map(t => `types=${t}`).join('&');
   const years = YEARS.map(y => `years=${y}`).join('&');
   const depts = DEPARTMENTS.map(d => `depts=${d}`).join('&');

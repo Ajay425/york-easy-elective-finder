@@ -6,12 +6,12 @@ export function UpdatesPopup() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const hasBeenShown = localStorage.getItem("updatesPopupShown");
+    const hasBeenShown = localStorage.getItem("updatesPopupShown_v2");
 
     // Show popup only if it hasn't been shown before
     if (!hasBeenShown) {
       setIsOpen(true);
-      localStorage.setItem("updatesPopupShown", "true");
+      localStorage.setItem("updatesPopupShown_v2", "true");
     }
   }, []);
 
@@ -55,16 +55,9 @@ export function UpdatesPopup() {
           {/* Updates List */}
           <div className="space-y-4 mb-6">
             <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/30 rounded-lg p-4 hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-300 group">
-              <h3 className="font-semibold text-purple-200 mb-1 group-hover:text-purple-100 transition-colors">⏰ Timing-Based Filtering</h3>
+              <h3 className="font-semibold text-purple-200 mb-1 group-hover:text-purple-100 transition-colors">☀️ Summer Courses Now Available</h3>
               <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">
-                Filter courses by timing preferences (Morning, Afternoon, or Evening) to find classes that match your schedule.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/30 rounded-lg p-4 hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-300 group">
-              <h3 className="font-semibold text-purple-200 mb-1 group-hover:text-purple-100 transition-colors">📅 Day Filters</h3>
-              <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">
-                Select specific days of the week to see only courses offered on your preferred days.
+                We now display summer course offerings! Browse and filter courses available during the summer term.
               </p>
             </div>
           </div>
