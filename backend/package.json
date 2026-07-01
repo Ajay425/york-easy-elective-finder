@@ -9,6 +9,8 @@
     "bootstrap": "node scripts/prepareBackend.js",
     "start": "node app.js",
     "pipeline": "node step2_courseParsing/runPipeline.js",
+    "export:frontend": "node scripts/exportStaticFrontendData.js",
+    "pipeline:export": "npm run pipeline && npm run export:frontend",
     "pipeline:full": "bash ./run_full_pipeline.sh",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate deploy",

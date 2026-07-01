@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "../ui/select";
-import { TERMS } from "../../lib/courseFilters";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "../ui/dialog";
+import { useCourseMeta } from "../../hooks/useCourseMeta";
 
 function DisclaimerModal({ open, onContinue, onCancel }) {
   return (
@@ -56,6 +56,7 @@ function DisclaimerModal({ open, onContinue, onCancel }) {
 const Home = () => {
   const [selectedTerm, setSelectedTerm] = useState(null);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const courseMeta = useCourseMeta();
   const navigate = useNavigate();
 
   const handleSearchClick = () => {
@@ -64,8 +65,15 @@ const Home = () => {
   };
 
   const handleContinue = () => {
+    const selectedTermMeta = courseMeta.terms.find((item) => item.term === selectedTerm);
     setShowDisclaimer(false);
-    navigate("/electives", { state: { term: selectedTerm } });
+    navigate("/electives", {
+      state: {
+        term: selectedTerm,
+        termLabel: selectedTermMeta?.label || selectedTerm,
+        termAndYear: courseMeta.termAndYear,
+      },
+    });
   };
 
   return (
@@ -114,8 +122,10 @@ const Home = () => {
             </SelectTrigger>
 
             <SelectContent className="bg-black/40 backdrop-blur-xl text-white border-white/10">
-              {TERMS.map((term) => (
-                <SelectItem key={term} value={term}>{term}</SelectItem>
+              {courseMeta.terms.map(({ term, label }) => (
+                <SelectItem key={term} value={term}>
+                  {label ? `${label} (${term})` : term}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>

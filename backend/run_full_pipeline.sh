@@ -49,6 +49,10 @@ echo "==> [\$(date)] step1 complete; running step2 (runPipeline.js)"
 cd "$STEP2_DIR"
 node runPipeline.js
 
+echo "==> [\$(date)] step2 complete; exporting static frontend data"
+cd "$SCRIPT_DIR"
+node scripts/exportStaticFrontendData.js
+
 echo "==> [\$(date)] pipeline finished"
 EOF
 )

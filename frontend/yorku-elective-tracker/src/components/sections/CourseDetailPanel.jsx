@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
-import { X, Copy, Check } from "lucide-react";
+import { X, Copy, Check, Bookmark, BookmarkCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+import { getCatEntryId } from "../../hooks/useSavedCatNumbers";
+
+const MotionDiv = motion.div;
 
 const DAY_LABELS = {
   M: "Monday",
@@ -14,7 +17,16 @@ const DAY_LABELS = {
   Sun: "Sunday",
 };
 
-export function CourseDetailPanel({ course, selectedTerm, onClose }) {
+export function CourseDetailPanel({
+  course,
+  selectedTerm,
+  selectedTermLabel,
+  onClose,
+  savedCatIds,
+  onSaveCatNumber,
+  onRemoveCatNumber,
+  highlightedCatId,
+}) {
   const [copiedIndex, setCopiedIndex] = useState(null);
 
   // Close panel on Escape key
@@ -34,22 +46,24 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
   const termOfferings =
     course.terms?.filter((t) => t.term === selectedTerm) || [];
 
-  // Compute popularity for THIS term only
-  const termPopularity =
-    termOfferings
-      ?.flatMap((t) => t.meetings)
-      ?.map((m) => m.popularity)
-      ?.filter((p) => p !== undefined && p !== null)
-      ?.sort((a, b) => b - a)[0] ?? null;
-
   const handleCopy = (text, index) => {
     navigator.clipboard.writeText(text);
     setCopiedIndex(index);
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
+  const handleSaveToggle = (offering) => {
+    const id = getCatEntryId(course.code, offering);
+    if (savedCatIds?.has(id)) {
+      onRemoveCatNumber?.(id);
+      return;
+    }
+
+    onSaveCatNumber?.(course, offering);
+  };
+
   return (
-    <motion.div
+    <MotionDiv
       initial={{ x: "100%" }}
       animate={{ x: 0 }}
       exit={{ x: "100%" }}
@@ -136,14 +150,17 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
       {termOfferings.length > 0 && (
         <div className="mt-6 space-y-6">
           <h4 className="text-yellow-200 font-semibold text-lg">
-            Sections for {selectedTerm} Term
+            Sections for {selectedTermLabel || selectedTerm}
           </h4>
 
           {termOfferings.map((t, idx) => (
             <div
               key={idx}
-              className="bg-white/10 rounded-xl p-4 border border-white/20 
-                         backdrop-blur-xl shadow-lg"
+              className={`bg-white/10 rounded-xl p-4 border backdrop-blur-xl shadow-lg ${
+                highlightedCatId === getCatEntryId(course.code, t)
+                  ? "border-yellow-200/70 shadow-yellow-300/10"
+                  : "border-white/20"
+              }`}
             >
               {/* Term + Cat Number */}
               <div className="flex justify-between items-start mb-4">
@@ -152,38 +169,62 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
                     Term: {t.term} — Section {t.section}
                   </p>
 
-                  <p className="text-gray-200 text-sm mt-1">
-                    <strong className="text-white">Cat Number:</strong>{" "}
-                    <span className="font-mono">{t.catNumber}</span>
-                  </p>
+                  {t.catNumber && (
+                    <p className="text-gray-200 text-sm mt-1">
+                      <strong className="text-white">Cat Number:</strong>{" "}
+                      <span className="font-mono">{t.catNumber}</span>
+                    </p>
+                  )}
                 </div>
 
-                {/* Copy Button */}
-                <div className="relative">
-                  <Button
-                    size="sm"
-                    className="bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600
-                               border border-purple-400 text-white shadow-lg shadow-purple-500/50
-                               hover:shadow-purple-500/80 transition-all duration-200 hover:scale-105
-                               flex items-center gap-1.5 px-3 py-1.5 h-auto text-xs font-semibold"
-                    onClick={() => handleCopy(t.catNumber, idx)}
-                  >
-                    {copiedIndex === idx ? (
-                      <>
-                        <Check className="w-3.5 h-3.5" />
-                        Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        Copy Cat Number
-                      </>
-                    )}
-                  </Button>
+                {t.catNumber && (
+                  <div className="relative flex flex-col gap-2 sm:items-end">
+                    <Button
+                      size="sm"
+                      className="bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600
+                                 border border-purple-400 text-white shadow-lg shadow-purple-500/50
+                                 hover:shadow-purple-500/80 transition-all duration-200 hover:scale-105
+                                 flex items-center gap-1.5 px-3 py-1.5 h-auto text-xs font-semibold"
+                      onClick={() => handleCopy(t.catNumber, idx)}
+                    >
+                      {copiedIndex === idx ? (
+                        <>
+                          <Check className="w-3.5 h-3.5" />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5" />
+                          Copy CAT
+                        </>
+                      )}
+                    </Button>
+
+                    <Button
+                      size="sm"
+                      className={`border text-white shadow-lg transition-all duration-200 hover:scale-105 flex items-center gap-1.5 px-3 py-1.5 h-auto text-xs font-semibold ${
+                        savedCatIds?.has(getCatEntryId(course.code, t))
+                          ? "bg-green-500/20 border-green-300/50 hover:bg-green-500/30"
+                          : "bg-white/10 border-white/20 hover:bg-white/20"
+                      }`}
+                      onClick={() => handleSaveToggle(t)}
+                    >
+                      {savedCatIds?.has(getCatEntryId(course.code, t)) ? (
+                        <>
+                          <BookmarkCheck className="w-3.5 h-3.5" />
+                          Saved
+                        </>
+                      ) : (
+                        <>
+                          <Bookmark className="w-3.5 h-3.5" />
+                          Save
+                        </>
+                      )}
+                    </Button>
                   
                   {/* Confirmation Message */}
                   {copiedIndex === idx && (
-                    <motion.div
+                    <MotionDiv
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
@@ -192,9 +233,10 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
                                  shadow-lg"
                     >
                       Cat Code in clipboard!
-                    </motion.div>
+                    </MotionDiv>
                   )}
-                </div>
+                  </div>
+                )}
               </div>
 
               {/* COURSE TYPES */}
@@ -337,6 +379,6 @@ export function CourseDetailPanel({ course, selectedTerm, onClose }) {
           <p>No sections offered for this term.</p>
         </div>
       )}
-    </motion.div>
+    </MotionDiv>
   );
 }

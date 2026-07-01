@@ -1,6 +1,3 @@
-const  BASE = import.meta.env.VITE_API_BASE;
-
-
 export const FACULTIES = [
   "AK", "AP", "AS", "ATH", "DMS", "ED", "ES", "EU", "FA", "GL", 
   "GS", "HH", "IOL", "LE", "OSC", "RIM", "SB", "SC"
@@ -32,8 +29,22 @@ export const DEPARTMENTS = [
 
 
 
-export const TERMS = ['S1', 'S2', 'S3', 'SU'];
-export const COURSE_TYPES = ['LECT', 'TUTR', 'LAB', 'SEMR', 'BLEN', 'ONLN', 'ONCA', 'HYFX'];
+export const TERMS = ['F', 'W', 'Y'];
+export const TERM_LABELS = {
+  F: "Fall",
+  W: "Winter",
+  Y: "Full Year",
+  M: "Full Year",
+  N: "Fall/Winter",
+  A: "Summer",
+  B: "Summer First Half",
+  C: "Summer Second Half",
+  S1: "Summer First Half",
+  S2: "Summer Second Half",
+  S3: "Summer Full",
+  SU: "Summer",
+};
+export const COURSE_TYPES = ['LECT', 'SEMR', 'TUTR', 'LAB', 'BLEN', 'ONLN', 'ONCA', 'HYFX'];
 export const YEARS = [1, 2, 3, 4];
 export const CREDITS = [0.5, 1, 1.5, 2, 3, 4, 4.5, 6, 9];
 
@@ -55,8 +66,10 @@ export const TIME_BUCKETS = [
   { key: "Evening", label: "Evening (5:00 PM & Later)", test: (mins) => mins >= 17 * 60 },
 ];
 
-// Helper function - pass ALL values to get ALL popular courses
 export function buildCoursesURL() {
+  const base = import.meta.env.VITE_API_BASE;
+  if (!base) return "/data/electives.json";
+
   const terms = TERMS.map(t => `terms=${t}`).join('&');
   const types = COURSE_TYPES.map(t => `types=${t}`).join('&');
   const years = YEARS.map(y => `years=${y}`).join('&');
@@ -64,5 +77,5 @@ export function buildCoursesURL() {
   const facs = FACULTIES.map(f => `faculties=${f}`).join('&');
   const credits = CREDITS.map(c => `credits=${c}`).join('&');
 
-  return `${BASE}/courses?${terms}&${types}&${years}&${depts}&${facs}&${credits}`;
+  return `${base}/courses?${terms}&${types}&${years}&${depts}&${facs}&${credits}`;
 }

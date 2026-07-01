@@ -1,62 +1,20 @@
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Search, X, Sparkles } from "lucide-react";
-import {io} from "socket.io-client";
-
-const socket = io("https://york-easy-elective-finder-production.up.railway.app", {
-  transports: ["websocket"],
-  secure: true
-});
-
-
 
 
 export function SearchBar({ onSearch, searchQuery }) {
   const [searchInput, setSearchInput] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [trendingSearches, setTrendingSearches] = useState([]);
-  const [socketConnected, setSocketConnected] = useState(false);
 
   useEffect(() => {
-    // Listen for socket connection status
-    const handleConnect = () => {
-      setSocketConnected(true);
-      console.log("[SOCKET] Connected");
-    };
-
-    const handleDisconnect = () => {
-      setSocketConnected(false);
-      console.log("[SOCKET] Disconnected");
-    };
-
-    // Listen for trending searches from the socket server
-    const handleTrendingSearches = (searches) => {
-      console.log("[TRENDING RECEIVED FROM SERVER]", searches);
-      // Deduplicate and limit to top 5
-      const uniqueSearches = Array.isArray(searches) 
-        ? [...new Set(searches)].slice(0, 5) 
-        : [];
-      setTrendingSearches(uniqueSearches);
-    };
-
-    socket.on("connect", handleConnect);
-    socket.on("disconnect", handleDisconnect);
-    socket.on("trendingSearches", handleTrendingSearches);
-
-    return () => {
-      socket.off("connect", handleConnect);
-      socket.off("disconnect", handleDisconnect);
-      socket.off("trendingSearches", handleTrendingSearches);
-    };
+    setTrendingSearches([]);
   }, []);
 
   const handleSearch = () => {
     if (searchInput.trim()) {
       onSearch(searchInput);
-      // Only emit if socket is connected
-      if (socketConnected) {
-        socket.emit("search", searchInput);
-      }
     }
   };
 
@@ -221,9 +179,6 @@ export function SearchBar({ onSearch, searchQuery }) {
             onClick={() => {
               setSearchInput(suggestion);
               onSearch(suggestion);
-              if (socketConnected) {
-                socket.emit("search", suggestion);
-              }
             }}
             className="
               px-4 py-2 text-xs font-semibold

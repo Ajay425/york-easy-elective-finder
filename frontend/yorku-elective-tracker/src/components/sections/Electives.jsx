@@ -6,32 +6,32 @@ import { SearchBar } from "./SearchBar";
 import { FilterBar } from "./FilterBar";
 import { CourseCard } from "./CourseCard";
 import { CourseDetailPanel } from "./CourseDetailPanel";
+import { SavedCatNumbers } from "./SavedCatNumbers";
 import { Pagination } from "./Pagination";
 import { UpdatesPopup } from "../UpdatesPopup";
 import { useLocation } from "react-router-dom";
-import { Mail } from "lucide-react";
+import { Bookmark, Mail, Search } from "lucide-react";
+import { useSavedCatNumbers } from "../../hooks/useSavedCatNumbers";
 
 const Electives = () => {
   const location = useLocation();
   const selectedTerm = location.state?.term || null;
+  const selectedTermLabel = location.state?.termLabel || selectedTerm;
+  const selectedTermAndYear = location.state?.termAndYear || null;
   const { courses, loading, error } = useCourses();
-
-  // Stop users from bypassing Home page
-  if (!selectedTerm) {
-    return (
-      <div className="min-h-screen w-full bg-black/90 text-white flex flex-col justify-center items-center">
-        <h1 className="text-2xl font-bold mb-3">No Term Selected</h1>
-        <p className="text-gray-300 mb-6">Please select a term to view electives.</p>
-        <a href="/" className="text-[#7f5af0] underline text-lg">Return Home</a>
-      </div>
-    );
-  }
+  const {
+    savedEntries,
+    savedIds,
+    saveCatNumber,
+    removeCatNumber,
+  } = useSavedCatNumbers();
 
   // Filter courses that match the selected term
-  const coursesForTerm = courses.filter((course) =>
-    course.terms?.some((t) => t.term.startsWith(selectedTerm))
-
-  );
+  const coursesForTerm = selectedTerm
+    ? courses.filter((course) =>
+        course.terms?.some((t) => t.term.startsWith(selectedTerm))
+      )
+    : [];
 
   // Load saved data
   const savedFilters = (() => {
@@ -60,7 +60,8 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
 
 
 
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedCourseDetails, setSelectedCourseDetails] = useState(null);
+  const [activeTab, setActiveTab] = useState("browse");
   const [currentPage, setCurrentPage] = useState(1);
   const coursesPerPage = 12;
 
@@ -74,7 +75,9 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
     if (savedFilters) {
       try {
         setFilters(JSON.parse(savedFilters));
-      } catch {}
+      } catch {
+        // Ignore invalid saved filter data.
+      }
   }
 
   if (savedSearch) {
@@ -83,7 +86,7 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
   if (savedPage) {
     setCurrentPage(Number(savedPage));
   }
-  }, []);
+  }, [setFilters, setSearchQuery]);
 
 
   // now save the filters
@@ -115,6 +118,38 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
     clearFilters();
     setCurrentPage(1);
   };
+
+  const openCourseDetails = (course, options = {}) => {
+    setSelectedCourseDetails({
+      course,
+      term: options.term || selectedTerm,
+      termLabel: options.termLabel || selectedTermLabel,
+      highlightedCatId: options.highlightedCatId || null,
+    });
+  };
+
+  const handleOpenSavedCourse = (course, entry) => {
+    openCourseDetails(course, {
+      term: entry.term,
+      termLabel: entry.termLabel,
+      highlightedCatId: entry.id,
+    });
+  };
+
+  const handleSaveCatNumber = (course, offering) => {
+    saveCatNumber(course, offering, selectedCourseDetails?.termLabel || selectedTermLabel, selectedTermAndYear);
+  };
+
+  // Stop users from bypassing Home page
+  if (!selectedTerm) {
+    return (
+      <div className="min-h-screen w-full bg-black/90 text-white flex flex-col justify-center items-center">
+        <h1 className="text-2xl font-bold mb-3">No Term Selected</h1>
+        <p className="text-gray-300 mb-6">Please select a term to view electives.</p>
+        <a href="/" className="text-[#7f5af0] underline text-lg">Return Home</a>
+      </div>
+    );
+  }
 
   // Sort courses by popularity in descending order
   const getPopularityForCourse = (course) => {
@@ -168,8 +203,11 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
       {/* Header */}
       <section className="relative z-10 pt-12 pb-6 w-full">
         <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-[#7f5af0] drop-shadow-[0_0_15px_rgba(127,90,240,0.35)] text-center">
-          Explore Your Electives ({selectedTerm})
+          Explore Your Electives ({selectedTermLabel})
         </h1>
+        {selectedTermAndYear && (
+          <p className="mt-2 text-center text-sm text-gray-400">{selectedTermAndYear}</p>
+        )}
       </section>
 
       {/* Contact Icon */}
@@ -197,66 +235,115 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
 
 
       {/* Search Bar */}
-      <div className="relative z-10 w-full flex justify-center">
-        <SearchBar onSearch={handleSearch} searchQuery={searchQuery} />
+      <div className="relative z-10 mb-5 flex rounded-lg border border-white/10 bg-white/5 p-1 shadow-lg shadow-black/20">
+        <button
+          type="button"
+          onClick={() => setActiveTab("browse")}
+          className={`flex h-10 items-center gap-2 rounded-md px-4 text-sm font-semibold transition ${
+            activeTab === "browse"
+              ? "bg-purple-500/25 text-white border border-purple-300/30"
+              : "bg-transparent text-gray-300 hover:text-white"
+          }`}
+        >
+          <Search className="h-4 w-4" />
+          Browse
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("saved")}
+          className={`flex h-10 items-center gap-2 rounded-md px-4 text-sm font-semibold transition ${
+            activeTab === "saved"
+              ? "bg-purple-500/25 text-white border border-purple-300/30"
+              : "bg-transparent text-gray-300 hover:text-white"
+          }`}
+        >
+          <Bookmark className="h-4 w-4" />
+          Saved
+          {savedEntries.length > 0 && (
+            <span className="rounded-md bg-purple-300 px-1.5 py-0.5 text-[10px] font-bold text-black">
+              {savedEntries.length}
+            </span>
+          )}
+        </button>
       </div>
 
-      {searchQuery && (
-        <p className="relative z-10 text-sm text-gray-300 mb-2">
-          Found {filteredCourses.length} courses matching "{searchQuery}"
-        </p>
-      )}
-
-      {/* Filter Bar */}
-      <div className="relative z-10 w-full">
-        <FilterBar
-          filters={filters}
-          setFilters={setFilters}
-          filterOptions={filterOptions}
-          onClear={handleClearFilters}
-          onFilterChange={handleFilterChange}
-        />
-      </div>
-
-      <p className="relative z-10 text-sm text-gray-400 italic text-center mb-5">
-        Showing {filteredCourses.length} courses • Click on a course card for more information
-      </p>
-
-      {/* Course Grid */}
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-7xl px-6 sm:px-10 pb-10">
-        {currentCourses.length > 0 ? (
-          currentCourses.map((course, index) => (
-            <CourseCard
-              key={index}
-              course={course}
-              selectedTerm={selectedTerm}
-              onClick={() => setSelectedCourse(course)}/>
-
-          ))
-        ) : (
-          <div className="col-span-full text-center py-10">
-            <p className="text-gray-300 text-lg">No courses found matching your criteria</p>
-            <p className="text-gray-400 text-sm mt-2">Try adjusting your search or filters</p>
+      {activeTab === "browse" ? (
+        <>
+          <div className="relative z-10 w-full flex justify-center">
+            <SearchBar onSearch={handleSearch} searchQuery={searchQuery} />
           </div>
-        )}
-      </div>
 
-      {/* Pagination */}
-      <div className="relative z-10 w-full">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
+          {searchQuery && (
+            <p className="relative z-10 text-sm text-gray-300 mb-2">
+              Found {filteredCourses.length} courses matching "{searchQuery}"
+            </p>
+          )}
+
+          {/* Filter Bar */}
+          <div className="relative z-10 w-full">
+            <FilterBar
+              filters={filters}
+              setFilters={setFilters}
+              filterOptions={filterOptions}
+              onClear={handleClearFilters}
+              onFilterChange={handleFilterChange}
+            />
+          </div>
+
+          <p className="relative z-10 text-sm text-gray-400 italic text-center mb-5">
+            Showing {filteredCourses.length} courses
+          </p>
+
+          {/* Course Grid */}
+          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-7xl px-6 sm:px-10 pb-10">
+            {currentCourses.length > 0 ? (
+              currentCourses.map((course) => (
+                <CourseCard
+                  key={course.code}
+                  course={course}
+                  selectedTerm={selectedTerm}
+                  onClick={() => openCourseDetails(course)}
+                />
+
+              ))
+            ) : (
+              <div className="col-span-full text-center py-10">
+                <p className="text-gray-300 text-lg">No courses found matching your criteria</p>
+                <p className="text-gray-400 text-sm mt-2">Try adjusting your search or filters</p>
+              </div>
+            )}
+          </div>
+
+          {/* Pagination */}
+          <div className="relative z-10 w-full">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+        </>
+      ) : (
+        <SavedCatNumbers
+          courses={courses}
+          savedEntries={savedEntries}
+          onOpenCourse={handleOpenSavedCourse}
+          onRemove={removeCatNumber}
         />
-      </div>
+      )}
 
       {/* Course Detail Panel */}
       <AnimatePresence>
-        {selectedCourse && (
+        {selectedCourseDetails && (
           <CourseDetailPanel
-            course={selectedCourse}
-            selectedTerm={selectedTerm}
-            onClose={() => setSelectedCourse(null)}
+            course={selectedCourseDetails.course}
+            selectedTerm={selectedCourseDetails.term}
+            selectedTermLabel={selectedCourseDetails.termLabel}
+            onClose={() => setSelectedCourseDetails(null)}
+            savedCatIds={savedIds}
+            onSaveCatNumber={handleSaveCatNumber}
+            onRemoveCatNumber={removeCatNumber}
+            highlightedCatId={selectedCourseDetails.highlightedCatId}
           />
         )}
       </AnimatePresence>

@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { YEARS, DEPARTMENTS, COURSE_TYPES, DAY_LABELS } from "../lib/courseFilters";
+import { YEARS, DEPARTMENTS, DAY_LABELS } from "../lib/courseFilters";
 
 // Author: --Jon
 
@@ -43,11 +43,22 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
       courses.some((c) => c.deptAcronym === dept)
     );
 
-    const courseTypes = COURSE_TYPES.filter((type) =>
-      courses.some((c) =>
-        c.terms?.some((t) => t.meetings?.some((m) => m.type === type))
-      )
-    );
+    const typeOrder = ["LECT", "SEMR", "TUTR", "LAB", "BLEN", "ONLN", "ONCA", "HYFX"];
+    const foundTypes = new Set();
+    courses.forEach((c) => {
+      c.terms?.forEach((t) => {
+        if (t.type) foundTypes.add(t.type);
+        t.meetings?.forEach((m) => {
+          if (m?.type) foundTypes.add(m.type);
+        });
+      });
+    });
+    const courseTypes = Array.from(foundTypes).sort((a, b) => {
+      const ia = typeOrder.indexOf(a);
+      const ib = typeOrder.indexOf(b);
+      if (ia !== -1 || ib !== -1) return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+      return a.localeCompare(b);
+    });
 
     // ✅ Day options derived from meetings.dayOfWeek or courseTimes.dayOfWeek
     const dayKeys = new Set();
@@ -83,8 +94,15 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
       return out;
     };
 
-    const startTimes = generateTimeOptions("07:00", "23:00", 30);
-    const endTimes = generateTimeOptions("07:00", "23:00", 30);
+    const hasTimingData = courses.some((c) =>
+      c.terms?.some((t) =>
+        t.courseTimes?.some((ct) => ct?.startTime) ||
+        t.meetings?.some((m) => m?.startTime)
+      )
+    );
+
+    const startTimes = hasTimingData ? generateTimeOptions("07:00", "23:00", 30) : [];
+    const endTimes = hasTimingData ? generateTimeOptions("07:00", "23:00", 30) : [];
 
     return {
       Credits: credits,
@@ -96,14 +114,6 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
       EndTime: endTimes,
     };
   }, [courses]);
-
-  // Helper to convert minutes back to HH:MM string
-  function minutesToTimeString(mins) {
-    if (mins == null || Number.isNaN(mins)) return null;
-    const h = Math.floor(mins / 60);
-    const m = mins % 60;
-    return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
-  }
 
   // Filter courses based on search and filters
   const filteredCourses = useMemo(() => {

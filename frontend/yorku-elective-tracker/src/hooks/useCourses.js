@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { buildCoursesURL } from "../lib/courseFilters";
 
 const FACULTY_NAMES = {
   "SB": "Schulich School of Business",
@@ -9,6 +8,39 @@ const FACULTY_NAMES = {
   "ED": "Faculty of Education"
 };
 
+function formatBackendCourse(c) {
+  return {
+    code: `${c.faculty}/${c.deptAcronym} ${c.courseCode}`,
+    title: c.name,
+    credits: c.credit.toFixed(2),
+    faculty: FACULTY_NAMES[c.faculty] || "Other",
+    year: c.year,
+    deptAcronym: c.deptAcronym,
+    description: c.desc || "",
+    topInstructorPopularity: c.courseOfferings?.[0]?.instructors?.[0]?.instructor?.popularity,
+    topInstructorName: c.courseOfferings?.[0]?.instructors?.[0]?.instructor
+      ? `${c.courseOfferings[0].instructors[0].instructor.firstname} ${c.courseOfferings[0].instructors[0].instructor.lastname}`
+      : null,
+    terms: (c.courseOfferings || []).map((offering) => ({
+      term: offering.term,
+      section: offering.section,
+      catNumber: offering.catNumber,
+      courseTimes: offering.courseTimes || [],
+      meetings: (offering.instructors || []).map((io) => ({
+        type: offering.type,
+        firstName: io.instructor?.firstname || "TBA",
+        lastName: io.instructor?.lastname || "",
+        avgRating: io.instructor?.avgRating,
+        avgDifficulty: io.instructor?.avgDifficulty,
+        wouldTakeAgainPercent: io.instructor?.wouldTakeAgainPercent,
+        numberOfRatings: io.instructor?.numberOfRatings,
+        rateMyProfLink: io.instructor?.rateMyProfLink,
+        popularity: io.instructor?.popularity
+      }))
+    }))
+  };
+}
+
 export function useCourses() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +49,7 @@ export function useCourses() {
   useEffect(() => {
     setLoading(true);  // Start loading
 
-    const url = buildCoursesURL();
+    const url = "/data/electives.json";
 
     fetch(url)
       .then((res) => {
@@ -28,42 +60,13 @@ export function useCourses() {
 
         const data = responseData.courses;
 
-        // Check if the data is an array
         if (!data || !Array.isArray(data)) {
           throw new Error('Invalid data format');
         }
 
-        // Format the courses data
-        const formatted = data.map((c) => ({
-          code: `${c.faculty}/${c.deptAcronym} ${c.courseCode}`,
-          title: c.name,
-          credits: c.credit.toFixed(2),
-          faculty: FACULTY_NAMES[c.faculty] || "Other",
-          year: c.year,
-          deptAcronym: c.deptAcronym,
-          description: c.desc || "",
-          topInstructorPopularity: c.courseOfferings?.[0]?.instructors?.[0]?.instructor?.popularity,
-          topInstructorName: c.courseOfferings?.[0]?.instructors?.[0]?.instructor
-            ? `${c.courseOfferings[0].instructors[0].instructor.firstname} ${c.courseOfferings[0].instructors[0].instructor.lastname}`
-            : null,
-          terms: (c.courseOfferings || []).map((offering) => ({
-            term: offering.term,
-            section: offering.section,
-            catNumber: offering.catNumber,
-            courseTimes: offering.courseTimes || [],
-            meetings: (offering.instructors || []).map((io, idx) => ({
-              type: offering.type,
-              firstName: io.instructor?.firstname || "TBA",
-              lastName: io.instructor?.lastname || "",
-              avgRating: io.instructor?.avgRating,
-              avgDifficulty: io.instructor?.avgDifficulty,
-              wouldTakeAgainPercent: io.instructor?.wouldTakeAgainPercent,
-              numberOfRatings: io.instructor?.numberOfRatings,
-              rateMyProfLink: io.instructor?.rateMyProfLink,
-              popularity: io.instructor?.popularity
-            }))
-          }))
-        }));
+        const formatted = responseData.format === "frontend.v1"
+          ? data
+          : data.map(formatBackendCourse);
 
 
         setCourses(formatted);  // Set the state with the formatted data
