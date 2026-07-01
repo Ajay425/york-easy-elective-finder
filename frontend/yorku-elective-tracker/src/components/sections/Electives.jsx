@@ -7,10 +7,11 @@ import { FilterBar } from "./FilterBar";
 import { CourseCard } from "./CourseCard";
 import { CourseDetailPanel } from "./CourseDetailPanel";
 import { SavedCatNumbers } from "./SavedCatNumbers";
+import { ScheduleVisualizer } from "./ScheduleVisualizer";
 import { Pagination } from "./Pagination";
 import { UpdatesPopup } from "../UpdatesPopup";
 import { useLocation } from "react-router-dom";
-import { Bookmark, Mail, Search } from "lucide-react";
+import { Bookmark, CalendarDays, Mail, Search } from "lucide-react";
 import { useSavedCatNumbers } from "../../hooks/useSavedCatNumbers";
 
 const Electives = () => {
@@ -235,11 +236,11 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
 
 
       {/* Search Bar */}
-      <div className="relative z-10 mb-5 flex rounded-lg border border-white/10 bg-white/5 p-1 shadow-lg shadow-black/20">
+      <div className="relative z-10 mb-5 mx-4 flex max-w-[calc(100%-2rem)] flex-wrap justify-center gap-1 rounded-lg border border-white/10 bg-white/5 p-1 shadow-lg shadow-black/20">
         <button
           type="button"
           onClick={() => setActiveTab("browse")}
-          className={`flex h-10 items-center gap-2 rounded-md px-4 text-sm font-semibold transition ${
+          className={`flex h-9 items-center gap-1.5 rounded-md px-3 text-sm font-semibold transition sm:h-10 sm:gap-2 sm:px-4 ${
             activeTab === "browse"
               ? "bg-purple-500/25 text-white border border-purple-300/30"
               : "bg-transparent text-gray-300 hover:text-white"
@@ -251,7 +252,7 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
         <button
           type="button"
           onClick={() => setActiveTab("saved")}
-          className={`flex h-10 items-center gap-2 rounded-md px-4 text-sm font-semibold transition ${
+          className={`flex h-9 items-center gap-1.5 rounded-md px-3 text-sm font-semibold transition sm:h-10 sm:gap-2 sm:px-4 ${
             activeTab === "saved"
               ? "bg-purple-500/25 text-white border border-purple-300/30"
               : "bg-transparent text-gray-300 hover:text-white"
@@ -264,6 +265,18 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
               {savedEntries.length}
             </span>
           )}
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("schedule")}
+          className={`flex h-9 items-center gap-1.5 rounded-md px-3 text-sm font-semibold transition sm:h-10 sm:gap-2 sm:px-4 ${
+            activeTab === "schedule"
+              ? "bg-purple-500/25 text-white border border-purple-300/30"
+              : "bg-transparent text-gray-300 hover:text-white"
+          }`}
+        >
+          <CalendarDays className="h-4 w-4" />
+          Schedule
         </button>
       </div>
 
@@ -323,12 +336,20 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
             />
           </div>
         </>
-      ) : (
+      ) : activeTab === "saved" ? (
         <SavedCatNumbers
           courses={courses}
           savedEntries={savedEntries}
           onOpenCourse={handleOpenSavedCourse}
           onRemove={removeCatNumber}
+        />
+      ) : (
+        <ScheduleVisualizer
+          courses={courses}
+          savedEntries={savedEntries}
+          selectedTerm={selectedTerm}
+          selectedTermLabel={selectedTermLabel}
+          onOpenCourse={handleOpenSavedCourse}
         />
       )}
 
