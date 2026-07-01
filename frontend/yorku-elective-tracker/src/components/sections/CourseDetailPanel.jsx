@@ -1,8 +1,15 @@
 import { motion } from "framer-motion";
-import { X, Copy, Check, Bookmark, BookmarkCheck } from "lucide-react";
+import { ChevronDown, X, Copy, Check, Bookmark, BookmarkCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { getCatEntryId } from "../../hooks/useSavedCatNumbers";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const MotionDiv = motion.div;
 
@@ -17,6 +24,143 @@ const DAY_LABELS = {
   Sun: "Sunday",
 };
 
+const TYPE_LABELS = {
+  LECT: "Lecture",
+  TUTR: "Tutorial",
+  LAB: "Lab",
+  SEM: "Seminar",
+  SEMR: "Seminar",
+  BLEN: "Blended",
+  ONLN: "Online",
+  ONCA: "Online Async",
+  HYFX: "Hybrid",
+};
+
+const TERM_LABELS = {
+  F: "Fall",
+  W: "Winter",
+  Y: "Full Year",
+  M: "Full Year",
+  N: "Fall/Winter",
+  A: "Summer",
+  B: "Summer First Half",
+  C: "Summer Second Half",
+  S1: "Summer First Half",
+  S2: "Summer Second Half",
+  S3: "Summer Full",
+  SU: "Summer",
+};
+
+const PRIMARY_TIME_TYPES = new Set(["LECT", "SEMR", "SEM", "BLEN", "ONLN", "ONCA", "HYFX"]);
+
+function minutesFromTime(value) {
+  const [hours, minutes] = String(value || "").split(":").map(Number);
+  if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return Number.MAX_SAFE_INTEGER;
+  return hours * 60 + minutes;
+}
+
+function sortTimes(times) {
+  const dayOrder = { M: 1, T: 2, W: 3, R: 4, Th: 4, F: 5, S: 6, Sat: 6, U: 7, Sun: 7 };
+  return [...times].sort((a, b) => {
+    const dayDiff = (dayOrder[a.dayOfWeek] || 99) - (dayOrder[b.dayOfWeek] || 99);
+    if (dayDiff !== 0) return dayDiff;
+    const timeDiff = minutesFromTime(a.startTime) - minutesFromTime(b.startTime);
+    if (timeDiff !== 0) return timeDiff;
+    return String(a.type || "").localeCompare(String(b.type || ""));
+  });
+}
+
+function splitTimesByRole(times) {
+  const sorted = sortTimes(Array.isArray(times) ? times : []);
+  return {
+    primary: sorted.filter((time) => PRIMARY_TIME_TYPES.has(time.type)),
+    tutorials: sorted.filter((time) => time.type === "TUTR"),
+    labs: sorted.filter((time) => time.type === "LAB"),
+    other: sorted.filter((time) =>
+      !PRIMARY_TIME_TYPES.has(time.type) && time.type !== "TUTR" && time.type !== "LAB"
+    ),
+  };
+}
+
+function groupOfferingKey(offering) {
+  return [offering?.term, offering?.section].map((part) => String(part || "").trim()).join("|");
+}
+
+function offeringIdentity(offering) {
+  return [offering?.term, offering?.section, offering?.catNumber]
+    .map((part) => String(part || "").trim())
+    .join("|");
+}
+
+function catSelectValue(offering, index) {
+  return offering?.catNumber || `option-${index}`;
+}
+
+function shortTimeSummary(offering) {
+  const times = sortTimes(Array.isArray(offering?.courseTimes) ? offering.courseTimes : []);
+  const selected = times.find((time) => time.catNumber === offering?.catNumber) || times.find((time) => time.type === "LAB") || times[0];
+  if (!selected) return "";
+
+  const day = DAY_LABELS[selected.dayOfWeek] || selected.dayOfWeek;
+  const type = selected.type ? `${selected.type} ` : "";
+  return `${type}${day} ${selected.startTime}${selected.endTime ? `-${selected.endTime}` : ""}`;
+}
+
+function termLabel(term, selectedTerm, selectedTermLabel) {
+  if (term === selectedTerm && selectedTermLabel) return selectedTermLabel;
+  return TERM_LABELS[term] || term || "Unknown term";
+}
+
+function summarizeTypes(offerings) {
+  const types = new Set();
+  offerings.forEach((offering) => {
+    offering.meetings?.forEach((meeting) => {
+      if (meeting?.type) types.add(TYPE_LABELS[meeting.type] || meeting.type);
+    });
+  });
+  return Array.from(types).slice(0, 3).join(" + ") || "Meeting info TBA";
+}
+
+function summarizeCats(offerings) {
+  const cats = Array.from(new Set(offerings.map((offering) => offering.catNumber).filter(Boolean)));
+  if (cats.length === 0) return "No CAT listed";
+  if (cats.length === 1) return `CAT ${cats[0]}`;
+  return `${cats.length} CAT options`;
+}
+
+function buildOutsideGroups(allTerms, visibleTerms, selectedTerm, selectedTermLabel) {
+  const visibleIds = new Set(visibleTerms.map(offeringIdentity));
+  const groups = new Map();
+
+  allTerms.forEach((offering) => {
+    if (visibleIds.has(offeringIdentity(offering))) return;
+
+    const key = groupOfferingKey(offering);
+    if (!groups.has(key)) {
+      groups.set(key, {
+        key,
+        term: offering.term,
+        section: offering.section,
+        offerings: [],
+      });
+    }
+    groups.get(key).offerings.push(offering);
+  });
+
+  return Array.from(groups.values())
+    .map((group) => ({
+      ...group,
+      label: `Section ${group.section} · ${termLabel(group.term, selectedTerm, selectedTermLabel)}`,
+      typeSummary: summarizeTypes(group.offerings),
+      catSummary: summarizeCats(group.offerings),
+    }))
+    .sort((a, b) => {
+      const termDiff = String(a.term || "").localeCompare(String(b.term || ""));
+      if (termDiff !== 0) return termDiff;
+      return String(a.section || "").localeCompare(String(b.section || ""), undefined, { numeric: true });
+    });
+}
+
 export function CourseDetailPanel({
   course,
   selectedTerm,
@@ -28,6 +172,7 @@ export function CourseDetailPanel({
   highlightedCatId,
 }) {
   const [copiedIndex, setCopiedIndex] = useState(null);
+  const [showOutsideSections, setShowOutsideSections] = useState(false);
 
   // Close panel on Escape key
   useEffect(() => {
@@ -40,11 +185,68 @@ export function CourseDetailPanel({
     return () => window.removeEventListener("keydown", handleKey);
   }, [onClose]);
 
-  if (!course) return null;
-
   // Filter term offerings based on selected term
-  const termOfferings =
-    course.terms?.filter((t) => t.term === selectedTerm) || [];
+  const termOfferings = useMemo(
+    () => course?.terms?.filter((t) => t.term === selectedTerm) || [],
+    [course?.terms, selectedTerm]
+  );
+  const offeringGroups = useMemo(() => {
+    const map = new Map();
+
+    termOfferings.forEach((offering) => {
+      const key = groupOfferingKey(offering);
+      if (!map.has(key)) {
+        map.set(key, {
+          key,
+          term: offering.term,
+          section: offering.section,
+          offerings: [],
+        });
+      }
+      map.get(key).offerings.push(offering);
+    });
+
+    return Array.from(map.values()).map((group) => ({
+      ...group,
+      offerings: [...group.offerings].sort((a, b) =>
+        String(a.catNumber || "").localeCompare(String(b.catNumber || ""), undefined, { numeric: true })
+      ),
+    }));
+  }, [termOfferings]);
+  const [selectedCatByGroup, setSelectedCatByGroup] = useState({});
+
+  useEffect(() => {
+    setSelectedCatByGroup((current) => {
+      const next = {};
+
+      offeringGroups.forEach((group) => {
+        const highlighted = group.offerings.find(
+          (offering) => getCatEntryId(course?.code, offering) === highlightedCatId
+        );
+        const currentOffering = group.offerings.find(
+          (offering, index) => catSelectValue(offering, index) === current[group.key]
+        );
+        const selected = highlighted || currentOffering || group.offerings[0];
+        next[group.key] = catSelectValue(selected, group.offerings.indexOf(selected));
+      });
+
+      return next;
+    });
+  }, [course?.code, highlightedCatId, offeringGroups]);
+
+  const visibleOfferings = offeringGroups.map((group) => {
+    const selectedValue = selectedCatByGroup[group.key];
+    const offering = group.offerings.find(
+      (item, index) => catSelectValue(item, index) === selectedValue
+    ) || group.offerings[0];
+
+    return { group, offering };
+  });
+  const outsideGroups = useMemo(
+    () => buildOutsideGroups(course?.allTerms || course?.terms || [], termOfferings, selectedTerm, selectedTermLabel),
+    [course?.allTerms, course?.terms, selectedTerm, selectedTermLabel, termOfferings]
+  );
+  const outsideOfferingCount = outsideGroups.reduce((total, group) => total + group.offerings.length, 0);
 
   const handleCopy = (text, index) => {
     navigator.clipboard.writeText(text);
@@ -61,6 +263,15 @@ export function CourseDetailPanel({
 
     onSaveCatNumber?.(course, offering);
   };
+
+  const handleCatSelection = (groupKey, value) => {
+    setSelectedCatByGroup((current) => ({
+      ...current,
+      [groupKey]: value,
+    }));
+  };
+
+  if (!course) return null;
 
   return (
     <MotionDiv
@@ -153,9 +364,9 @@ export function CourseDetailPanel({
             Sections for {selectedTermLabel || selectedTerm}
           </h4>
 
-          {termOfferings.map((t, idx) => (
+          {visibleOfferings.map(({ group, offering: t }, idx) => (
             <div
-              key={idx}
+              key={group.key}
               className={`bg-white/10 rounded-xl p-4 border backdrop-blur-xl shadow-lg ${
                 highlightedCatId === getCatEntryId(course.code, t)
                   ? "border-yellow-200/70 shadow-yellow-300/10"
@@ -169,9 +380,41 @@ export function CourseDetailPanel({
                     Term: {t.term} — Section {t.section}
                   </p>
 
-                  {t.catNumber && (
+                  {group.offerings.length > 1 ? (
+                    <div className="mt-2 w-full max-w-[220px]">
+                      <Select
+                        value={selectedCatByGroup[group.key] || catSelectValue(t, 0)}
+                        onValueChange={(value) => handleCatSelection(group.key, value)}
+                      >
+                        <SelectTrigger className="h-9 w-full bg-black/25 border-white/20 text-white">
+                          <SelectValue placeholder="Select CAT" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-black/90 backdrop-blur-xl text-white border-white/10">
+                          {group.offerings.map((option, optionIndex) => {
+                            const summary = shortTimeSummary(option);
+                            return (
+                              <SelectItem
+                                key={catSelectValue(option, optionIndex)}
+                                value={catSelectValue(option, optionIndex)}
+                              >
+                                {option.catNumber || `Option ${optionIndex + 1}`}
+                                {summary ? ` - ${summary}` : ""}
+                              </SelectItem>
+                            );
+                          })}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  ) : t.catNumber ? (
                     <p className="text-gray-200 text-sm mt-1">
                       <strong className="text-white">Cat Number:</strong>{" "}
+                      <span className="font-mono">{t.catNumber}</span>
+                    </p>
+                  ) : null}
+
+                  {group.offerings.length > 1 && t.catNumber && (
+                    <p className="text-gray-200 text-sm mt-2">
+                      <strong className="text-white">Selected CAT:</strong>{" "}
                       <span className="font-mono">{t.catNumber}</span>
                     </p>
                   )}
@@ -247,22 +490,12 @@ export function CourseDetailPanel({
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {Array.from(new Set(t.meetings.map((m) => m.type))).map((type) => {
-                      const typeLabels = {
-                        "LECT": "Lecture",
-                        "TUTR": "Tutorial",
-                        "LAB": "Lab",
-                        "SEM": "Seminar",
-                        "BLEN": "Blended",
-                        "ONLN": "Online",
-                        "ONCA": "Online Async",
-                        "HYFX": "Hybrid"
-                      };
                       return (
                         <span
                           key={type}
                           className="px-2 py-1 text-[10px] font-semibold bg-white/10 text-white rounded border border-white/20"
                         >
-                          {typeLabels[type] || type}
+                          {TYPE_LABELS[type] || type}
                         </span>
                       );
                     })}
@@ -270,27 +503,46 @@ export function CourseDetailPanel({
                 </div>
               )}
 
-{/* 🕒 TIMINGS SECTION */}
-              {t.courseTimes && t.courseTimes.length > 0 ? (
+              {/* TIMINGS SECTION */}
+              {t.courseTimes && t.courseTimes.length > 0 ? (() => {
+                const groupedTimes = splitTimesByRole(t.courseTimes);
+                const sections = [
+                  { key: "primary", label: "Class Times", times: groupedTimes.primary },
+                  { key: "tutorials", label: "Selected Tutorial", times: groupedTimes.tutorials },
+                  { key: "labs", label: "Selected Lab", times: groupedTimes.labs },
+                  { key: "other", label: "Other Selected Times", times: groupedTimes.other },
+                ].filter((section) => section.times.length > 0);
+
+                return (
                 <div className="mb-4 pb-4 border-b border-white/10">
-                  <p className="text-gray-300 text-xs mb-2">
-                    <strong className="text-white">📅 Class Times:</strong>
-                  </p>
-                  <div className="space-y-1.5 text-xs">
-                    {t.courseTimes.map((timing, i) => (
-                      <div key={i} className="flex items-center gap-2 text-gray-200">
-                        <span className="px-2 py-0.5 rounded bg-white/10 border border-white/20 font-semibold min-w-fit text-[10px]">
-                          {DAY_LABELS[timing.dayOfWeek] || timing.dayOfWeek}
-                        </span>
-                        <span className="text-gray-300">
-                          {timing.startTime}
-                          {timing.endTime ? ` – ${timing.endTime}` : ""}
-                        </span>
+                  <div className="space-y-3">
+                    {sections.map((section) => (
+                      <div key={section.key}>
+                        <p className="text-gray-300 text-xs mb-2">
+                          <strong className="text-white">{section.label}:</strong>
+                        </p>
+                        <div className="space-y-1.5 text-xs">
+                          {section.times.map((timing, i) => (
+                            <div key={`${section.key}-${i}`} className="flex items-center gap-2 text-gray-200">
+                              <span className="px-2 py-0.5 rounded bg-white/10 border border-white/20 font-semibold min-w-fit text-[10px]">
+                                {TYPE_LABELS[timing.type] || timing.type}
+                              </span>
+                              <span className="px-2 py-0.5 rounded bg-white/10 border border-white/20 font-semibold min-w-fit text-[10px]">
+                                {DAY_LABELS[timing.dayOfWeek] || timing.dayOfWeek}
+                              </span>
+                              <span className="text-gray-300">
+                                {timing.startTime}
+                                {timing.endTime ? ` - ${timing.endTime}` : ""}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              ) : t.meetings?.some((m) => m.dayOfWeek && m.startTime) ? (
+                );
+              })() : t.meetings?.some((m) => m.dayOfWeek && m.startTime) ? (
                 <div className="mb-4 pb-4 border-b border-white/10">
                   <p className="text-gray-300 text-xs mb-2">
                     <strong className="text-white">📅 Class Times:</strong>
@@ -377,6 +629,46 @@ export function CourseDetailPanel({
       {termOfferings.length === 0 && (
         <div className="mt-6 text-center text-gray-300">
           <p>No sections offered for this term.</p>
+        </div>
+      )}
+
+      {outsideGroups.length > 0 && (
+        <div className="mt-6 rounded-xl border border-white/10 bg-black/20 p-4">
+          <button
+            type="button"
+            onClick={() => setShowOutsideSections((current) => !current)}
+            className="flex w-full items-center justify-between gap-3 text-left"
+          >
+            <div>
+              <h4 className="text-sm font-semibold text-gray-100">
+                Available, But Outside Your Filters
+              </h4>
+              <p className="mt-1 text-xs text-gray-400">
+                {outsideOfferingCount} section option{outsideOfferingCount === 1 ? "" : "s"} in {outsideGroups.length} group{outsideGroups.length === 1 ? "" : "s"}
+              </p>
+            </div>
+            <ChevronDown
+              className={`h-4 w-4 shrink-0 text-gray-300 transition-transform ${
+                showOutsideSections ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {showOutsideSections && (
+            <div className="mt-4 space-y-2">
+              {outsideGroups.map((group) => (
+                <div
+                  key={group.key}
+                  className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2"
+                >
+                  <p className="text-sm font-semibold text-gray-100">{group.label}</p>
+                  <p className="mt-1 text-xs text-gray-400">
+                    {group.typeSummary} · {group.catSummary}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </MotionDiv>

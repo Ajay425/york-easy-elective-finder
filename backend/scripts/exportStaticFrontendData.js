@@ -1,7 +1,14 @@
 import fs from 'fs/promises';
 import * as cheerio from 'cheerio';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
+import {
+  decodeHtml,
+  flattenCourseTimeComponents,
+  parseCourseTimeHtml,
+  parseTypeAndComponent,
+  sortCourseTimes,
+} from '../lib/courseTimeHtmlParser.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -139,48 +146,6 @@ function courseTimeKey({ faculty, dept, code, credit, term, section }) {
     String(term || '').trim(),
     String(section || '').trim(),
   ].join('|');
-}
-
-function cleanHtmlText(value) {
-  return (value ?? '').replace(/\u00A0/g, ' ').trim();
-}
-
-function normalizeHtmlType(value) {
-  return cleanHtmlText(value).replace(/\s+/g, '').replace(/[^A-Za-z]/g, '').toUpperCase();
-}
-
-function calculateEndTime(startTime, durationMinutes) {
-  const [hours, mins] = String(startTime).split(':').map(Number);
-  const duration = Math.floor(Number(durationMinutes));
-  if (!Number.isFinite(hours) || !Number.isFinite(mins) || !Number.isFinite(duration)) return null;
-
-  const totalMinutes = hours * 60 + mins + duration;
-  const endHours = Math.floor(totalMinutes / 60);
-  const endMins = totalMinutes % 60;
-  return `${String(endHours).padStart(2, '0')}:${String(endMins).padStart(2, '0')}`;
-}
-
-function decodeHtml(buffer) {
-  if (buffer.length >= 2) {
-    const b0 = buffer[0];
-    const b1 = buffer[1];
-
-    if (b0 === 0xfe && b1 === 0xff) {
-      const body = buffer.slice(2);
-      const swapped = Buffer.allocUnsafe(body.length);
-      for (let i = 0; i + 1 < body.length; i += 2) {
-        swapped[i] = body[i + 1];
-        swapped[i + 1] = body[i];
-      }
-      return swapped.toString('utf16le');
-    }
-
-    if (b0 === 0xff && b1 === 0xfe) {
-      return buffer.slice(2).toString('utf16le');
-    }
-  }
-
-  return buffer.toString('utf8');
 }
 
 async function readJson(filePath, fallback = null) {
@@ -348,129 +313,104 @@ async function listCourseTimeHtmlFiles() {
 async function parseCourseTimeHtmlFile(filePath) {
   const html = decodeHtml(await fs.readFile(filePath));
   const $ = cheerio.load(html);
-  const rows = $("table[border='1']").first().find('tr').toArray();
-  const parsed = [];
+  return parseCourseTimeHtml($);
+}
 
-  let currentFaculty = null;
-  let currentDept = null;
-  let currentTerm = null;
-  let lastCourseCode = null;
-  let lastCredit = null;
-  let lastSection = null;
+function componentKey({ faculty, dept, code, credit, term, section, type, componentNumber }) {
+  return [
+    courseTimeKey({ faculty, dept, code, credit, term, section }),
+    String(type || '').trim(),
+    String(componentNumber || '').trim(),
+  ].join('|');
+}
 
-  for (const row of rows) {
-    const tds = $(row).find('> td').toArray();
-    if (tds.length === 0) continue;
-    if (cleanHtmlText($(tds[0]).text()) === 'Fac') continue;
+function sectionCatKey(sectionKey, catNumber) {
+  return [sectionKey, String(catNumber || '').trim()].join('|');
+}
 
-    const td3colspan = tds[3] ? $(tds[3]).attr('colspan') : undefined;
-    if (tds.length >= 4 && td3colspan === '8') {
-      currentFaculty = cleanHtmlText($(tds[0]).text());
-      currentDept = cleanHtmlText($(tds[1]).text());
-      currentTerm = cleanHtmlText($(tds[2]).text());
-      continue;
-    }
+function dedupePushTime(map, key, time, seen, seenPrefix = key) {
+  const dedupeKey = [
+    seenPrefix,
+    time.type,
+    time.componentNumber || '',
+    time.catNumber || '',
+    time.dayOfWeek,
+    time.startTime,
+    time.durationMinutes,
+  ].join('|');
+  if (seen.has(dedupeKey)) return;
+  seen.add(dedupeKey);
 
-    if (!currentFaculty || !currentDept || !currentTerm) continue;
-
-    const firstColspan = $(tds[0]).attr('colspan');
-    let type = null;
-    let timesTd = null;
-
-    if (firstColspan === '3') {
-      const courseCellText = cleanHtmlText($(tds[1]).text());
-      type = normalizeHtmlType($(tds[3]).text());
-      timesTd = tds[6] ? $(tds[6]) : null;
-
-      const match = courseCellText.match(/(?<code>\d{4})\s+(?<credit>\d+\.\d{2})\s+(?<section>[A-Z])/);
-      if (!match) continue;
-
-      lastCourseCode = match.groups.code;
-      lastCredit = Number(match.groups.credit);
-      lastSection = match.groups.section;
-    } else if (firstColspan === '5') {
-      type = normalizeHtmlType($(tds[1]).text());
-      timesTd = tds[4] ? $(tds[4]) : null;
-      if (!lastCourseCode || !lastSection || lastCredit == null) continue;
-    } else {
-      continue;
-    }
-
-    if (!type || !timesTd) continue;
-
-    for (const tr of timesTd.find('table tr').toArray()) {
-      const cells = $(tr).find('td').toArray();
-      if (cells.length < 3) continue;
-
-      const dayOfWeek = cleanHtmlText($(cells[0]).text());
-      const startTime = cleanHtmlText($(cells[1]).text());
-      const durationMinutes = Math.floor(parseInt(cleanHtmlText($(cells[2]).text()), 10));
-      if (!dayOfWeek || !startTime || Number.isNaN(durationMinutes)) continue;
-
-      parsed.push({
-        faculty: currentFaculty,
-        dept: currentDept,
-        code: lastCourseCode,
-        credit: lastCredit,
-        term: currentTerm,
-        section: lastSection,
-        type,
-        dayOfWeek,
-        startTime,
-        durationMinutes,
-        endTime: calculateEndTime(startTime, durationMinutes),
-      });
-    }
-  }
-
-  return parsed;
+  if (!map.has(key)) map.set(key, []);
+  map.get(key).push({
+    type: time.type,
+    componentNumber: time.componentNumber,
+    catNumber: time.catNumber,
+    dayOfWeek: time.dayOfWeek,
+    startTime: time.startTime,
+    durationMinutes: time.durationMinutes,
+    endTime: time.endTime,
+  });
 }
 
 async function buildCourseTimesLookup() {
   const files = await listCourseTimeHtmlFiles();
-  const lookup = new Map();
+  const allBySection = new Map();
+  const commonBySection = new Map();
+  const byCat = new Map();
+  const componentMeta = new Map();
+  const catsBySection = new Map();
   const seen = new Set();
   let parsedRows = 0;
+  let parsedComponents = 0;
 
   for (const file of files) {
-    const rows = await parseCourseTimeHtmlFile(file);
+    const components = await parseCourseTimeHtmlFile(file);
+    parsedComponents += components.length;
+    const rows = flattenCourseTimeComponents(components);
     parsedRows += rows.length;
 
-    for (const row of rows) {
-      const key = courseTimeKey(row);
-      const dedupeKey = [
-        key,
-        row.type,
-        row.dayOfWeek,
-        row.startTime,
-        row.durationMinutes,
-      ].join('|');
-      if (seen.has(dedupeKey)) continue;
-      seen.add(dedupeKey);
+    for (const component of components) {
+      const key = componentKey(component);
+      if (!componentMeta.has(key)) {
+        componentMeta.set(key, {
+          type: component.type,
+          componentNumber: component.componentNumber,
+          catNumber: component.catNumber,
+        });
+      }
+    }
 
-      if (!lookup.has(key)) lookup.set(key, []);
-      lookup.get(key).push({
-        type: row.type,
-        dayOfWeek: row.dayOfWeek,
-        startTime: row.startTime,
-        durationMinutes: row.durationMinutes,
-        endTime: row.endTime,
-      });
+    for (const row of rows) {
+      const sectionKey = courseTimeKey(row);
+      dedupePushTime(allBySection, sectionKey, row, seen, `all|${sectionKey}`);
+
+      if (row.catNumber) {
+        const catKey = sectionCatKey(sectionKey, row.catNumber);
+        if (!catsBySection.has(sectionKey)) catsBySection.set(sectionKey, new Set());
+        catsBySection.get(sectionKey).add(row.catNumber);
+        dedupePushTime(byCat, catKey, row, seen, `cat|${catKey}`);
+      } else {
+        dedupePushTime(commonBySection, sectionKey, row, seen, `common|${sectionKey}`);
+      }
     }
   }
 
-  const dayOrder = { M: 1, T: 2, W: 3, R: 4, Th: 4, F: 5, S: 6, Sat: 6, U: 7, Sun: 7 };
-  for (const times of lookup.values()) {
-    times.sort((a, b) => {
-      const dayDiff = (dayOrder[a.dayOfWeek] ?? 99) - (dayOrder[b.dayOfWeek] ?? 99);
-      if (dayDiff !== 0) return dayDiff;
-      const timeDiff = String(a.startTime).localeCompare(String(b.startTime));
-      if (timeDiff !== 0) return timeDiff;
-      return String(a.type).localeCompare(String(b.type));
-    });
+  for (const times of [...allBySection.values(), ...commonBySection.values(), ...byCat.values()]) {
+    sortCourseTimes(times);
   }
 
-  return { lookup, fileCount: files.length, parsedRows, matchedKeys: lookup.size };
+  return {
+    allBySection,
+    commonBySection,
+    byCat,
+    componentMeta,
+    catsBySection,
+    fileCount: files.length,
+    parsedRows,
+    parsedComponents,
+    matchedKeys: allBySection.size,
+  };
 }
 
 function buildRmpLookup(rmpRows, matchRows) {
@@ -508,7 +448,8 @@ function getInstructorRmp(rmpLookup, firstName, lastName) {
 }
 
 function mapMeeting(meeting, rmpLookup) {
-  const type = normalizeCourseType(meeting?.type);
+  const parsedType = parseTypeAndComponent(meeting?.type);
+  const type = parsedType.type || normalizeCourseType(meeting?.type);
   const instructors = Array.isArray(meeting?.instructors) && meeting.instructors.length
     ? meeting.instructors
     : [{ firstName: 'TBA', lastName: '' }];
@@ -522,6 +463,8 @@ function mapMeeting(meeting, rmpLookup) {
 
     return {
       type,
+      componentNumber: parsedType.componentNumber,
+      rawType: parsedType.rawType || meeting?.type || null,
       catNumber: meeting?.catNumber || null,
       firstName,
       lastName,
@@ -542,6 +485,8 @@ function dedupeMeetings(meetings) {
   for (const meeting of meetings) {
     const key = [
       meeting.type || '',
+      meeting.componentNumber || '',
+      meeting.catNumber || '',
       normalizeName(meeting.firstName),
       normalizeName(meeting.lastName),
     ].join('|');
@@ -566,6 +511,95 @@ function sortTypes(types) {
 function isRelevantTerm(term, termAndYear) {
   if (!termAndYear || !/fall\/winter/i.test(termAndYear)) return true;
   return FALL_WINTER_TERMS.has(term);
+}
+
+function rawCatNumber(value) {
+  const text = String(value || '').trim();
+  return text || null;
+}
+
+function sortedCatNumbers(values) {
+  return [...values].filter(Boolean).sort((a, b) => String(a).localeCompare(String(b), undefined, { numeric: true }));
+}
+
+function getSectionKey(course, term) {
+  return courseTimeKey({
+    faculty: course.facultyPrefix,
+    dept: course.dept,
+    code: course.code,
+    credit: course.credit,
+    term: term.term,
+    section: term.section,
+  });
+}
+
+function getMeetingComponentMeta(courseTimes, course, term, meeting) {
+  return courseTimes.componentMeta.get(componentKey({
+    faculty: course.facultyPrefix,
+    dept: course.dept,
+    code: course.code,
+    credit: course.credit,
+    term: term.term,
+    section: term.section,
+    type: meeting.type,
+    componentNumber: meeting.componentNumber,
+  }));
+}
+
+function isMeetingForCat(courseTimes, course, term, meeting, selectedCatNumber) {
+  const meetingCat = rawCatNumber(meeting.catNumber);
+  const meta = getMeetingComponentMeta(courseTimes, course, term, meeting);
+  const htmlCat = rawCatNumber(meta?.catNumber);
+
+  if (htmlCat) return htmlCat === selectedCatNumber;
+  if (meta && !htmlCat) return true;
+  if (!meetingCat) return true;
+  return meetingCat === selectedCatNumber;
+}
+
+function courseTimesForCat(courseTimes, sectionKey, selectedCatNumber) {
+  if (!selectedCatNumber) return courseTimes.allBySection.get(sectionKey) || [];
+
+  const common = courseTimes.commonBySection.get(sectionKey) || [];
+  const selected = courseTimes.byCat.get(sectionCatKey(sectionKey, selectedCatNumber)) || [];
+  return sortCourseTimes([...common, ...selected]);
+}
+
+function buildTermOfferings(course, term, meetings, courseTimes) {
+  const sectionKey = getSectionKey(course, term);
+  const rawMeetingCats = new Set(meetings.map((meeting) => rawCatNumber(meeting.catNumber)).filter(Boolean));
+  const htmlCats = courseTimes.catsBySection.get(sectionKey) || new Set();
+  const catNumbers = sortedCatNumbers(htmlCats.size ? htmlCats : rawMeetingCats);
+
+  if (!catNumbers.length) {
+    return [{
+      term: term.term,
+      section: term.section,
+      catNumber: null,
+      courseTimes: courseTimes.allBySection.get(sectionKey) || term.courseTimes || [],
+      meetings,
+    }];
+  }
+
+  return catNumbers.map((catNumber) => {
+    const optionMeetings = meetings.filter((meeting) =>
+      isMeetingForCat(courseTimes, course, term, meeting, catNumber)
+    ).map((meeting) => {
+      const meta = getMeetingComponentMeta(courseTimes, course, term, meeting);
+      return meta && !rawCatNumber(meta.catNumber)
+        ? { ...meeting, catNumber: null }
+        : meeting;
+    });
+
+    return {
+      term: term.term,
+      section: term.section,
+      catNumber,
+      optionLabel: `CAT ${catNumber}`,
+      courseTimes: courseTimesForCat(courseTimes, sectionKey, catNumber),
+      meetings: optionMeetings.length ? optionMeetings : meetings.filter((meeting) => !rawCatNumber(meeting.catNumber)),
+    };
+  });
 }
 
 function bestPopularity(course) {
@@ -609,32 +643,21 @@ async function main() {
 
       const terms = (course.terms || [])
         .filter((term) => isRelevantTerm(term.term, termAndYear))
-        .map((term) => {
+        .flatMap((term) => {
           const meetings = dedupeMeetings((term.meetings || []).flatMap((meeting) => mapMeeting(meeting, rmpLookup)));
           for (const meeting of meetings) {
             if (meeting.type) typeSet.add(meeting.type);
             if (meeting.rateMyProfLink) instructorsWithRmpLinks++;
           }
           if (term.term) termSet.add(term.term);
-          const catNumber = meetings.find((meeting) => meeting.catNumber)?.catNumber || null;
-          const courseTimesForTerm = term.courseTimes || courseTimes.lookup.get(courseTimeKey({
-            faculty: course.facultyPrefix,
-            dept: course.dept,
-            code: course.code,
-            credit: course.credit,
-            term: term.term,
-            section: term.section,
-          })) || [];
-          if (catNumber) offeringsWithCatNumbers++;
-          if (courseTimesForTerm.length) offeringsWithTimes++;
 
-          return {
-            term: term.term,
-            section: term.section,
-            catNumber,
-            courseTimes: courseTimesForTerm,
-            meetings,
-          };
+          const offerings = buildTermOfferings(course, term, meetings, courseTimes);
+          for (const offering of offerings) {
+            if (offering.catNumber) offeringsWithCatNumbers++;
+            if (offering.courseTimes?.length) offeringsWithTimes++;
+          }
+
+          return offerings;
         })
         .filter((term) => term.term && term.meetings.length > 0);
 
@@ -722,6 +745,7 @@ async function main() {
       offeringsWithTimes,
       instructorsWithRmpLinks,
       courseTimeHtmlFiles: courseTimes.fileCount,
+      courseTimeComponentsParsed: courseTimes.parsedComponents,
       courseTimeRowsParsed: courseTimes.parsedRows,
       courseTimeSectionKeys: courseTimes.matchedKeys,
     },
@@ -751,12 +775,23 @@ async function main() {
   console.log(`Offerings with class times: ${offeringsWithTimes}`);
   console.log(`Instructor rows with RMP links: ${instructorsWithRmpLinks}`);
   console.log(`Course time HTML files: ${courseTimes.fileCount}`);
+  console.log(`Course time components parsed: ${courseTimes.parsedComponents}`);
   console.log(`Course time rows parsed: ${courseTimes.parsedRows}`);
   console.log(`Wrote ${OUT_COURSES}`);
   console.log(`Wrote ${OUT_META}`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+export {
+  buildCourseTimesLookup,
+  buildTermOfferings,
+  courseTimeKey,
+  mapMeeting,
+  parseCourseTimeHtmlFile,
+};
+
+if (import.meta.url === pathToFileURL(process.argv[1] || '').href) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

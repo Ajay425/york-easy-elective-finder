@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useCourses } from "../../hooks/useCourses";
+import { useCourseMeta } from "../../hooks/useCourseMeta";
 import { useFilters } from "../../hooks/useFilters";
 import { SearchBar } from "./SearchBar";
 import { FilterBar } from "./FilterBar";
@@ -10,15 +11,26 @@ import { SavedCatNumbers } from "./SavedCatNumbers";
 import { ScheduleVisualizer } from "./ScheduleVisualizer";
 import { Pagination } from "./Pagination";
 import { UpdatesPopup } from "../UpdatesPopup";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Bookmark, CalendarDays, Mail, Search } from "lucide-react";
 import { useSavedCatNumbers } from "../../hooks/useSavedCatNumbers";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Electives = () => {
   const location = useLocation();
-  const selectedTerm = location.state?.term || null;
-  const selectedTermLabel = location.state?.termLabel || selectedTerm;
-  const selectedTermAndYear = location.state?.termAndYear || null;
+  const navigate = useNavigate();
+  const locationTerm = location.state?.term || null;
+  const [selectedTerm, setSelectedTerm] = useState(locationTerm);
+  const courseMeta = useCourseMeta();
+  const selectedTermMeta = courseMeta.terms.find((item) => item.term === selectedTerm);
+  const selectedTermLabel = selectedTermMeta?.label || location.state?.termLabel || selectedTerm;
+  const selectedTermAndYear = courseMeta.termAndYear || location.state?.termAndYear || null;
   const { courses, loading, error } = useCourses();
   const {
     savedEntries,
@@ -65,6 +77,10 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
   const [activeTab, setActiveTab] = useState("browse");
   const [currentPage, setCurrentPage] = useState(1);
   const coursesPerPage = 12;
+
+  useEffect(() => {
+    if (locationTerm) setSelectedTerm(locationTerm);
+  }, [locationTerm]);
 
   // save current search filters
 
@@ -118,6 +134,22 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
   const handleClearFilters = () => {
     clearFilters();
     setCurrentPage(1);
+  };
+
+  const handleTermChange = (term) => {
+    const termMeta = courseMeta.terms.find((item) => item.term === term);
+    setSelectedTerm(term);
+    setSelectedCourseDetails(null);
+    setActiveTab("browse");
+    setCurrentPage(1);
+    navigate("/electives", {
+      replace: true,
+      state: {
+        term,
+        termLabel: termMeta?.label || term,
+        termAndYear: selectedTermAndYear,
+      },
+    });
   };
 
   const openCourseDetails = (course, options = {}) => {
@@ -209,6 +241,20 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
         {selectedTermAndYear && (
           <p className="mt-2 text-center text-sm text-gray-400">{selectedTermAndYear}</p>
         )}
+        <div className="mx-auto mt-4 w-full max-w-xs px-4">
+          <Select value={selectedTerm} onValueChange={handleTermChange}>
+            <SelectTrigger className="w-full bg-white/10 backdrop-blur-xl border border-white/20 text-white">
+              <SelectValue placeholder="Select a Term..." />
+            </SelectTrigger>
+            <SelectContent className="bg-black/80 backdrop-blur-xl text-white border-white/10">
+              {courseMeta.terms.map(({ term, label }) => (
+                <SelectItem key={term} value={term}>
+                  {label ? `${label} (${term})` : term}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </section>
 
       {/* Contact Icon */}
@@ -349,6 +395,7 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
           savedEntries={savedEntries}
           selectedTerm={selectedTerm}
           selectedTermLabel={selectedTermLabel}
+          selectedTermAndYear={selectedTermAndYear}
           onOpenCourse={handleOpenSavedCourse}
         />
       )}

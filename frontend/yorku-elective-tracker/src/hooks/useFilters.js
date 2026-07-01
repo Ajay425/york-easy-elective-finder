@@ -191,8 +191,8 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
 
         if (matchingTerms.length === 0) return null;
 
-        // Return a shallow copy of course with only matching/pruned terms so UI shows only those section meetings
-        return { ...course, terms: matchingTerms };
+        // Keep full availability for detail views while preserving filtered terms for cards/results.
+        return { ...course, allTerms: course.terms || [], terms: matchingTerms };
       })
       .filter(Boolean)
       .filter((course) => {

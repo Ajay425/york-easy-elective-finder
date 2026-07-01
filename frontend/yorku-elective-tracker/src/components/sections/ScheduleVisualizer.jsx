@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AlertTriangle, CalendarDays, Clock, FlaskConical } from "lucide-react";
 
 const DAYS = [
@@ -68,12 +68,18 @@ function buildSavedSections(courses, savedEntries) {
   });
 }
 
-function buildScheduleBlocks(sections, selectedTerm) {
+function sectionAppearsInCalendar(sectionTerm, calendarTerm) {
+  if (calendarTerm === "F") return sectionTerm === "F" || sectionTerm === "Y";
+  if (calendarTerm === "W") return sectionTerm === "W" || sectionTerm === "Y";
+  return sectionTerm === calendarTerm;
+}
+
+function buildScheduleBlocks(sections, calendarTerm) {
   const blocks = [];
   const unscheduled = [];
 
   for (const section of sections) {
-    if (section.entry.term !== selectedTerm) continue;
+    if (!sectionAppearsInCalendar(section.entry.term, calendarTerm)) continue;
 
     if (!section.isAvailable) {
       unscheduled.push({ ...section, reason: "This saved section is not in the current data." });
@@ -167,22 +173,45 @@ function shortLabel(value, maxLength = 18) {
   return `${text.slice(0, maxLength - 1).trim()}...`;
 }
 
-export function ScheduleVisualizer({
-  courses,
-  savedEntries,
-  selectedTerm,
-  selectedTermLabel,
+function seasonYears(termAndYear) {
+  const match = String(termAndYear || "").match(/(\d{4})(?:-(\d{4}))?/);
+  if (!match) return {};
+  const startYear = match[1];
+  const endYear = match[2] || String(Number(startYear) + 1);
+  return { startYear, endYear };
+}
+
+function inferredTermLabel(term, termAndYear) {
+  const { startYear, endYear } = seasonYears(termAndYear);
+
+  if (/fall\/winter/i.test(String(termAndYear || ""))) {
+    if (term === "F") return `Fall ${startYear || ""}`.trim();
+    if (term === "W") return `Winter ${endYear || ""}`.trim();
+    if (term === "Y") return `Full Year ${startYear && endYear ? `${startYear}-${endYear}` : ""}`.trim();
+  }
+
+  return term;
+}
+
+function labelForTerm(term, termAndYear, selectedTerm, selectedTermLabel, savedEntries) {
+  if (term === selectedTerm && selectedTermLabel) return selectedTermLabel;
+  const savedEntry = savedEntries.find((entry) => entry.term === term && entry.termLabel);
+  return savedEntry?.termLabel || inferredTermLabel(term, termAndYear);
+}
+
+function isFallWinterTerm(term) {
+  return term === "F" || term === "W" || term === "Y";
+}
+
+function ScheduleCalendar({
+  calendarTerm,
+  calendarLabel,
+  savedSections,
   onOpenCourse,
 }) {
-  const selectedTermName = selectedTermLabel || selectedTerm || "selected term";
-  const selectedTermSavedCount = savedEntries.filter((entry) => entry.term === selectedTerm).length;
-  const savedSections = useMemo(
-    () => buildSavedSections(courses, savedEntries),
-    [courses, savedEntries]
-  );
   const { blocks, unscheduled } = useMemo(
-    () => buildScheduleBlocks(savedSections, selectedTerm),
-    [savedSections, selectedTerm]
+    () => buildScheduleBlocks(savedSections, calendarTerm),
+    [savedSections, calendarTerm]
   );
   const positionedBlocks = useMemo(() => assignOverlapLanes(blocks), [blocks]);
   const firstBlockStart = Math.min(...positionedBlocks.map((block) => block.start));
@@ -197,6 +226,230 @@ export function ScheduleVisualizer({
   const hourMarks = buildHourMarks(timelineStart, timelineEnd);
   const rowHeight = 42;
   const timelineHeight = Math.max(320, (totalMinutes / 60) * rowHeight);
+  const savedCount = savedSections.filter((section) =>
+    sectionAppearsInCalendar(section.entry.term, calendarTerm)
+  ).length;
+
+  return (
+    <div className="space-y-3">
+      <div>
+        <h4 className="text-base font-bold text-white">{calendarLabel}</h4>
+        <p className="text-xs text-gray-400">
+          Includes saved {calendarLabel} sections and full-year sections.
+        </p>
+      </div>
+
+      {positionedBlocks.length > 0 ? (
+        <>
+          <div className="hidden overflow-hidden rounded-lg border border-white/10 bg-black/20 shadow-2xl shadow-black/30 md:block">
+            <div>
+              <div className="grid grid-cols-[58px_repeat(5,minmax(0,1fr))] border-b border-white/10 bg-white/[0.04]">
+                <div className="px-2 py-2 text-[10px] font-semibold uppercase text-gray-500">Time</div>
+                {DAYS.map((day) => (
+                  <div key={day.key} className="border-l border-white/10 px-2 py-2 text-center text-xs font-bold text-white lg:text-sm">
+                    {day.label}
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-[58px_repeat(5,minmax(0,1fr))]" style={{ height: `${timelineHeight}px` }}>
+                <div className="relative border-r border-white/10 bg-white/[0.02]">
+                  {hourMarks.map((minute) => (
+                    <div
+                      key={minute}
+                      className="absolute left-0 right-0 px-1.5 text-right text-[10px] text-gray-500"
+                      style={{ top: `${((minute - timelineStart) / totalMinutes) * 100}%` }}
+                    >
+                      {formatMinutes(minute)}
+                    </div>
+                  ))}
+                </div>
+
+                {DAYS.map((day) => {
+                  const dayBlocks = positionedBlocks.filter((block) => block.day === day.key);
+
+                  return (
+                    <div key={day.key} className="relative border-l border-white/10">
+                      {hourMarks.map((minute) => (
+                        <div
+                          key={minute}
+                          className="absolute left-0 right-0 border-t border-white/5"
+                          style={{ top: `${((minute - timelineStart) / totalMinutes) * 100}%` }}
+                        />
+                      ))}
+
+                      {dayBlocks.map((block) => {
+                        const width = 100 / (block.lanes || 1);
+                        const left = width * (block.lane || 0);
+                        const isConflict = block.conflictCount > 0;
+
+                        return (
+                          <button
+                            key={block.id}
+                            type="button"
+                            onClick={() => onOpenCourse(block.course, block.entry)}
+                            title={`${block.entry.courseCode} · ${block.entry.courseTitle} · ${block.entry.catNumber}`}
+                            className={`absolute overflow-hidden rounded-md border px-1.5 py-1 text-left shadow-md backdrop-blur transition hover:scale-[1.01] hover:shadow-purple-500/20 ${colorFor(block.entry.courseCode)} ${
+                              isConflict ? "ring-1 ring-red-300/70" : ""
+                            }`}
+                            style={{
+                              top: `${((block.start - timelineStart) / totalMinutes) * 100}%`,
+                              height: `${Math.max(5, ((block.end - block.start) / totalMinutes) * 100)}%`,
+                              left: `calc(${left}% + 3px)`,
+                              width: `calc(${width}% - 6px)`,
+                            }}
+                          >
+                            <p className="truncate text-[11px] font-bold leading-tight">
+                              {block.entry.courseCode}
+                            </p>
+                            <p className="truncate text-[10px] leading-tight opacity-85">
+                              Sec {block.entry.section} · {block.type}
+                            </p>
+                            {isConflict && (
+                              <p className="mt-0.5 inline-flex items-center gap-1 rounded bg-red-500/25 px-1 py-0.5 text-[9px] font-bold text-red-50">
+                                <AlertTriangle className="h-3 w-3" />
+                                Conflict
+                              </p>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3 md:hidden">
+            {DAYS.map((day) => {
+              const dayBlocks = positionedBlocks
+                .filter((block) => block.day === day.key)
+                .sort((a, b) => a.start - b.start);
+
+              return (
+                <div key={day.key} className="rounded-lg border border-white/10 bg-white/[0.04] p-3">
+                  <h4 className="mb-2 text-sm font-bold text-white">{day.label}</h4>
+                  {dayBlocks.length ? (
+                    <div className="space-y-2">
+                      {dayBlocks.map((block) => {
+                        const isConflict = block.conflictCount > 0;
+
+                        return (
+                          <button
+                            key={block.id}
+                            type="button"
+                            onClick={() => onOpenCourse(block.course, block.entry)}
+                            className={`w-full rounded-md border px-3 py-2 text-left shadow-md ${colorFor(block.entry.courseCode)} ${
+                              isConflict ? "ring-1 ring-red-300/70" : ""
+                            }`}
+                          >
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="min-w-0 truncate text-sm font-bold">{block.entry.courseCode}</span>
+                              <span className="shrink-0 rounded bg-black/25 px-1.5 py-0.5 text-[10px] font-bold">
+                                {block.type}
+                              </span>
+                            </div>
+                            <p className="mt-1 truncate text-xs opacity-85">
+                              {shortLabel(block.entry.courseTitle, 34)}
+                            </p>
+                            <p className="mt-1 truncate text-[11px] opacity-75">
+                              {block.entry.catNumber} · Sec {block.entry.section}
+                            </p>
+                            {isConflict && (
+                              <span className="mt-1 inline-flex items-center gap-1 rounded bg-red-500/25 px-1.5 py-0.5 text-[10px] font-bold text-red-50">
+                                <AlertTriangle className="h-3 w-3" />
+                                Conflict
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <p className="text-xs text-gray-500">No saved classes.</p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <div className="rounded-lg border border-white/10 bg-white/[0.04] px-6 py-10 text-center">
+          <Clock className="mx-auto mb-4 h-8 w-8 text-gray-400" />
+          <h3 className="text-lg font-semibold text-white">No weekday class times found</h3>
+          <p className="mt-2 text-sm text-gray-400">
+            {savedCount > 0
+              ? `Saved ${calendarLabel} sections do not currently have Monday-Friday timing data.`
+              : `You have not saved any ${calendarLabel} sections yet.`}
+          </p>
+        </div>
+      )}
+
+      {unscheduled.length > 0 && (
+        <div className="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+          <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-gray-300">
+            Saved sections not shown on this calendar
+          </h3>
+          <div className="space-y-2">
+            {unscheduled.map((item) => (
+              <button
+                key={item.entry.id}
+                type="button"
+                disabled={!item.isAvailable}
+                onClick={() => item.isAvailable && onOpenCourse(item.course, item.entry)}
+                className="flex w-full flex-col gap-1 rounded-lg border border-white/10 bg-black/20 p-3 text-left text-sm text-gray-200 hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                <span className="font-semibold text-white">
+                  {item.entry.courseCode} · {item.entry.catNumber}
+                </span>
+                <span className="text-xs text-gray-400">{item.reason}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function ScheduleVisualizer({
+  courses,
+  savedEntries,
+  selectedTerm,
+  selectedTermLabel,
+  selectedTermAndYear,
+  onOpenCourse,
+}) {
+  const hasFallWinterTerms = isFallWinterTerm(selectedTerm) ||
+    savedEntries.some((entry) => isFallWinterTerm(entry.term));
+  const fallLabel = labelForTerm("F", selectedTermAndYear, selectedTerm, selectedTermLabel, savedEntries);
+  const winterLabel = labelForTerm("W", selectedTermAndYear, selectedTerm, selectedTermLabel, savedEntries);
+  const selectedTermName = selectedTermLabel || selectedTerm || "selected term";
+  const [viewMode, setViewMode] = useState(hasFallWinterTerms ? "both" : "selected");
+
+  useEffect(() => {
+    setViewMode(hasFallWinterTerms ? "both" : "selected");
+  }, [hasFallWinterTerms, selectedTerm]);
+
+  const savedSections = useMemo(
+    () => buildSavedSections(courses, savedEntries),
+    [courses, savedEntries]
+  );
+  const viewOptions = hasFallWinterTerms
+    ? [
+      { id: "fall", label: fallLabel },
+      { id: "winter", label: winterLabel },
+      { id: "both", label: "Both" },
+    ]
+    : [{ id: "selected", label: selectedTermName }];
+  const calendars = hasFallWinterTerms
+    ? viewMode === "fall"
+      ? [{ term: "F", label: fallLabel }]
+      : viewMode === "winter"
+        ? [{ term: "W", label: winterLabel }]
+        : [{ term: "F", label: fallLabel }, { term: "W", label: winterLabel }]
+    : [{ term: selectedTerm, label: selectedTermName }];
 
   if (!savedEntries.length) {
     return (
@@ -230,181 +483,39 @@ export function ScheduleVisualizer({
         <div>
           <h3 className="text-lg font-bold text-white">Saved Schedule</h3>
           <p className="text-xs text-gray-400 sm:text-sm">
-            Showing saved {selectedTermName} sections on a Monday-Friday view.
+            Full-year sections appear on both Fall and Winter calendars.
           </p>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {viewOptions.map((option) => (
+            <button
+              key={option.id}
+              type="button"
+              onClick={() => setViewMode(option.id)}
+              className={`h-9 rounded-lg border px-3 text-sm font-semibold transition ${
+                viewMode === option.id
+                  ? "border-purple-300/50 bg-purple-500/25 text-white"
+                  : "border-white/10 bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
       </div>
 
-      {positionedBlocks.length > 0 ? (
-        <>
-        <div className="hidden overflow-hidden rounded-lg border border-white/10 bg-black/20 shadow-2xl shadow-black/30 md:block">
-          <div>
-            <div className="grid grid-cols-[58px_repeat(5,minmax(0,1fr))] border-b border-white/10 bg-white/[0.04]">
-              <div className="px-2 py-2 text-[10px] font-semibold uppercase text-gray-500">Time</div>
-              {DAYS.map((day) => (
-                <div key={day.key} className="border-l border-white/10 px-2 py-2 text-center text-xs font-bold text-white lg:text-sm">
-                  {day.label}
-                </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-[58px_repeat(5,minmax(0,1fr))]" style={{ height: `${timelineHeight}px` }}>
-              <div className="relative border-r border-white/10 bg-white/[0.02]">
-                {hourMarks.map((minute) => (
-                  <div
-                    key={minute}
-                    className="absolute left-0 right-0 px-1.5 text-right text-[10px] text-gray-500"
-                    style={{ top: `${((minute - timelineStart) / totalMinutes) * 100}%` }}
-                  >
-                    {formatMinutes(minute)}
-                  </div>
-                ))}
-              </div>
-
-              {DAYS.map((day) => {
-                const dayBlocks = positionedBlocks.filter((block) => block.day === day.key);
-
-                return (
-                  <div key={day.key} className="relative border-l border-white/10">
-                    {hourMarks.map((minute) => (
-                      <div
-                        key={minute}
-                        className="absolute left-0 right-0 border-t border-white/5"
-                        style={{ top: `${((minute - timelineStart) / totalMinutes) * 100}%` }}
-                      />
-                    ))}
-
-                    {dayBlocks.map((block) => {
-                      const width = 100 / (block.lanes || 1);
-                      const left = width * (block.lane || 0);
-                      const isConflict = block.conflictCount > 0;
-
-                      return (
-                        <button
-                          key={block.id}
-                          type="button"
-                          onClick={() => onOpenCourse(block.course, block.entry)}
-                          title={`${block.entry.courseCode} · ${block.entry.courseTitle} · ${block.entry.catNumber}`}
-                          className={`absolute overflow-hidden rounded-md border px-1.5 py-1 text-left shadow-md backdrop-blur transition hover:scale-[1.01] hover:shadow-purple-500/20 ${colorFor(block.entry.courseCode)} ${
-                            isConflict ? "ring-1 ring-red-300/70" : ""
-                          }`}
-                          style={{
-                            top: `${((block.start - timelineStart) / totalMinutes) * 100}%`,
-                            height: `${Math.max(5, ((block.end - block.start) / totalMinutes) * 100)}%`,
-                            left: `calc(${left}% + 3px)`,
-                            width: `calc(${width}% - 6px)`,
-                          }}
-                        >
-                          <p className="truncate text-[11px] font-bold leading-tight">
-                            {block.entry.courseCode}
-                          </p>
-                          <p className="truncate text-[10px] leading-tight opacity-85">
-                            Sec {block.entry.section} · {block.type}
-                          </p>
-                          {isConflict && (
-                            <p className="mt-0.5 inline-flex items-center gap-1 rounded bg-red-500/25 px-1 py-0.5 text-[9px] font-bold text-red-50">
-                              <AlertTriangle className="h-3 w-3" />
-                              Conflict
-                            </p>
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-3 md:hidden">
-          {DAYS.map((day) => {
-            const dayBlocks = positionedBlocks
-              .filter((block) => block.day === day.key)
-              .sort((a, b) => a.start - b.start);
-
-            return (
-              <div key={day.key} className="rounded-lg border border-white/10 bg-white/[0.04] p-3">
-                <h4 className="mb-2 text-sm font-bold text-white">{day.label}</h4>
-                {dayBlocks.length ? (
-                  <div className="space-y-2">
-                    {dayBlocks.map((block) => {
-                      const isConflict = block.conflictCount > 0;
-
-                      return (
-                        <button
-                          key={block.id}
-                          type="button"
-                          onClick={() => onOpenCourse(block.course, block.entry)}
-                          className={`w-full rounded-md border px-3 py-2 text-left shadow-md ${colorFor(block.entry.courseCode)} ${
-                            isConflict ? "ring-1 ring-red-300/70" : ""
-                          }`}
-                        >
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="min-w-0 truncate text-sm font-bold">{block.entry.courseCode}</span>
-                            <span className="shrink-0 rounded bg-black/25 px-1.5 py-0.5 text-[10px] font-bold">
-                              {block.type}
-                            </span>
-                          </div>
-                          <p className="mt-1 truncate text-xs opacity-85">
-                            {shortLabel(block.entry.courseTitle, 34)}
-                          </p>
-                          <p className="mt-1 truncate text-[11px] opacity-75">
-                            {block.entry.catNumber} · Sec {block.entry.section}
-                          </p>
-                          {isConflict && (
-                            <span className="mt-1 inline-flex items-center gap-1 rounded bg-red-500/25 px-1.5 py-0.5 text-[10px] font-bold text-red-50">
-                              <AlertTriangle className="h-3 w-3" />
-                              Conflict
-                            </span>
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <p className="text-xs text-gray-500">No saved classes.</p>
-                )}
-              </div>
-            );
-          })}
-        </div>
-        </>
-      ) : (
-        <div className="rounded-lg border border-white/10 bg-white/[0.04] px-6 py-12 text-center">
-          <Clock className="mx-auto mb-4 h-8 w-8 text-gray-400" />
-          <h3 className="text-lg font-semibold text-white">No weekday class times found</h3>
-          <p className="mt-2 text-sm text-gray-400">
-            {selectedTermSavedCount > 0
-              ? `Saved ${selectedTermName} sections do not currently have Monday-Friday timing data.`
-              : `You have not saved any ${selectedTermName} sections yet.`}
-          </p>
-        </div>
-      )}
-
-      {unscheduled.length > 0 && (
-        <div className="mt-5 rounded-lg border border-white/10 bg-white/[0.04] p-4">
-          <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-gray-300">
-            Saved sections not shown on the grid
-          </h3>
-          <div className="space-y-2">
-            {unscheduled.map((item) => (
-              <button
-                key={item.entry.id}
-                type="button"
-                disabled={!item.isAvailable}
-                onClick={() => item.isAvailable && onOpenCourse(item.course, item.entry)}
-                className="flex w-full flex-col gap-1 rounded-lg border border-white/10 bg-black/20 p-3 text-left text-sm text-gray-200 hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                <span className="font-semibold text-white">
-                  {item.entry.courseCode} · {item.entry.catNumber}
-                </span>
-                <span className="text-xs text-gray-400">{item.reason}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      <div className="space-y-8">
+        {calendars.map((calendar) => (
+          <ScheduleCalendar
+            key={calendar.term}
+            calendarTerm={calendar.term}
+            calendarLabel={calendar.label}
+            savedSections={savedSections}
+            onOpenCourse={onOpenCourse}
+          />
+        ))}
+      </div>
     </section>
   );
 }

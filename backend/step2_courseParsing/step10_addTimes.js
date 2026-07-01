@@ -2,6 +2,10 @@ import fs from "fs";
 import path from "path";
 import * as cheerio from "cheerio";
 import { PrismaClient } from "@prisma/client";
+import {
+  calculateEndTime,
+  parseCourseTimeHtml,
+} from "../lib/courseTimeHtmlParser.js";
 
 const prisma = new PrismaClient();
 
@@ -11,33 +15,10 @@ const DRY_RUN = false;
 const PROGRESS_EVERY = 25;
 const MAX_INVALID_TIME_WARNINGS = 5;
 
-// ✅ ONLY these teaching types are allowed
-const teachingTypes = ["LECT", "SEMR", "BLEN", "ONLN", "ONCA", "HYFX"];
+// Components that can carry schedule rows. Tutorials/labs matter because CAT choices
+// often differ only by one of these components.
+const schedulableTypes = ["LECT", "SEMR", "BLEN", "ONLN", "ONCA", "HYFX", "TUTR", "LAB"];
 // =========================================
-
-const clean = (s) => (s ?? "").replace(/\u00A0/g, " ").trim();
-const normType = (s) => clean(s).replace(/\s+/g, "");
-
-// Calculate end time from start time (HH:MM format) and duration in minutes
-function calculateEndTime(startTime, durationMinutes) {
-  try {
-    const [hours, mins] = String(startTime).split(':').map(Number);
-    const durationInt = Math.floor(Number(durationMinutes));
-    
-    if (isNaN(hours) || isNaN(mins) || isNaN(durationInt)) {
-      noteInvalidTimeWarning(`⚠️ Invalid time input: startTime=${startTime}, durationMinutes=${durationMinutes}`);
-      return null;
-    }
-    
-    const totalMinutes = hours * 60 + mins + durationInt;
-    const endHours = Math.floor(totalMinutes / 60);
-    const endMins = totalMinutes % 60;
-    return `${String(endHours).padStart(2, '0')}:${String(endMins).padStart(2, '0')}`;
-  } catch (err) {
-    noteInvalidTimeWarning(`⚠️ Error calculating endTime: ${err.message}`);
-    return null;
-  }
-}
 
 // Global stats
 let stats = {
@@ -103,91 +84,14 @@ function listHtmlFiles(dir) {
 async function processHtmlFile(filePath) {
   const html = readHtmlSmart(filePath);
   const $ = cheerio.load(html);
-
-  let currentFaculty = null;
-  let currentDept = null;
-  let currentTerm = null;
-
-  // Persist across rows where course info is omitted
-  let lastCourseCode = null;
-  let lastCredit = null;
-  let lastSection = null;
-
-  const mainTable = $("table[border='1']").first();
-  const rows = mainTable.find("tr").toArray(); // ✅ robust: tbody/no-tbody doesn’t matter
+  const components = parseCourseTimeHtml($);
 
   let fileParsedBlocks = 0;
 
-  for (const row of rows) {
-    const tds = $(row).find("> td").toArray();
-    if (tds.length === 0) continue;
+  for (const component of components) {
+    if (!schedulableTypes.includes(component.type)) continue;
 
-    // Skip the black header row ("Fac Dept Term ...")
-    if (clean($(tds[0]).text()) === "Fac") continue;
-
-    // Course title header row (td[3] colspan="8")
-    const td3colspan = tds[3] ? $(tds[3]).attr("colspan") : undefined;
-    if (tds.length >= 4 && td3colspan === "8") {
-      currentFaculty = clean($(tds[0]).text());
-      currentDept = clean($(tds[1]).text());
-      currentTerm = clean($(tds[2]).text());
-      continue;
-    }
-
-    if (!currentFaculty || !currentDept || !currentTerm) continue;
-
-    const firstColspan = $(tds[0]).attr("colspan");
-
-    let typeText = null;
-    let timesTd = null;
-
-    // Pattern A: rows with course info (colspan="3")
-    if (firstColspan === "3") {
-      const courseCellText = clean($(tds[1]).text());
-      typeText = normType($(tds[3]).text());
-      timesTd = tds[6] ? $(tds[6]) : null;
-
-      const m = courseCellText.match(
-        /(?<code>\d{4})\s+(?<credit>\d+\.\d{2})\s+(?<section>[A-Z])/
-      );
-      if (!m) continue;
-
-      lastCourseCode = m.groups.code;
-      lastCredit = parseFloat(m.groups.credit);
-      lastSection = m.groups.section;
-    }
-
-    // Pattern B: rows WITHOUT course info (colspan="5") reuse last*
-    else if (firstColspan === "5") {
-      typeText = normType($(tds[1]).text());
-      timesTd = tds[4] ? $(tds[4]) : null;
-
-      if (!lastCourseCode || !lastSection || lastCredit == null) continue;
-    } else {
-      continue;
-    }
-
-    // ✅ FILTER: ignore all non-teaching types
-    if (!teachingTypes.includes(typeText)) continue;
-    if (!timesTd) continue;
-
-    // Parse meeting times
-    const times = [];
-    const timeRows = timesTd.find("table tr").toArray();
-
-    for (const tr of timeRows) {
-      const cells = $(tr).find("td").toArray();
-      if (cells.length < 3) continue;
-
-      const dayOfWeek = clean($(cells[0]).text());
-      const startTime = clean($(cells[1]).text());
-      const durationMinutes = Math.floor(parseInt(clean($(cells[2]).text()), 10));
-
-      if (!dayOfWeek || !startTime || Number.isNaN(durationMinutes)) continue;
-      times.push({ dayOfWeek, startTime, durationMinutes });
-    }
-
-    if (times.length === 0) {
+    if (component.times.length === 0) {
       stats.timeSkippedNoTimes++;
       continue;
     }
@@ -199,10 +103,10 @@ async function processHtmlFile(filePath) {
     const course = await prisma.course.findUnique({
       where: {
         faculty_deptAcronym_courseCode_credit: {
-          faculty: currentFaculty,
-          deptAcronym: currentDept,
-          courseCode: lastCourseCode,
-          credit: lastCredit,
+          faculty: component.faculty,
+          deptAcronym: component.dept,
+          courseCode: component.code,
+          credit: component.credit,
         },
       },
       select: { id: true },
@@ -216,10 +120,11 @@ async function processHtmlFile(filePath) {
     // 2) Find Offering
     const offering = await prisma.currentCourseOfferings.findFirst({
       where: {
-        term: currentTerm,
+        term: component.term,
         courseId: course.id,
-        section: lastSection,
-        type: typeText,
+        section: component.section,
+        type: component.type,
+        ...(component.catNumber ? { catNumber: component.catNumber } : {}),
       },
       select: { id: true },
     });
@@ -230,8 +135,11 @@ async function processHtmlFile(filePath) {
     }
 
     // 3) Insert / update CourseTime
-    for (const t of times) {
+    for (const t of component.times) {
       const endTime = calculateEndTime(t.startTime, t.durationMinutes);
+      if (!endTime) {
+        noteInvalidTimeWarning(`⚠️ Invalid time input: startTime=${t.startTime}, durationMinutes=${t.durationMinutes}`);
+      }
       
       const existing = await prisma.courseTime.findFirst({
         where: {

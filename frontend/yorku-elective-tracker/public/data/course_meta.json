@@ -1,6 +1,6 @@
 {
   "msg": "success",
-  "generatedAt": "2026-07-01T02:50:41.940Z",
+  "generatedAt": "2026-07-01T14:28:05.813Z",
   "termAndYear": "Fall/Winter 2026-2027",
   "source": "backend/step2_courseParsing/archive/all_courses_FallWinter_2026-2027_2026-07-01T02-23-08-851Z.json",
   "sourceKind": "latest-completed-archive",
@@ -9,7 +9,7 @@
   "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/WRIT - Writing - ( AP )/AP_WRIT 3740 3.00_Fundamentals of Editing for Non-majors_CourseSchedule.html",
   "rawYorkCoursesNewestMtime": "2026-06-30T17:12:15.255Z",
   "rawYorkCoursesNewerThanSource": false,
-  "courseCount": 1839,
+  "courseCount": 1829,
   "terms": [
     {
       "term": "F",
@@ -47,11 +47,12 @@
   ],
   "hasTimingData": true,
   "stats": {
-    "offeringsWithCatNumbers": 3039,
-    "offeringsWithTimes": 2326,
-    "instructorsWithRmpLinks": 1484,
+    "offeringsWithCatNumbers": 5445,
+    "offeringsWithTimes": 4606,
+    "instructorsWithRmpLinks": 1496,
     "courseTimeHtmlFiles": 11,
-    "courseTimeRowsParsed": 14818,
-    "courseTimeSectionKeys": 6677
+    "courseTimeComponentsParsed": 14777,
+    "courseTimeRowsParsed": 14931,
+    "courseTimeSectionKeys": 6735
   }
 }
