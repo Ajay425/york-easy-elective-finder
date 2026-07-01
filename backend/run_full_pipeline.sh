@@ -2,7 +2,7 @@
 
 # Run the full pipeline:
 # 1) run step1_PythonCourseScraper/step_1_open_subject.py inside its virtualenv
-# 2) once step1 finishes, run step2_courseParsing/runPipeline.js with node
+# 2) once step1 finishes, run the JSON parser/export pipeline with node
 #
 # This script detaches into a screen session so it can run for days and be attached later.
 # Usage:
@@ -16,7 +16,6 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STEP1_DIR="$SCRIPT_DIR/step1_PythonCourseScraper"
-STEP2_DIR="$SCRIPT_DIR/step2_courseParsing"
 SCREEN_SESSION="york_pipeline"
 RUNTIME_PIPELINE_DIR="$SCRIPT_DIR/runtime/pipeline"
 LOGFILE="$RUNTIME_PIPELINE_DIR/pipeline.log"
@@ -41,17 +40,13 @@ echo "==> [\$(date)] running step1 (scrape subjects)"
 cd "$STEP1_DIR"
 
 # NOTE: step1 can take a long time. Output is captured in the screen log.
-"$VENV_PYTHON" step_1_open_subject.py
+FORCE_FRESH_SCRAPE=1 "$VENV_PYTHON" step_1_open_subject.py
 
-# Once step1 completes, run the parsing pipeline.
-echo "==> [\$(date)] step1 complete; running step2 (runPipeline.js)"
+# Once step1 completes, run the parsing/export pipeline.
+echo "==> [\$(date)] step1 complete; running JSON pipeline"
 
-cd "$STEP2_DIR"
-node runPipeline.js
-
-echo "==> [\$(date)] step2 complete; exporting static frontend data"
 cd "$SCRIPT_DIR"
-node scripts/exportStaticFrontendData.js
+npm run pipeline
 
 echo "==> [\$(date)] pipeline finished"
 EOF

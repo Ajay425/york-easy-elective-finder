@@ -1,5 +1,5 @@
 import express from 'express';
-import * as db from '../database/dbPrismaCourses.js';
+import * as db from '../database/dbJsonCourses.js';
 import fs from 'fs/promises';
 import { STEP13_FILE } from '../utils/paths.js';
 

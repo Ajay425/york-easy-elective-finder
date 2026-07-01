@@ -5,23 +5,19 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "setup": "npm ci && npm run bootstrap && npm run db:generate",
+    "setup": "npm ci && npm run bootstrap",
     "bootstrap": "node scripts/prepareBackend.js",
     "start": "node app.js",
-    "pipeline": "node step2_courseParsing/runPipeline.js",
+    "pipeline": "node step2_courseParsing/runPipeline.js && npm run export:frontend",
     "export:frontend": "node scripts/exportStaticFrontendData.js",
-    "pipeline:export": "npm run pipeline && npm run export:frontend",
+    "pipeline:export": "npm run pipeline",
     "pipeline:full": "bash ./run_full_pipeline.sh",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate deploy",
-    "test": "echo \"No tests configured\""
+    "test": "node tests/jsonBackend.test.js && node tests/courseTimes.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.22.0",
-    "@prisma/client-runtime-utils": "^7.5.0",
     "cheerio": "^1.1.2",
     "connect-redis": "^6.0.0",
     "cookie-parser": "^1.4.6",
@@ -44,8 +40,5 @@
     "ratemyprofessor-api": "^1.0.1",
     "redis": "^4.6.7",
     "resend": "^6.5.2"
-  },
-  "devDependencies": {
-    "prisma": "^5.22.0"
   }
 }

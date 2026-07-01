@@ -455,6 +455,38 @@ def main() -> None:
             subjects = subjects[:MAX_SUBJECTS]
         logging.info(f"📚 Found {len(subjects)} subjects to scrape")
 
+        force_fresh_scrape = os.environ.get("FORCE_FRESH_SCRAPE") == "1"
+        run_complete_marker = os.path.join(BASE_DIR, RUN_COMPLETE_MARKER)
+
+        if force_fresh_scrape:
+            if os.path.isdir(SAVE_DIR_PATH):
+                try:
+                    ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                    archive_root = os.path.join(BASE_DIR, "archive")
+                    os.makedirs(archive_root, exist_ok=True)
+                    base = os.path.basename(os.path.normpath(SAVE_DIR))
+                    archive_dir = os.path.join(archive_root, f"{base}_fresh_start_{ts}")
+                    suffix = 1
+                    while os.path.exists(archive_dir):
+                        archive_dir = os.path.join(archive_root, f"{base}_fresh_start_{ts}_{suffix}")
+                        suffix += 1
+                    os.rename(SAVE_DIR_PATH, archive_dir)
+                    logging.info(f"🧹 FORCE_FRESH_SCRAPE archived existing scraper output to {archive_dir}")
+                except Exception as e:
+                    raise RuntimeError(f"FORCE_FRESH_SCRAPE failed to archive existing {SAVE_DIR_PATH}: {e}") from e
+
+            try:
+                open(PROGRESS_FILE_PATH, "w", encoding="utf-8").close()
+                logging.info(f"🧹 FORCE_FRESH_SCRAPE cleared {PROGRESS_FILE_PATH}")
+            except Exception as e:
+                raise RuntimeError(f"FORCE_FRESH_SCRAPE failed to clear {PROGRESS_FILE_PATH}: {e}") from e
+
+            try:
+                if os.path.exists(run_complete_marker):
+                    os.remove(run_complete_marker)
+            except Exception:
+                pass
+
         # Load prior progress, if any.
         completed_subjects: Set[str] = set()
         if os.path.exists(PROGRESS_FILE_PATH):
@@ -465,7 +497,6 @@ def main() -> None:
                 logging.warning(f"⚠️ Failed to read {PROGRESS_FILE_PATH}: {e}")
 
         # Determine if the prior run finished completely; if so, archive its output.
-        run_complete_marker = os.path.join(BASE_DIR, RUN_COMPLETE_MARKER)
         run_finished_cleanly = os.path.exists(run_complete_marker)
         run_finished_by_progress = len(completed_subjects) == len(subjects) and len(subjects) > 0
 

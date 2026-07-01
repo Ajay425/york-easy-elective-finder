@@ -5,23 +5,12 @@ import fs from 'fs/promises';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Array of steps to execute in order
+// Array of steps to execute in order. The default pipeline is intentionally
+// JSON-only: the frontend and API server read static JSON snapshots, so the
+// legacy Prisma/PostgreSQL import steps are no longer required to rebuild data.
 const steps = [
   { num: 1, name: 'Extract Courses from HTML', path: './step1_extractAllCoursestoJson.js' },
   { num: 1.5, name: 'Update Lecture Category Numbers', path: './step1.5_updateCatNumbers.js' },
-  { num: 2, name: 'Import Courses to Database', path: './step2_JSONCoursestoDb.mjs' },
-  { num: 3, name: 'Add Prerequisites', path: './step3_addPrereqsToCoursesInDb.js' },
-  { num: 4, name: 'Import Instructors', path: './step4_JSONinstructorsToDb.js' },
-  { num: 5, name: 'Import Departments', path: './step5_DeptToDbPrisma.js' },
-  { num: 6, name: 'Add Professor Ratings', path: './step6_rmpAddprofessorRatingsToDb.js' },
-  { num: 7, name: 'Import Course Offerings', path: './step7_courseOfferingsToDB.js' },
-  { num: 8, name: 'Import Instructor Offerings', path: './step8_instructorOfferingstoDb.js' },
-  { num: 9, name: 'Add Instructor Popularity', path: './step9_addInstructorPopularity.js' },
-   { num: 10, name: 'Add Course Times', path: './step10_addTimes.js' },
-  { num: 11, name: 'Cleanup Self Prerequisites', path: './step11_cleanupSelfPrereqs.js' },
-  { num: 12, name: 'Course Prerequisites to DB', path: './step12_coursePrereqsToDb.js' },
-  { num: 13, name: 'Remove Prereqs From Approved Course List', path: './step13_removeApprovedCoursePrereqs.js' },
-  { num: 14, name: 'Extract Unique DB Values', path: './step14_uniqueValues.js' },
 ];
 
 
@@ -108,7 +97,7 @@ async function main() {
   const pipelineStart = Date.now();
   
   console.log('\n' + '█'.repeat(60));
-  console.log('█ 🚀 DATABASE PIPELINE - STARTING');
+  console.log('█ JSON COURSE PIPELINE - STARTING');
   console.log('█'.repeat(60));
   console.log(`Total steps: ${steps.length}`);
   console.log(`Started at: ${new Date().toLocaleString()}\n`);

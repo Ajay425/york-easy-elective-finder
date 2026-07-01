@@ -6,7 +6,6 @@ This backend is now structured to run from any machine without relying on the cu
 
 - Node.js 20+
 - npm 10+
-- PostgreSQL database
 - Python 3.10+ only if you run the scraper pipeline step 1
 
 ## First-time setup
@@ -14,13 +13,10 @@ This backend is now structured to run from any machine without relying on the cu
 1. Copy environment template:
    - `cp .env.example .env`
 2. Fill required values in `.env`:
-   - `DATABASE_URL`
    - `ADMIN_PASSWORD`
    - `JWT_SECRET`
 3. Install and prepare local files:
    - `npm run setup`
-4. Apply database migrations:
-   - `npm run db:migrate`
 
 ## Run services
 
@@ -46,10 +42,14 @@ This backend is now structured to run from any machine without relying on the cu
 - Run full long-running scraper + parser in screen:
   - `npm run pipeline:full`
 
-`pipeline:full` also runs the static frontend export after the scraper/parser finishes.
+`pipeline` and `pipeline:full` both write the static frontend export after the scraper/parser finishes.
 The public frontend reads `frontend/yorku-elective-tracker/public/data/electives.json`
 and `frontend/yorku-elective-tracker/public/data/course_meta.json`, so the API server does
 not need to stay online for normal student browsing.
+
+The API backend also reads the same static JSON snapshot now. PostgreSQL is no longer required
+for serving/searching courses. The old Prisma import scripts remain in `step2_courseParsing/`
+as legacy tooling, but they are not part of the default backend setup or pipeline.
 
 The static export uses `step2_courseParsing/all_courses.json` first when that active parser
 output exists. After a successful pipeline run, `runPipeline.js` moves that file into

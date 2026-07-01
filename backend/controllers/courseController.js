@@ -1,4 +1,4 @@
-import * as db from '../database/dbPrismaCourses.js';
+import * as db from '../database/dbJsonCourses.js';
 import rmp from 'ratemyprofessor-api';
 import { incrementApiUsage } from '../utils/apiUsageTracker.js';
 import fs from 'fs/promises';
@@ -10,6 +10,10 @@ const badWords = new Set([
     'FUCK', 'SHIT', 'BITCH', 'ASS', 'CUNT', 'NIGGER', 'NIGGA',
     'DICK', 'PUSSY', 'COCK', 'WHORE', 'SLUT'
 ]);
+
+function errorStatus(err) {
+    return Number.isInteger(err?.statusCode) ? err.statusCode : 500;
+}
 
 async function ensureTrendingFile() {
     await fs.mkdir(path.dirname(TRENDING_FILE), { recursive: true });
@@ -134,7 +138,7 @@ export async function getPopularCourses(req,res) {
         return res.status(200).json({msg:"success", courses:courses})
     }
     catch(err){
-        return res.status(500).json({ msg: err.message || err });    
+        return res.status(errorStatus(err)).json({ msg: err.message || err });    
     }
 
 }
@@ -150,7 +154,7 @@ export async function getCourseFromParams(req,res) {
         return res.status(200).json({msg:"success", course:course})
     }
     catch(err){
-        return res.status(500).json({ msg: err.message || err });    
+        return res.status(errorStatus(err)).json({ msg: err.message || err });    
     }
 
 }
@@ -163,7 +167,7 @@ export async function getCourseFromQuery(req,res) {
         return res.status(200).json({msg:"success", course:course})
     }
     catch(err){
-        return res.status(500).json({ msg: err.message || err });    
+        return res.status(errorStatus(err)).json({ msg: err.message || err });    
     }
 
 }
@@ -198,7 +202,7 @@ export async function searchCourses(req, res) {
         const { results, total } = await db.searchCoursesDb(q, page, pageSize, filters);
         return res.status(200).json({ msg: 'success', results, total, page, pageSize });
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -207,7 +211,7 @@ export async function getCourseSearchFilterOptions(req, res) {
         const options = await db.getCourseSearchFilterOptionsDb();
         return res.status(200).json({ msg: 'success', options });
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -218,7 +222,7 @@ export async function updateCourse(req, res) {
         const updated = await db.updateCourseDB(courseId, data);
         return res.status(200).json({ msg: 'updated', course: updated });
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -228,7 +232,7 @@ export async function deleteCourse(req, res) {
         await db.deleteCourseDB(courseId);
         return res.status(204).send();
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -239,7 +243,7 @@ export async function createOffering(req, res) {
         const offering = await db.createOfferingDB(courseId, data);
         return res.status(201).json({ msg: 'created', offering });
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -250,7 +254,7 @@ export async function updateOffering(req, res) {
         const updated = await db.updateOfferingDB(offeringId, data);
         return res.status(200).json({ msg: 'updated', updated });
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -260,7 +264,7 @@ export async function deleteOffering(req, res) {
         await db.deleteOfferingDB(offeringId);
         return res.status(204).send();
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -270,7 +274,7 @@ export async function createInstructor(req, res) {
         const created = await db.createInstructorDB(data);
         return res.status(201).json({ msg: 'created', instructor: created });
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -281,7 +285,7 @@ export async function updateInstructor(req, res) {
         const updated = await db.updateInstructorDB(instructorId, data);
         return res.status(200).json({ msg: 'updated', instructor: updated });
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -293,7 +297,7 @@ export async function addInstructorToOffering(req, res) {
         const created = await db.addInstructorToOfferingDB(offeringId, instructorId);
         return res.status(201).json({ msg: 'created', created });
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -304,7 +308,7 @@ export async function removeInstructorFromOffering(req, res) {
         await db.removeInstructorFromOfferingDB(offeringId, instructorId);
         return res.status(204).send();
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -315,7 +319,7 @@ export async function searchInstructors(req, res) {
         const results = await db.searchInstructorsDb(q, limit);
         return res.status(200).json({ msg: 'success', results });
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
@@ -352,7 +356,7 @@ export async function generateInstructorPopularity(req, res) {
         const updated = await db.recomputeInstructorPopularity(instructorId);
         return res.status(200).json({ msg: 'success', instructor: updated });
     } catch (err) {
-        return res.status(500).json({ msg: err.message || err });
+        return res.status(errorStatus(err)).json({ msg: err.message || err });
     }
 }
 
