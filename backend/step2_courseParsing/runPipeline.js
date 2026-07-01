@@ -11,8 +11,25 @@ const __dirname = path.dirname(__filename);
 const steps = [
   { num: 1, name: 'Extract Courses from HTML', path: './step1_extractAllCoursestoJson.js' },
   { num: 1.5, name: 'Update Lecture Category Numbers', path: './step1.5_updateCatNumbers.js' },
+  { num: 11, name: 'Cleanup Self Prerequisites (JSON)', path: './step11_cleanupSelfPrereqsJson.js' },
+  { num: 13, name: 'Remove Prereqs From Approved Course List (JSON)', path: './step13_removeApprovedCoursePrereqsJson.js' },
+  { num: 14, name: 'Extract Unique Values (JSON)', path: './step14_uniqueValuesJson.js' },
 ];
 
+const legacyCoverageNotes = [
+  'Old steps 2, 3, 4, 5, 7, 8, and 12 only loaded Prisma/PostgreSQL tables; the static exporter now reads all_courses.json directly.',
+  'Old step 6 (RMP ratings) and step 9 (popularity) are applied during static export from data/profs/yorku_RMP_data.json and logs/matches.json.',
+  'Old step 10 (course times) is applied during static export from step2_courseParsing/courseTimesHtml/*.html.',
+  'Old steps 11, 13, and 14 changed derived data, so JSON-native replacements run in this pipeline.',
+];
+
+function logLegacyCoverage() {
+  console.log('Legacy step coverage:');
+  for (const note of legacyCoverageNotes) {
+    console.log(`- ${note}`);
+  }
+  console.log('');
+}
 
 async function runStep(stepNumber, stepName, modulePath, progressIndex) {
   try {
@@ -101,6 +118,7 @@ async function main() {
   console.log('█'.repeat(60));
   console.log(`Total steps: ${steps.length}`);
   console.log(`Started at: ${new Date().toLocaleString()}\n`);
+  logLegacyCoverage();
   
   let completedSteps = 0;
   let success = false;

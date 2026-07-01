@@ -216,12 +216,24 @@ async function newestArchivedCourseFile(termAndYear) {
       if (wantedTerm && !entry.name.includes(wantedTerm)) continue;
 
       const filePath = path.join(STEP2_ARCHIVE_DIR, entry.name);
-      const stat = await fs.stat(filePath);
-      candidates.push({ filePath, mtimeMs: stat.mtimeMs });
+      const info = await courseFileInfo(filePath);
+      candidates.push({ filePath, mtimeMs: info.mtimeMs, count: info.count });
     }
 
     candidates.sort((a, b) => b.mtimeMs - a.mtimeMs);
-    return candidates[0]?.filePath || null;
+    if (!candidates.length) return null;
+
+    const maxCount = Math.max(...candidates.map((candidate) => candidate.count));
+    const minimumCompleteCount = maxCount >= 500 ? Math.max(100, Math.floor(maxCount * 0.8)) : 0;
+    const selected = candidates.find((candidate) => candidate.count >= minimumCompleteCount) || candidates[0];
+
+    if (selected.filePath !== candidates[0].filePath) {
+      console.warn(
+        `Warning: newest archive ${candidates[0].filePath} has only ${candidates[0].count} courses; using ${selected.filePath} with ${selected.count} courses instead.`
+      );
+    }
+
+    return selected.filePath;
   } catch {
     return null;
   }
@@ -229,20 +241,30 @@ async function newestArchivedCourseFile(termAndYear) {
 
 async function resolveCourseSource(termAndYear) {
   const activeInfo = await courseFileInfo(STEP2_COURSES);
+  const archiveFile = await newestArchivedCourseFile(termAndYear);
+  const archiveInfo = archiveFile ? await courseFileInfo(archiveFile) : null;
+
   if (activeInfo.exists && courseFileMatchesTerm(activeInfo, termAndYear)) {
-    return {
-      filePath: STEP2_COURSES,
-      kind: 'active-step2-output',
-      info: activeInfo,
-    };
+    const archiveCount = archiveInfo?.count || 0;
+    const minimumActiveCount = archiveCount >= 500 ? Math.max(100, Math.floor(archiveCount * 0.8)) : 0;
+    if (minimumActiveCount && activeInfo.count < minimumActiveCount) {
+      console.warn(
+        `Warning: active step2 output ${STEP2_COURSES} has only ${activeInfo.count} courses; falling back to archive ${archiveFile} with ${archiveCount} courses.`
+      );
+    } else {
+      return {
+        filePath: STEP2_COURSES,
+        kind: 'active-step2-output',
+        info: activeInfo,
+      };
+    }
   }
 
-  const archiveFile = await newestArchivedCourseFile(termAndYear);
   if (archiveFile) {
     return {
       filePath: archiveFile,
       kind: 'latest-completed-archive',
-      info: await courseFileInfo(archiveFile),
+      info: archiveInfo,
     };
   }
 
@@ -786,6 +808,7 @@ export {
   buildTermOfferings,
   courseTimeKey,
   mapMeeting,
+  newestArchivedCourseFile,
   parseCourseTimeHtmlFile,
 };
 

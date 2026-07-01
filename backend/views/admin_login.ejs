@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title>Admin Login</title>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
       body{font-family:Arial, sans-serif;background:#f7f8fb;padding:24px}
       .box{max-width:420px;margin:80px auto;background:#fff;padding:20px;border-radius:10px;border:1px solid #eee}
@@ -15,14 +14,10 @@
   <body>
     <div class="box">
       <h2>Admin Login</h2>
+      <p>Local admin access is enabled. Continue to the admin dashboard.</p>
       <form method="post" action="/admin/login">
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Enter admin password" />
-        <div style="margin-top:12px">
-          <div class="cf-turnstile" data-sitekey="<%= process.env.TURNSTILE_SITE_KEY || '' %>"></div>
-        </div>
         <div style="margin-top:10px">
-          <button type="submit">Sign in</button>
+          <button type="submit">Continue</button>
         </div>
       </form>
       <% if (error) { %>
