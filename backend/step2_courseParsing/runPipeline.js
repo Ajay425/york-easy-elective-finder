@@ -5,22 +5,32 @@ import fs from 'fs/promises';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Array of steps to execute in order. The default pipeline is intentionally
-// JSON-only: the frontend and API server read static JSON snapshots, so the
-// legacy Prisma/PostgreSQL import steps are no longer required to rebuild data.
+// Array of steps to execute in order. The default pipeline is now JSON-only:
+// the scraper writes course JSON, the numbered pipeline rewrites JSON artifacts,
+// and the static export consumes those JSON artifacts directly.
 const steps = [
   { num: 1, name: 'Extract Courses from HTML', path: './step1_extractAllCoursestoJson.js' },
   { num: 1.5, name: 'Update Lecture Category Numbers', path: './step1.5_updateCatNumbers.js' },
+  { num: 2, name: 'Normalize Courses (JSON)', path: './step2_jsonCourses.js' },
+  { num: 3, name: 'Build Prerequisite Edges (JSON)', path: './step3_jsonPrereqs.js' },
+  { num: 4, name: 'Build Instructor Roster (JSON)', path: './step4_jsonInstructors.js' },
+  { num: 5, name: 'Build Department Snapshot (JSON)', path: './step5_jsonDepartments.js' },
+  { num: 6, name: 'Refresh RMP Ratings (JSON/API)', path: './step6_rmpAddprofessorRatingsJson.js' },
+  { num: 7, name: 'Build Course Offerings (JSON)', path: './step7_jsonCourseOfferings.js' },
+  { num: 8, name: 'Build Instructor-Offering Links (JSON)', path: './step8_jsonInstructorOfferings.js' },
+  { num: 9, name: 'Compute Instructor Popularity (JSON)', path: './step9_jsonInstructorPopularity.js' },
+  { num: 10, name: 'Build Course Times (JSON)', path: './step10_jsonAddTimes.js' },
   { num: 11, name: 'Cleanup Self Prerequisites (JSON)', path: './step11_cleanupSelfPrereqsJson.js' },
   { num: 13, name: 'Remove Prereqs From Approved Course List (JSON)', path: './step13_removeApprovedCoursePrereqsJson.js' },
+  { num: 12, name: 'Build Course Prerequisite Snapshot (JSON)', path: './step12_jsonCoursePrereqs.js' },
   { num: 14, name: 'Extract Unique Values (JSON)', path: './step14_uniqueValuesJson.js' },
 ];
 
 const legacyCoverageNotes = [
-  'Old steps 2, 3, 4, 5, 7, 8, and 12 only loaded Prisma/PostgreSQL tables; the static exporter now reads all_courses.json directly.',
-  'Old step 6 (RMP ratings) and step 9 (popularity) are applied during static export from data/profs/yorku_RMP_data.json and logs/matches.json.',
-  'Old step 10 (course times) is applied during static export from step2_courseParsing/courseTimesHtml/*.html.',
-  'Old steps 11, 13, and 14 changed derived data, so JSON-native replacements run in this pipeline.',
+  'Steps 2, 3, 4, 5, 7, 8, and 12 now build JSON snapshots instead of Prisma tables.',
+  'Steps 6 and 9 refresh RMP ratings and popularity in JSON files using the live RMP API and JSON outputs.',
+  'Step 10 builds a JSON course-time lookup from step2_courseParsing/courseTimesHtml/*.html.',
+  'Steps 11, 13, and 14 continue to rewrite derived JSON in place.',
 ];
 
 function logLegacyCoverage() {

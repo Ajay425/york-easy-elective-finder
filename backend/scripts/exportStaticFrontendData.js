@@ -9,6 +9,7 @@ import {
   parseTypeAndComponent,
   sortCourseTimes,
 } from '../lib/courseTimeHtmlParser.js';
+import { hydrateCourseTimesLookup } from '../step2_courseParsing/jsonPipelineArtifacts.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,11 +21,13 @@ const SOURCE_COURSES = path.join(backendRoot, 'data', 'all_courses.json');
 const STEP2_DIR = path.join(backendRoot, 'step2_courseParsing');
 const STEP2_ARCHIVE_DIR = path.join(STEP2_DIR, 'archive');
 const STEP2_COURSES = path.join(STEP2_DIR, 'all_courses.json');
+const RUNTIME_PIPELINE_DIR = path.join(backendRoot, 'runtime', 'pipeline');
 const COURSE_TIMES_HTML_DIR = path.join(STEP2_DIR, 'courseTimesHtml');
 const RAW_YORK_COURSES_DIR = path.join(backendRoot, 'step1_PythonCourseScraper', 'york_courses');
 const SOURCE_RMP = path.join(backendRoot, 'data', 'profs', 'yorku_RMP_data.json');
 const SOURCE_RMP_MATCHES = path.join(STEP2_DIR, 'logs', 'matches.json');
 const SESSION_META = path.join(backendRoot, 'step1_PythonCourseScraper', 'session_meta.json');
+const COURSE_TIMES_SIDECAR = path.join(RUNTIME_PIPELINE_DIR, 'courseTimes.json');
 const OUT_COURSES = path.join(frontendDataDir, 'electives.json');
 const OUT_META = path.join(frontendDataDir, 'course_meta.json');
 
@@ -146,6 +149,15 @@ function courseTimeKey({ faculty, dept, code, credit, term, section }) {
     String(term || '').trim(),
     String(section || '').trim(),
   ].join('|');
+}
+
+async function loadCourseTimesSidecar() {
+  try {
+    const serialized = await readJson(COURSE_TIMES_SIDECAR);
+    return hydrateCourseTimesLookup(serialized);
+  } catch {
+    return null;
+  }
 }
 
 async function readJson(filePath, fallback = null) {
@@ -435,6 +447,12 @@ async function buildCourseTimesLookup() {
   };
 }
 
+async function loadResolvedCourseTimes() {
+  const sidecar = await loadCourseTimesSidecar();
+  if (sidecar) return sidecar;
+  return buildCourseTimesLookup();
+}
+
 function buildRmpLookup(rmpRows, matchRows) {
   const lookup = new Map();
 
@@ -642,7 +660,7 @@ async function main() {
     readJson(SOURCE_RMP_MATCHES, []),
     newestFileInDir(RAW_YORK_COURSES_DIR),
   ]);
-  const courseTimes = await buildCourseTimesLookup();
+  const courseTimes = await loadResolvedCourseTimes();
 
   if (!Array.isArray(rawCourses)) {
     throw new Error(`${courseSource.filePath} must contain an array`);

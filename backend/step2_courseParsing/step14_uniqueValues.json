@@ -1,18 +1,47 @@
 {
-  "generatedAt": "2026-07-01T16:51:37.040Z",
+  "generatedAt": "2026-07-01T21:57:48.901Z",
   "source": "step2_courseParsing/all_courses.json",
   "faculties": [
     "AP",
     "ED",
-    "SB"
+    "FA",
+    "GS",
+    "LE",
+    "SB",
+    "SC"
   ],
   "departments": [
     "ACTG",
-    "ADMS"
+    "ADMS",
+    "ANCW",
+    "ANTH",
+    "ARB",
+    "ARTH",
+    "ARTM",
+    "ASL",
+    "AUCO",
+    "BBED",
+    "BC",
+    "BCHM",
+    "BEAP",
+    "BIOL",
+    "BPHS",
+    "BUSI",
+    "CAPS",
+    "CCCC",
+    "CCY",
+    "CDIS",
+    "CH",
+    "CHEM"
   ],
   "credits": [
+    0,
     1.5,
-    3
+    3,
+    4,
+    6,
+    8,
+    9
   ],
   "years": [
     1,
@@ -25,6 +54,8 @@
   ],
   "terms": [
     "A",
+    "B2",
+    "B4",
     "C",
     "F",
     "F2",
@@ -33,7 +64,9 @@
     "N",
     "W",
     "W2",
-    "W3"
+    "W3",
+    "WS",
+    "Y"
   ],
   "termAndYears": [
     "Fall/Winter 2026-2027"
