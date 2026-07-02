@@ -58,13 +58,23 @@ await fs.writeFile(rmpFile, `${JSON.stringify([
     rateMyProfLink: 'https://www.ratemyprofessors.com/professor/123',
   },
   {
-    first: 'No',
-    last: 'Link',
+    first: 'Rated',
+    last: 'NoLink',
     avgRating: 5,
     overall_rating: 5,
     avgDifficulty: 1,
     wouldTakeAgainPercent: 100,
     numratings: 99,
+    rateMyProfLink: null,
+  },
+  {
+    first: 'No',
+    last: 'Data',
+    avgRating: 0,
+    overall_rating: 0,
+    avgDifficulty: 0,
+    wouldTakeAgainPercent: -1,
+    numratings: 0,
     rateMyProfLink: null,
   },
 ])}\n`, 'utf-8');
@@ -83,9 +93,11 @@ assert.equal(
 
 const rmpRows = JSON.parse(await fs.readFile(rmpFile, 'utf-8'));
 assert.ok(rmpRows[0].popularity > 50 && rmpRows[0].popularity <= 100, 'expected linked RMP row to receive positive popularity');
-assert.equal(rmpRows[1].popularity, 0, 'expected unlinked RMP row to receive zero popularity');
+assert.ok(rmpRows[1].popularity > 50 && rmpRows[1].popularity <= 100, 'expected unlinked but rated RMP row to receive positive popularity');
+assert.equal(rmpRows[2].popularity, 0, 'expected unlinked RMP row without rating data to receive zero popularity');
 
 const frontendPayload = JSON.parse(await fs.readFile(frontendDataPath, 'utf-8'));
+const backendRmpRows = JSON.parse(await fs.readFile(path.join(backendRoot, 'data', 'profs', 'yorku_RMP_data.json'), 'utf-8'));
 const meetings = (frontendPayload.courses || [])
   .flatMap((course) => course.terms || [])
   .flatMap((offering) => offering.meetings || []);
@@ -100,6 +112,16 @@ assert.ok(rmpMeeting, 'expected exported frontend JSON to include RMP rating/lin
 assert.ok(
   (frontendPayload.courses || []).some((course) => Number(course.topInstructorPopularity) > 0),
   'expected exported frontend JSON to include topInstructorPopularity values'
+);
+
+const williamPietroRmp = backendRmpRows.find((row) => row.first === 'William' && row.last === 'Pietro');
+const williamPietroMeeting = meetings.find((meeting) => meeting.firstName === 'William' && meeting.lastName === 'Pietro');
+assert.ok(williamPietroRmp, 'expected William Pietro in backend RMP JSON');
+assert.ok(williamPietroMeeting, 'expected William Pietro in exported frontend meetings');
+assert.equal(
+  williamPietroMeeting.popularity,
+  williamPietroRmp.popularity,
+  'exported frontend popularity should use Step 9 RMP JSON popularity'
 );
 
 console.log(

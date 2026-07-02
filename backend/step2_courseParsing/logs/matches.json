@@ -1427,6 +1427,29 @@
   },
   {
     "requested": {
+      "firstname": "Fernanda",
+      "lastname": "Carra-Salsberg"
+    },
+    "rmpResult": {
+      "avgRating": 4.5,
+      "avgDifficulty": 2.8,
+      "wouldTakeAgainPercent": 86.6667,
+      "numRatings": 34,
+      "formattedName": "Fernanda Carra Salsberg",
+      "department": "Languages",
+      "link": "https://www.ratemyprofessors.com/professor/465908"
+    },
+    "updatedFields": {
+      "avgRating": 4.5,
+      "avgDifficulty": 2.8,
+      "wouldTakeAgainPercent": 86.6667,
+      "numberOfRatings": 34,
+      "department": "ESL",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/465908"
+    }
+  },
+  {
+    "requested": {
       "firstname": "Bridget",
       "lastname": "Cauthery"
     },
@@ -1561,6 +1584,29 @@
       "numberOfRatings": 18,
       "department": "CHEM",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/1798218"
+    }
+  },
+  {
+    "requested": {
+      "firstname": "Yongsheng",
+      "lastname": "Chen"
+    },
+    "rmpResult": {
+      "avgRating": 3.4,
+      "avgDifficulty": 3,
+      "wouldTakeAgainPercent": 66.6667,
+      "numRatings": 5,
+      "formattedName": "Yongsheng Chen",
+      "department": "Earth Science",
+      "link": "https://www.ratemyprofessors.com/professor/2679540"
+    },
+    "updatedFields": {
+      "avgRating": 3.4,
+      "avgDifficulty": 3,
+      "wouldTakeAgainPercent": 66.6667,
+      "numberOfRatings": 5,
+      "department": "ESSE",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2679540"
     }
   },
   {
@@ -1868,21 +1914,21 @@
       "lastname": "Coulter"
     },
     "rmpResult": {
-      "avgRating": 4.3,
-      "avgDifficulty": 1.9,
-      "wouldTakeAgainPercent": 83.3333,
-      "numRatings": 17,
+      "avgRating": 3.7,
+      "avgDifficulty": 2.3,
+      "wouldTakeAgainPercent": 50,
+      "numRatings": 9,
       "formattedName": "Natalie Coulter",
-      "department": "Communication Studies",
-      "link": "https://www.ratemyprofessors.com/professor/1810365"
+      "department": "Communication",
+      "link": "https://www.ratemyprofessors.com/professor/1752960"
     },
     "updatedFields": {
-      "avgRating": 4.3,
-      "avgDifficulty": 1.9,
-      "wouldTakeAgainPercent": 83.3333,
-      "numberOfRatings": 17,
+      "avgRating": 3.7,
+      "avgDifficulty": 2.3,
+      "wouldTakeAgainPercent": 50,
+      "numberOfRatings": 9,
       "department": "CMCT, CMDS",
-      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/1810365"
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/1752960"
     }
   },
   {
@@ -2853,29 +2899,6 @@
   },
   {
     "requested": {
-      "firstname": "Sarah",
-      "lastname": "Flicker"
-    },
-    "rmpResult": {
-      "avgRating": 4.9,
-      "avgDifficulty": 2.4,
-      "wouldTakeAgainPercent": 100,
-      "numRatings": 18,
-      "formattedName": "Sarah Blacker",
-      "department": "Social Science",
-      "link": "https://www.ratemyprofessors.com/professor/2608792"
-    },
-    "updatedFields": {
-      "avgRating": 4.9,
-      "avgDifficulty": 2.4,
-      "wouldTakeAgainPercent": 100,
-      "numberOfRatings": 18,
-      "department": "ENVS",
-      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2608792"
-    }
-  },
-  {
-    "requested": {
       "firstname": "Mary",
       "lastname": "Fogarty"
     },
@@ -2895,6 +2918,29 @@
       "numberOfRatings": 2,
       "department": "DANC",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2335746"
+    }
+  },
+  {
+    "requested": {
+      "firstname": "Julio",
+      "lastname": "Fonseca"
+    },
+    "rmpResult": {
+      "avgRating": 3.6,
+      "avgDifficulty": 2.8,
+      "wouldTakeAgainPercent": 53.8462,
+      "numRatings": 74,
+      "formattedName": "Julio Fonseca",
+      "department": "Languages",
+      "link": "https://www.ratemyprofessors.com/professor/74066"
+    },
+    "updatedFields": {
+      "avgRating": 3.6,
+      "avgDifficulty": 2.8,
+      "wouldTakeAgainPercent": 53.8462,
+      "numberOfRatings": 74,
+      "department": "ESL",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/74066"
     }
   },
   {
@@ -3934,6 +3980,29 @@
   },
   {
     "requested": {
+      "firstname": "Baoxin",
+      "lastname": "Hu"
+    },
+    "rmpResult": {
+      "avgRating": 3.8,
+      "avgDifficulty": 3.6,
+      "wouldTakeAgainPercent": 0,
+      "numRatings": 5,
+      "formattedName": "Baoxin Hu",
+      "department": "Earth Science",
+      "link": "https://www.ratemyprofessors.com/professor/554440"
+    },
+    "updatedFields": {
+      "avgRating": 3.8,
+      "avgDifficulty": 3.6,
+      "wouldTakeAgainPercent": 0,
+      "numberOfRatings": 5,
+      "department": "ESS, ESSE",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/554440"
+    }
+  },
+  {
+    "requested": {
       "firstname": "Rongbing",
       "lastname": "Huang"
     },
@@ -4204,7 +4273,7 @@
       "avgDifficulty": 2.8,
       "wouldTakeAgainPercent": 45.4545,
       "numberOfRatings": 22,
-      "department": "ENG",
+      "department": "ENG, ESSE",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2351957"
     }
   },
@@ -4480,7 +4549,7 @@
       "avgDifficulty": 0,
       "wouldTakeAgainPercent": -1,
       "numberOfRatings": 0,
-      "department": "CHEM",
+      "department": "CHEM, ESSE",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/1481171"
     }
   },
@@ -5883,7 +5952,7 @@
       "avgDifficulty": 3.1,
       "wouldTakeAgainPercent": 90,
       "numberOfRatings": 9,
-      "department": "DLLL",
+      "department": "DLLL, ESL",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2676755"
     }
   },
@@ -6441,6 +6510,29 @@
   },
   {
     "requested": {
+      "firstname": "John",
+      "lastname": "Moores"
+    },
+    "rmpResult": {
+      "avgRating": 4.2,
+      "avgDifficulty": 2.8,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 6,
+      "formattedName": "John Moores",
+      "department": "Natural Sciences",
+      "link": "https://www.ratemyprofessors.com/professor/1972810"
+    },
+    "updatedFields": {
+      "avgRating": 4.2,
+      "avgDifficulty": 2.8,
+      "wouldTakeAgainPercent": 100,
+      "numberOfRatings": 6,
+      "department": "ESSE",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/1972810"
+    }
+  },
+  {
+    "requested": {
       "firstname": "Sylvie",
       "lastname": "Morin"
     },
@@ -6688,7 +6780,7 @@
       "avgDifficulty": 1.8,
       "wouldTakeAgainPercent": 96,
       "numberOfRatings": 30,
-      "department": "DLLL",
+      "department": "DLLL, ESL",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/1746670"
     }
   },
@@ -7081,6 +7173,29 @@
       "numberOfRatings": 35,
       "department": "ECON",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2563526"
+    }
+  },
+  {
+    "requested": {
+      "firstname": "Spiros",
+      "lastname": "Pagiatakis"
+    },
+    "rmpResult": {
+      "avgRating": 2.8,
+      "avgDifficulty": 3.5,
+      "wouldTakeAgainPercent": 35.7143,
+      "numRatings": 30,
+      "formattedName": "Spiros Pagiatakis",
+      "department": "Engineering",
+      "link": "https://www.ratemyprofessors.com/professor/34169"
+    },
+    "updatedFields": {
+      "avgRating": 2.8,
+      "avgDifficulty": 3.5,
+      "wouldTakeAgainPercent": 35.7143,
+      "numberOfRatings": 30,
+      "department": "ESS, ESSE",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/34169"
     }
   },
   {
@@ -7930,7 +8045,7 @@
       "avgDifficulty": 3,
       "wouldTakeAgainPercent": 14.2857,
       "numberOfRatings": 14,
-      "department": "DEMS",
+      "department": "DEMS, ENVS",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2510390"
     }
   },
@@ -8028,6 +8143,29 @@
   },
   {
     "requested": {
+      "firstname": "Mansour",
+      "lastname": "Safdari"
+    },
+    "rmpResult": {
+      "avgRating": 3.3,
+      "avgDifficulty": 3.5,
+      "wouldTakeAgainPercent": 50,
+      "numRatings": 39,
+      "formattedName": "Mansour Safdari",
+      "department": "English As A Second Language",
+      "link": "https://www.ratemyprofessors.com/professor/2100088"
+    },
+    "updatedFields": {
+      "avgRating": 3.3,
+      "avgDifficulty": 3.5,
+      "wouldTakeAgainPercent": 50,
+      "numberOfRatings": 39,
+      "department": "ESL",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2100088"
+    }
+  },
+  {
+    "requested": {
       "firstname": "Sukhwant",
       "lastname": "Sagar"
     },
@@ -8114,7 +8252,7 @@
       "avgDifficulty": 0,
       "wouldTakeAgainPercent": -1,
       "numberOfRatings": 0,
-      "department": "ANTH",
+      "department": "ANTH, ENVS",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2653758"
     }
   },
@@ -8557,6 +8695,29 @@
   },
   {
     "requested": {
+      "firstname": "Isaac",
+      "lastname": "Smith"
+    },
+    "rmpResult": {
+      "avgRating": 2,
+      "avgDifficulty": 3.3,
+      "wouldTakeAgainPercent": 25,
+      "numRatings": 4,
+      "formattedName": "Isaac Smith",
+      "department": "Physics",
+      "link": "https://www.ratemyprofessors.com/professor/2673487"
+    },
+    "updatedFields": {
+      "avgRating": 2,
+      "avgDifficulty": 3.3,
+      "wouldTakeAgainPercent": 25,
+      "numberOfRatings": 4,
+      "department": "ESSE",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2673487"
+    }
+  },
+  {
+    "requested": {
       "firstname": "J",
       "lastname": "Smith"
     },
@@ -8626,6 +8787,29 @@
   },
   {
     "requested": {
+      "firstname": "Gunho",
+      "lastname": "Sohn"
+    },
+    "rmpResult": {
+      "avgRating": 2.3,
+      "avgDifficulty": 3.1,
+      "wouldTakeAgainPercent": 20,
+      "numRatings": 7,
+      "formattedName": "Gunho Sohn",
+      "department": "Engineering",
+      "link": "https://www.ratemyprofessors.com/professor/1657809"
+    },
+    "updatedFields": {
+      "avgRating": 2.3,
+      "avgDifficulty": 3.1,
+      "wouldTakeAgainPercent": 20,
+      "numberOfRatings": 7,
+      "department": "ESS, ESSE",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/1657809"
+    }
+  },
+  {
+    "requested": {
       "firstname": "Adriano",
       "lastname": "Solis"
     },
@@ -8689,7 +8873,7 @@
       "avgDifficulty": 2,
       "wouldTakeAgainPercent": 87.5,
       "numberOfRatings": 8,
-      "department": "DLLL",
+      "department": "DLLL, ESL",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2609155"
     }
   },
@@ -8994,6 +9178,29 @@
   },
   {
     "requested": {
+      "firstname": "Neil",
+      "lastname": "Tandon"
+    },
+    "rmpResult": {
+      "avgRating": 1.9,
+      "avgDifficulty": 3.9,
+      "wouldTakeAgainPercent": 18.1818,
+      "numRatings": 11,
+      "formattedName": "Neil Tandon",
+      "department": "Earth Science",
+      "link": "https://www.ratemyprofessors.com/professor/2499882"
+    },
+    "updatedFields": {
+      "avgRating": 1.9,
+      "avgDifficulty": 3.9,
+      "wouldTakeAgainPercent": 18.1818,
+      "numberOfRatings": 11,
+      "department": "ESS, ESSE",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2499882"
+    }
+  },
+  {
+    "requested": {
       "firstname": "Aparna",
       "lastname": "Tarc"
     },
@@ -9036,6 +9243,29 @@
       "numberOfRatings": 0,
       "department": "ENVS",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2680293"
+    }
+  },
+  {
+    "requested": {
+      "firstname": "Peter",
+      "lastname": "Taylor"
+    },
+    "rmpResult": {
+      "avgRating": 2.3,
+      "avgDifficulty": 3.4,
+      "wouldTakeAgainPercent": 20,
+      "numRatings": 52,
+      "formattedName": "Peter Taylor",
+      "department": "Earth Science",
+      "link": "https://www.ratemyprofessors.com/professor/19473"
+    },
+    "updatedFields": {
+      "avgRating": 2.3,
+      "avgDifficulty": 3.4,
+      "wouldTakeAgainPercent": 20,
+      "numberOfRatings": 52,
+      "department": "ESS, ESSE",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/19473"
     }
   },
   {
@@ -10071,6 +10301,29 @@
       "numberOfRatings": 4,
       "department": "CMA",
       "rateMyProfLink": "https://www.ratemyprofessors.com/professor/3018821"
+    }
+  },
+  {
+    "requested": {
+      "firstname": "James",
+      "lastname": "Whiteway"
+    },
+    "rmpResult": {
+      "avgRating": 4.3,
+      "avgDifficulty": 1.3,
+      "wouldTakeAgainPercent": 50,
+      "numRatings": 3,
+      "formattedName": "James Whiteway",
+      "department": "Earth Science",
+      "link": "https://www.ratemyprofessors.com/professor/3090839"
+    },
+    "updatedFields": {
+      "avgRating": 4.3,
+      "avgDifficulty": 1.3,
+      "wouldTakeAgainPercent": 50,
+      "numberOfRatings": 3,
+      "department": "ESSE",
+      "rateMyProfLink": "https://www.ratemyprofessors.com/professor/3090839"
     }
   },
   {

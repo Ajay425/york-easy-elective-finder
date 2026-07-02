@@ -10,6 +10,10 @@ const { results, total } = await db.searchCoursesDb('PSYC 1010', 1, 10, {});
 assert.ok(total > 0, 'expected PSYC 1010 search results');
 assert.ok(results.some((course) => course.code.includes('PSYC 1010')), 'expected PSYC 1010 in search page');
 
+const chemSearch = await db.searchCoursesDb('CHEM 1000', 1, 10, {});
+const chem1000 = chemSearch.results.find((course) => course.code === 'SC/CHEM 1000');
+assert.ok(chem1000, 'expected approved no-real-prereq SC/CHEM 1000 to appear in frontend JSON search');
+
 const course = await db.getCourseFromIdDB(results[0].id);
 assert.equal(course.id, results[0].id);
 assert.ok(Array.isArray(course.courseOfferings), 'expected course offerings array');

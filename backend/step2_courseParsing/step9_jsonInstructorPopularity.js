@@ -28,9 +28,10 @@ function normalizeWouldAgain(value) {
 
 function computePopularity(professor) {
   const hasRmpLink = !!(professor.rateMyProfLink && professor.rateMyProfLink.trim());
-  if (!hasRmpLink) return 0;
-
   const numberOfRatings = Math.max(0, professor.numratings ?? professor.numberOfRatings ?? 0);
+  const hasRatingData = Number(professor.avgRating ?? professor.overall_rating) > 0 && numberOfRatings > 0;
+  if (!hasRmpLink && !hasRatingData) return 0;
+
   const noReviews =
     (professor.avgRating === 0 || professor.avgRating == null || professor.avgRating === -1) &&
     (professor.avgDifficulty === 0 || professor.avgDifficulty == null || professor.avgDifficulty === -1) &&

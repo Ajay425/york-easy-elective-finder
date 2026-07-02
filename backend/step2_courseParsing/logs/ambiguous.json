@@ -13,7 +13,7 @@
       "department": "Administration",
       "link": "https://www.ratemyprofessors.com/professor/1130687"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -21,15 +21,31 @@
       "lastname": "Alsop"
     },
     "rmpResult": {
-      "avgRating": 4.5,
-      "avgDifficulty": 3,
+      "avgRating": 4,
+      "avgDifficulty": 2,
       "wouldTakeAgainPercent": -1,
       "numRatings": 1,
-      "formattedName": "Vanessa Mathews",
-      "department": "Geography",
-      "link": "https://www.ratemyprofessors.com/professor/1566038"
+      "formattedName": "Vanessa Miceli",
+      "department": "Social Science",
+      "link": "https://www.ratemyprofessors.com/professor/1712658"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Zahra",
+      "lastname": "Arjmandi"
+    },
+    "rmpResult": {
+      "avgRating": 3.2,
+      "avgDifficulty": 3.7,
+      "wouldTakeAgainPercent": 54.5455,
+      "numRatings": 11,
+      "formattedName": "Zahra Zahra Gharibi",
+      "department": "Management",
+      "link": "https://www.ratemyprofessors.com/professor/2625025"
+    },
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -37,15 +53,15 @@
       "lastname": "Armstrong"
     },
     "rmpResult": {
-      "avgRating": 2.4,
-      "avgDifficulty": 4.1,
-      "wouldTakeAgainPercent": 36.6667,
-      "numRatings": 89,
-      "formattedName": "Karen Bernhardt-Walther",
-      "department": "Economics",
-      "link": "https://www.ratemyprofessors.com/professor/2540932"
+      "avgRating": 3.8,
+      "avgDifficulty": 3.1,
+      "wouldTakeAgainPercent": 66.6667,
+      "numRatings": 28,
+      "formattedName": "Karen Murray",
+      "department": "Political Science",
+      "link": "https://www.ratemyprofessors.com/professor/949483"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -61,7 +77,23 @@
       "department": "Mathematics",
       "link": "https://www.ratemyprofessors.com/professor/891400"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Michael",
+      "lastname": "Bazzocchi"
+    },
+    "rmpResult": {
+      "avgRating": 4.4,
+      "avgDifficulty": 2.5,
+      "wouldTakeAgainPercent": 95.2381,
+      "numRatings": 118,
+      "formattedName": "Michael Riddell",
+      "department": "Kinesiology",
+      "link": "https://www.ratemyprofessors.com/professor/155700"
+    },
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -69,15 +101,15 @@
       "lastname": "Beaulne-Stuebing"
     },
     "rmpResult": {
-      "avgRating": 2.5,
-      "avgDifficulty": 3,
-      "wouldTakeAgainPercent": 36.3636,
-      "numRatings": 11,
-      "formattedName": "Rebecca Schechter",
-      "department": "Film",
-      "link": "https://www.ratemyprofessors.com/professor/2228153"
+      "avgRating": 5,
+      "avgDifficulty": 1.9,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 27,
+      "formattedName": "Rebecca Dunk",
+      "department": "Psychology",
+      "link": "https://www.ratemyprofessors.com/professor/3073046"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -93,7 +125,7 @@
       "department": "Education",
       "link": "https://www.ratemyprofessors.com/professor/809319"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -109,7 +141,7 @@
       "department": "Psychology",
       "link": "https://www.ratemyprofessors.com/professor/641818"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -125,7 +157,7 @@
       "department": "Humanities",
       "link": "https://www.ratemyprofessors.com/professor/563077"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -141,7 +173,7 @@
       "department": "Political Science",
       "link": "https://www.ratemyprofessors.com/professor/1435344"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -157,7 +189,7 @@
       "department": "Mathematics",
       "link": "https://www.ratemyprofessors.com/professor/14957"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -173,7 +205,7 @@
       "department": "Languages",
       "link": "https://www.ratemyprofessors.com/professor/78336"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -189,7 +221,7 @@
       "department": "Accounting",
       "link": "https://www.ratemyprofessors.com/professor/1488608"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -205,7 +237,7 @@
       "department": "Mathematics",
       "link": "https://www.ratemyprofessors.com/professor/2342454"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -221,7 +253,7 @@
       "department": "Humanities",
       "link": "https://www.ratemyprofessors.com/professor/2569292"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -237,7 +269,7 @@
       "department": "Health Science",
       "link": "https://www.ratemyprofessors.com/professor/2534353"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -253,7 +285,23 @@
       "department": "Not Specified",
       "link": "https://www.ratemyprofessors.com/professor/1731480"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Michael",
+      "lastname": "Daly"
+    },
+    "rmpResult": {
+      "avgRating": 4.4,
+      "avgDifficulty": 2.5,
+      "wouldTakeAgainPercent": 95.2381,
+      "numRatings": 118,
+      "formattedName": "Michael Riddell",
+      "department": "Kinesiology",
+      "link": "https://www.ratemyprofessors.com/professor/155700"
+    },
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -269,7 +317,7 @@
       "department": "Business",
       "link": "https://www.ratemyprofessors.com/professor/1877190"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -285,7 +333,7 @@
       "department": "Health",
       "link": "https://www.ratemyprofessors.com/professor/2224670"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -301,7 +349,7 @@
       "department": "Economics",
       "link": "https://www.ratemyprofessors.com/professor/2540932"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -317,7 +365,7 @@
       "department": "Psychology",
       "link": "https://www.ratemyprofessors.com/professor/1481171"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -333,7 +381,23 @@
       "department": "Biology",
       "link": "https://www.ratemyprofessors.com/professor/2977271"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Sarah",
+      "lastname": "Flicker"
+    },
+    "rmpResult": {
+      "avgRating": 1.6,
+      "avgDifficulty": 4.7,
+      "wouldTakeAgainPercent": 20,
+      "numRatings": 25,
+      "formattedName": "Sarah Evans",
+      "department": "Nursing",
+      "link": "https://www.ratemyprofessors.com/professor/2447690"
+    },
+    "reason": "not confident match - kept existing rating fields"
   },
   {
     "requested": {
@@ -341,15 +405,15 @@
       "lastname": "Frake-Mistak"
     },
     "rmpResult": {
-      "avgRating": 3.2,
-      "avgDifficulty": 3.1,
-      "wouldTakeAgainPercent": 100,
-      "numRatings": 7,
-      "formattedName": "Amanda Cornacchia",
-      "department": "Business",
-      "link": "https://www.ratemyprofessors.com/professor/1089424"
+      "avgRating": 1.6,
+      "avgDifficulty": 4.2,
+      "wouldTakeAgainPercent": 19.1489,
+      "numRatings": 47,
+      "formattedName": "Amanda Herold",
+      "department": "Marketing",
+      "link": "https://www.ratemyprofessors.com/professor/2598950"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -365,7 +429,7 @@
       "department": "Computer Science",
       "link": "https://www.ratemyprofessors.com/professor/788505"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -381,7 +445,7 @@
       "department": "Dance",
       "link": "https://www.ratemyprofessors.com/professor/2305685"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -397,7 +461,23 @@
       "department": "Music",
       "link": "https://www.ratemyprofessors.com/professor/1790532"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Mark",
+      "lastname": "Gordon"
+    },
+    "rmpResult": {
+      "avgRating": 3.3,
+      "avgDifficulty": 3.5,
+      "wouldTakeAgainPercent": 47.8495,
+      "numRatings": 275,
+      "formattedName": "Mark Vicari",
+      "department": "Biology",
+      "link": "https://www.ratemyprofessors.com/professor/43465"
+    },
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -413,7 +493,7 @@
       "department": "Geography",
       "link": "https://www.ratemyprofessors.com/professor/1026072"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -429,7 +509,7 @@
       "department": "Management",
       "link": "https://www.ratemyprofessors.com/professor/906299"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -445,7 +525,7 @@
       "department": "Human Resources Management",
       "link": "https://www.ratemyprofessors.com/professor/2669427"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -461,7 +541,7 @@
       "department": "Social Work",
       "link": "https://www.ratemyprofessors.com/professor/696076"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -477,7 +557,7 @@
       "department": "Psychology",
       "link": "https://www.ratemyprofessors.com/professor/641818"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -493,7 +573,7 @@
       "department": "Chemistry",
       "link": "https://www.ratemyprofessors.com/professor/2980358"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -509,7 +589,7 @@
       "department": "Administration",
       "link": "https://www.ratemyprofessors.com/professor/1344740"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - kept existing rating fields"
   },
   {
     "requested": {
@@ -525,7 +605,7 @@
       "department": "Anthropology",
       "link": "https://www.ratemyprofessors.com/professor/66505"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -541,7 +621,7 @@
       "department": "Humanities",
       "link": "https://www.ratemyprofessors.com/professor/563077"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -557,7 +637,7 @@
       "department": "Chemistry",
       "link": "https://www.ratemyprofessors.com/professor/1698139"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -573,7 +653,23 @@
       "department": "Anthropology",
       "link": "https://www.ratemyprofessors.com/professor/559831"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Gary",
+      "lastname": "Klaassen"
+    },
+    "rmpResult": {
+      "avgRating": 2.9,
+      "avgDifficulty": 3,
+      "wouldTakeAgainPercent": 75,
+      "numRatings": 33,
+      "formattedName": "Gary Butler",
+      "department": "Humanities",
+      "link": "https://www.ratemyprofessors.com/professor/11783"
+    },
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -589,7 +685,7 @@
       "department": "Applied Linguistics",
       "link": "https://www.ratemyprofessors.com/professor/2795590"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -597,15 +693,15 @@
       "lastname": "Kuang"
     },
     "rmpResult": {
-      "avgRating": 4.7,
+      "avgRating": 5,
       "avgDifficulty": 3,
       "wouldTakeAgainPercent": 100,
-      "numRatings": 12,
-      "formattedName": "Emily Merson",
-      "department": "Political Science",
-      "link": "https://www.ratemyprofessors.com/professor/1435344"
+      "numRatings": 2,
+      "formattedName": "Emily  Fickel",
+      "department": "Education",
+      "link": "https://www.ratemyprofessors.com/professor/3005634"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -621,7 +717,7 @@
       "department": "Chemistry",
       "link": "https://www.ratemyprofessors.com/professor/2097159"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -637,7 +733,7 @@
       "department": "Biology",
       "link": "https://www.ratemyprofessors.com/professor/3096871"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -653,7 +749,7 @@
       "department": "History",
       "link": "https://www.ratemyprofessors.com/professor/815184"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -669,7 +765,7 @@
       "department": "Political Science",
       "link": "https://www.ratemyprofessors.com/professor/3688009"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -685,7 +781,7 @@
       "department": "Administration",
       "link": "https://www.ratemyprofessors.com/professor/886835"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -701,7 +797,7 @@
       "department": "Kinesiology",
       "link": "https://www.ratemyprofessors.com/professor/797158"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -709,15 +805,15 @@
       "lastname": "Ma"
     },
     "rmpResult": {
-      "avgRating": 2.3,
-      "avgDifficulty": 3.5,
-      "wouldTakeAgainPercent": 26.6667,
-      "numRatings": 76,
-      "formattedName": "Xianghong Li",
-      "department": "Economics",
-      "link": "https://www.ratemyprofessors.com/professor/457360"
+      "avgRating": 4.3,
+      "avgDifficulty": 1.9,
+      "wouldTakeAgainPercent": 75,
+      "numRatings": 21,
+      "formattedName": "Li Lee",
+      "department": "Administration",
+      "link": "https://www.ratemyprofessors.com/professor/889378"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -725,15 +821,15 @@
       "lastname": "MacDonald"
     },
     "rmpResult": {
-      "avgRating": 1.5,
-      "avgDifficulty": 5,
-      "wouldTakeAgainPercent": -1,
-      "numRatings": 1,
-      "formattedName": "Margaret Fitch",
-      "department": "Health",
-      "link": "https://www.ratemyprofessors.com/professor/1528663"
+      "avgRating": 4.4,
+      "avgDifficulty": 2.9,
+      "wouldTakeAgainPercent": 81.8182,
+      "numRatings": 12,
+      "formattedName": "Margaret Schotte",
+      "department": "History",
+      "link": "https://www.ratemyprofessors.com/professor/2122547"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -749,7 +845,7 @@
       "department": "Political Science",
       "link": "https://www.ratemyprofessors.com/professor/3688009"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -765,7 +861,7 @@
       "department": "Design Merchandising Textiles",
       "link": "https://www.ratemyprofessors.com/professor/1776406"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -781,7 +877,7 @@
       "department": "Education",
       "link": "https://www.ratemyprofessors.com/professor/809319"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -797,7 +893,7 @@
       "department": "Psychology",
       "link": "https://www.ratemyprofessors.com/professor/3029481"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -813,7 +909,7 @@
       "department": "History",
       "link": "https://www.ratemyprofessors.com/professor/2614076"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -829,7 +925,7 @@
       "department": "Biology",
       "link": "https://www.ratemyprofessors.com/professor/43465"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -845,7 +941,7 @@
       "department": "Computer Science",
       "link": "https://www.ratemyprofessors.com/professor/2927311"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -861,7 +957,7 @@
       "department": "Biology",
       "link": "https://www.ratemyprofessors.com/professor/1910779"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -877,7 +973,7 @@
       "department": "History",
       "link": "https://www.ratemyprofessors.com/professor/172291"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -893,7 +989,7 @@
       "department": "Computer Science",
       "link": "https://www.ratemyprofessors.com/professor/2683165"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -909,7 +1005,7 @@
       "department": "Kinesiology",
       "link": "https://www.ratemyprofessors.com/professor/2882027"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -917,15 +1013,15 @@
       "lastname": "Orszulik"
     },
     "rmpResult": {
-      "avgRating": 4.6,
-      "avgDifficulty": 2.1,
-      "wouldTakeAgainPercent": 87.5,
-      "numRatings": 49,
-      "formattedName": "Ryan James",
-      "department": "Anthropology",
-      "link": "https://www.ratemyprofessors.com/professor/559831"
+      "avgRating": 3,
+      "avgDifficulty": 3.9,
+      "wouldTakeAgainPercent": 43.2432,
+      "numRatings": 65,
+      "formattedName": "Ryan Wei",
+      "department": "History",
+      "link": "https://www.ratemyprofessors.com/professor/1339312"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -941,7 +1037,7 @@
       "department": "History",
       "link": "https://www.ratemyprofessors.com/professor/2004009"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -957,7 +1053,7 @@
       "department": "Business",
       "link": "https://www.ratemyprofessors.com/professor/35795"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -973,7 +1069,7 @@
       "department": "Theater",
       "link": "https://www.ratemyprofessors.com/professor/1879871"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -989,7 +1085,7 @@
       "department": "Marketing",
       "link": "https://www.ratemyprofessors.com/professor/2770367"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1005,7 +1101,7 @@
       "department": "Health",
       "link": "https://www.ratemyprofessors.com/professor/2703928"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1021,7 +1117,7 @@
       "department": "History",
       "link": "https://www.ratemyprofessors.com/professor/41057"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1037,7 +1133,7 @@
       "department": "Theatre",
       "link": "https://www.ratemyprofessors.com/professor/3074014"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1053,7 +1149,7 @@
       "department": "Biology",
       "link": "https://www.ratemyprofessors.com/professor/374074"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1069,7 +1165,7 @@
       "department": "Psychology",
       "link": "https://www.ratemyprofessors.com/professor/1481171"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1085,7 +1181,7 @@
       "department": "Finance",
       "link": "https://www.ratemyprofessors.com/professor/1072703"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1101,7 +1197,7 @@
       "department": "English",
       "link": "https://www.ratemyprofessors.com/professor/2821515"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1117,7 +1213,7 @@
       "department": "Mathematics",
       "link": "https://www.ratemyprofessors.com/professor/2621166"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - kept existing rating fields"
   },
   {
     "requested": {
@@ -1133,7 +1229,7 @@
       "department": "Social Science",
       "link": "https://www.ratemyprofessors.com/professor/466452"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1149,7 +1245,7 @@
       "department": "Nursing",
       "link": "https://www.ratemyprofessors.com/professor/2624161"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1165,7 +1261,7 @@
       "department": "Administration",
       "link": "https://www.ratemyprofessors.com/professor/2385185"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1181,7 +1277,7 @@
       "department": "Psychology",
       "link": "https://www.ratemyprofessors.com/professor/3029481"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1197,7 +1293,7 @@
       "department": "Human Rights",
       "link": "https://www.ratemyprofessors.com/professor/1889233"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1213,7 +1309,7 @@
       "department": "Engineering",
       "link": "https://www.ratemyprofessors.com/professor/2064485"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1229,7 +1325,7 @@
       "department": "Mathematics",
       "link": "https://www.ratemyprofessors.com/professor/2308173"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1245,7 +1341,7 @@
       "department": "Business",
       "link": "https://www.ratemyprofessors.com/professor/1902404"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - kept existing rating fields"
   },
   {
     "requested": {
@@ -1261,7 +1357,7 @@
       "department": "Economics",
       "link": "https://www.ratemyprofessors.com/professor/101153"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1277,7 +1373,7 @@
       "department": "Business",
       "link": "https://www.ratemyprofessors.com/professor/206769"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - kept existing rating fields"
   },
   {
     "requested": {
@@ -1293,7 +1389,7 @@
       "department": "Health",
       "link": "https://www.ratemyprofessors.com/professor/2243940"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1309,7 +1405,7 @@
       "department": "Education",
       "link": "https://www.ratemyprofessors.com/professor/2610403"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1325,7 +1421,7 @@
       "department": "Psychology",
       "link": "https://www.ratemyprofessors.com/professor/703517"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1341,7 +1437,7 @@
       "department": "Mathematics",
       "link": "https://www.ratemyprofessors.com/professor/1689740"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1357,7 +1453,7 @@
       "department": "Writing",
       "link": "https://www.ratemyprofessors.com/professor/1794722"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1365,15 +1461,15 @@
       "lastname": "Traverse-Thomas"
     },
     "rmpResult": {
-      "avgRating": 0,
-      "avgDifficulty": 0,
-      "wouldTakeAgainPercent": 0,
-      "numRatings": 0,
-      "formattedName": "Jacqui Haddow-Green",
-      "department": "Mathematics",
-      "link": "https://www.ratemyprofessors.com/professor/3110966"
+      "avgRating": 5,
+      "avgDifficulty": 2,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 1,
+      "formattedName": "Jacqui Frost",
+      "department": "Sociology",
+      "link": "https://www.ratemyprofessors.com/professor/3103679"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1389,7 +1485,7 @@
       "department": "Business",
       "link": "https://www.ratemyprofessors.com/professor/2828041"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1405,7 +1501,7 @@
       "department": "Nursing",
       "link": "https://www.ratemyprofessors.com/professor/1455865"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1421,7 +1517,7 @@
       "department": "Social Work",
       "link": "https://www.ratemyprofessors.com/professor/2771864"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1429,15 +1525,15 @@
       "lastname": "Wakefield"
     },
     "rmpResult": {
-      "avgRating": 4.5,
-      "avgDifficulty": 2.8,
-      "wouldTakeAgainPercent": 100,
-      "numRatings": 6,
-      "formattedName": "Graham Robertson",
-      "department": "Marketing",
-      "link": "https://www.ratemyprofessors.com/professor/1176434"
+      "avgRating": 3,
+      "avgDifficulty": 3.7,
+      "wouldTakeAgainPercent": 28.5714,
+      "numRatings": 7,
+      "formattedName": "Sadita Graham",
+      "department": "Human Resources Management",
+      "link": "https://www.ratemyprofessors.com/professor/2241775"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1445,15 +1541,15 @@
       "lastname": "Warwick"
     },
     "rmpResult": {
-      "avgRating": 4.2,
-      "avgDifficulty": 2.2,
+      "avgRating": 3.1,
+      "avgDifficulty": 3,
       "wouldTakeAgainPercent": 100,
-      "numRatings": 33,
-      "formattedName": "Susan Ehrlich",
-      "department": "Languages",
-      "link": "https://www.ratemyprofessors.com/professor/42290"
+      "numRatings": 28,
+      "formattedName": "Susan Ingram",
+      "department": "Humanities",
+      "link": "https://www.ratemyprofessors.com/professor/563077"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1469,7 +1565,7 @@
       "department": "English",
       "link": "https://www.ratemyprofessors.com/professor/258165"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1485,7 +1581,7 @@
       "department": "Natural Sciences",
       "link": "https://www.ratemyprofessors.com/professor/1417898"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   },
   {
     "requested": {
@@ -1501,6 +1597,6 @@
       "department": "Engineering",
       "link": "https://www.ratemyprofessors.com/professor/2415432"
     },
-    "reason": "not confident match - cleared rating fields"
+    "reason": "not confident match - no existing rating fields"
   }
 ]

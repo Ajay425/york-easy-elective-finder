@@ -26,6 +26,7 @@ const COURSE_TIMES_HTML_DIR = path.join(STEP2_DIR, 'courseTimesHtml');
 const RAW_YORK_COURSES_DIR = path.join(backendRoot, 'step1_PythonCourseScraper', 'york_courses');
 const SOURCE_RMP = path.join(backendRoot, 'data', 'profs', 'yorku_RMP_data.json');
 const SOURCE_RMP_MATCHES = path.join(STEP2_DIR, 'logs', 'matches.json');
+const STEP13_APPROVED_NO_PREREQS = path.join(STEP2_DIR, 'step13_coursesWithoutRealPrereqs.json');
 const SESSION_META = path.join(backendRoot, 'step1_PythonCourseScraper', 'session_meta.json');
 const COURSE_TIMES_SIDECAR = path.join(RUNTIME_PIPELINE_DIR, 'courseTimes.json');
 const OUT_COURSES = path.join(frontendDataDir, 'electives.json');
@@ -149,6 +150,40 @@ function courseTimeKey({ faculty, dept, code, credit, term, section }) {
     String(term || '').trim(),
     String(section || '').trim(),
   ].join('|');
+}
+
+function approvedCourseKey(entry) {
+  return [
+    String(entry?.faculty || entry?.facultyPrefix || '').trim(),
+    String(entry?.deptAcronym || entry?.dept || '').trim(),
+    String(entry?.courseCode || entry?.code || '').trim(),
+    String(Number(entry?.credit)),
+  ].join('|');
+}
+
+async function loadApprovedNoRealPrereqKeys() {
+  const approved = await readJson(STEP13_APPROVED_NO_PREREQS, { courses: [] });
+  return new Set(
+    (Array.isArray(approved?.courses) ? approved.courses : [])
+      .map(approvedCourseKey)
+      .filter((key) => !key.startsWith('|') && !key.endsWith('|') && !key.includes('NaN'))
+  );
+}
+
+function applyApprovedNoRealPrereqs(courses, approvedKeys) {
+  let clearedCourses = 0;
+  let clearedPrereqRows = 0;
+
+  const normalizedCourses = courses.map((course) => {
+    if (!approvedKeys.has(approvedCourseKey(course))) return course;
+
+    const prereqs = Array.isArray(course.prereqs) ? course.prereqs : [];
+    clearedCourses++;
+    clearedPrereqRows += prereqs.length;
+    return { ...course, prereqs: [] };
+  });
+
+  return { courses: normalizedCourses, clearedCourses, clearedPrereqRows };
 }
 
 async function loadCourseTimesSidecar() {
@@ -456,28 +491,31 @@ async function loadResolvedCourseTimes() {
 function buildRmpLookup(rmpRows, matchRows) {
   const lookup = new Map();
 
+  for (const row of Array.isArray(rmpRows) ? rmpRows : []) {
+    const key = `${normalizeName(row.first)}|${normalizeName(row.last)}`;
+    if (!key.startsWith('|') && !key.endsWith('|')) lookup.set(key, row);
+  }
+
   for (const match of Array.isArray(matchRows) ? matchRows : []) {
     const first = match?.requested?.firstname;
     const last = match?.requested?.lastname;
     const fields = match?.updatedFields || {};
     const key = `${normalizeName(first)}|${normalizeName(last)}`;
     if (key.startsWith('|') || key.endsWith('|')) continue;
+    const existing = lookup.get(key) || {};
 
     lookup.set(key, {
+      ...existing,
       first,
       last,
-      overall_rating: fields.avgRating,
-      avgDifficulty: fields.avgDifficulty,
-      wouldTakeAgainPercent: fields.wouldTakeAgainPercent,
-      numratings: fields.numberOfRatings,
-      department: fields.department,
-      rateMyProfLink: fields.rateMyProfLink,
+      overall_rating: fields.avgRating ?? existing.overall_rating,
+      avgRating: fields.avgRating ?? existing.avgRating,
+      avgDifficulty: fields.avgDifficulty ?? existing.avgDifficulty,
+      wouldTakeAgainPercent: fields.wouldTakeAgainPercent ?? existing.wouldTakeAgainPercent,
+      numratings: fields.numberOfRatings ?? existing.numratings,
+      department: fields.department ?? existing.department,
+      rateMyProfLink: fields.rateMyProfLink ?? existing.rateMyProfLink,
     });
-  }
-
-  for (const row of Array.isArray(rmpRows) ? rmpRows : []) {
-    const key = `${normalizeName(row.first)}|${normalizeName(row.last)}`;
-    if (!key.startsWith('|') && !key.endsWith('|') && !lookup.has(key)) lookup.set(key, row);
   }
   return lookup;
 }
@@ -500,6 +538,7 @@ function mapMeeting(meeting, rmpLookup) {
     const rmp = getInstructorRmp(rmpLookup, firstName, lastName);
     const avgRating = toNumber(rmp?.overall_rating);
     const numberOfRatings = rmp?.numratings == null ? null : Number(rmp.numratings) || 0;
+    const storedPopularity = toNumber(rmp?.popularity);
 
     return {
       type,
@@ -513,7 +552,7 @@ function mapMeeting(meeting, rmpLookup) {
       wouldTakeAgainPercent: toNumber(rmp?.wouldTakeAgainPercent),
       numberOfRatings,
       rateMyProfLink: rmp?.rateMyProfLink || null,
-      popularity: computePopularity(avgRating, numberOfRatings),
+      popularity: storedPopularity ?? computePopularity(avgRating, numberOfRatings),
     };
   });
 }
@@ -654,11 +693,12 @@ function bestPopularity(course) {
 async function main() {
   const sessionMeta = await readJson(SESSION_META, {});
   const courseSource = await resolveCourseSource(sessionMeta?.termAndYear);
-  const [rawCourses, rmpRows, rmpMatchRows, newestRawYorkCourseFile] = await Promise.all([
+  const [rawCourses, rmpRows, rmpMatchRows, newestRawYorkCourseFile, approvedNoRealPrereqKeys] = await Promise.all([
     readJson(courseSource.filePath),
     readJson(SOURCE_RMP, []),
     readJson(SOURCE_RMP_MATCHES, []),
     newestFileInDir(RAW_YORK_COURSES_DIR),
+    loadApprovedNoRealPrereqKeys(),
   ]);
   const courseTimes = await loadResolvedCourseTimes();
 
@@ -669,13 +709,15 @@ async function main() {
   const generatedAt = new Date().toISOString();
   const termAndYear = sessionMeta?.termAndYear || null;
   const rmpLookup = buildRmpLookup(rmpRows, rmpMatchRows);
+  const approvedNoRealPrereqResult = applyApprovedNoRealPrereqs(rawCourses, approvedNoRealPrereqKeys);
+  const effectiveRawCourses = approvedNoRealPrereqResult.courses;
   const termSet = new Set();
   const typeSet = new Set();
   let offeringsWithCatNumbers = 0;
   let offeringsWithTimes = 0;
   let instructorsWithRmpLinks = 0;
 
-  const courses = rawCourses
+  const courses = effectiveRawCourses
     .filter((course) => Array.isArray(course.prereqs) && course.prereqs.length === 0)
     .map((course) => {
       const year = inferYear(course.code);
@@ -771,6 +813,8 @@ async function main() {
     sourceKind: payload.sourceKind,
     sourceMtime: courseSource.info?.mtime || null,
     sourceCourseCount: courseSource.info?.count || rawCourses.length,
+    approvedNoRealPrereqCourses: approvedNoRealPrereqResult.clearedCourses,
+    approvedNoRealPrereqRowsCleared: approvedNoRealPrereqResult.clearedPrereqRows,
     rawYorkCoursesNewestFile: newestRawYorkCourseFile
       ? path.relative(projectRoot, newestRawYorkCourseFile.filePath)
       : null,
@@ -802,6 +846,7 @@ async function main() {
   console.log(`Source: ${courseSource.filePath}`);
   console.log(`Source kind: ${courseSource.kind}`);
   console.log(`Source modified: ${courseSource.info?.mtime || 'unknown'}`);
+  console.log(`Approved no-real-prereq courses applied: ${approvedNoRealPrereqResult.clearedCourses} (${approvedNoRealPrereqResult.clearedPrereqRows} prereq row(s) cleared in export)`);
   if (newestRawYorkCourseFile) {
     console.log(`Newest york_courses file: ${newestRawYorkCourseFile.filePath}`);
     console.log(`Newest york_courses modified: ${newestRawYorkCourseFile.mtime}`);
@@ -825,8 +870,10 @@ export {
   buildCourseTimesLookup,
   buildTermOfferings,
   courseTimeKey,
+  applyApprovedNoRealPrereqs,
   mapMeeting,
   newestArchivedCourseFile,
+  loadApprovedNoRealPrereqKeys,
   parseCourseTimeHtmlFile,
 };
 
