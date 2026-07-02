@@ -33,6 +33,19 @@ if (!termAndYear) {
 /**
  * Extract meeting/term info from each course HTML table
  */
+function parseInstructorName(value) {
+  const fullName = String(value || "").trim().replace(/\s+/g, " ");
+  if (!fullName || fullName.toUpperCase() === "TBA") {
+    return { firstName: "TBA", lastName: "" };
+  }
+
+  const nameParts = fullName.split(" ");
+  return {
+    firstName: nameParts[0] || "TBA",
+    lastName: nameParts[nameParts.length - 1] || "",
+  };
+}
+
 function extracttermInfo($, termRows) {
   const terms = [];
 
@@ -62,20 +75,14 @@ function extracttermInfo($, termRows) {
 
       instructorLinks.each((_, a) => {
         const fullName = $(a).text().trim().replace(/\s+/g, " ");
-        const nameParts = fullName.split(" ");
-        const firstName = nameParts[0] || "";
-        const lastName = nameParts[nameParts.length - 1] || "";
-        instructors.push({ firstName, lastName });
+        instructors.push(parseInstructorName(fullName));
         
       });
 
       // ✅ Fallback if no <a> tags (old style tables)
       if (instructors.length === 0) {
         const text = $(cols[3]).text().trim().replace(/\s+/g, " ");
-        const nameParts = text.split(" ");
-        const firstName = nameParts[0] || "";
-        const lastName = nameParts[nameParts.length - 1] || "";
-        instructors.push({ firstName, lastName });
+        instructors.push(parseInstructorName(text));
       }
 
       meetings.push({ type, catNumber, instructors });

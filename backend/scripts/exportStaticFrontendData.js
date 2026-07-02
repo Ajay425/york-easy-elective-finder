@@ -603,6 +603,126 @@ function dedupeMeetings(meetings) {
   return deduped;
 }
 
+function courseTypeRank(type) {
+  const index = COURSE_TYPE_ORDER.indexOf(type);
+  return index === -1 ? 999 : index;
+}
+
+function compareMeetingRoles(a, b) {
+  const typeDiff = courseTypeRank(a.type) - courseTypeRank(b.type);
+  if (typeDiff !== 0) return typeDiff;
+
+  const componentDiff = String(a.componentNumber || '').localeCompare(String(b.componentNumber || ''), undefined, { numeric: true });
+  if (componentDiff !== 0) return componentDiff;
+
+  return String(a.catNumber || '').localeCompare(String(b.catNumber || ''), undefined, { numeric: true });
+}
+
+function cleanInstructorName(firstName, lastName) {
+  const first = String(firstName || '').trim();
+  const last = String(lastName || '').trim();
+  const isTba = !first || first.toUpperCase() === 'TBA';
+
+  return {
+    firstName: isTba ? 'TBA' : first,
+    lastName: isTba ? '' : last,
+    displayName: isTba ? 'TBA' : `${first} ${last}`.trim(),
+    isTba,
+  };
+}
+
+function instructorGroupKey(meeting) {
+  const { firstName, lastName, isTba } = cleanInstructorName(meeting?.firstName, meeting?.lastName);
+  if (isTba) return 'tba';
+  return `${normalizeName(firstName)}|${normalizeName(lastName)}`;
+}
+
+function profileScore(meeting) {
+  return [
+    meeting?.rateMyProfLink ? 1 : 0,
+    Number(meeting?.popularity) || 0,
+    Number(meeting?.numberOfRatings) || 0,
+    Number(meeting?.avgRating) || 0,
+  ];
+}
+
+function compareProfileScores(a, b) {
+  for (let index = 0; index < a.length; index++) {
+    const diff = (a[index] || 0) - (b[index] || 0);
+    if (diff !== 0) return diff;
+  }
+  return 0;
+}
+
+export function buildInstructorGroups(meetings) {
+  const groups = new Map();
+
+  for (const meeting of Array.isArray(meetings) ? meetings : []) {
+    const name = cleanInstructorName(meeting?.firstName, meeting?.lastName);
+    const key = instructorGroupKey(meeting);
+
+    if (!groups.has(key)) {
+      groups.set(key, {
+        firstName: name.firstName,
+        lastName: name.lastName,
+        displayName: name.displayName,
+        isTba: name.isTba,
+        avgRating: null,
+        avgDifficulty: null,
+        wouldTakeAgainPercent: null,
+        numberOfRatings: null,
+        rateMyProfLink: null,
+        popularity: 0,
+        roles: [],
+        _roleKeys: new Set(),
+        _profileScore: [0, 0, 0, 0],
+      });
+    }
+
+    const group = groups.get(key);
+    const currentScore = profileScore(meeting);
+    if (compareProfileScores(currentScore, group._profileScore) > 0) {
+      group.avgRating = meeting?.avgRating ?? null;
+      group.avgDifficulty = meeting?.avgDifficulty ?? null;
+      group.wouldTakeAgainPercent = meeting?.wouldTakeAgainPercent ?? null;
+      group.numberOfRatings = meeting?.numberOfRatings ?? null;
+      group.rateMyProfLink = meeting?.rateMyProfLink || null;
+      group._profileScore = currentScore;
+    }
+
+    group.popularity = Math.max(group.popularity, Number(meeting?.popularity) || 0);
+
+    const role = {
+      type: meeting?.type || null,
+      componentNumber: meeting?.componentNumber || null,
+      rawType: meeting?.rawType || null,
+      catNumber: rawCatNumber(meeting?.catNumber),
+    };
+    const roleKey = [role.type || '', role.componentNumber || '', role.rawType || '', role.catNumber || ''].join('|');
+    if (!group._roleKeys.has(roleKey)) {
+      group._roleKeys.add(roleKey);
+      group.roles.push(role);
+    }
+  }
+
+  return [...groups.values()]
+    .map(({ _roleKeys, _profileScore, ...group }) => ({
+      ...group,
+      roles: group.roles.sort(compareMeetingRoles),
+    }))
+    .sort((a, b) => {
+      if (a.isTba !== b.isTba) return a.isTba ? 1 : -1;
+
+      const roleDiff = compareMeetingRoles(a.roles[0] || {}, b.roles[0] || {});
+      if (roleDiff !== 0) return roleDiff;
+
+      const popularityDiff = (Number(b.popularity) || 0) - (Number(a.popularity) || 0);
+      if (popularityDiff !== 0) return popularityDiff;
+
+      return a.displayName.localeCompare(b.displayName);
+    });
+}
+
 function sortTypes(types) {
   return [...types].sort((a, b) => {
     const ia = COURSE_TYPE_ORDER.indexOf(a);
@@ -682,6 +802,7 @@ function buildTermOfferings(course, term, meetings, courseTimes) {
       catNumber: null,
       courseTimes: courseTimes.allBySection.get(sectionKey) || term.courseTimes || [],
       meetings,
+      instructorGroups: buildInstructorGroups(meetings),
     }];
   }
 
@@ -703,7 +824,10 @@ function buildTermOfferings(course, term, meetings, courseTimes) {
       courseTimes: courseTimesForCat(courseTimes, sectionKey, catNumber),
       meetings: optionMeetings.length ? optionMeetings : meetings.filter((meeting) => !rawCatNumber(meeting.catNumber)),
     };
-  });
+  }).map((offering) => ({
+    ...offering,
+    instructorGroups: buildInstructorGroups(offering.meetings),
+  }));
 }
 
 function bestPopularity(course) {

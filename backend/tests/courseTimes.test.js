@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'fs';
 import {
+  buildInstructorGroups,
   buildCourseTimesLookup,
   buildTermOfferings,
   courseTimeKey,
@@ -69,6 +70,22 @@ assert.deepEqual(
 );
 assert.equal(r26a03.meetings.some((meeting) => meeting.type === 'LAB' && meeting.componentNumber === '02'), false);
 assert.equal(r26a04.meetings.some((meeting) => meeting.type === 'LAB' && meeting.componentNumber === '01'), false);
+
+const r26a03InstructorGroups = buildInstructorGroups(r26a03.meetings);
+const derekGroup = r26a03InstructorGroups.find((group) => group.firstName === 'Derek' && group.lastName === 'Jackson');
+const tbaLabGroup = r26a03InstructorGroups.find((group) => group.isTba);
+
+assert.equal(r26a03InstructorGroups.length, 2);
+assert.deepEqual(
+  derekGroup?.roles.map((role) => `${role.type}${role.componentNumber || ''}`),
+  ['LECT01', 'TUTR01'],
+  'Derek Jackson should be grouped once with lecture and tutorial roles'
+);
+assert.deepEqual(
+  tbaLabGroup?.roles.map((role) => `${role.type}${role.componentNumber || ''}`),
+  ['LAB01'],
+  'the selected lab should stay visible as a distinct TBA role'
+);
 
 const edfe1101 = courses.find((item) =>
   item.facultyPrefix === 'ED' &&
@@ -159,6 +176,30 @@ assert.ok(multiCatSectionsChecked > 500, `expected broad multi-CAT coverage, che
 assert.ok(multiCatOfferingsChecked > 2000, `expected broad multi-CAT offering coverage, checked ${multiCatOfferingsChecked}`);
 
 const frontendPayload = JSON.parse(fs.readFileSync('../frontend/yorku-elective-tracker/public/data/electives.json', 'utf8'));
+const frontendChem1500 = frontendPayload.courses.find((course) => course.code === 'SC/CHEM 1500');
+const frontendR26A03 = frontendChem1500?.terms.find((offering) =>
+  offering.term === 'F' &&
+  offering.section === 'A' &&
+  offering.catNumber === 'R26A03'
+);
+const frontendDerekGroup = frontendR26A03?.instructorGroups?.find((group) =>
+  group.firstName === 'Derek' &&
+  group.lastName === 'Jackson'
+);
+const frontendTbaGroup = frontendR26A03?.instructorGroups?.find((group) => group.isTba);
+
+assert.ok(frontendR26A03, 'expected frontend data to include SC/CHEM 1500 CAT R26A03');
+assert.deepEqual(
+  frontendDerekGroup?.roles.map((role) => `${role.type}${role.componentNumber || ''}`),
+  ['LECT01', 'TUTR01'],
+  'frontend data should save Derek Jackson once with lecture and tutorial roles'
+);
+assert.deepEqual(
+  frontendTbaGroup?.roles.map((role) => `${role.type}${role.componentNumber || ''}`),
+  ['LAB01'],
+  'frontend data should save the selected lab TBA as its own role'
+);
+
 let frontendMultiCatGroupsChecked = 0;
 for (const exportedCourse of frontendPayload.courses || []) {
   const groups = new Map();

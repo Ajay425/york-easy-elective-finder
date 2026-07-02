@@ -36,6 +36,18 @@ const TYPE_LABELS = {
   HYFX: "Hybrid",
 };
 
+const COURSE_TYPE_ORDER = [
+  "LECT",
+  "SEMR",
+  "SEM",
+  "TUTR",
+  "LAB",
+  "BLEN",
+  "ONLN",
+  "ONCA",
+  "HYFX",
+];
+
 const TERM_LABELS = {
   F: "Fall",
   W: "Winter",
@@ -126,6 +138,169 @@ function summarizeCats(offerings) {
   if (cats.length === 0) return "No CAT listed";
   if (cats.length === 1) return `CAT ${cats[0]}`;
   return `${cats.length} CAT options`;
+}
+
+function normalizeName(value) {
+  return String(value || "")
+    .normalize("NFKD")
+    .replace(/[^\w\s]|_/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function cleanInstructorName(firstName, lastName) {
+  const first = String(firstName || "").trim();
+  const last = String(lastName || "").trim();
+  const isTba = !first || first.toUpperCase() === "TBA";
+
+  return {
+    firstName: isTba ? "TBA" : first,
+    lastName: isTba ? "" : last,
+    displayName: isTba ? "TBA" : `${first} ${last}`.trim(),
+    isTba,
+  };
+}
+
+function instructorKey(meeting) {
+  const name = cleanInstructorName(meeting?.firstName, meeting?.lastName);
+  if (name.isTba) return "tba";
+  return `${normalizeName(name.firstName)}|${normalizeName(name.lastName)}`;
+}
+
+function roleRank(type) {
+  const index = COURSE_TYPE_ORDER.indexOf(type);
+  return index === -1 ? 999 : index;
+}
+
+function compareRoles(a, b) {
+  const typeDiff = roleRank(a?.type) - roleRank(b?.type);
+  if (typeDiff !== 0) return typeDiff;
+
+  const componentDiff = String(a?.componentNumber || "").localeCompare(String(b?.componentNumber || ""), undefined, { numeric: true });
+  if (componentDiff !== 0) return componentDiff;
+
+  return String(a?.catNumber || "").localeCompare(String(b?.catNumber || ""), undefined, { numeric: true });
+}
+
+function roleLabel(role) {
+  const label = TYPE_LABELS[role?.type] || role?.type || "Meeting";
+  return role?.componentNumber ? `${label} ${role.componentNumber}` : label;
+}
+
+function profileScore(meeting) {
+  return [
+    meeting?.rateMyProfLink ? 1 : 0,
+    Number(meeting?.popularity) || 0,
+    Number(meeting?.numberOfRatings) || 0,
+    Number(meeting?.avgRating) || 0,
+  ];
+}
+
+function compareScores(a, b) {
+  for (let index = 0; index < a.length; index++) {
+    const diff = (a[index] || 0) - (b[index] || 0);
+    if (diff !== 0) return diff;
+  }
+  return 0;
+}
+
+function buildInstructorGroups(meetings) {
+  const groups = new Map();
+
+  (Array.isArray(meetings) ? meetings : []).forEach((meeting) => {
+    const name = cleanInstructorName(meeting?.firstName, meeting?.lastName);
+    const key = instructorKey(meeting);
+
+    if (!groups.has(key)) {
+      groups.set(key, {
+        firstName: name.firstName,
+        lastName: name.lastName,
+        displayName: name.displayName,
+        isTba: name.isTba,
+        avgRating: null,
+        avgDifficulty: null,
+        wouldTakeAgainPercent: null,
+        numberOfRatings: null,
+        rateMyProfLink: null,
+        popularity: 0,
+        roles: [],
+        roleKeys: new Set(),
+        score: [0, 0, 0, 0],
+      });
+    }
+
+    const group = groups.get(key);
+    const score = profileScore(meeting);
+    if (compareScores(score, group.score) > 0) {
+      group.avgRating = meeting?.avgRating ?? null;
+      group.avgDifficulty = meeting?.avgDifficulty ?? null;
+      group.wouldTakeAgainPercent = meeting?.wouldTakeAgainPercent ?? null;
+      group.numberOfRatings = meeting?.numberOfRatings ?? null;
+      group.rateMyProfLink = meeting?.rateMyProfLink || null;
+      group.score = score;
+    }
+
+    group.popularity = Math.max(group.popularity, Number(meeting?.popularity) || 0);
+
+    const role = {
+      type: meeting?.type || null,
+      componentNumber: meeting?.componentNumber || null,
+      rawType: meeting?.rawType || null,
+      catNumber: meeting?.catNumber || null,
+    };
+    const roleKey = [role.type || "", role.componentNumber || "", role.rawType || "", role.catNumber || ""].join("|");
+    if (!group.roleKeys.has(roleKey)) {
+      group.roleKeys.add(roleKey);
+      group.roles.push(role);
+    }
+  });
+
+  return Array.from(groups.values())
+    .map((group) => {
+      const publicGroup = {
+        ...group,
+        roles: [...group.roles].sort(compareRoles),
+      };
+      delete publicGroup.roleKeys;
+      delete publicGroup.score;
+      return publicGroup;
+    })
+    .sort((a, b) => {
+      if (a.isTba !== b.isTba) return a.isTba ? 1 : -1;
+
+      const roleDiff = compareRoles(a.roles[0] || {}, b.roles[0] || {});
+      if (roleDiff !== 0) return roleDiff;
+
+      const popularityDiff = (Number(b.popularity) || 0) - (Number(a.popularity) || 0);
+      if (popularityDiff !== 0) return popularityDiff;
+
+      return a.displayName.localeCompare(b.displayName);
+    });
+}
+
+function getInstructorGroups(offering) {
+  return Array.isArray(offering?.instructorGroups) && offering.instructorGroups.length
+    ? offering.instructorGroups
+    : buildInstructorGroups(offering?.meetings);
+}
+
+function formatRatingValue(value) {
+  const num = Number(value);
+  if (!Number.isFinite(num) || num <= 0) return "N/A";
+  return num.toFixed(1);
+}
+
+function formatPercentValue(value) {
+  const num = Number(value);
+  if (!Number.isFinite(num) || num < 0) return "N/A";
+  return `${num.toFixed(1).replace(/\.0$/, "")}%`;
+}
+
+function formatCountValue(value) {
+  const num = Number(value);
+  if (!Number.isFinite(num) || num <= 0) return "N/A";
+  return Math.round(num).toLocaleString();
 }
 
 function buildOutsideGroups(allTerms, visibleTerms, selectedTerm, selectedTermLabel) {
@@ -275,19 +450,11 @@ export function CourseDetailPanel({
 
   return (
     <>
-      <MotionDiv
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.18 }}
+      <div
         className="fixed inset-0 z-40 bg-black/30"
         onClick={onClose}
       />
-      <MotionDiv
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%" }}
-        transition={{ type: "spring", stiffness: 80 }}
+      <div
         className="fixed top-0 right-0 h-full w-full sm:w-[420px] 
                    bg-white/10 backdrop-blur-2xl border-l border-white/20 
                    shadow-2xl p-6 z-50 flex flex-col overflow-y-auto"
@@ -577,59 +744,81 @@ export function CourseDetailPanel({
               
 
               {/* INSTRUCTORS */}
-              {t.meetings?.length > 0 ? (
-                <div className="space-y-4">
-                  {t.meetings.map((m, index) => (
-                    <div
-                      key={index}
-                      className="bg-black/20 rounded-lg p-3 border border-white/10"
-                    >
-                      <p className="text-white text-sm font-semibold">
-                        {m.firstName} {m.lastName}
-                      </p>
+              {(() => {
+                const instructorGroups = getInstructorGroups(t);
 
-                      {/* RMP Ratings */}
-                      <div className="text-gray-300 text-xs mt-1 space-y-1">
-                        <p>
-                          ⭐ <strong>{m.avgRating ?? "N/A"}</strong> / 5
-                        </p>
-                        <p>
-                          📘 Difficulty:{" "}
-                          <strong>{m.avgDifficulty ?? "N/A"}</strong>
-                        </p>
-                        <p>
-                          🔁 Would take again:{" "}
-                          <strong>
-                            {m.wouldTakeAgainPercent
-                              ? `${m.wouldTakeAgainPercent}%`
-                              : "N/A"}
-                          </strong>
-                        </p>
-                        <p>
-                          🧪 Ratings:{" "}
-                          <strong>{m.numberOfRatings ?? "N/A"}</strong>
-                        </p>
-                      </div>
+                return instructorGroups.length > 0 ? (
+                  <div className="space-y-4">
+                    {instructorGroups.map((instructor, index) => {
+                      const roles = Array.isArray(instructor.roles) ? instructor.roles : [];
+                      const displayName = instructor.displayName ||
+                        `${instructor.firstName || ""} ${instructor.lastName || ""}`.trim() ||
+                        "TBA";
 
-                      {/* RMP Link */}
-                      {m.rateMyProfLink && (
-                        <a
-                          href={m.rateMyProfLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-yellow-300 underline text-xs mt-2 inline-block"
+                      return (
+                        <div
+                          key={`${displayName}-${roles.map(roleLabel).join("-")}-${index}`}
+                          className="bg-black/20 rounded-lg p-3 border border-white/10"
                         >
-                          View on RateMyProfessors →
-                        </a>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-300 text-sm italic">
-                  No instructor information available.
-                </p>
-              )}
+                          <div className="flex flex-wrap gap-1.5 mb-2">
+                            {roles.length ? roles.map((role, roleIndex) => (
+                              <span
+                                key={`${roleLabel(role)}-${roleIndex}`}
+                                className="px-2 py-0.5 rounded bg-white/10 border border-white/20 text-[10px] font-semibold text-gray-100"
+                              >
+                                {roleLabel(role)}
+                              </span>
+                            )) : (
+                              <span className="px-2 py-0.5 rounded bg-white/10 border border-white/20 text-[10px] font-semibold text-gray-100">
+                                Instructor
+                              </span>
+                            )}
+                          </div>
+
+                          <p className="text-white text-sm font-semibold">
+                            {displayName}
+                          </p>
+
+                          {/* RMP Ratings */}
+                          <div className="text-gray-300 text-xs mt-1 space-y-1">
+                            <p>
+                              ⭐ <strong>{formatRatingValue(instructor.avgRating)}</strong> / 5
+                            </p>
+                            <p>
+                              📘 Difficulty:{" "}
+                              <strong>{formatRatingValue(instructor.avgDifficulty)}</strong>
+                            </p>
+                            <p>
+                              🔁 Would take again:{" "}
+                              <strong>{formatPercentValue(instructor.wouldTakeAgainPercent)}</strong>
+                            </p>
+                            <p>
+                              🧪 Ratings:{" "}
+                              <strong>{formatCountValue(instructor.numberOfRatings)}</strong>
+                            </p>
+                          </div>
+
+                          {/* RMP Link */}
+                          {instructor.rateMyProfLink && (
+                            <a
+                              href={instructor.rateMyProfLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-yellow-300 underline text-xs mt-2 inline-block"
+                            >
+                              View on RateMyProfessors →
+                            </a>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <p className="text-gray-300 text-sm italic">
+                    No instructor information available.
+                  </p>
+                );
+              })()}
             </div>
           ))}
         </div>
@@ -680,7 +869,7 @@ export function CourseDetailPanel({
           )}
         </div>
       )}
-      </MotionDiv>
+      </div>
     </>
   );
 }

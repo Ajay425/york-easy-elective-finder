@@ -5,8 +5,13 @@ import { GraduationCap, Users, Flame } from "lucide-react";
 
 export function CourseCard({ course, selectedTerm, onClick }) {
 
-  // Find first valid instructor in a specific term
-const getInstructorFromMeeting = (meeting) => {
+  const termMatchesSelection = (term, selection) => {
+    if (!selection) return true;
+    return term === selection || term?.startsWith(selection);
+  };
+
+  // Build a comparable instructor summary from a meeting row
+  const getInstructorFromMeeting = (meeting) => {
     if (!meeting) return null;
 
     const first = (meeting.firstName || "").trim();
@@ -20,18 +25,31 @@ const getInstructorFromMeeting = (meeting) => {
     return {
       name: fullName,
       popularity: meeting.popularity ?? null,
+      avgRating: meeting.avgRating ?? null,
+      numberOfRatings: meeting.numberOfRatings ?? null,
     };
   };
 
-  // Find first valid instructor in a specific term
+  const compareInstructors = (a, b) => {
+    const popularityDiff = (Number(b?.popularity) || 0) - (Number(a?.popularity) || 0);
+    if (popularityDiff !== 0) return popularityDiff;
+
+    const ratingDiff = (Number(b?.avgRating) || 0) - (Number(a?.avgRating) || 0);
+    if (ratingDiff !== 0) return ratingDiff;
+
+    return (Number(b?.numberOfRatings) || 0) - (Number(a?.numberOfRatings) || 0);
+  };
+
+  // Find the strongest instructor signal in a specific offering
   const findInstructorInTerm = (term) => {
     if (!term?.meetings) return null;
 
-    for (const m of term.meetings) {
-      const instructor = getInstructorFromMeeting(m);
-      if (instructor) return instructor;
-    }
-    return null;
+    const instructors = term.meetings
+      .map((m) => getInstructorFromMeeting(m))
+      .filter(Boolean)
+      .sort(compareInstructors);
+
+    return instructors[0] || null;
   };
 
   // Main instructor selector
@@ -40,9 +58,13 @@ const getInstructorFromMeeting = (meeting) => {
 
     // 1️⃣ If a term is selected: ONLY look at that term
     if (selectedTerm) {
-      const term = course.terms.find((t) => t.term === selectedTerm);
-      if (!term) return null;
-      return findInstructorInTerm(term);
+      const instructors = course.terms
+        .filter((t) => termMatchesSelection(t.term, selectedTerm))
+        .map((term) => findInstructorInTerm(term))
+        .filter(Boolean)
+        .sort(compareInstructors);
+
+      return instructors[0] || null;
     }
 
     // 2️⃣ If no term selected: search all terms for any valid instructor
@@ -60,10 +82,9 @@ const getInstructorFromMeeting = (meeting) => {
 
     // 1️⃣ If a term is selected: ONLY use that term's popularity values
     if (selectedTerm) {
-      const term = course.terms.find((t) => t.term === selectedTerm);
-      if (!term?.meetings) return null;
-
-      const pops = term.meetings
+      const pops = course.terms
+        .filter((t) => termMatchesSelection(t.term, selectedTerm))
+        .flatMap((term) => term.meetings || [])
         .map((m) => m.popularity)
         .filter((p) => p !== undefined && p !== null);
 
@@ -88,26 +109,28 @@ const getInstructorFromMeeting = (meeting) => {
   };
 
   // Detect online availability
-const ONLINE_TYPES = ["ONLN", "ONCA", "ONCB", "HYFX", "REM", "REM1", "HYBR"]; 
+  const ONLINE_TYPES = ["ONLN", "ONCA", "ONCB", "HYFX", "REM", "REM1", "HYBR"]; 
 
-const isOnline = (course, selectedTerm) => {
-  if (!course?.terms) return false;
+  const isOnline = (course, selectedTerm) => {
+    if (!course?.terms) return false;
 
-  // Must check ONLY the chosen term
-  const term = course.terms.find((t) => t.term === selectedTerm);
-  if (!term?.meetings) return false;
+    // Must check ONLY the chosen term
+    const terms = course.terms.filter((t) => termMatchesSelection(t.term, selectedTerm));
+    if (!terms.length) return false;
 
-  // Checks exact meeting types ONLY (no substring accidents)
-  return term.meetings.some((m) =>
-    ONLINE_TYPES.includes((m.type || "").trim().toUpperCase())
-  );
-};
+    // Checks exact meeting types ONLY (no substring accidents)
+    return terms.some((term) =>
+      term.meetings?.some((m) =>
+        ONLINE_TYPES.includes((m.type || "").trim().toUpperCase())
+      )
+    );
+  };
 
 
 
 
   const topInstructor = getInstructor(course, selectedTerm);
-  const popularity = getPopularity(course, selectedTerm, topInstructor);
+  const popularity = getPopularity(course, selectedTerm);
   const isOnlineAvailable = isOnline(course, selectedTerm);
 
 

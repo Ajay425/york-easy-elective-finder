@@ -1,6 +1,6 @@
 {
   "msg": "success",
-  "generatedAt": "2026-07-02T23:25:35.364Z",
+  "generatedAt": "2026-07-02T23:43:06.878Z",
   "termAndYear": "Fall/Winter 2026-2027",
   "source": "backend/step2_courseParsing/archive/all_courses_FallWinter_2026-2027_2026-07-01T15-50-18-610Z.json",
   "sourceKind": "latest-completed-archive",
@@ -9,8 +9,8 @@
   "approvedNoRealPrereqCourses": 36,
   "approvedNoRealPrereqRowsCleared": 88,
   "manuallyHiddenCourses": 37,
-  "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/EXCH - Exchange - ( SB )/SB_EXCH 4972 1.50_Exchange - Language Elective_CourseSchedule.html",
-  "rawYorkCoursesNewestMtime": "2026-07-02T23:25:23.067Z",
+  "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/FACC - Financial Accountability - ( GS )/GS_FACC 6550 3.00_Governance and Regulation of Anti-Money Laundering and Terrorist Financing_CourseSchedule.html",
+  "rawYorkCoursesNewestMtime": "2026-07-02T23:42:54.647Z",
   "rawYorkCoursesNewerThanSource": true,
   "courseCount": 1826,
   "terms": [

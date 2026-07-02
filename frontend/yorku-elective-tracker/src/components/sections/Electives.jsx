@@ -187,14 +187,13 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
   // Sort courses by popularity in descending order
   const getPopularityForCourse = (course) => {
     if (!selectedTerm || !course.terms) return 0;
-    const offering = course.terms.find((t) => t.term.startsWith(selectedTerm));
-    if (!offering || !offering.meetings) return 0;
+    const pops = course.terms
+      .filter((t) => t.term === selectedTerm || t.term?.startsWith(selectedTerm))
+      .flatMap((offering) => offering.meetings || [])
+      .map((m) => m.popularity)
+      .filter((p) => p !== undefined && p !== null);
     
-    const pops = offering.meetings
-      ?.map((m) => m.popularity)
-      ?.filter((p) => p !== undefined && p !== null);
-    
-    return pops?.length ? Math.max(...pops) : 0;
+    return pops.length ? Math.max(...pops) : 0;
   };
 
   const sortedCourses = [...filteredCourses].sort((a, b) => {
