@@ -58,7 +58,10 @@
     <div class="container">
       <div style="display:flex;align-items:center;gap:12px;justify-content:space-between">
         <div><a href="<%= returnTo || '/admin' %>">← Back to search</a></div>
-        <div><a href="/admin/logout" style="color:#2b6cb0;text-decoration:none">Logout</a></div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <a href="/admin/manual-lists" style="color:#2b6cb0;text-decoration:none">Manual lists</a>
+          <a href="/admin/logout" style="color:#2b6cb0;text-decoration:none">Logout</a>
+        </div>
       </div>
       <h1 class="page-title"><span class="code"><%= course.deptAcronym %> <%= course.courseCode %></span> — <span class="coursename"><%= course.name %></span></h1>
       <div class="meta">Faculty: <%= course.faculty %> • Credits: <%= course.credit %> • Year: <%= course.year %></div>
@@ -67,10 +70,16 @@
       <h2>Edit basic info</h2>
       <div style="margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
         <button id="add-no-real-prereq" type="button" class="btn btn-ghost">
-          <%= isInNoRealPrereqList ? 'Clear prereqs (already in step13 list)' : 'Clear prereqs + Add To step13_coursesWithoutRealPrereqs' %>
+          <%= isInNoRealPrereqList ? 'Already in Step13 no-real-prereq list' : 'Add To Step13 no-real-prereq list' %>
         </button>
         <span id="step13-status" class="status-pill <%= isInNoRealPrereqList ? 'in-list' : 'not-in-list' %>">
           <%= isInNoRealPrereqList ? 'Already in step13 list' : 'Not in step13 list' %>
+        </span>
+        <button id="hide-from-frontend" type="button" class="btn <%= isInHiddenList ? 'btn-danger' : 'btn-ghost' %>">
+          <%= isInHiddenList ? 'Remove From Step15 Hide List' : 'Hide From Frontend (Step15)' %>
+        </button>
+        <span id="step15-status" class="status-pill <%= isInHiddenList ? 'in-list' : 'not-in-list' %>">
+          <%= isInHiddenList ? 'Hidden by step15' : 'Not hidden by step15' %>
         </span>
       </div>
       <form method="post" action="/admin/course/<%= course.id %>/update">
@@ -245,13 +254,15 @@
       // Prereq delete handler
       const addNoRealPrereqBtn = document.getElementById('add-no-real-prereq');
       const step13Status = document.getElementById('step13-status');
+      const hideFromFrontendBtn = document.getElementById('hide-from-frontend');
+      const step15Status = document.getElementById('step15-status');
       addNoRealPrereqBtn && addNoRealPrereqBtn.addEventListener('click', async () => {
         try {
           const res = await fetch(`/admin/course/<%= course.id %>/add-no-real-prereq`, { method: 'POST' });
           const json = await res.json();
           if (res.ok) {
             alert(json.msg || 'Course added');
-            addNoRealPrereqBtn.textContent = 'Clear prereqs (already in step13 list)';
+            addNoRealPrereqBtn.textContent = 'Already in Step13 no-real-prereq list';
             if (step13Status) {
               step13Status.textContent = 'Already in step13 list';
               step13Status.classList.remove('not-in-list');
@@ -262,6 +273,44 @@
           }
         } catch (err) {
           alert('Failed to add course');
+        }
+      });
+
+      let isHiddenByStep15 = <%- JSON.stringify(!!isInHiddenList) %>;
+      hideFromFrontendBtn && hideFromFrontendBtn.addEventListener('click', async () => {
+        const reason = isHiddenByStep15
+          ? ''
+          : prompt('Reason for hiding this course from the frontend?', 'Restricted/program-only course or missed prerequisite/restriction.');
+        if (!isHiddenByStep15 && reason === null) return;
+
+        try {
+          const url = isHiddenByStep15
+            ? `/admin/course/<%= course.id %>/remove-hidden`
+            : `/admin/course/<%= course.id %>/hide-from-frontend`;
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ reason }),
+          });
+          const json = await res.json();
+          if (res.ok) {
+            alert(json.msg || 'Step15 updated');
+            isHiddenByStep15 = !isHiddenByStep15;
+            hideFromFrontendBtn.textContent = isHiddenByStep15
+              ? 'Remove From Step15 Hide List'
+              : 'Hide From Frontend (Step15)';
+            hideFromFrontendBtn.classList.toggle('btn-danger', isHiddenByStep15);
+            hideFromFrontendBtn.classList.toggle('btn-ghost', !isHiddenByStep15);
+            if (step15Status) {
+              step15Status.textContent = isHiddenByStep15 ? 'Hidden by step15' : 'Not hidden by step15';
+              step15Status.classList.toggle('in-list', isHiddenByStep15);
+              step15Status.classList.toggle('not-in-list', !isHiddenByStep15);
+            }
+          } else {
+            alert(json.msg || 'Failed to update Step15');
+          }
+        } catch (err) {
+          alert('Failed to update Step15');
         }
       });
 

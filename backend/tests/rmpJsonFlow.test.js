@@ -8,6 +8,7 @@ import {
   hasUsableRating,
   normalizeExistingRecord,
   professorKey,
+  recordFromRmp,
 } from '../step2_courseParsing/step6_rmpAddprofessorRatingsJson.js';
 
 const backendRoot = process.cwd();
@@ -38,6 +39,25 @@ assert.equal(
   'ambiguous RMP refresh should preserve the existing RMP link instead of changing it to N/A'
 );
 assert.equal(ambiguousRefreshRecord.avgRating, 4.3);
+
+const incompleteConfidentRefreshRecord = recordFromRmp(
+  0,
+  { firstname: 'Ian', lastname: 'Slater', dept: 'NATS, STS' },
+  {
+    avgRating: 4.8,
+    avgDifficulty: 1.8,
+    wouldTakeAgainPercent: 96.875,
+    numRatings: 182,
+    formattedName: 'Ian Slater',
+  },
+  existingIan
+);
+assert.equal(
+  incompleteConfidentRefreshRecord.rateMyProfLink,
+  existingIan.rateMyProfLink,
+  'confident RMP refresh with no returned link should preserve the existing RMP link'
+);
+assert.equal(incompleteConfidentRefreshRecord.numratings, 182);
 
 const preservedMap = new Map();
 preservedMap.set(professorKey(existingIan.first, existingIan.last), existingIan);

@@ -14,6 +14,12 @@ const chemSearch = await db.searchCoursesDb('CHEM 1000', 1, 10, {});
 const chem1000 = chemSearch.results.find((course) => course.code === 'SC/CHEM 1000');
 assert.ok(chem1000, 'expected approved no-real-prereq SC/CHEM 1000 to appear in frontend JSON search');
 
+const hiddenSearch = await db.searchCoursesDb('ED ECON 4000', 1, 10, {});
+assert.ok(
+  !hiddenSearch.results.some((course) => course.code === 'ED/ECON 4000'),
+  'expected manually hidden ED/ECON 4000 to be absent from frontend JSON search'
+);
+
 const course = await db.getCourseFromIdDB(results[0].id);
 assert.equal(course.id, results[0].id);
 assert.ok(Array.isArray(course.courseOfferings), 'expected course offerings array');

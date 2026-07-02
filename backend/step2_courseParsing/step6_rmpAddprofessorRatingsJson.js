@@ -97,7 +97,7 @@ function emptyRecord(index, instructor) {
   };
 }
 
-function recordFromRmp(index, instructor, currProfInfo) {
+function recordFromRmp(index, instructor, currProfInfo, existing = null) {
   const avgRating = typeof currProfInfo.avgRating === 'number'
     ? currProfInfo.avgRating
     : (currProfInfo.avg_rating ?? null);
@@ -107,16 +107,16 @@ function recordFromRmp(index, instructor, currProfInfo) {
     dept: instructor.dept || '',
     first: instructor.firstname,
     last: instructor.lastname,
-    avgRating,
-    avgDifficulty: typeof currProfInfo.avgDifficulty === 'number'
+    avgRating: avgRating ?? existing?.avgRating ?? existing?.overall_rating ?? 0,
+    avgDifficulty: (typeof currProfInfo.avgDifficulty === 'number'
       ? currProfInfo.avgDifficulty
-      : (currProfInfo.avg_difficulty ?? null),
-    wouldTakeAgainPercent: typeof currProfInfo.wouldTakeAgainPercent === 'number'
+      : (currProfInfo.avg_difficulty ?? null)) ?? existing?.avgDifficulty ?? 0,
+    wouldTakeAgainPercent: (typeof currProfInfo.wouldTakeAgainPercent === 'number'
       ? currProfInfo.wouldTakeAgainPercent
-      : (currProfInfo.would_take_again_percent ?? null),
-    numratings: currProfInfo.numRatings ?? currProfInfo.num_ratings ?? currProfInfo.numberOfRatings ?? 0,
-    overall_rating: avgRating,
-    rateMyProfLink: currProfInfo.link ?? currProfInfo.url ?? null,
+      : (currProfInfo.would_take_again_percent ?? null)) ?? existing?.wouldTakeAgainPercent ?? -1,
+    numratings: currProfInfo.numRatings ?? currProfInfo.num_ratings ?? currProfInfo.numberOfRatings ?? existing?.numratings ?? existing?.numberOfRatings ?? 0,
+    overall_rating: avgRating ?? existing?.overall_rating ?? existing?.avgRating ?? 0,
+    rateMyProfLink: currProfInfo.link ?? currProfInfo.url ?? existing?.rateMyProfLink ?? null,
   };
 }
 
@@ -209,7 +209,7 @@ async function main() {
           : 'not confident match - no existing rating fields',
       });
     } else {
-      record = recordFromRmp(index, instructor, currProfInfo);
+      record = recordFromRmp(index, instructor, currProfInfo, existing);
 
       matches.push({
         requested: { firstname: first, lastname: last },

@@ -274,15 +274,24 @@ export function CourseDetailPanel({
   if (!course) return null;
 
   return (
-    <MotionDiv
-      initial={{ x: "100%" }}
-      animate={{ x: 0 }}
-      exit={{ x: "100%" }}
-      transition={{ type: "spring", stiffness: 80 }}
-      className="fixed top-0 right-0 h-full w-full sm:w-[420px] 
-                 bg-white/10 backdrop-blur-2xl border-l border-white/20 
-                 shadow-2xl p-6 z-50 flex flex-col overflow-y-auto"
-    >
+    <>
+      <MotionDiv
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.18 }}
+        className="fixed inset-0 z-40 bg-black/30"
+        onClick={onClose}
+      />
+      <MotionDiv
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ type: "spring", stiffness: 80 }}
+        className="fixed top-0 right-0 h-full w-full sm:w-[420px] 
+                   bg-white/10 backdrop-blur-2xl border-l border-white/20 
+                   shadow-2xl p-6 z-50 flex flex-col overflow-y-auto"
+      >
       {/* HEADER */}
       <div
         className="
@@ -671,6 +680,7 @@ export function CourseDetailPanel({
           )}
         </div>
       )}
-    </MotionDiv>
+      </MotionDiv>
+    </>
   );
 }

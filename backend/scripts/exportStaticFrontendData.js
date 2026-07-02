@@ -27,6 +27,7 @@ const RAW_YORK_COURSES_DIR = path.join(backendRoot, 'step1_PythonCourseScraper',
 const SOURCE_RMP = path.join(backendRoot, 'data', 'profs', 'yorku_RMP_data.json');
 const SOURCE_RMP_MATCHES = path.join(STEP2_DIR, 'logs', 'matches.json');
 const STEP13_APPROVED_NO_PREREQS = path.join(STEP2_DIR, 'step13_coursesWithoutRealPrereqs.json');
+const STEP15_HIDE_FROM_FRONTEND = path.join(STEP2_DIR, 'step15_coursesToHideFromFrontend.json');
 const SESSION_META = path.join(backendRoot, 'step1_PythonCourseScraper', 'session_meta.json');
 const COURSE_TIMES_SIDECAR = path.join(RUNTIME_PIPELINE_DIR, 'courseTimes.json');
 const OUT_COURSES = path.join(frontendDataDir, 'electives.json');
@@ -170,6 +171,15 @@ async function loadApprovedNoRealPrereqKeys() {
   );
 }
 
+async function loadHiddenCourseKeys() {
+  const hidden = await readJson(STEP15_HIDE_FROM_FRONTEND, { courses: [] });
+  return new Set(
+    (Array.isArray(hidden?.courses) ? hidden.courses : [])
+      .map(approvedCourseKey)
+      .filter((key) => !key.startsWith('|') && !key.endsWith('|') && !key.includes('NaN'))
+  );
+}
+
 function applyApprovedNoRealPrereqs(courses, approvedKeys) {
   let clearedCourses = 0;
   let clearedPrereqRows = 0;
@@ -184,6 +194,21 @@ function applyApprovedNoRealPrereqs(courses, approvedKeys) {
   });
 
   return { courses: normalizedCourses, clearedCourses, clearedPrereqRows };
+}
+
+function applyHiddenCourses(courses, hiddenKeys) {
+  const visibleCourses = [];
+  let hiddenCourses = 0;
+
+  for (const course of courses) {
+    if (hiddenKeys.has(approvedCourseKey(course))) {
+      hiddenCourses++;
+      continue;
+    }
+    visibleCourses.push(course);
+  }
+
+  return { courses: visibleCourses, hiddenCourses };
 }
 
 async function loadCourseTimesSidecar() {
@@ -693,12 +718,13 @@ function bestPopularity(course) {
 async function main() {
   const sessionMeta = await readJson(SESSION_META, {});
   const courseSource = await resolveCourseSource(sessionMeta?.termAndYear);
-  const [rawCourses, rmpRows, rmpMatchRows, newestRawYorkCourseFile, approvedNoRealPrereqKeys] = await Promise.all([
+  const [rawCourses, rmpRows, rmpMatchRows, newestRawYorkCourseFile, approvedNoRealPrereqKeys, hiddenCourseKeys] = await Promise.all([
     readJson(courseSource.filePath),
     readJson(SOURCE_RMP, []),
     readJson(SOURCE_RMP_MATCHES, []),
     newestFileInDir(RAW_YORK_COURSES_DIR),
     loadApprovedNoRealPrereqKeys(),
+    loadHiddenCourseKeys(),
   ]);
   const courseTimes = await loadResolvedCourseTimes();
 
@@ -710,7 +736,8 @@ async function main() {
   const termAndYear = sessionMeta?.termAndYear || null;
   const rmpLookup = buildRmpLookup(rmpRows, rmpMatchRows);
   const approvedNoRealPrereqResult = applyApprovedNoRealPrereqs(rawCourses, approvedNoRealPrereqKeys);
-  const effectiveRawCourses = approvedNoRealPrereqResult.courses;
+  const hiddenCourseResult = applyHiddenCourses(approvedNoRealPrereqResult.courses, hiddenCourseKeys);
+  const effectiveRawCourses = hiddenCourseResult.courses;
   const termSet = new Set();
   const typeSet = new Set();
   let offeringsWithCatNumbers = 0;
@@ -815,6 +842,7 @@ async function main() {
     sourceCourseCount: courseSource.info?.count || rawCourses.length,
     approvedNoRealPrereqCourses: approvedNoRealPrereqResult.clearedCourses,
     approvedNoRealPrereqRowsCleared: approvedNoRealPrereqResult.clearedPrereqRows,
+    manuallyHiddenCourses: hiddenCourseResult.hiddenCourses,
     rawYorkCoursesNewestFile: newestRawYorkCourseFile
       ? path.relative(projectRoot, newestRawYorkCourseFile.filePath)
       : null,
@@ -847,6 +875,7 @@ async function main() {
   console.log(`Source kind: ${courseSource.kind}`);
   console.log(`Source modified: ${courseSource.info?.mtime || 'unknown'}`);
   console.log(`Approved no-real-prereq courses applied: ${approvedNoRealPrereqResult.clearedCourses} (${approvedNoRealPrereqResult.clearedPrereqRows} prereq row(s) cleared in export)`);
+  console.log(`Manually hidden courses applied: ${hiddenCourseResult.hiddenCourses}`);
   if (newestRawYorkCourseFile) {
     console.log(`Newest york_courses file: ${newestRawYorkCourseFile.filePath}`);
     console.log(`Newest york_courses modified: ${newestRawYorkCourseFile.mtime}`);
@@ -871,9 +900,11 @@ export {
   buildTermOfferings,
   courseTimeKey,
   applyApprovedNoRealPrereqs,
+  applyHiddenCourses,
   mapMeeting,
   newestArchivedCourseFile,
   loadApprovedNoRealPrereqKeys,
+  loadHiddenCourseKeys,
   parseCourseTimeHtmlFile,
 };
 

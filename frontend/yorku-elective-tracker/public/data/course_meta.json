@@ -1,6 +1,6 @@
 {
   "msg": "success",
-  "generatedAt": "2026-07-02T22:36:32.362Z",
+  "generatedAt": "2026-07-02T23:25:35.364Z",
   "termAndYear": "Fall/Winter 2026-2027",
   "source": "backend/step2_courseParsing/archive/all_courses_FallWinter_2026-2027_2026-07-01T15-50-18-610Z.json",
   "sourceKind": "latest-completed-archive",
@@ -8,10 +8,11 @@
   "sourceCourseCount": 4321,
   "approvedNoRealPrereqCourses": 36,
   "approvedNoRealPrereqRowsCleared": 88,
-  "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/ESSE - Earth, Space Science and Engineering - ( LE )/LE_ESSE 4051 3.00_Synoptic Meteorology II_CourseSchedule.html",
-  "rawYorkCoursesNewestMtime": "2026-07-02T22:35:31.492Z",
+  "manuallyHiddenCourses": 37,
+  "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/EXCH - Exchange - ( SB )/SB_EXCH 4972 1.50_Exchange - Language Elective_CourseSchedule.html",
+  "rawYorkCoursesNewestMtime": "2026-07-02T23:25:23.067Z",
   "rawYorkCoursesNewerThanSource": true,
-  "courseCount": 1863,
+  "courseCount": 1826,
   "terms": [
     {
       "term": "F",
@@ -49,9 +50,9 @@
   ],
   "hasTimingData": true,
   "stats": {
-    "offeringsWithCatNumbers": 5946,
-    "offeringsWithTimes": 5107,
-    "instructorsWithRmpLinks": 828,
+    "offeringsWithCatNumbers": 5796,
+    "offeringsWithTimes": 4965,
+    "instructorsWithRmpLinks": 777,
     "courseTimeHtmlFiles": 11,
     "courseTimeComponentsParsed": 14777,
     "courseTimeRowsParsed": 14931,

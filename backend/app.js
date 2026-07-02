@@ -82,7 +82,8 @@ app.get("/api", async (req, res) => {
 // Auth routes: login page and handlers (public)
 function grantAdminCookie(res) {
     const token = jwt.sign({ sub: 'admin' }, jwtSecret, { expiresIn: '8h' });
-    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
+    const secureCookie = process.env.ADMIN_COOKIE_SECURE === 'true';
+    res.cookie('token', token, { httpOnly: true, secure: secureCookie, sameSite: 'lax' });
 }
 
 app.get('/admin/login', (req, res) => {
