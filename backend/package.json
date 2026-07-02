@@ -12,7 +12,7 @@
     "export:frontend": "node scripts/exportStaticFrontendData.js",
     "pipeline:export": "npm run pipeline",
     "pipeline:full": "bash ./run_full_pipeline.sh",
-    "test": "node tests/jsonBackend.test.js && node tests/jsonPipelineSteps.test.js && node tests/courseTimes.test.js"
+    "test": "node tests/jsonBackend.test.js && node tests/jsonPipelineSteps.test.js && node tests/jsonPipelineArtifacts.test.js && node tests/rmpJsonFlow.test.js && node tests/courseTimes.test.js"
   },
   "keywords": [],
   "author": "",

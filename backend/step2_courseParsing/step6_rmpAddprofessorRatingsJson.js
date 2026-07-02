@@ -1,7 +1,7 @@
 import rmp from 'ratemyprofessor-api';
 import fs from 'fs/promises';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { collectInstructors, loadAllCourses, normalizeName } from './jsonPipelineArtifacts.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -13,6 +13,14 @@ const ambiguousPath = process.env.RMP_AMBIGUOUS_FILE || path.join(__dirname, 'lo
 const maxProfessors = Number(process.env.RMP_MAX_PROFESSORS || 0) || null;
 const delayMs = Number(process.env.RMP_DELAY_MS || 150);
 const FULLNAME_DISTANCE_THRESHOLD = 0.18;
+
+async function readJson(filePath, fallback) {
+  try {
+    return JSON.parse(await fs.readFile(filePath, 'utf8'));
+  } catch {
+    return fallback;
+  }
+}
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -47,6 +55,77 @@ function nameDistance(a, b) {
   return levenshtein(na, nb) / Math.max(na.length, nb.length, 1);
 }
 
+function professorKey(first, last) {
+  return `${normalizeName(first)}|${normalizeName(last)}`;
+}
+
+function hasUsableRating(row) {
+  return Boolean(
+    row?.rateMyProfLink ||
+    Number(row?.avgRating ?? row?.overall_rating) > 0 ||
+    Number(row?.numratings ?? row?.numberOfRatings) > 0
+  );
+}
+
+function normalizeExistingRecord(row, instructor = null) {
+  return {
+    ...row,
+    dept: instructor?.dept || row?.dept || row?.department || '',
+    first: instructor?.firstname || row?.first || row?.firstname || '',
+    last: instructor?.lastname || row?.last || row?.lastname || '',
+    avgRating: row?.avgRating ?? row?.overall_rating ?? 0,
+    avgDifficulty: row?.avgDifficulty ?? 0,
+    wouldTakeAgainPercent: row?.wouldTakeAgainPercent ?? -1,
+    numratings: row?.numratings ?? row?.numberOfRatings ?? 0,
+    overall_rating: row?.overall_rating ?? row?.avgRating ?? 0,
+    rateMyProfLink: row?.rateMyProfLink ?? null,
+  };
+}
+
+function emptyRecord(index, instructor) {
+  return {
+    id: index + 1,
+    dept: instructor.dept || '',
+    first: instructor.firstname,
+    last: instructor.lastname,
+    avgRating: 0,
+    avgDifficulty: 0,
+    wouldTakeAgainPercent: -1,
+    numratings: 0,
+    overall_rating: 0,
+    rateMyProfLink: null,
+  };
+}
+
+function recordFromRmp(index, instructor, currProfInfo) {
+  const avgRating = typeof currProfInfo.avgRating === 'number'
+    ? currProfInfo.avgRating
+    : (currProfInfo.avg_rating ?? null);
+
+  return {
+    id: index + 1,
+    dept: instructor.dept || '',
+    first: instructor.firstname,
+    last: instructor.lastname,
+    avgRating,
+    avgDifficulty: typeof currProfInfo.avgDifficulty === 'number'
+      ? currProfInfo.avgDifficulty
+      : (currProfInfo.avg_difficulty ?? null),
+    wouldTakeAgainPercent: typeof currProfInfo.wouldTakeAgainPercent === 'number'
+      ? currProfInfo.wouldTakeAgainPercent
+      : (currProfInfo.would_take_again_percent ?? null),
+    numratings: currProfInfo.numRatings ?? currProfInfo.num_ratings ?? currProfInfo.numberOfRatings ?? 0,
+    overall_rating: avgRating,
+    rateMyProfLink: currProfInfo.link ?? currProfInfo.url ?? null,
+  };
+}
+
+function finalizeRecords(recordMap) {
+  return [...recordMap.values()]
+    .sort((a, b) => `${a.last} ${a.first}`.localeCompare(`${b.last} ${b.first}`))
+    .map((record, index) => ({ ...record, id: index + 1 }));
+}
+
 function isConfidentMatch(requestedFirst, requestedLast, currProfInfo, schoolId) {
   if (!currProfInfo) return false;
 
@@ -79,6 +158,16 @@ async function main() {
   await fs.mkdir(path.dirname(ambiguousPath), { recursive: true });
   await fs.mkdir(path.dirname(rmpDataPath), { recursive: true });
 
+  const existingRows = await readJson(rmpDataPath, []);
+  const recordMap = new Map();
+  for (const row of Array.isArray(existingRows) ? existingRows : []) {
+    const first = row?.first || row?.firstname;
+    const last = row?.last || row?.lastname;
+    const key = professorKey(first, last);
+    if (key.startsWith('|') || key.endsWith('|')) continue;
+    recordMap.set(key, normalizeExistingRecord(row));
+  }
+
   const courses = await loadAllCourses();
   const instructors = collectInstructors(courses).filter((instructor) => instructor.firstname && instructor.firstname !== 'TBA');
   const limit = maxProfessors ? Math.min(maxProfessors, instructors.length) : instructors.length;
@@ -99,6 +188,8 @@ async function main() {
     const instructor = instructors[index];
     const first = instructor.firstname;
     const last = instructor.lastname;
+    const key = professorKey(first, last);
+    const existing = recordMap.get(key);
 
     await delay(delayMs);
     const currProfInfo = await rmp.getProfessorRatingAtSchoolId(`${first} ${last}`, schoolId);
@@ -106,39 +197,19 @@ async function main() {
 
     let record;
     if (!confident) {
-      record = {
-        id: index + 1,
-        dept: instructor.dept || '',
-        first,
-        last,
-        avgRating: 0,
-        avgDifficulty: 0,
-        wouldTakeAgainPercent: -1,
-        numratings: 0,
-        overall_rating: 0,
-        rateMyProfLink: null,
-      };
+      record = hasUsableRating(existing)
+        ? normalizeExistingRecord(existing, instructor)
+        : emptyRecord(index, instructor);
 
       ambiguous.push({
         requested: { firstname: first, lastname: last },
         rmpResult: currProfInfo ?? null,
-        reason: 'not confident match - cleared rating fields',
+        reason: hasUsableRating(existing)
+          ? 'not confident match - kept existing rating fields'
+          : 'not confident match - no existing rating fields',
       });
     } else {
-      record = {
-        id: index + 1,
-        dept: instructor.dept || '',
-        first,
-        last,
-        avgRating: typeof currProfInfo.avgRating === 'number' ? currProfInfo.avgRating : (currProfInfo.avg_rating ?? null),
-        avgDifficulty: typeof currProfInfo.avgDifficulty === 'number' ? currProfInfo.avgDifficulty : (currProfInfo.avg_difficulty ?? null),
-        wouldTakeAgainPercent: typeof currProfInfo.wouldTakeAgainPercent === 'number'
-          ? currProfInfo.wouldTakeAgainPercent
-          : (currProfInfo.would_take_again_percent ?? null),
-        numratings: currProfInfo.numRatings ?? currProfInfo.num_ratings ?? currProfInfo.numberOfRatings ?? 0,
-        overall_rating: typeof currProfInfo.avgRating === 'number' ? currProfInfo.avgRating : (currProfInfo.avg_rating ?? null),
-        rateMyProfLink: currProfInfo.link ?? currProfInfo.url ?? null,
-      };
+      record = recordFromRmp(index, instructor, currProfInfo);
 
       matches.push({
         requested: { firstname: first, lastname: last },
@@ -154,6 +225,7 @@ async function main() {
       });
     }
 
+    recordMap.set(key, record);
     results.push(record);
 
     if (index === 0 || (index + 1) % 50 === 0 || index + 1 === limit) {
@@ -161,17 +233,30 @@ async function main() {
     }
   }
 
+  const mergedResults = finalizeRecords(recordMap);
+
   await Promise.all([
-    fs.writeFile(rmpDataPath, `${JSON.stringify(results, null, 2)}\n`, 'utf8'),
+    fs.writeFile(rmpDataPath, `${JSON.stringify(mergedResults, null, 2)}\n`, 'utf8'),
     fs.writeFile(matchesPath, `${JSON.stringify(matches, null, 2)}\n`, 'utf8'),
     fs.writeFile(ambiguousPath, `${JSON.stringify(ambiguous, null, 2)}\n`, 'utf8'),
   ]);
 
-  console.log(`[step6-json] Saved ${results.length} instructor rows to ${rmpDataPath}`);
+  console.log(`[step6-json] Saved ${mergedResults.length} instructor rows to ${rmpDataPath} (${results.length} refreshed, ${mergedResults.length - results.length} preserved)`);
   console.log(`[step6-json] Wrote matches to ${matchesPath} and ambiguous cases to ${ambiguousPath}`);
 }
 
-main().catch((error) => {
-  console.error(`[step6-json] Failed: ${error.message}`);
-  process.exit(1);
-});
+export {
+  emptyRecord,
+  finalizeRecords,
+  hasUsableRating,
+  normalizeExistingRecord,
+  professorKey,
+  recordFromRmp,
+};
+
+if (import.meta.url === pathToFileURL(process.argv[1] || '').href) {
+  main().catch((error) => {
+    console.error(`[step6-json] Failed: ${error.message}`);
+    process.exit(1);
+  });
+}

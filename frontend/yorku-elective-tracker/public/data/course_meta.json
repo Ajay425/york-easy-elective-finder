@@ -1,13 +1,13 @@
 {
   "msg": "success",
-  "generatedAt": "2026-07-01T21:58:59.507Z",
+  "generatedAt": "2026-07-02T22:16:54.456Z",
   "termAndYear": "Fall/Winter 2026-2027",
   "source": "backend/step2_courseParsing/archive/all_courses_FallWinter_2026-2027_2026-07-01T15-50-18-610Z.json",
   "sourceKind": "latest-completed-archive",
   "sourceMtime": "2026-07-01T15:50:18.590Z",
   "sourceCourseCount": 4321,
-  "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/CHEM - Chemistry - ( ED, GS, SC )/SC_CHEM 4000 8.00_Research Project_CourseSchedule.html",
-  "rawYorkCoursesNewestMtime": "2026-07-01T21:58:30.201Z",
+  "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/ESSE - Earth, Space Science and Engineering - ( LE )/LE_ESSE 1010 3.00_The Dynamic Earth and Space Geodesy_CourseSchedule.html",
+  "rawYorkCoursesNewestMtime": "2026-07-02T22:16:34.670Z",
   "rawYorkCoursesNewerThanSource": true,
   "courseCount": 1829,
   "terms": [
@@ -49,7 +49,7 @@
   "stats": {
     "offeringsWithCatNumbers": 5445,
     "offeringsWithTimes": 4606,
-    "instructorsWithRmpLinks": 186,
+    "instructorsWithRmpLinks": 746,
     "courseTimeHtmlFiles": 11,
     "courseTimeComponentsParsed": 14777,
     "courseTimeRowsParsed": 14931,

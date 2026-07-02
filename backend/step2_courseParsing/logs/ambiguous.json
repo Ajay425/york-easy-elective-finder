@@ -1,6 +1,22 @@
 [
   {
     "requested": {
+      "firstname": "Nirupama",
+      "lastname": "Agrawal"
+    },
+    "rmpResult": {
+      "avgRating": 2.5,
+      "avgDifficulty": 2.9,
+      "wouldTakeAgainPercent": 0,
+      "numRatings": 13,
+      "formattedName": "Niru Nirupama",
+      "department": "Administration",
+      "link": "https://www.ratemyprofessors.com/professor/1130687"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "Vanessa",
       "lastname": "Alsop"
     },
@@ -12,6 +28,70 @@
       "formattedName": "Vanessa Mathews",
       "department": "Geography",
       "link": "https://www.ratemyprofessors.com/professor/1566038"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Karen",
+      "lastname": "Armstrong"
+    },
+    "rmpResult": {
+      "avgRating": 2.4,
+      "avgDifficulty": 4.1,
+      "wouldTakeAgainPercent": 36.6667,
+      "numRatings": 89,
+      "formattedName": "Karen Bernhardt-Walther",
+      "department": "Economics",
+      "link": "https://www.ratemyprofessors.com/professor/2540932"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Ranu",
+      "lastname": "Basu"
+    },
+    "rmpResult": {
+      "avgRating": 3.7,
+      "avgDifficulty": 3.1,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 8,
+      "formattedName": "B Ranu",
+      "department": "Mathematics",
+      "link": "https://www.ratemyprofessors.com/professor/891400"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Rebecca",
+      "lastname": "Beaulne-Stuebing"
+    },
+    "rmpResult": {
+      "avgRating": 2.5,
+      "avgDifficulty": 3,
+      "wouldTakeAgainPercent": 36.3636,
+      "numRatings": 11,
+      "formattedName": "Rebecca Schechter",
+      "department": "Film",
+      "link": "https://www.ratemyprofessors.com/professor/2228153"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Nancy",
+      "lastname": "Bell"
+    },
+    "rmpResult": {
+      "avgRating": 4.7,
+      "avgDifficulty": 2.4,
+      "wouldTakeAgainPercent": 94.1176,
+      "numRatings": 23,
+      "formattedName": "Nancy Sanders",
+      "department": "Education",
+      "link": "https://www.ratemyprofessors.com/professor/809319"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -49,6 +129,38 @@
   },
   {
     "requested": {
+      "firstname": "Emily",
+      "lastname": "Burgis"
+    },
+    "rmpResult": {
+      "avgRating": 4.7,
+      "avgDifficulty": 3,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 12,
+      "formattedName": "Emily Merson",
+      "department": "Political Science",
+      "link": "https://www.ratemyprofessors.com/professor/1435344"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Stephen",
+      "lastname": "Cain"
+    },
+    "rmpResult": {
+      "avgRating": 4.8,
+      "avgDifficulty": 2.2,
+      "wouldTakeAgainPercent": 95.6522,
+      "numRatings": 109,
+      "formattedName": "Stephen Watson",
+      "department": "Mathematics",
+      "link": "https://www.ratemyprofessors.com/professor/14957"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "Pilar",
       "lastname": "Carbonell-Foulquie"
     },
@@ -65,17 +177,33 @@
   },
   {
     "requested": {
+      "firstname": "Alex",
+      "lastname": "Chalk"
+    },
+    "rmpResult": {
+      "avgRating": 3.5,
+      "avgDifficulty": 3.5,
+      "wouldTakeAgainPercent": 48.2759,
+      "numRatings": 40,
+      "formattedName": "Alex Garber",
+      "department": "Accounting",
+      "link": "https://www.ratemyprofessors.com/professor/1488608"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "Paul",
       "lastname": "Chan"
     },
     "rmpResult": {
-      "avgRating": 3,
-      "avgDifficulty": 3,
-      "wouldTakeAgainPercent": 42.8571,
-      "numRatings": 43,
-      "formattedName": "Paul Ritvo",
-      "department": "Kinesiology",
-      "link": "https://www.ratemyprofessors.com/professor/428081"
+      "avgRating": 2.7,
+      "avgDifficulty": 4.4,
+      "wouldTakeAgainPercent": 38.0952,
+      "numRatings": 42,
+      "formattedName": "Paul Skoufranis",
+      "department": "Mathematics",
+      "link": "https://www.ratemyprofessors.com/professor/2342454"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -92,6 +220,22 @@
       "formattedName": "Abigail Shabtay",
       "department": "Humanities",
       "link": "https://www.ratemyprofessors.com/professor/2569292"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Lina",
+      "lastname": "Correa"
+    },
+    "rmpResult": {
+      "avgRating": 4.4,
+      "avgDifficulty": 2.2,
+      "wouldTakeAgainPercent": 83.3333,
+      "numRatings": 5,
+      "formattedName": "Lina Deker",
+      "department": "Health Science",
+      "link": "https://www.ratemyprofessors.com/professor/2534353"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -145,6 +289,38 @@
   },
   {
     "requested": {
+      "firstname": "Karen",
+      "lastname": "Devonish-Mazzotta"
+    },
+    "rmpResult": {
+      "avgRating": 2.4,
+      "avgDifficulty": 4.1,
+      "wouldTakeAgainPercent": 36.6667,
+      "numRatings": 89,
+      "formattedName": "Karen Bernhardt-Walther",
+      "department": "Economics",
+      "link": "https://www.ratemyprofessors.com/professor/2540932"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Stephanie",
+      "lastname": "Fearon"
+    },
+    "rmpResult": {
+      "avgRating": 0,
+      "avgDifficulty": 0,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 0,
+      "formattedName": "Stephanie Stephanie Jones",
+      "department": "Psychology",
+      "link": "https://www.ratemyprofessors.com/professor/1481171"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "Yuqing",
       "lastname": "Feng"
     },
@@ -156,6 +332,22 @@
       "formattedName": "Feng  Yuqing",
       "department": "Biology",
       "link": "https://www.ratemyprofessors.com/professor/2977271"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Mandy",
+      "lastname": "Frake-Mistak"
+    },
+    "rmpResult": {
+      "avgRating": 3.2,
+      "avgDifficulty": 3.1,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 7,
+      "formattedName": "Amanda Cornacchia",
+      "department": "Business",
+      "link": "https://www.ratemyprofessors.com/professor/1089424"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -177,17 +369,49 @@
   },
   {
     "requested": {
+      "firstname": "Hector",
+      "lastname": "Garcia"
+    },
+    "rmpResult": {
+      "avgRating": 3,
+      "avgDifficulty": 2.9,
+      "wouldTakeAgainPercent": 50,
+      "numRatings": 10,
+      "formattedName": "Syreeta Hector",
+      "department": "Dance",
+      "link": "https://www.ratemyprofessors.com/professor/2305685"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "Amy",
       "lastname": "Goldsweig"
     },
     "rmpResult": {
-      "avgRating": 4.6,
-      "avgDifficulty": 2.1,
-      "wouldTakeAgainPercent": 88,
-      "numRatings": 25,
-      "formattedName": "Amy Muise",
-      "department": "Psychology",
-      "link": "https://www.ratemyprofessors.com/professor/2197541"
+      "avgRating": 3.8,
+      "avgDifficulty": 2,
+      "wouldTakeAgainPercent": 50,
+      "numRatings": 4,
+      "formattedName": "Amy Gajadhar",
+      "department": "Music",
+      "link": "https://www.ratemyprofessors.com/professor/1790532"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Jeremy",
+      "lastname": "Green"
+    },
+    "rmpResult": {
+      "avgRating": 3.6,
+      "avgDifficulty": 2.9,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 7,
+      "formattedName": "Jeremy Kowalski",
+      "department": "Geography",
+      "link": "https://www.ratemyprofessors.com/professor/1026072"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -204,6 +428,54 @@
       "formattedName": "Justin Tan",
       "department": "Management",
       "link": "https://www.ratemyprofessors.com/professor/906299"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Yanran",
+      "lastname": "Guo"
+    },
+    "rmpResult": {
+      "avgRating": 3.5,
+      "avgDifficulty": 3.6,
+      "wouldTakeAgainPercent": 61.5385,
+      "numRatings": 13,
+      "formattedName": "Guolei (Chris) Zhang",
+      "department": "Human Resources Management",
+      "link": "https://www.ratemyprofessors.com/professor/2669427"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Jan",
+      "lastname": "Hadlaw"
+    },
+    "rmpResult": {
+      "avgRating": 2.1,
+      "avgDifficulty": 3.7,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 17,
+      "formattedName": "Jan Lackstrom",
+      "department": "Social Work",
+      "link": "https://www.ratemyprofessors.com/professor/696076"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Kyle",
+      "lastname": "Herbert"
+    },
+    "rmpResult": {
+      "avgRating": 4.7,
+      "avgDifficulty": 1.8,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 44,
+      "formattedName": "Kyle Killian",
+      "department": "Psychology",
+      "link": "https://www.ratemyprofessors.com/professor/641818"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -241,6 +513,150 @@
   },
   {
     "requested": {
+      "firstname": "Daphne",
+      "lastname": "Idiz"
+    },
+    "rmpResult": {
+      "avgRating": 3.7,
+      "avgDifficulty": 2.7,
+      "wouldTakeAgainPercent": 75,
+      "numRatings": 29,
+      "formattedName": "Daphne Winland",
+      "department": "Anthropology",
+      "link": "https://www.ratemyprofessors.com/professor/66505"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Susan",
+      "lastname": "Johnson"
+    },
+    "rmpResult": {
+      "avgRating": 3.1,
+      "avgDifficulty": 3,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 28,
+      "formattedName": "Susan Ingram",
+      "department": "Humanities",
+      "link": "https://www.ratemyprofessors.com/professor/563077"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Anirudh",
+      "lastname": "Kaushik"
+    },
+    "rmpResult": {
+      "avgRating": 5,
+      "avgDifficulty": 2,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 2,
+      "formattedName": "Kaushik Patel",
+      "department": "Chemistry",
+      "link": "https://www.ratemyprofessors.com/professor/1698139"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Ryan",
+      "lastname": "Kennedy"
+    },
+    "rmpResult": {
+      "avgRating": 4.6,
+      "avgDifficulty": 2.1,
+      "wouldTakeAgainPercent": 87.5,
+      "numRatings": 49,
+      "formattedName": "Ryan James",
+      "department": "Anthropology",
+      "link": "https://www.ratemyprofessors.com/professor/559831"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Ibtissem",
+      "lastname": "Knouzi"
+    },
+    "rmpResult": {
+      "avgRating": 1,
+      "avgDifficulty": 5,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 1,
+      "formattedName": "Knouzi Ibtissem",
+      "department": "Applied Linguistics",
+      "link": "https://www.ratemyprofessors.com/professor/2795590"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Emily",
+      "lastname": "Kuang"
+    },
+    "rmpResult": {
+      "avgRating": 4.7,
+      "avgDifficulty": 3,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 12,
+      "formattedName": "Emily Merson",
+      "department": "Political Science",
+      "link": "https://www.ratemyprofessors.com/professor/1435344"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Nippe",
+      "lastname": "Lagerlöf"
+    },
+    "rmpResult": {
+      "avgRating": 2,
+      "avgDifficulty": 3.7,
+      "wouldTakeAgainPercent": 20.339,
+      "numRatings": 64,
+      "formattedName": "Michael Nippe",
+      "department": "Chemistry",
+      "link": "https://www.ratemyprofessors.com/professor/2097159"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Etienne",
+      "lastname": "Lale"
+    },
+    "rmpResult": {
+      "avgRating": 2.7,
+      "avgDifficulty": 4.1,
+      "wouldTakeAgainPercent": 36.8421,
+      "numRatings": 19,
+      "formattedName": "Veronique Etienne Etienne",
+      "department": "Biology",
+      "link": "https://www.ratemyprofessors.com/professor/3096871"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Ganaele",
+      "lastname": "Langlois"
+    },
+    "rmpResult": {
+      "avgRating": 3.3,
+      "avgDifficulty": 4,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 4,
+      "formattedName": "Langlois Suzanne",
+      "department": "History",
+      "link": "https://www.ratemyprofessors.com/professor/815184"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "Jessica",
       "lastname": "Li"
     },
@@ -252,6 +668,38 @@
       "formattedName": "Jessica Neamie",
       "department": "Political Science",
       "link": "https://www.ratemyprofessors.com/professor/3688009"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Yong",
+      "lastname": "Lian"
+    },
+    "rmpResult": {
+      "avgRating": 2.8,
+      "avgDifficulty": 4.3,
+      "wouldTakeAgainPercent": 28.5714,
+      "numRatings": 10,
+      "formattedName": "Yong Troy",
+      "department": "Administration",
+      "link": "https://www.ratemyprofessors.com/professor/886835"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Suzanne",
+      "lastname": "Liska"
+    },
+    "rmpResult": {
+      "avgRating": 0,
+      "avgDifficulty": 0,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 0,
+      "formattedName": "Suzanne Ville",
+      "department": "Kinesiology",
+      "link": "https://www.ratemyprofessors.com/professor/797158"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -277,13 +725,13 @@
       "lastname": "MacDonald"
     },
     "rmpResult": {
-      "avgRating": 4.1,
-      "avgDifficulty": 2.8,
-      "wouldTakeAgainPercent": 66.6667,
-      "numRatings": 21,
-      "formattedName": "Margaret Riggin",
-      "department": "Accounting",
-      "link": "https://www.ratemyprofessors.com/professor/690736"
+      "avgRating": 1.5,
+      "avgDifficulty": 5,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 1,
+      "formattedName": "Margaret Fitch",
+      "department": "Health",
+      "link": "https://www.ratemyprofessors.com/professor/1528663"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -305,6 +753,150 @@
   },
   {
     "requested": {
+      "firstname": "Shweta",
+      "lastname": "Mahajan"
+    },
+    "rmpResult": {
+      "avgRating": 2.8,
+      "avgDifficulty": 3.8,
+      "wouldTakeAgainPercent": 33.3333,
+      "numRatings": 29,
+      "formattedName": "Shweta Reddy",
+      "department": "Design Merchandising Textiles",
+      "link": "https://www.ratemyprofessors.com/professor/1776406"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Nancy",
+      "lastname": "Marshall"
+    },
+    "rmpResult": {
+      "avgRating": 4.7,
+      "avgDifficulty": 2.4,
+      "wouldTakeAgainPercent": 94.1176,
+      "numRatings": 23,
+      "formattedName": "Nancy Sanders",
+      "department": "Education",
+      "link": "https://www.ratemyprofessors.com/professor/809319"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Andrew",
+      "lastname": "McConnell"
+    },
+    "rmpResult": {
+      "avgRating": 3.3,
+      "avgDifficulty": 2.9,
+      "wouldTakeAgainPercent": 53.8462,
+      "numRatings": 25,
+      "formattedName": "Andrew Brankley",
+      "department": "Psychology",
+      "link": "https://www.ratemyprofessors.com/professor/3029481"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Gavin",
+      "lastname": "McDonald"
+    },
+    "rmpResult": {
+      "avgRating": 0,
+      "avgDifficulty": 0,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 0,
+      "formattedName": "Gavin Wiens",
+      "department": "History",
+      "link": "https://www.ratemyprofessors.com/professor/2614076"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Mark",
+      "lastname": "Mensah"
+    },
+    "rmpResult": {
+      "avgRating": 3.3,
+      "avgDifficulty": 3.5,
+      "wouldTakeAgainPercent": 47.8495,
+      "numRatings": 275,
+      "formattedName": "Mark Vicari",
+      "department": "Biology",
+      "link": "https://www.ratemyprofessors.com/professor/43465"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Navid",
+      "lastname": "Mohaghegh"
+    },
+    "rmpResult": {
+      "avgRating": 3.5,
+      "avgDifficulty": 2.5,
+      "wouldTakeAgainPercent": 57.1429,
+      "numRatings": 13,
+      "formattedName": "Mohaghegh Navid",
+      "department": "Computer Science",
+      "link": "https://www.ratemyprofessors.com/professor/2927311"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Asha",
+      "lastname": "Nagpal"
+    },
+    "rmpResult": {
+      "avgRating": 3.3,
+      "avgDifficulty": 3.7,
+      "wouldTakeAgainPercent": 62.8253,
+      "numRatings": 332,
+      "formattedName": "Asha Rao",
+      "department": "Biology",
+      "link": "https://www.ratemyprofessors.com/professor/1910779"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Douglas",
+      "lastname": "Nort"
+    },
+    "rmpResult": {
+      "avgRating": 4.3,
+      "avgDifficulty": 3.2,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 11,
+      "formattedName": "Douglas Hay",
+      "department": "History",
+      "link": "https://www.ratemyprofessors.com/professor/172291"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Mehdi",
+      "lastname": "Nourinejad"
+    },
+    "rmpResult": {
+      "avgRating": 2.9,
+      "avgDifficulty": 3.3,
+      "wouldTakeAgainPercent": 50,
+      "numRatings": 39,
+      "formattedName": "Mehdi Abbasi",
+      "department": "Computer Science",
+      "link": "https://www.ratemyprofessors.com/professor/2683165"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "Phillip",
       "lastname": "Oelbaum"
     },
@@ -316,6 +908,38 @@
       "formattedName": "Devin Phillip",
       "department": "Kinesiology",
       "link": "https://www.ratemyprofessors.com/professor/2882027"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Ryan",
+      "lastname": "Orszulik"
+    },
+    "rmpResult": {
+      "avgRating": 4.6,
+      "avgDifficulty": 2.1,
+      "wouldTakeAgainPercent": 87.5,
+      "numRatings": 49,
+      "formattedName": "Ryan James",
+      "department": "Anthropology",
+      "link": "https://www.ratemyprofessors.com/professor/559831"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Mary",
+      "lastname": "Ott"
+    },
+    "rmpResult": {
+      "avgRating": 5,
+      "avgDifficulty": 4,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 1,
+      "formattedName": "Mary Franks",
+      "department": "History",
+      "link": "https://www.ratemyprofessors.com/professor/2004009"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -337,6 +961,38 @@
   },
   {
     "requested": {
+      "firstname": "Danica",
+      "lastname": "Pawlick-Potts"
+    },
+    "rmpResult": {
+      "avgRating": 1.1,
+      "avgDifficulty": 2.4,
+      "wouldTakeAgainPercent": 0,
+      "numRatings": 10,
+      "formattedName": "Danica West",
+      "department": "Theater",
+      "link": "https://www.ratemyprofessors.com/professor/1879871"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Muriel",
+      "lastname": "Péguret"
+    },
+    "rmpResult": {
+      "avgRating": 2,
+      "avgDifficulty": 3,
+      "wouldTakeAgainPercent": 50,
+      "numRatings": 1,
+      "formattedName": "Muriel Wilson",
+      "department": "Marketing",
+      "link": "https://www.ratemyprofessors.com/professor/2770367"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "Stella",
       "lastname": "Peng"
     },
@@ -353,6 +1009,54 @@
   },
   {
     "requested": {
+      "firstname": "Jose",
+      "lastname": "Perez"
+    },
+    "rmpResult": {
+      "avgRating": 3.4,
+      "avgDifficulty": 3,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 26,
+      "formattedName": "Jose Curto",
+      "department": "History",
+      "link": "https://www.ratemyprofessors.com/professor/41057"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Patricia",
+      "lastname": "Perkins"
+    },
+    "rmpResult": {
+      "avgRating": 1.3,
+      "avgDifficulty": 4,
+      "wouldTakeAgainPercent": 0,
+      "numRatings": 3,
+      "formattedName": "Patricia Tedford",
+      "department": "Theatre",
+      "link": "https://www.ratemyprofessors.com/professor/3074014"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Gail",
+      "lastname": "Prasad"
+    },
+    "rmpResult": {
+      "avgRating": 3.8,
+      "avgDifficulty": 3.1,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 30,
+      "formattedName": "Gail Fraser",
+      "department": "Biology",
+      "link": "https://www.ratemyprofessors.com/professor/374074"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "Stephanie",
       "lastname": "Pugliese"
     },
@@ -364,6 +1068,86 @@
       "formattedName": "Stephanie Stephanie Jones",
       "department": "Psychology",
       "link": "https://www.ratemyprofessors.com/professor/1481171"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Nadia",
+      "lastname": "Qureshi"
+    },
+    "rmpResult": {
+      "avgRating": 1.4,
+      "avgDifficulty": 4.6,
+      "wouldTakeAgainPercent": 0,
+      "numRatings": 7,
+      "formattedName": "Nadia Massoud",
+      "department": "Finance",
+      "link": "https://www.ratemyprofessors.com/professor/1072703"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Alyssa",
+      "lastname": "Racco"
+    },
+    "rmpResult": {
+      "avgRating": 3,
+      "avgDifficulty": 4.5,
+      "wouldTakeAgainPercent": 33.3333,
+      "numRatings": 2,
+      "formattedName": "Alyssa Cothran",
+      "department": "English",
+      "link": "https://www.ratemyprofessors.com/professor/2821515"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Elena",
+      "lastname": "Rakitskaya"
+    },
+    "rmpResult": {
+      "avgRating": 3.2,
+      "avgDifficulty": 4,
+      "wouldTakeAgainPercent": 60,
+      "numRatings": 5,
+      "formattedName": "Elena Aruffo",
+      "department": "Mathematics",
+      "link": "https://www.ratemyprofessors.com/professor/2621166"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "megan",
+      "lastname": "ramsay"
+    },
+    "rmpResult": {
+      "avgRating": 3.1,
+      "avgDifficulty": 3,
+      "wouldTakeAgainPercent": 62.5,
+      "numRatings": 24,
+      "formattedName": "Megan Davies",
+      "department": "Social Science",
+      "link": "https://www.ratemyprofessors.com/professor/466452"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Catriona",
+      "lastname": "Sandilands"
+    },
+    "rmpResult": {
+      "avgRating": 3,
+      "avgDifficulty": 3.8,
+      "wouldTakeAgainPercent": 50,
+      "numRatings": 4,
+      "formattedName": "Catriona Buick",
+      "department": "Nursing",
+      "link": "https://www.ratemyprofessors.com/professor/2624161"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -389,13 +1173,45 @@
       "lastname": "Sarta"
     },
     "rmpResult": {
-      "avgRating": 1,
-      "avgDifficulty": 1,
-      "wouldTakeAgainPercent": 0,
-      "numRatings": 1,
-      "formattedName": "Andrew Temes",
-      "department": "Business",
-      "link": "https://www.ratemyprofessors.com/professor/3084781"
+      "avgRating": 3.3,
+      "avgDifficulty": 2.9,
+      "wouldTakeAgainPercent": 53.8462,
+      "numRatings": 25,
+      "formattedName": "Andrew Brankley",
+      "department": "Psychology",
+      "link": "https://www.ratemyprofessors.com/professor/3029481"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Mohamed",
+      "lastname": "Sesay"
+    },
+    "rmpResult": {
+      "avgRating": 4.8,
+      "avgDifficulty": 2.1,
+      "wouldTakeAgainPercent": 92.1053,
+      "numRatings": 45,
+      "formattedName": "Mohamed Banda",
+      "department": "Human Rights",
+      "link": "https://www.ratemyprofessors.com/professor/1889233"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Laleh",
+      "lastname": "Seyyed-Kalantari"
+    },
+    "rmpResult": {
+      "avgRating": 3.5,
+      "avgDifficulty": 2.9,
+      "wouldTakeAgainPercent": 70,
+      "numRatings": 11,
+      "formattedName": "Laleh Golshahi",
+      "department": "Engineering",
+      "link": "https://www.ratemyprofessors.com/professor/2064485"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -412,6 +1228,22 @@
       "formattedName": "Shu Xiao Li",
       "department": "Mathematics",
       "link": "https://www.ratemyprofessors.com/professor/2308173"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Yan",
+      "lastname": "Shvartzshnaider"
+    },
+    "rmpResult": {
+      "avgRating": 3.5,
+      "avgDifficulty": 2.7,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 3,
+      "formattedName": "Yan Yan Wu",
+      "department": "Business",
+      "link": "https://www.ratemyprofessors.com/professor/1902404"
     },
     "reason": "not confident match - cleared rating fields"
   },
@@ -449,6 +1281,118 @@
   },
   {
     "requested": {
+      "firstname": "Candice",
+      "lastname": "Spykers"
+    },
+    "rmpResult": {
+      "avgRating": 3.2,
+      "avgDifficulty": 2.5,
+      "wouldTakeAgainPercent": 50,
+      "numRatings": 6,
+      "formattedName": "Candice Christmas",
+      "department": "Health",
+      "link": "https://www.ratemyprofessors.com/professor/2243940"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Jesse",
+      "lastname": "Staats"
+    },
+    "rmpResult": {
+      "avgRating": 4.8,
+      "avgDifficulty": 2.2,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 12,
+      "formattedName": "Jesse thistle",
+      "department": "Education",
+      "link": "https://www.ratemyprofessors.com/professor/2610403"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Anne",
+      "lastname": "Sullivan"
+    },
+    "rmpResult": {
+      "avgRating": 3.3,
+      "avgDifficulty": 3.2,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 15,
+      "formattedName": "Anne Blais",
+      "department": "Psychology",
+      "link": "https://www.ratemyprofessors.com/professor/703517"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Seyed",
+      "lastname": "Tayebi"
+    },
+    "rmpResult": {
+      "avgRating": 1.9,
+      "avgDifficulty": 4.7,
+      "wouldTakeAgainPercent": 16.6667,
+      "numRatings": 25,
+      "formattedName": "Seyed Moghadas",
+      "department": "Mathematics",
+      "link": "https://www.ratemyprofessors.com/professor/1689740"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Kate",
+      "lastname": "Tilleczek"
+    },
+    "rmpResult": {
+      "avgRating": 3.7,
+      "avgDifficulty": 2.7,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 19,
+      "formattedName": "Kate Kaul",
+      "department": "Writing",
+      "link": "https://www.ratemyprofessors.com/professor/1794722"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Jacqui",
+      "lastname": "Traverse-Thomas"
+    },
+    "rmpResult": {
+      "avgRating": 0,
+      "avgDifficulty": 0,
+      "wouldTakeAgainPercent": 0,
+      "numRatings": 0,
+      "formattedName": "Jacqui Haddow-Green",
+      "department": "Mathematics",
+      "link": "https://www.ratemyprofessors.com/professor/3110966"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Roopa",
+      "lastname": "Trilokekar"
+    },
+    "rmpResult": {
+      "avgRating": 2.4,
+      "avgDifficulty": 3.7,
+      "wouldTakeAgainPercent": 33.3333,
+      "numRatings": 9,
+      "formattedName": "Roopa Desai",
+      "department": "Business",
+      "link": "https://www.ratemyprofessors.com/professor/2828041"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "Christine",
       "lastname": "Verrall"
     },
@@ -465,6 +1409,70 @@
   },
   {
     "requested": {
+      "firstname": "Farah",
+      "lastname": "Virani"
+    },
+    "rmpResult": {
+      "avgRating": 0,
+      "avgDifficulty": 0,
+      "wouldTakeAgainPercent": -1,
+      "numRatings": 0,
+      "formattedName": "Shift Farah",
+      "department": "Social Work",
+      "link": "https://www.ratemyprofessors.com/professor/2771864"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Graham",
+      "lastname": "Wakefield"
+    },
+    "rmpResult": {
+      "avgRating": 4.5,
+      "avgDifficulty": 2.8,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 6,
+      "formattedName": "Graham Robertson",
+      "department": "Marketing",
+      "link": "https://www.ratemyprofessors.com/professor/1176434"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Susan",
+      "lastname": "Warwick"
+    },
+    "rmpResult": {
+      "avgRating": 4.2,
+      "avgDifficulty": 2.2,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 33,
+      "formattedName": "Susan Ehrlich",
+      "department": "Languages",
+      "link": "https://www.ratemyprofessors.com/professor/42290"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Darren",
+      "lastname": "Wilson"
+    },
+    "rmpResult": {
+      "avgRating": 4.6,
+      "avgDifficulty": 3.4,
+      "wouldTakeAgainPercent": 100,
+      "numRatings": 44,
+      "formattedName": "Darren Gobert",
+      "department": "English",
+      "link": "https://www.ratemyprofessors.com/professor/258165"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
       "firstname": "H",
       "lastname": "Yildirim"
     },
@@ -476,6 +1484,22 @@
       "formattedName": "Armour M. H",
       "department": "Natural Sciences",
       "link": "https://www.ratemyprofessors.com/professor/1417898"
+    },
+    "reason": "not confident match - cleared rating fields"
+  },
+  {
+    "requested": {
+      "firstname": "Afshin",
+      "lastname": "Zare"
+    },
+    "rmpResult": {
+      "avgRating": 4.1,
+      "avgDifficulty": 3.3,
+      "wouldTakeAgainPercent": 75,
+      "numRatings": 12,
+      "formattedName": "Afshin Rezaei-Zare",
+      "department": "Engineering",
+      "link": "https://www.ratemyprofessors.com/professor/2415432"
     },
     "reason": "not confident match - cleared rating fields"
   }

@@ -22,7 +22,7 @@ const steps = [
   { num: 10, name: 'Build Course Times (JSON)', path: './step10_jsonAddTimes.js' },
   { num: 11, name: 'Cleanup Self Prerequisites (JSON)', path: './step11_cleanupSelfPrereqsJson.js' },
   { num: 13, name: 'Remove Prereqs From Approved Course List (JSON)', path: './step13_removeApprovedCoursePrereqsJson.js' },
-  { num: 12, name: 'Build Course Prerequisite Snapshot (JSON)', path: './step12_jsonCoursePrereqs.js' },
+  { num: 12, name: 'Build Course Prerequisite Snapshot (JSON, after cleanup)', path: './step12_jsonCoursePrereqs.js' },
   { num: 14, name: 'Extract Unique Values (JSON)', path: './step14_uniqueValuesJson.js' },
 ];
 

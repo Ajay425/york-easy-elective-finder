@@ -4,6 +4,7 @@ import os from 'os';
 import path from 'path';
 import { spawnSync } from 'child_process';
 import { newestArchivedCourseFile } from '../scripts/exportStaticFrontendData.js';
+import { artifactPaths } from '../step2_courseParsing/jsonPipelineArtifacts.js';
 
 const backendRoot = process.cwd();
 const archiveDir = path.join(backendRoot, 'step2_courseParsing', 'archive');
@@ -83,16 +84,18 @@ runStep('step2_courseParsing/step13_removeApprovedCoursePrereqsJson.js', {
   COURSES_FILE: coursesFile,
   STEP13_REPORT_FILE: reportFile,
 });
+runStep('step2_courseParsing/step12_jsonCoursePrereqs.js', { COURSES_FILE: coursesFile });
 runStep('step2_courseParsing/step14_uniqueValuesJson.js', {
   COURSES_FILE: coursesFile,
   STEP14_OUTPUT_FILE: uniqueFile,
 });
 
-const [courses, approved, report, unique] = await Promise.all([
+const [courses, approved, report, unique, prereqSnapshot] = await Promise.all([
   fs.readFile(coursesFile, 'utf-8').then(JSON.parse),
   fs.readFile(approvedListPath, 'utf-8').then(JSON.parse),
   fs.readFile(reportFile, 'utf-8').then(JSON.parse),
   fs.readFile(uniqueFile, 'utf-8').then(JSON.parse),
+  fs.readFile(artifactPaths.step12CoursePrereqs, 'utf-8').then(JSON.parse),
 ]);
 
 const fallWinterSource = await newestArchivedCourseFile('Fall/Winter 2026-2027');
@@ -117,6 +120,13 @@ const stillWithPrereqs = courses
   .map(courseKey);
 
 assert.deepEqual(stillWithPrereqs, [], 'approved no-real-prereq courses must have prereqs cleared');
+assert.deepEqual(
+  (prereqSnapshot.courses || [])
+    .filter((course) => approvedKeysAfterCleanup.has(courseKey(course.course)) && (course.prereqs || []).length > 0)
+    .map((course) => courseKey(course.course)),
+  [],
+  'step12 prerequisite snapshot must reflect step13 approved-prereq cleanup'
+);
 assert.ok(report.totalPrereqRowsDeleted > 0, 'expected approved-prereq cleanup to remove rows');
 assert.ok(unique.faculties.length > 0, 'expected JSON unique values to include faculties');
 assert.ok(unique.departments.length > 0, 'expected JSON unique values to include departments');
