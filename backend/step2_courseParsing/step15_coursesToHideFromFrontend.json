@@ -7,6 +7,161 @@
   ],
   "courses": [
     {
+      "id": 36,
+      "faculty": "AP",
+      "deptAcronym": "CCY",
+      "courseCode": "3999",
+      "credit": 6,
+      "name": "Research with Children and Young People: Methods",
+      "desc": "This course explores methods and methodologies for child-centred research with a focus on ethical standards and guidelines that shape the field and sustain best practice for research with children. A child-centred approach is central to examining how children can be an integral part of the research process without being subjected to objectification and/or marginalization. Prerequisites: CCY 1999 6.00, CCY 2999 6.00 Course Credit Exclusion:: AP/HUMA 3695 6.00",
+      "language": null,
+      "year": 3,
+      "prerequisites": [],
+      "prerequisiteFor": [],
+      "courseOfferings": [
+        {
+          "id": 360002,
+          "term": "F",
+          "section": "B",
+          "catNumber": "H28W01 (AP CCY ) Z82V01 (AP HUMA)",
+          "type": "SEMR",
+          "courseTimes": [
+            {
+              "type": "SEMR",
+              "componentNumber": "01",
+              "catNumber": "H28W01 (AP CCY ) Z82V01 (AP HUMA)",
+              "dayOfWeek": "M",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            },
+            {
+              "type": "SEMR",
+              "componentNumber": "01",
+              "catNumber": "H28W01 (AP CCY ) Z82V01 (AP HUMA)",
+              "dayOfWeek": "W",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 36002001,
+              "instructorId": 36002001,
+              "courseOfferingId": 360002,
+              "instructor": {
+                "id": 36002001,
+                "firstname": "Abigail",
+                "lastname": "Shabtay",
+                "avgRating": 4.9,
+                "avgDifficulty": 2.8,
+                "wouldTakeAgainPercent": 96.1538,
+                "numberOfRatings": 26,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2569292",
+                "popularity": 81
+              }
+            }
+          ]
+        },
+        {
+          "id": 360003,
+          "term": "F",
+          "section": "C",
+          "catNumber": "A75X01 (AP CCY ) X29H01 (AP HUMA)",
+          "type": "SEMR",
+          "courseTimes": [
+            {
+              "type": "SEMR",
+              "componentNumber": "01",
+              "catNumber": "A75X01 (AP CCY ) X29H01 (AP HUMA)",
+              "dayOfWeek": "M",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            },
+            {
+              "type": "SEMR",
+              "componentNumber": "01",
+              "catNumber": "A75X01 (AP CCY ) X29H01 (AP HUMA)",
+              "dayOfWeek": "W",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 36003001,
+              "instructorId": 36003001,
+              "courseOfferingId": 360003,
+              "instructor": {
+                "id": 36003001,
+                "firstname": "Abigail",
+                "lastname": "Shabtay",
+                "avgRating": 4.9,
+                "avgDifficulty": 2.8,
+                "wouldTakeAgainPercent": 96.1538,
+                "numberOfRatings": 26,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2569292",
+                "popularity": 81
+              }
+            }
+          ]
+        },
+        {
+          "id": 360001,
+          "term": "F",
+          "section": "A",
+          "catNumber": "N81N01 (AP CCY ) V35M01 (AP HUMA)",
+          "type": "BLEN",
+          "courseTimes": [
+            {
+              "type": "BLEN",
+              "componentNumber": "01",
+              "catNumber": "N81N01 (AP CCY ) V35M01 (AP HUMA)",
+              "dayOfWeek": "M",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            },
+            {
+              "type": "BLEN",
+              "componentNumber": "01",
+              "catNumber": "N81N01 (AP CCY ) V35M01 (AP HUMA)",
+              "dayOfWeek": "W",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 36001001,
+              "instructorId": 36001001,
+              "courseOfferingId": 360001,
+              "instructor": {
+                "id": 36001001,
+                "firstname": "Kabita",
+                "lastname": "Chakraborty",
+                "avgRating": 3.1,
+                "avgDifficulty": 3.5,
+                "wouldTakeAgainPercent": 33.3333,
+                "numberOfRatings": 10,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/1840294",
+                "popularity": 48
+              }
+            }
+          ]
+        }
+      ],
+      "reason": "Restricted/program-only course or missed prerequisite/restriction.",
+      "courseDescription": "This course explores methods and methodologies for child-centred research with a focus on ethical standards and guidelines that shape the field and sustain best practice for research with children. A child-centred approach is central to examining how children can be an integral part of the research process without being subjected to objectification and/or marginalization. Prerequisites: CCY 1999 6.00, CCY 2999 6.00 Course Credit Exclusion:: AP/HUMA 3695 6.00"
+    },
+    {
       "id": 317,
       "faculty": "AP",
       "deptAcronym": "CRIM",
@@ -274,6 +429,161 @@
       ],
       "reason": "Restricted/program-only course or missed prerequisite/restriction.",
       "courseDescription": "Visual criminology suggests that crime and its control cannot be understood separately from their representation. This course explores the role of images and imaging technology in crime and punishment, as well as the complex ways in which crime, criminality, and its control are visualized, constructed and framed through various forms of visual technologies, materials, and modes of representation. Prerequisite: SOSC/CRIM 1650, with a grade of at least B."
+    },
+    {
+      "id": 38,
+      "faculty": "AP",
+      "deptAcronym": "HUMA",
+      "courseCode": "3999",
+      "credit": 6,
+      "name": "Research with Children and Young People: Methods",
+      "desc": "This course explores methods and methodologies for child-centred research with a focus on ethical standards and guidelines that shape the field and sustain best practice for research with children. A child-centred approach is central to examining how children can be an integral part of the research process without being subjected to objectification and/or marginalization. Prerequisites: CCY 1999 6.00, CCY 2999 6.00 Course Credit Exclusion:: AP/HUMA 3695 6.00",
+      "language": null,
+      "year": 3,
+      "prerequisites": [],
+      "prerequisiteFor": [],
+      "courseOfferings": [
+        {
+          "id": 380002,
+          "term": "F",
+          "section": "B",
+          "catNumber": "H28W01 (AP CCY ) Z82V01 (AP HUMA)",
+          "type": "SEMR",
+          "courseTimes": [
+            {
+              "type": "SEMR",
+              "componentNumber": "01",
+              "catNumber": "H28W01 (AP CCY ) Z82V01 (AP HUMA)",
+              "dayOfWeek": "M",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            },
+            {
+              "type": "SEMR",
+              "componentNumber": "01",
+              "catNumber": "H28W01 (AP CCY ) Z82V01 (AP HUMA)",
+              "dayOfWeek": "W",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 38002001,
+              "instructorId": 38002001,
+              "courseOfferingId": 380002,
+              "instructor": {
+                "id": 38002001,
+                "firstname": "Abigail",
+                "lastname": "Shabtay",
+                "avgRating": 4.9,
+                "avgDifficulty": 2.8,
+                "wouldTakeAgainPercent": 96.1538,
+                "numberOfRatings": 26,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2569292",
+                "popularity": 81
+              }
+            }
+          ]
+        },
+        {
+          "id": 380003,
+          "term": "F",
+          "section": "C",
+          "catNumber": "A75X01 (AP CCY ) X29H01 (AP HUMA)",
+          "type": "SEMR",
+          "courseTimes": [
+            {
+              "type": "SEMR",
+              "componentNumber": "01",
+              "catNumber": "A75X01 (AP CCY ) X29H01 (AP HUMA)",
+              "dayOfWeek": "M",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            },
+            {
+              "type": "SEMR",
+              "componentNumber": "01",
+              "catNumber": "A75X01 (AP CCY ) X29H01 (AP HUMA)",
+              "dayOfWeek": "W",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 38003001,
+              "instructorId": 38003001,
+              "courseOfferingId": 380003,
+              "instructor": {
+                "id": 38003001,
+                "firstname": "Abigail",
+                "lastname": "Shabtay",
+                "avgRating": 4.9,
+                "avgDifficulty": 2.8,
+                "wouldTakeAgainPercent": 96.1538,
+                "numberOfRatings": 26,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2569292",
+                "popularity": 81
+              }
+            }
+          ]
+        },
+        {
+          "id": 380001,
+          "term": "F",
+          "section": "A",
+          "catNumber": "N81N01 (AP CCY ) V35M01 (AP HUMA)",
+          "type": "BLEN",
+          "courseTimes": [
+            {
+              "type": "BLEN",
+              "componentNumber": "01",
+              "catNumber": "N81N01 (AP CCY ) V35M01 (AP HUMA)",
+              "dayOfWeek": "M",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            },
+            {
+              "type": "BLEN",
+              "componentNumber": "01",
+              "catNumber": "N81N01 (AP CCY ) V35M01 (AP HUMA)",
+              "dayOfWeek": "W",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 38001001,
+              "instructorId": 38001001,
+              "courseOfferingId": 380001,
+              "instructor": {
+                "id": 38001001,
+                "firstname": "Kabita",
+                "lastname": "Chakraborty",
+                "avgRating": 3.1,
+                "avgDifficulty": 3.5,
+                "wouldTakeAgainPercent": 33.3333,
+                "numberOfRatings": 10,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/1840294",
+                "popularity": 48
+              }
+            }
+          ]
+        }
+      ],
+      "reason": "Restricted/program-only course or missed prerequisite/restriction.",
+      "courseDescription": "This course explores methods and methodologies for child-centred research with a focus on ethical standards and guidelines that shape the field and sustain best practice for research with children. A child-centred approach is central to examining how children can be an integral part of the research process without being subjected to objectification and/or marginalization. Prerequisites: CCY 1999 6.00, CCY 2999 6.00 Course Credit Exclusion:: AP/HUMA 3695 6.00"
     },
     {
       "id": 131,
@@ -1860,6 +2170,763 @@
       "courseDescription": "Educators develop an understanding of adolescents through the wider world. Topics include: mental health; family life and community; theories of development and health, in particular, the effects of puberty both physically, mentally and emotionally; socio-emotional life; importance of peer relationships and peer groups; school life, conflict and care; and identity and culture. These themes are explored through the lens of Indigenous and global epistemologies, and Decolonization, Equity, Diversity and Anti-Black racism. This course is only available to students in the Bachelor of Education (BEd) program."
     },
     {
+      "id": 19,
+      "faculty": "ED",
+      "deptAcronym": "EDFE",
+      "courseCode": "3100",
+      "credit": 3,
+      "name": "Teaching for Diverse & Equitable Classrooms in Ontario",
+      "desc": "In exploring issues of diversity and equity in Ontario classrooms, this course examines relationships, curriculum, learning and teaching in relation to the multiple and intersecting identities of learners and educators. This course aims to name and disrupt historical and contemporary systemic oppression in schooling that continue harm students and staff in Ontario classrooms. Examples of systemic oppression include settler colonialism, White supremacy, anti-Black racism, cis-heteropatriarchy, ethnocentrism, classism, ableism, xenophobia, Anglocentrism, Islamophobia, anti-Semitism, anti-Asian racism, and more. This course is only available to students in the Bachelor of Education (BEd) degree program.",
+      "language": null,
+      "year": 3,
+      "prerequisites": [],
+      "prerequisiteFor": [],
+      "courseOfferings": [
+        {
+          "id": 190013,
+          "term": "F",
+          "section": "Z",
+          "catNumber": "J41U01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "J41U01",
+              "dayOfWeek": "T",
+              "startTime": "14:30",
+              "durationMinutes": 170,
+              "endTime": "17:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19013001,
+              "instructorId": 19013001,
+              "courseOfferingId": 190013,
+              "instructor": {
+                "id": 19013001,
+                "firstname": "Mohamed",
+                "lastname": "Banda",
+                "avgRating": 4.8,
+                "avgDifficulty": 2.1,
+                "wouldTakeAgainPercent": 92.1053,
+                "numberOfRatings": 45,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/1889233",
+                "popularity": 84
+              }
+            }
+          ]
+        },
+        {
+          "id": 190014,
+          "term": "W",
+          "section": "M",
+          "catNumber": "C88G01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "C88G01",
+              "dayOfWeek": "R",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19014001,
+              "instructorId": 19014001,
+              "courseOfferingId": 190014,
+              "instructor": {
+                "id": 19014001,
+                "firstname": "Janette",
+                "lastname": "Holmes",
+                "avgRating": 3.4,
+                "avgDifficulty": 1.7,
+                "wouldTakeAgainPercent": 25,
+                "numberOfRatings": 7,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/588309",
+                "popularity": 51
+              }
+            }
+          ]
+        },
+        {
+          "id": 190012,
+          "term": "F",
+          "section": "Y",
+          "catNumber": "P94Y01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "P94Y01",
+              "dayOfWeek": "T",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19012001,
+              "instructorId": 19012001,
+              "courseOfferingId": 190012,
+              "instructor": {
+                "id": 19012001,
+                "firstname": "Joy",
+                "lastname": "Mannette",
+                "avgRating": 2.2,
+                "avgDifficulty": 2.5,
+                "wouldTakeAgainPercent": 40,
+                "numberOfRatings": 33,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/79433",
+                "popularity": 39
+              }
+            }
+          ]
+        },
+        {
+          "id": 190001,
+          "term": "F",
+          "section": "A",
+          "catNumber": "M24Q01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "M24Q01",
+              "dayOfWeek": "R",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19001001,
+              "instructorId": 19001001,
+              "courseOfferingId": 190001,
+              "instructor": {
+                "id": 19001001,
+                "firstname": "Kyle",
+                "lastname": "Herbert",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": -1,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190002,
+          "term": "F",
+          "section": "B",
+          "catNumber": "F71C01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "F71C01",
+              "dayOfWeek": "R",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19002001,
+              "instructorId": 19002001,
+              "courseOfferingId": 190002,
+              "instructor": {
+                "id": 19002001,
+                "firstname": "Ryan",
+                "lastname": "Kennedy",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": -1,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190003,
+          "term": "F",
+          "section": "C",
+          "catNumber": "W18K01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "W18K01",
+              "dayOfWeek": "R",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19003001,
+              "instructorId": 19003001,
+              "courseOfferingId": 190003,
+              "instructor": {
+                "id": 19003001,
+                "firstname": "Kyle",
+                "lastname": "Herbert",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": -1,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190004,
+          "term": "F",
+          "section": "D",
+          "catNumber": "P65T01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "P65T01",
+              "dayOfWeek": "R",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19004001,
+              "instructorId": 19004001,
+              "courseOfferingId": 190004,
+              "instructor": {
+                "id": 19004001,
+                "firstname": "TBA",
+                "lastname": "",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190005,
+          "term": "F",
+          "section": "E",
+          "catNumber": "J12F01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "J12F01",
+              "dayOfWeek": "R",
+              "startTime": "14:30",
+              "durationMinutes": 170,
+              "endTime": "17:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19005001,
+              "instructorId": 19005001,
+              "courseOfferingId": 190005,
+              "instructor": {
+                "id": 19005001,
+                "firstname": "TBA",
+                "lastname": "",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190006,
+          "term": "F",
+          "section": "F",
+          "catNumber": "C59Z01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "C59Z01",
+              "dayOfWeek": "F",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19006001,
+              "instructorId": 19006001,
+              "courseOfferingId": 190006,
+              "instructor": {
+                "id": 19006001,
+                "firstname": "Kyle",
+                "lastname": "Herbert",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": -1,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190007,
+          "term": "F",
+          "section": "G",
+          "catNumber": "C96K01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "C96K01",
+              "dayOfWeek": "W",
+              "startTime": "12:00",
+              "durationMinutes": 170,
+              "endTime": "14:50"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19007001,
+              "instructorId": 19007001,
+              "courseOfferingId": 190007,
+              "instructor": {
+                "id": 19007001,
+                "firstname": "TBA",
+                "lastname": "",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190008,
+          "term": "F",
+          "section": "H",
+          "catNumber": "T06W01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "T06W01",
+              "dayOfWeek": "F",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19008001,
+              "instructorId": 19008001,
+              "courseOfferingId": 190008,
+              "instructor": {
+                "id": 19008001,
+                "firstname": "Ryan",
+                "lastname": "Kennedy",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": -1,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190009,
+          "term": "F",
+          "section": "I",
+          "catNumber": "M53X01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "M53X01",
+              "dayOfWeek": "R",
+              "startTime": "14:30",
+              "durationMinutes": 170,
+              "endTime": "17:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19009001,
+              "instructorId": 19009001,
+              "courseOfferingId": 190009,
+              "instructor": {
+                "id": 19009001,
+                "firstname": "TBA",
+                "lastname": "",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190010,
+          "term": "F",
+          "section": "W",
+          "catNumber": "G00R01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "G00R01",
+              "dayOfWeek": "T",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19010001,
+              "instructorId": 19010001,
+              "courseOfferingId": 190010,
+              "instructor": {
+                "id": 19010001,
+                "firstname": "TBA",
+                "lastname": "",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190011,
+          "term": "F",
+          "section": "X",
+          "catNumber": "W47C01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "W47C01",
+              "dayOfWeek": "T",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19011001,
+              "instructorId": 19011001,
+              "courseOfferingId": 190011,
+              "instructor": {
+                "id": 19011001,
+                "firstname": "TBA",
+                "lastname": "",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190015,
+          "term": "W",
+          "section": "N",
+          "catNumber": "T35Z01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "T35Z01",
+              "dayOfWeek": "R",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19015001,
+              "instructorId": 19015001,
+              "courseOfferingId": 190015,
+              "instructor": {
+                "id": 19015001,
+                "firstname": "Stephanie",
+                "lastname": "Fearon",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": -1,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190016,
+          "term": "W",
+          "section": "O",
+          "catNumber": "M82A01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "M82A01",
+              "dayOfWeek": "R",
+              "startTime": "14:30",
+              "durationMinutes": 170,
+              "endTime": "17:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19016001,
+              "instructorId": 19016001,
+              "courseOfferingId": 190016,
+              "instructor": {
+                "id": 19016001,
+                "firstname": "TBA",
+                "lastname": "",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190017,
+          "term": "W",
+          "section": "P",
+          "catNumber": "G29J01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "G29J01",
+              "dayOfWeek": "R",
+              "startTime": "14:30",
+              "durationMinutes": 170,
+              "endTime": "17:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19017001,
+              "instructorId": 19017001,
+              "courseOfferingId": 190017,
+              "instructor": {
+                "id": 19017001,
+                "firstname": "Kyle",
+                "lastname": "Herbert",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": -1,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190018,
+          "term": "W",
+          "section": "Q",
+          "catNumber": "W76R01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "W76R01",
+              "dayOfWeek": "F",
+              "startTime": "14:30",
+              "durationMinutes": 170,
+              "endTime": "17:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19018001,
+              "instructorId": 19018001,
+              "courseOfferingId": 190018,
+              "instructor": {
+                "id": 19018001,
+                "firstname": "TBA",
+                "lastname": "",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190019,
+          "term": "W",
+          "section": "S",
+          "catNumber": "Q23D01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "Q23D01",
+              "dayOfWeek": "R",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19019001,
+              "instructorId": 19019001,
+              "courseOfferingId": 190019,
+              "instructor": {
+                "id": 19019001,
+                "firstname": "TBA",
+                "lastname": "",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 190020,
+          "term": "W",
+          "section": "U",
+          "catNumber": "J70M01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "J70M01",
+              "dayOfWeek": "R",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 19020001,
+              "instructorId": 19020001,
+              "courseOfferingId": 190020,
+              "instructor": {
+                "id": 19020001,
+                "firstname": "Farah",
+                "lastname": "Virani",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": -1,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reason": "Restricted/program-only course or missed prerequisite/restriction.",
+      "courseDescription": "In exploring issues of diversity and equity in Ontario classrooms, this course examines relationships, curriculum, learning and teaching in relation to the multiple and intersecting identities of learners and educators. This course aims to name and disrupt historical and contemporary systemic oppression in schooling that continue harm students and staff in Ontario classrooms. Examples of systemic oppression include settler colonialism, White supremacy, anti-Black racism, cis-heteropatriarchy, ethnocentrism, classism, ableism, xenophobia, Anglocentrism, Islamophobia, anti-Semitism, anti-Asian racism, and more. This course is only available to students in the Bachelor of Education (BEd) degree program."
+    },
+    {
       "id": 26,
       "faculty": "ED",
       "deptAcronym": "EDFE",
@@ -2854,6 +3921,245 @@
       ],
       "reason": "Restricted/program-only course or missed prerequisite/restriction.",
       "courseDescription": "This course begins to prepare students to be qualified teachers of English in Ontario classrooms. It allows students to examine the theories, philosophies, knowledge, policies, and practices specific to teaching English in the intermediate and senior grades, with an emphasis on fostering inclusivity and diversity. This includes considerations related to Truth and Reconciliation, Indigenous knowledges, and Anti-Black racism. The course also explores global perspectives on English education, encouraging an understanding of international contexts and diverse cultural influences. Students will engage in discussions surrounding ecological sustainability, examining how English education intersects with environmental issues and global sustainability goals. This expanded perspective aligns with the course's commitment to preparing educators who are mindful of the broader social, cultural, and environmental implications of their teaching practices. This course is only available to students in the Bachelor of Education (BEd) degree program."
+    },
+    {
+      "id": 26,
+      "faculty": "ED",
+      "deptAcronym": "EDPJ",
+      "courseCode": "1000",
+      "credit": 3,
+      "name": "Language & Literacy in the Primary-Junior Divisions",
+      "desc": "This course facilitates an understanding of the Ontario Language Curriculum in the Primary/Junior grades with a focus on exploring and critiquing current thinking about language and literacy learning and the implications for pedagogical choices. This course is only available to students in the Bachelor of Education (BEd) degree program.",
+      "language": null,
+      "year": 1,
+      "prerequisites": [],
+      "prerequisiteFor": [],
+      "courseOfferings": [
+        {
+          "id": 260002,
+          "term": "F",
+          "section": "B",
+          "catNumber": "N83X01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "N83X01",
+              "dayOfWeek": "M",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 26002001,
+              "instructorId": 26002001,
+              "courseOfferingId": 260002,
+              "instructor": {
+                "id": 26002001,
+                "firstname": "Ronald",
+                "lastname": "Benson",
+                "avgRating": 5,
+                "avgDifficulty": 1.6,
+                "wouldTakeAgainPercent": 100,
+                "numberOfRatings": 21,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/221735",
+                "popularity": 83
+              }
+            }
+          ]
+        },
+        {
+          "id": 260005,
+          "term": "F",
+          "section": "G",
+          "catNumber": "D54R01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "D54R01",
+              "dayOfWeek": "T",
+              "startTime": "9:00",
+              "durationMinutes": 170,
+              "endTime": "11:50"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 26005001,
+              "instructorId": 26005001,
+              "courseOfferingId": 260005,
+              "instructor": {
+                "id": 26005001,
+                "firstname": "Mara",
+                "lastname": "Reich",
+                "avgRating": 4.5,
+                "avgDifficulty": 2.2,
+                "wouldTakeAgainPercent": 71.4286,
+                "numberOfRatings": 13,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2841347",
+                "popularity": 67
+              }
+            }
+          ]
+        },
+        {
+          "id": 260001,
+          "term": "F",
+          "section": "A",
+          "catNumber": "U36W01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "U36W01",
+              "dayOfWeek": "M",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 26001001,
+              "instructorId": 26001001,
+              "courseOfferingId": 260001,
+              "instructor": {
+                "id": 26001001,
+                "firstname": "Eleanor",
+                "lastname": "Johnston",
+                "avgRating": 1.2,
+                "avgDifficulty": 3.8,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 34,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2834963",
+                "popularity": 16
+              }
+            }
+          ]
+        },
+        {
+          "id": 260006,
+          "term": "F",
+          "section": "U",
+          "catNumber": "R24Y01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "R24Y01",
+              "dayOfWeek": "T",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 26006001,
+              "instructorId": 26006001,
+              "courseOfferingId": 260006,
+              "instructor": {
+                "id": 26006001,
+                "firstname": "Eleanor",
+                "lastname": "Johnston",
+                "avgRating": 1.2,
+                "avgDifficulty": 3.8,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 34,
+                "department": null,
+                "rateMyProfLink": "https://www.ratemyprofessors.com/professor/2834963",
+                "popularity": 16
+              }
+            }
+          ]
+        },
+        {
+          "id": 260003,
+          "term": "F",
+          "section": "C",
+          "catNumber": "H30R01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "H30R01",
+              "dayOfWeek": "T",
+              "startTime": "8:30",
+              "durationMinutes": 170,
+              "endTime": "11:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 26003001,
+              "instructorId": 26003001,
+              "courseOfferingId": 260003,
+              "instructor": {
+                "id": 26003001,
+                "firstname": "TBA",
+                "lastname": "",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": 0,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": 260004,
+          "term": "F",
+          "section": "D",
+          "catNumber": "A77D01",
+          "type": "LECT",
+          "courseTimes": [
+            {
+              "type": "LECT",
+              "componentNumber": "01",
+              "catNumber": "A77D01",
+              "dayOfWeek": "T",
+              "startTime": "11:30",
+              "durationMinutes": 170,
+              "endTime": "14:20"
+            }
+          ],
+          "instructors": [
+            {
+              "id": 26004001,
+              "instructorId": 26004001,
+              "courseOfferingId": 260004,
+              "instructor": {
+                "id": 26004001,
+                "firstname": "Mary",
+                "lastname": "Ott",
+                "avgRating": 0,
+                "avgDifficulty": 0,
+                "wouldTakeAgainPercent": -1,
+                "numberOfRatings": 0,
+                "department": null,
+                "rateMyProfLink": null,
+                "popularity": 0
+              }
+            }
+          ]
+        }
+      ],
+      "reason": "Restricted/program-only course or missed prerequisite/restriction.",
+      "courseDescription": "This course facilitates an understanding of the Ontario Language Curriculum in the Primary/Junior grades with a focus on exploring and critiquing current thinking about language and literacy learning and the implications for pedagogical choices. This course is only available to students in the Bachelor of Education (BEd) degree program."
     },
     {
       "id": 68,
