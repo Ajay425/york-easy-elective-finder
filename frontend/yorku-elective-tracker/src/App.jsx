@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Routes , Route} from 'react-router-dom';
 import Home from './components/sections/Home.jsx';
 import Electives from './components/sections/Electives.jsx';
 import ContactUs from './components/sections/Contact.jsx';
+import { Analytics } from '@vercel/analytics/react';
 
 
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
         </Routes>
       </Router>
+      <Analytics />
     </div>
   )
 }
