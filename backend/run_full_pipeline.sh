@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+z#!/usr/bin/env bash
 
 # Run the full pipeline:
 # 1) run step1_PythonCourseScraper/step_1_open_subject.py inside its virtualenv

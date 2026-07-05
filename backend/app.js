@@ -46,6 +46,7 @@ app.use(passport.initialize());
 const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false });
 
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '127.0.0.1';
 
 async function ensureCountFile() {
     await fs.mkdir(RUNTIME_STATE_DIR, { recursive: true });
@@ -108,11 +109,11 @@ app.use("/prereq", prereqRouter)
 // Protect admin routes with Passport-JWT
 app.use('/admin', passport.authenticate('jwt', { session: false, failureRedirect: '/admin/login' }), adminRouter);
 
-app.listen(PORT, (err)=>{
+app.listen(PORT, HOST, (err)=>{
         if (err){
             console.log(err)
         }
         else{
-                console.log("Sucessfully running on PORT " + PORT)
+                console.log(`Sucessfully running on ${HOST}:${PORT}`)
         }
 })
