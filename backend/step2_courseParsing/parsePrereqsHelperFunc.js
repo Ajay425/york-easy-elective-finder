@@ -1,86 +1,174 @@
-// parsePrereqs.js
+const KNOWN_FACULTY_PREFIXES = new Set([
+  "AP",
+  "ED",
+  "EU",
+  "FA",
+  "GL",
+  "GS",
+  "HH",
+  "LE",
+  "SB",
+  "SC",
+  // Historical York prefixes that still appear in old course descriptions.
+  "AK",
+  "AS",
+]);
 
-// const courseData = {
-//   description: `This two-course sequence develops students' understanding of financial accounting information so that they can be informed and effective users of the information. The courses focus on uses of accounting information for different decisions and from different stakeholder perspectives, and consider the economic and behavioural effects that accounting treatments have on users and preparers. Readings from current publications are used to demonstrate practical applications of the issues discussed in class. Classroom techniques such as case studies, classroom discussions, student presentations and group and individual research projects (intended to develop students' critical skills) are employed. Prerequisite: SB/ ACTG 2010 3.00. Course Credit Exclusion: GL/ECON 2710 3.00.`
-// };
- export function extractPrereqsWithCredits(description) {
-  // ✅ Capture only the "Prerequisite(s)" or "Pre-requisite(s)" section
-  // Stops before known headers or end of string.
-  const prereqBlockRe =
-    /\bPre-?requisite[s]?\s*:\s*([\s\S]*?)(?=(?:\s*(?:\.|\)|;)?\s*(?:Course\s+Credit\s+Exclusions?[^:]*:|Course\s+Credit\s+Exclusion[^:]*:|Co-?requisites?[^:]*:|Corequisites?[^:]*:|(?:NCR\s+)?Notes?[^:]*:|Open\s+to\b|Prior\s+to\b|Previously\b[^:]*:)|$))/gi;
+const REQUIREMENT_HEADER_RE =
+  /\b(?:(?:Course|General|MBA|MFIN)\s+)?(?:Pre-?\s*requisite(?:s|\(s\))?(?:\s*(?:\/|and|or)\s*Co-?\s*requisite(?:s|\(s\))?)?|Co-?\s*requisite(?:s|\(s\))?(?:\s*(?:\/|and|or)\s*Pre-?\s*requisite(?:s|\(s\))?)?|Pre\s*(?:-?\s*\/\s*|-?\s*or\s+|-?\s*and\s+)Co-?\s*requisite(?:s|\(s\))?|Co\s*(?:-?\s*\/\s*|-?\s*or\s+|-?\s*and\s+)Pre-?\s*requisite(?:s|\(s\))?)(?:\s+for\b[^:.]{0,120})?\s*:?\s*:\s*/gi;
 
-  // ✅ Course with credits (e.g., LE/EECS2030 3.00)
-  const fullCourseRe = /([A-Z]{1,3})\s*\/\s*([A-Z]+)\s*(\d{3,4}[A-Z]?)\s+(\d+(?:\.\d+)?)/g;
+const STOP_HEADER_RE =
+  /\b(?:(?:Strongly\s+)?Recommended[^:]*:|Suggested[^:]*:|Former\s+(?:pre-?\s*requisite|co-?\s*requisite)[^:]*:|Course\s+Credit\s+Exclusions?\b[^:.]{0,80}:?|Course\s+Credit\s+Exclusion\b[^:.]{0,80}:?|Course\s+Exclusions?\b[^:.]{0,80}:?|Course\s+Exclusion\b[^:.]{0,80}:?|Students\s+may\s+not\s+(?:also\s+)?receive\s+credit\b|NCR\s+Note[^:]*:|NCR\s*:|Notes?[^:]*:|Open\s+to\b|Not\s+open\s+to\b|Prior\s+to\b|Previously\b[^:]*:|Cross-?List(?:ed|ing)?[^:]*:|Integrated\s+with\b|CCEs?\s*:)/gi;
 
-  // ✅ Credits-only tails (e.g., "or 6.00")
-  const creditsOnlyRe = /\bor\s+(\d+(?:\.\d+)?)(?!\s*\/)/gi;
+const FULL_COURSE_RE =
+  /\b((?:[A-Z]{2,5}\s*\/\s*)*[A-Z]{2,5})\s*(\d{3,4}[A-Z]?)\s+(\d+(?:\.\d+)?)/g;
 
-  const results = [];
-  const blocks = [...description.matchAll(prereqBlockRe)];
-  if (blocks.length === 0) return [];
+const CREDITS_ONLY_RE = /\bor\s+(\d+(?:\.\d+)?)(?!\s*\/)/gi;
 
-  for (const block of blocks) {
-    let text = block[1].trim();
+function normalizeContext(context = {}) {
+  return {
+    faculty: String(context.facultyPrefix || context.faculty || "").trim().toUpperCase(),
+    dept: String(context.dept || context.deptAcronym || "").trim().toUpperCase(),
+  };
+}
 
-    // 🧩 Fallback: if no known keyword follows, and the text continues past the
-    // final course, stop at the *last* sentence-ending period that is NOT part of a credit number.
-    const fallbackMatch = /(?<!\d)\.\s+[A-Z]/.exec(text);
-    if (fallbackMatch) {
-      const cutoff = fallbackMatch.index + 1;
-      text = text.slice(0, cutoff);
+function isIgnoredRequirementHeader(description, index) {
+  const before = description.slice(Math.max(0, index - 48), index);
+  return /(?:strongly\s+)?recommended\s+$|suggested\s+$|former\s+$|not\s+(?:a\s+)?$/i.test(before);
+}
+
+function requirementTypeFromHeader(headerText) {
+  return /co-?\s*requisite|corequisite|\bco\b/i.test(headerText) ? "corequisite" : "prerequisite";
+}
+
+function findRequirementHeaders(description) {
+  const headers = [];
+  for (const match of description.matchAll(REQUIREMENT_HEADER_RE)) {
+    if (isIgnoredRequirementHeader(description, match.index)) continue;
+    headers.push({
+      index: match.index,
+      end: match.index + match[0].length,
+      type: requirementTypeFromHeader(match[0]),
+    });
+  }
+  return headers;
+}
+
+function firstStopIndex(text) {
+  let earliest = text.length;
+  for (const match of text.matchAll(STOP_HEADER_RE)) {
+    earliest = Math.min(earliest, match.index);
+  }
+
+  return earliest;
+}
+
+function extractRequirementBlocks(description) {
+  const headers = findRequirementHeaders(description);
+  const blocks = [];
+
+  for (let i = 0; i < headers.length; i++) {
+    const header = headers[i];
+    const nextHeaderIndex = i + 1 < headers.length ? headers[i + 1].index : description.length;
+    const rawText = description.slice(header.end, nextHeaderIndex);
+    const text = rawText.slice(0, firstStopIndex(rawText)).trim();
+    if (text) blocks.push({ text, type: header.type });
+  }
+
+  return blocks;
+}
+
+function subjectsFromRaw(rawSubject, context) {
+  const normalized = rawSubject.replace(/\s+/g, "").toUpperCase();
+  const parts = normalized.split("/").filter(Boolean);
+  if (parts.length === 0) return [];
+
+  if (parts.length === 1) {
+    if (!context.faculty) return [];
+    return [{ faculty: context.faculty, dept: parts[0] }];
+  }
+
+  if (KNOWN_FACULTY_PREFIXES.has(parts[0])) {
+    const faculty = parts[0];
+    const rest = parts.slice(1);
+    const legacyFacultyPrefixes = rest.slice(0, -1).filter((part) => KNOWN_FACULTY_PREFIXES.has(part));
+
+    if (legacyFacultyPrefixes.length > 0) {
+      const dept = rest[rest.length - 1];
+      return [faculty, ...legacyFacultyPrefixes].map((prefix) => ({ faculty: prefix, dept }));
     }
 
-    const fullMatches = [...text.matchAll(fullCourseRe)];
+    return rest.map((dept) => ({ faculty, dept }));
+  }
+
+  if (parts.length > 2) {
+    const facultyIndex = parts.findIndex((part) => KNOWN_FACULTY_PREFIXES.has(part));
+    if (facultyIndex >= 0 && facultyIndex + 1 < parts.length) {
+      return [{ faculty: parts[facultyIndex], dept: parts[parts.length - 1] }];
+    }
+  }
+
+  if (context.faculty) {
+    return parts.map((dept) => ({ faculty: context.faculty, dept }));
+  }
+
+  return [];
+}
+
+function pushCourse(results, subject, code, credits, requirementType) {
+  const year = parseInt(code[0], 10);
+  results.push({
+    full: `${subject.faculty}/${subject.dept} ${code} ${credits}`,
+    faculty: subject.faculty,
+    dept: subject.dept,
+    code,
+    credits,
+    year,
+    requirementType,
+  });
+}
+
+export function extractPrereqsWithCredits(description, context = {}) {
+  const normalizedContext = normalizeContext(context);
+  const results = [];
+  const blocks = extractRequirementBlocks(String(description || ""));
+
+  for (const block of blocks) {
+    const fullMatches = [...block.text.matchAll(FULL_COURSE_RE)];
     if (fullMatches.length === 0) continue;
 
     for (let i = 0; i < fullMatches.length; i++) {
-      const m = fullMatches[i];
-      const faculty = m[1].toUpperCase().trim();
-      const dept = m[2].toUpperCase().trim();
-      const code = m[3].toUpperCase().trim();
-      const credits = parseFloat(m[4]);
-      const subject = `${faculty}/${dept}`;
+      const match = fullMatches[i];
+      const subjects = subjectsFromRaw(match[1], normalizedContext);
+      const code = match[2].toUpperCase().trim();
+      const credits = parseFloat(match[3]);
 
-      // ✅ Extract year from first digit of the numeric code
-      const year = parseInt(code[0], 10);
+      if (subjects.length === 0 || Number.isNaN(credits)) continue;
 
-      // Push the main match
-      results.push({
-        full: `${subject} ${code} ${credits}`,
-        faculty,
-        dept,
-        code,
-        credits,
-        year, // 👈 new field
-      });
+      for (const subject of subjects) {
+        pushCourse(results, subject, code, credits, block.type);
+      }
 
-      // Handle "or 6.00" style credits
-      const start = m.index + m[0].length;
-      const end =
-        i + 1 < fullMatches.length ? fullMatches[i + 1].index : text.length;
-      const tail = text.slice(start, end);
+      const start = match.index + match[0].length;
+      const end = i + 1 < fullMatches.length ? fullMatches[i + 1].index : block.text.length;
+      const tail = block.text.slice(start, end);
 
-      for (const c of tail.matchAll(creditsOnlyRe)) {
-        results.push({
-          full: `${subject} ${code} ${c[1]}`,
-          faculty,
-          dept,
-          code,
-          credits: parseFloat(c[1]),
-          year, // 👈 keep same year
-        });
+      for (const creditOnly of tail.matchAll(CREDITS_ONLY_RE)) {
+        const alternateCredits = parseFloat(creditOnly[1]);
+        if (Number.isNaN(alternateCredits)) continue;
+        for (const subject of subjects) {
+          pushCourse(results, subject, code, alternateCredits, block.type);
+        }
       }
     }
   }
 
-  // ✅ Deduplicate
-  return Array.from(new Map(results.map((o) => [o.full, o])).values());
+  return Array.from(
+    new Map(
+      results.map((item) => [
+        `${item.faculty}|${item.dept}|${item.code}|${item.credits}|${item.requirementType}`,
+        item,
+      ])
+    ).values()
+  );
 }
-
-
-
-// Test
-// const prereqs = extractPrereqsWithCredits(courseData.description);
-// console.log("Extracted prerequisites (deduped):");
-// console.log(prereqs);
-

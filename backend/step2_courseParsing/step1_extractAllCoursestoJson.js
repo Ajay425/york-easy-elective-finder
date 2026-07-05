@@ -4,7 +4,7 @@ import * as cheerio from "cheerio";
 import { fileURLToPath } from "url";
 
 import { extractPrereqsWithCredits } from "./parsePrereqsHelperFunc.js";
-import { Console } from "console";
+import { mergeFreshCoursesWithArchive } from "./mergePreviousCourses.js";
 
 const PROGRESS_EVERY = 100;
 
@@ -14,9 +14,9 @@ const __dirname = path.dirname(__filename);
 
 // Include session metadata from step1 so we can tag offerings with term+year
 const sessionMetaPath = path.join(__dirname, "../step1_PythonCourseScraper/session_meta.json");
-let termAndYear = null;
+let termAndYear = process.env.TERM_AND_YEAR || null;
 try {
-  if (fs.existsSync(sessionMetaPath)) {
+  if (!termAndYear && fs.existsSync(sessionMetaPath)) {
     const raw = fs.readFileSync(sessionMetaPath, "utf-8");
     const meta = JSON.parse(raw);
     termAndYear = meta.termAndYear || meta.sessionName || null;
@@ -123,7 +123,7 @@ const match = heading.match(/^([A-Z]{1,3})\/([A-Z]+)\s+(\d{4}[A-Z]?)\s+([\d.]+)\
   const language = langHeader.next("p").text().replace(/\s+/g, " ").trim();
 
   // 4️⃣ Extract prerequisites
-  const prereqs = extractPrereqsWithCredits(description);
+  const prereqs = extractPrereqsWithCredits(description, { facultyPrefix, dept });
 
   // 5️⃣ Extract all term/meeting information
   const termRows = $("td.bodytext:contains('Term')");
@@ -148,11 +148,18 @@ const match = heading.match(/^([A-Z]{1,3})\/([A-Z]+)\s+(\d{4}[A-Z]?)\s+([\d.]+)\
 // ------------------------------------------------------
 
 // Root folder where all subjects are stored
-const baseDir = path.resolve(__dirname, "../step1_PythonCourseScraper/york_courses");
+const baseDir = process.env.COURSE_HTML_DIR
+  ? path.resolve(process.env.COURSE_HTML_DIR)
+  : path.resolve(__dirname, "../step1_PythonCourseScraper/york_courses");
 
 // Output files
-const outputFile = path.join(__dirname, "all_courses.json");
-const failedFilePath = path.join(__dirname, "failedParsing.json");
+const outputFile = process.env.COURSES_OUTPUT_FILE || path.join(__dirname, "all_courses.json");
+const failedFilePath = process.env.FAILED_PARSING_FILE || path.join(__dirname, "failedParsing.json");
+const archiveDir = process.env.PREVIOUS_COURSE_ARCHIVE_DIR || path.join(__dirname, "archive");
+const scraperFailureReportPath = process.env.SCRAPER_FAILURE_REPORT_FILE
+  || path.join(__dirname, "../step1_PythonCourseScraper/failed_scrape_report.json");
+const mergeReportPath = process.env.STEP1_MERGE_REPORT_FILE
+  || path.join(__dirname, "../runtime/reports/step1_mergePreviousCoursesReport.json");
 
 /**
  * Recursively collect all HTML files from a directory tree
@@ -229,12 +236,43 @@ for (let i = 0; i < allHtmlFiles.length; i++) {
   }
 }
 
+const mergeEnabled = process.env.MERGE_PREVIOUS_COURSES !== "0";
+let outputCourses = allCourses;
+
+if (mergeEnabled) {
+  try {
+    const mergeResult = await mergeFreshCoursesWithArchive(allCourses, {
+      archiveDir,
+      termAndYear,
+      failureReportPath: scraperFailureReportPath,
+      outputReportPath: mergeReportPath,
+    });
+    outputCourses = mergeResult.courses;
+
+    if (mergeResult.report.carriedForwardCount > 0) {
+      console.warn(
+        `[step1] Carrying forward ${mergeResult.report.carriedForwardCount} course(s) from previous archive. `
+        + `Reasons: ${mergeResult.report.reasons.join(", ")}. Report: ${mergeReportPath}`
+      );
+    } else {
+      console.log(`[step1] Previous-archive merge checked; no courses carried forward. Report: ${mergeReportPath}`);
+    }
+  } catch (err) {
+    console.warn(`[step1] Previous-archive merge failed; using fresh parse only: ${err.message}`);
+  }
+} else {
+  console.log("[step1] Previous-archive merge disabled by MERGE_PREVIOUS_COURSES=0.");
+}
+
 // ------------------------------------------------------
 //  SAVE RESULTS TO JSON
 // ------------------------------------------------------
 try {
-  fs.writeFileSync(outputFile, JSON.stringify(allCourses, null, 2), "utf-8");
-  console.log(`[step1] Parsed ${allCourses.length} courses.`);
+  fs.writeFileSync(outputFile, JSON.stringify(outputCourses, null, 2), "utf-8");
+  console.log(`[step1] Parsed ${allCourses.length} fresh courses.`);
+  if (outputCourses.length !== allCourses.length) {
+    console.log(`[step1] Wrote ${outputCourses.length} courses after previous-archive fallback.`);
+  }
   console.log(`[step1] Wrote output to: ${outputFile}`);
 } catch (err) {
   console.error("❌ Failed to write all_courses.json:", err.message);

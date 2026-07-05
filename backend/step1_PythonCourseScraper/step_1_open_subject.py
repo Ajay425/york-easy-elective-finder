@@ -20,6 +20,7 @@ SAVE_DIR = "york_courses"
 PROGRESS_FILE = "progress.txt"
 LOG_FILE = "scraper.log"
 RUN_COMPLETE_MARKER = "run_complete.marker"
+FAILED_SCRAPE_REPORT = "failed_scrape_report.json"
 # Persist session metadata so downstream steps can tag offerings with term+year
 SESSION_META_FILE = "session_meta.json"
 SESSION_META_SAVED = False
@@ -31,10 +32,13 @@ PROGRESS_FILE_PATH = os.path.join(BASE_DIR, PROGRESS_FILE)
 
 COOLDOWN_SECONDS = 300              # 5 minutes (only after many consecutive fails)
 SUBJECT_ERROR_THRESHOLD = 5
+SUBJECT_MAX_TOTAL_ERRORS = 15       # skip/report a subject instead of looping forever
 COURSE_MAX_CONSEC_FAILS = 5         # only cooldown after 5 consecutive failures
+COURSE_MAX_TOTAL_ATTEMPTS = 25      # skip/report a course instead of looping forever
 SHORT_BACKOFF_BASE = 10             # seconds; doubles each retry attempt
 RELAUNCH_PAUSE_SECONDS = 15         # pause after relaunch to avoid instant re-block
 SESSION_MAX_COURSES = 50            # Relaunch browser every N courses to refresh fingerprint
+SUBJECT_CODE_GUARD_MIN_COURSES = 3
 # ----------------------------------------------------------
 
 logging.basicConfig(
@@ -79,6 +83,53 @@ def file_is_valid_html(path: str, min_bytes: int = 800) -> bool:
 def cooldown(reason: str) -> None:
     logging.warning(f"🧊 Cooldown ({COOLDOWN_SECONDS/60:.0f} min): {reason}")
     time.sleep(COOLDOWN_SECONDS)
+
+class SubjectMismatchError(RuntimeError):
+    pass
+
+def utc_now_iso() -> str:
+    return datetime.datetime.now(datetime.UTC).isoformat()
+
+def subject_code_from_name(subject_name: str) -> str:
+    return subject_name.split(" - ", 1)[0].strip().upper()
+
+def course_dept_from_code(code: str) -> Optional[str]:
+    match = re.match(r"^[A-Z]{2}\/([A-Z0-9]+)\s+\d{4}\s+\d\.\d{2}$", code.strip())
+    return match.group(1).upper() if match else None
+
+def validate_subject_course_list(subject_name: str, courses: List[Tuple[str, str]]) -> None:
+    expected = subject_code_from_name(subject_name)
+    if not expected or len(courses) < SUBJECT_CODE_GUARD_MIN_COURSES:
+        return
+
+    dept_counts = {}
+    for code, _title in courses:
+        dept = course_dept_from_code(code)
+        if dept:
+            dept_counts[dept] = dept_counts.get(dept, 0) + 1
+
+    if not dept_counts or expected in dept_counts:
+        return
+
+    sample = ", ".join(f"{code} - {title}" for code, title in courses[:5])
+    observed = ", ".join(f"{dept}:{count}" for dept, count in sorted(dept_counts.items()))
+    raise SubjectMismatchError(
+        f"Subject results mismatch for {subject_name}: expected course dept {expected}, "
+        f"observed {observed}. Sample rows: {sample}"
+    )
+
+def write_failed_scrape_report(failed_subjects, failed_courses) -> None:
+    report_path = os.path.join(BASE_DIR, FAILED_SCRAPE_REPORT)
+    payload = {
+        "generatedAt": utc_now_iso(),
+        "failedSubjects": failed_subjects,
+        "failedCourses": failed_courses,
+    }
+    try:
+        with open(report_path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2)
+    except Exception as e:
+        logging.warning(f"⚠️ Failed to write {FAILED_SCRAPE_REPORT}: {e}")
 
 # ----------------------------------------------------------
 # 🕐 DAILY MAINTENANCE CHECK
@@ -439,6 +490,8 @@ def main() -> None:
         logging.info(f"🚀 Launching Playwright browser (FAST_MODE={FAST_MODE})")
         browser, context, page = new_session()
         courses_in_session = 0
+        failed_subjects = []
+        failed_courses = []
 
         # Build subjects list
         check_maintenance_window()
@@ -484,6 +537,13 @@ def main() -> None:
             try:
                 if os.path.exists(run_complete_marker):
                     os.remove(run_complete_marker)
+            except Exception:
+                pass
+
+            try:
+                failed_report_path = os.path.join(BASE_DIR, FAILED_SCRAPE_REPORT)
+                if os.path.exists(failed_report_path):
+                    os.remove(failed_report_path)
             except Exception:
                 pass
 
@@ -546,6 +606,8 @@ def main() -> None:
             os.makedirs(subj_dir, exist_ok=True)
 
             subject_errors = 0
+            skipped_subject = False
+            failed_course_keys: Set[Tuple[str, str]] = set()
             while True:
                 check_maintenance_window()
 
@@ -583,18 +645,46 @@ def main() -> None:
                         break
                     
                     courses = collect_course_list(page)
+                    validate_subject_course_list(subject_name, courses)
                     logging.info(f"   → Found {len(courses)} courses")
                 except Exception as e:
                     subject_errors += 1
                     logging.warning(f"⚠️ Subject load failed: {e}")
-                    if subject_errors >= SUBJECT_ERROR_THRESHOLD:
+                    should_skip_subject = (
+                        isinstance(e, SubjectMismatchError) and subject_errors >= SUBJECT_ERROR_THRESHOLD
+                    ) or subject_errors >= SUBJECT_MAX_TOTAL_ERRORS
+
+                    if should_skip_subject:
+                        failed_subjects.append({
+                            "subject": subject_name,
+                            "subjectValue": subject_value,
+                            "failedAt": utc_now_iso(),
+                            "errors": subject_errors,
+                            "reason": str(e),
+                        })
+                        write_failed_scrape_report(failed_subjects, failed_courses)
+                        logging.error(
+                            f"⛔ Skipping subject after {subject_errors} failed load attempt(s): {subject_name}"
+                        )
+                        with open(PROGRESS_FILE_PATH, "a", encoding="utf-8") as f:
+                            f.write(subject_name + "\n")
+                        skipped_subject = True
+                        close_session(browser, context)
+                        browser, context, page = new_session()
+                        courses_in_session = 0
+                        time.sleep(RELAUNCH_PAUSE_SECONDS)
+                        break
+
+                    if subject_errors % SUBJECT_ERROR_THRESHOLD == 0:
                         cooldown("Too many subject errors; backing off.")
-                        subject_errors = 0
                         close_session(browser, context)
                         browser, context, page = new_session()
                         courses_in_session = 0
                         time.sleep(RELAUNCH_PAUSE_SECONDS)
                     continue
+
+                if skipped_subject:
+                    break
 
                 # Per-course loop
                 for i, (code, title) in enumerate(courses, start=1):
@@ -610,6 +700,7 @@ def main() -> None:
                         continue
 
                     consec_fail = 0
+                    total_fail = 0
 
                     while True:
                         check_maintenance_window()
@@ -633,10 +724,28 @@ def main() -> None:
                         except Exception as e:
                             elapsed = time.time() - t0
                             consec_fail += 1
+                            total_fail += 1
 
                             logging.warning(
                                 f"      ⚠️ Attempt took {elapsed:.1f}s before failing for {code}: {e}"
                             )
+
+                            if total_fail >= COURSE_MAX_TOTAL_ATTEMPTS:
+                                failed_course_keys.add((code, title))
+                                failed_courses.append({
+                                    "subject": subject_name,
+                                    "subjectValue": subject_value,
+                                    "code": code,
+                                    "title": title,
+                                    "failedAt": utc_now_iso(),
+                                    "attempts": total_fail,
+                                    "reason": str(e),
+                                })
+                                write_failed_scrape_report(failed_subjects, failed_courses)
+                                logging.error(
+                                    f"      ⛔ Skipping course after {total_fail} failed attempt(s): {code} - {title}"
+                                )
+                                break
 
                             msg = str(e)
                             if ("Search By Subject" in msg) or ("Blocked/interstitial" in msg) or ("cloudflare" in msg.lower()) or ("session" in msg.lower()):
@@ -680,6 +789,9 @@ def main() -> None:
                 # Verify completion
                 all_ok = True
                 for (code, title) in courses:
+                    if (code, title) in failed_course_keys:
+                        logging.warning(f"⚠️ Subject completion accepted with failed course recorded: {code} - {title}")
+                        continue
                     fn = sanitize_filename(f"{code}_{title}_CourseSchedule.html")
                     fp = os.path.join(subj_dir, fn)
                     if not file_is_valid_html(fp):

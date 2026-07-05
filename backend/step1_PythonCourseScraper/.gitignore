@@ -2,3 +2,4 @@ venv/
 york_courses/
 progress.txt
 scraper.log
+failed_scrape_report.json

@@ -1,6 +1,6 @@
 {
   "msg": "success",
-  "generatedAt": "2026-07-02T23:43:06.878Z",
+  "generatedAt": "2026-07-05T19:13:39.002Z",
   "termAndYear": "Fall/Winter 2026-2027",
   "source": "backend/step2_courseParsing/archive/all_courses_FallWinter_2026-2027_2026-07-01T15-50-18-610Z.json",
   "sourceKind": "latest-completed-archive",
@@ -8,11 +8,11 @@
   "sourceCourseCount": 4321,
   "approvedNoRealPrereqCourses": 36,
   "approvedNoRealPrereqRowsCleared": 88,
-  "manuallyHiddenCourses": 37,
-  "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/FACC - Financial Accountability - ( GS )/GS_FACC 6550 3.00_Governance and Regulation of Anti-Money Laundering and Terrorist Financing_CourseSchedule.html",
-  "rawYorkCoursesNewestMtime": "2026-07-02T23:42:54.647Z",
+  "manuallyHiddenCourses": 463,
+  "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/ADMS - Administrative Studies - ( AP )/AP_ADMS 3705 3.00_Emergency Management_ Field Experience_CourseSchedule.html",
+  "rawYorkCoursesNewestMtime": "2026-07-05T19:13:21.622Z",
   "rawYorkCoursesNewerThanSource": true,
-  "courseCount": 1826,
+  "courseCount": 1400,
   "terms": [
     {
       "term": "F",
@@ -42,17 +42,14 @@
     "ISTY",
     "FDEX",
     "FIEL",
-    "INSP",
     "LGCL",
-    "THES",
-    "WKSP",
-    "COOP"
+    "WKSP"
   ],
   "hasTimingData": true,
   "stats": {
-    "offeringsWithCatNumbers": 5796,
-    "offeringsWithTimes": 4965,
-    "instructorsWithRmpLinks": 777,
+    "offeringsWithCatNumbers": 4816,
+    "offeringsWithTimes": 4291,
+    "instructorsWithRmpLinks": 629,
     "courseTimeHtmlFiles": 11,
     "courseTimeComponentsParsed": 14777,
     "courseTimeRowsParsed": 14931,

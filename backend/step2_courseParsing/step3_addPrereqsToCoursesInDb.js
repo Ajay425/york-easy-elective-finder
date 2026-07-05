@@ -55,7 +55,10 @@ async function processCourses(prisma, courses6) {
     stats.coursesScanned++;
     if (!c.desc) continue;
 
-    const prereqs = extractPrereqsWithCredits(c.desc);
+    const prereqs = extractPrereqsWithCredits(c.desc, {
+      faculty: c.faculty,
+      deptAcronym: c.deptAcronym,
+    });
     if (prereqs.length === 0) continue;
     stats.coursesWithPrereqs++;
 
