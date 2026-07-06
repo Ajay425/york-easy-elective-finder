@@ -14297,6 +14297,456 @@
       "desc": "This experiential education course reflects the work term component of the Technology Internship Program (TIP). Qualified Honours students gain relevant work experience as an integrated complement to their academic studies, reflected in the requirements of a learning agreement and work term report. Students are required to register in this course for each four month work term, with the maximum number of work term courses being four ( i.e. 16 months). Students in this course receive assistance from the Career Centre prior to and during their internship, and are also assigned a Faculty Supervisor/Committee. Prerequisites: Enrolment is by permission only. Criteria for permission include: (1) that students have successfully completed at least nine PHYS credits at the 3000-level or higher, and have a GPA of at least 5.00 in SC/PHYS courses overall; (2) that students are enrolled full-time in the Honours program prior to beginning their internship and have attended the mandatory preparatory sessions as outlined by the Career Centre; (3) that students have not been absent for more than two consecutive years as a full-time student from their Honours degree studies; (4) that upon enrolling in this course students have a minimum of nine credits remaining towards their Honours degree and need to return as a full-time student for at least one academic term to complete their degree after completion of their final work term. Registration in SC/PHYS 3900 0.00 provides a record on the transcript for each work term.",
       "reason": "Reviewed active-course exclusion: placement/practicum/co-op/internship course; permission/application-gated course.",
       "courseDescription": "This experiential education course reflects the work term component of the Technology Internship Program (TIP). Qualified Honours students gain relevant work experience as an integrated complement to their academic studies, reflected in the requirements of a learning agreement and work term report. Students are required to register in this course for each four month work term, with the maximum number of work term courses being four ( i.e. 16 months). Students in this course receive assistance from the Career Centre prior to and during their internship, and are also assigned a Faculty Supervisor/Committee. Prerequisites: Enrolment is by permission only. Criteria for permission include: (1) that students have successfully completed at least nine PHYS credits at the 3000-level or higher, and have a GPA of at least 5.00 in SC/PHYS courses overall; (2) that students are enrolled full-time in the Honours program prior to beginning their internship and have attended the mandatory preparatory sessions as outlined by the Career Centre; (3) that students have not been absent for more than two consecutive years as a full-time student from their Honours degree studies; (4) that upon enrolling in this course students have a minimum of nine credits remaining towards their Honours degree and need to return as a full-time student for at least one academic term to complete their degree after completion of their final work term. Registration in SC/PHYS 3900 0.00 provides a record on the transcript for each work term."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "CH",
+      "courseCode": "3850",
+      "credit": 3,
+      "name": "Christianity, Christian Culture and Modern Chinese Culture and Literature",
+      "desc": "This course examines the impact of Christianity and Christian culture on modern Chinese culture and society since the early twentieth century. Through the analysis of selected works written by novelists, scholars, theologians and church leaders, students will gain insights into the complex relationship between Christian culture and Chinese society and the role of Christianity in the development of Chinese modernity. Prerequisites: permission of instructor",
+      "reason": "Reviewed active-course exclusion: permission/application-gated course.",
+      "courseDescription": "This course examines the impact of Christianity and Christian culture on modern Chinese culture and society since the early twentieth century. Through the analysis of selected works written by novelists, scholars, theologians and church leaders, students will gain insights into the complex relationship between Christian culture and Chinese society and the role of Christianity in the development of Chinese modernity. Prerequisites: permission of instructor"
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "CH",
+      "courseCode": "4860",
+      "credit": 6,
+      "name": "Eileen Chang: Major Author Studies in Modern Chinese Literature",
+      "desc": "This course adopts contemporary literary theories such as life writing, translation studies, gender discourse, film and cultural studies to examine the major works of Eileen Chang, (Zhang Ailing, 1920-1995), one of the greatest modern Chinese writers of the twentieth century. Using different literary theories, such as Anthony Cordingley's notion of self-translation and Tonglin Lu's concept of gender and sexuality in twentieth-century Chinese literature, students analyze her short stories, essays and novels, as well as their recreations into various media in the socio-historical and geopolitical context of the modern and contemporary Chinese society. All texts are available in English. No knowledge of Chinese languages required. Prerequisites: Any Chinese literature, film, or culture courses or by permission of the instructor.",
+      "reason": "Reviewed active-course exclusion: missed non-code prerequisite; requires prior relevant coursework or permission.",
+      "courseDescription": "This course adopts contemporary literary theories such as life writing, translation studies, gender discourse, film and cultural studies to examine the major works of Eileen Chang, (Zhang Ailing, 1920-1995), one of the greatest modern Chinese writers of the twentieth century. Using different literary theories, such as Anthony Cordingley's notion of self-translation and Tonglin Lu's concept of gender and sexuality in twentieth-century Chinese literature, students analyze her short stories, essays and novels, as well as their recreations into various media in the socio-historical and geopolitical context of the modern and contemporary Chinese society. All texts are available in English. No knowledge of Chinese languages required. Prerequisites: Any Chinese literature, film, or culture courses or by permission of the instructor."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "CLTR",
+      "courseCode": "4000",
+      "credit": 3,
+      "name": "Independent Studies in Culture & Expression",
+      "desc": "Open to advanced students only, this course offers the highly motivated student an opportunity to pursue intensive study pertaining to a theme emanating from culture and its expression on his or her own under the guidance of an Instructor. Prerequisites: 78 credits; prior acceptance by a faculty supervisor; completion of the Independent Studies contract; and approval by the Chair.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "Open to advanced students only, this course offers the highly motivated student an opportunity to pursue intensive study pertaining to a theme emanating from culture and its expression on his or her own under the guidance of an Instructor. Prerequisites: 78 credits; prior acceptance by a faculty supervisor; completion of the Independent Studies contract; and approval by the Chair."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "CLTR",
+      "courseCode": "4000",
+      "credit": 6,
+      "name": "Independent Studies in Culture & Expression",
+      "desc": "Open to advanced students only, this course offers the highly motivated student an opportunity to pursue intensive study pertaining to a theme emanating from culture and its expression on his or her own under the guidance of an Instructor. Prerequisites: 78 credits; prior acceptance by a faculty supervisor; completion of the Independent Studies contract; and approval by the Chair.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "Open to advanced students only, this course offers the highly motivated student an opportunity to pursue intensive study pertaining to a theme emanating from culture and its expression on his or her own under the guidance of an Instructor. Prerequisites: 78 credits; prior acceptance by a faculty supervisor; completion of the Independent Studies contract; and approval by the Chair."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "COGS",
+      "courseCode": "4901",
+      "credit": 6,
+      "name": "Honours Seminar in Cognitive Science",
+      "desc": "This course is the capstone for students in the cognitive science honours BA program. Students will obtain a greater understanding of the work that cognitive scientists do, and how the theoretical background can be implemented in solving real-world problems and uncovering additional facts about the world. Students will be expected to produce a major work in cognitive science as well as demonstrate their knowledge of the applications of cognition science to many different areas of academia and industry. Note: Students must be Cognitive Science majors and have successfully completed a minimum of 84 credits in total Course credit exclusion: AP/COGS 4900 6.00 (prior to Fall 2010).",
+      "reason": "Reviewed active-course exclusion: limited to a specific program/major/student cohort; special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "This course is the capstone for students in the cognitive science honours BA program. Students will obtain a greater understanding of the work that cognitive scientists do, and how the theoretical background can be implemented in solving real-world problems and uncovering additional facts about the world. Students will be expected to produce a major work in cognitive science as well as demonstrate their knowledge of the applications of cognition science to many different areas of academia and industry. Note: Students must be Cognitive Science majors and have successfully completed a minimum of 84 credits in total Course credit exclusion: AP/COGS 4900 6.00 (prior to Fall 2010)."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "CWR",
+      "courseCode": "3610",
+      "credit": 6,
+      "name": "Intermediate Prose Workshop: Fiction",
+      "desc": "A course for students who have demonstrated talent in the writing of prose fiction. Study may be made of the craft of the journal, short story and novel through the work of both recognized writers and students in the course. Note: For students who are not creative writing majors, enrolment in this course is based upon approval of a portfolio of 15 to 20 pages of prose submitted by the student to the coordinator of the creative writing program. CCE: AP/EN 3610 6.00",
+      "reason": "Reviewed active-course exclusion: audition/portfolio/interview gate.",
+      "courseDescription": "A course for students who have demonstrated talent in the writing of prose fiction. Study may be made of the craft of the journal, short story and novel through the work of both recognized writers and students in the course. Note: For students who are not creative writing majors, enrolment in this course is based upon approval of a portfolio of 15 to 20 pages of prose submitted by the student to the coordinator of the creative writing program. CCE: AP/EN 3610 6.00"
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "CWR",
+      "courseCode": "3620",
+      "credit": 6,
+      "name": "Intermediate Poetry Workshop",
+      "desc": "A course for students who are seriously engaged in the practice of poetry, and who wish to explore their strengths and develop the range of their skills in the company of other poets. The workshop approach will encourage learning while doing. Note: For students who are not creative writing majors, enrolment in this course is based upon approval of a portfolio of 15 to 20 pages of poetry submitted by the student to the Coordinator of the Creative Writing program. CCE: AP/CWR 3620 6.00",
+      "reason": "Reviewed active-course exclusion: audition/portfolio/interview gate.",
+      "courseDescription": "A course for students who are seriously engaged in the practice of poetry, and who wish to explore their strengths and develop the range of their skills in the company of other poets. The workshop approach will encourage learning while doing. Note: For students who are not creative writing majors, enrolment in this course is based upon approval of a portfolio of 15 to 20 pages of poetry submitted by the student to the Coordinator of the Creative Writing program. CCE: AP/CWR 3620 6.00"
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "CWR",
+      "courseCode": "4610",
+      "credit": 6,
+      "name": "Senior Prose Workshop: Fiction",
+      "desc": "This course is intended primarily for students who have taken AP/EN 3610 6.00 and demonstrated that they can benefit from advanced study of the writing of prose fiction. Students will be expected to re-examine and enlarge potentialities already evident within their work. Prerequisite: Permission of the Instructor. CCE: AP/EN 4610 6.00",
+      "reason": "Reviewed active-course exclusion: permission/application-gated course.",
+      "courseDescription": "This course is intended primarily for students who have taken AP/EN 3610 6.00 and demonstrated that they can benefit from advanced study of the writing of prose fiction. Students will be expected to re-examine and enlarge potentialities already evident within their work. Prerequisite: Permission of the Instructor. CCE: AP/EN 4610 6.00"
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "CWR",
+      "courseCode": "4620",
+      "credit": 6,
+      "name": "Senior Poetry Workshop",
+      "desc": "This course is intended primarily for students who have taken AP/EN 3620 6.00 and demonstrated that they can benefit from advanced study of the writing of poetry. Students will be expected to re-examine and enlarge potentialities already evident within their work. Prerequisite: Permission of the Instructor. CCE: AP/EN 4620 6.00",
+      "reason": "Reviewed active-course exclusion: permission/application-gated course.",
+      "courseDescription": "This course is intended primarily for students who have taken AP/EN 3620 6.00 and demonstrated that they can benefit from advanced study of the writing of poetry. Students will be expected to re-examine and enlarge potentialities already evident within their work. Prerequisite: Permission of the Instructor. CCE: AP/EN 4620 6.00"
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "EN",
+      "courseCode": "2015",
+      "credit": 3,
+      "name": "What Does Race Have to Do With It? (Race: Theory and Literature II)",
+      "desc": "Examines responses by various authors who consider race and racism as they inhere across genres in literature and literary study from the opening of the twentieth century to today. Course credit exclusions: AP/EN 2013 6.00. Open to: all English (EN) Majors/Minors students eligible to take 2000-level courses according to LA&PS regulations, or \"by permission\". Not open to Non-EN Majors/Minors, except \"by permission\".",
+      "reason": "Reviewed active-course exclusion: open only/primarily to a named program or student group.",
+      "courseDescription": "Examines responses by various authors who consider race and racism as they inhere across genres in literature and literary study from the opening of the twentieth century to today. Course credit exclusions: AP/EN 2013 6.00. Open to: all English (EN) Majors/Minors students eligible to take 2000-level courses according to LA&PS regulations, or \"by permission\". Not open to Non-EN Majors/Minors, except \"by permission\"."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "GSWS",
+      "courseCode": "4801",
+      "credit": 3,
+      "name": "Directed Reading",
+      "desc": "This course is designed to enable Honours students to undertake a detailed independent study of their own choosing. The student will undertake intensive reading and writing in one or two selected areas. Previously offered as: AP/WMST 4801 3.00, GL/WMST 4801 3.00. Previously offered as AP/GWST 4801 Cr=3.00 EN.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "This course is designed to enable Honours students to undertake a detailed independent study of their own choosing. The student will undertake intensive reading and writing in one or two selected areas. Previously offered as: AP/WMST 4801 3.00, GL/WMST 4801 3.00. Previously offered as AP/GWST 4801 Cr=3.00 EN."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "GSWS",
+      "courseCode": "4801",
+      "credit": 6,
+      "name": "Directed Reading",
+      "desc": "This course is designed to enable Honours students to undertake a detailed independent study of their own choosing. The student will undertake intensive reading and writing in one or two selected areas. Previously offered as: AP/WMST 4801 6.00, GL/WMST 4801 6.00, AP/GWST 4801 Cr=6.00 EN.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "This course is designed to enable Honours students to undertake a detailed independent study of their own choosing. The student will undertake intensive reading and writing in one or two selected areas. Previously offered as: AP/WMST 4801 6.00, GL/WMST 4801 6.00, AP/GWST 4801 Cr=6.00 EN."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "HIST",
+      "courseCode": "4990",
+      "credit": 3,
+      "name": "Supervised Reading and Research",
+      "desc": "This course is intended to enable students of exceptional ability to pursue individual fields of interest not otherwise provided for by the regular curriculum.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "This course is intended to enable students of exceptional ability to pursue individual fields of interest not otherwise provided for by the regular curriculum."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "HIST",
+      "courseCode": "4990",
+      "credit": 6,
+      "name": "Supervised Reading and Research",
+      "desc": "This course is intended to enable students of exceptional ability to pursue individual fields of interest not otherwise provided for by the regular curriculum. Note: Open to history majors after completion of 84 credits with the permission of the Chair and with the agreement of a member of the department who will act as supervisor.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "This course is intended to enable students of exceptional ability to pursue individual fields of interest not otherwise provided for by the regular curriculum. Note: Open to history majors after completion of 84 credits with the permission of the Chair and with the agreement of a member of the department who will act as supervisor."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "POLS",
+      "courseCode": "3990",
+      "credit": 3,
+      "name": "Supervised Reading and Research",
+      "desc": "Students in their third-year may take independent, individually-supervised reading/research courses, either on a full-year or half-year basis, when the student and the course meet the requirements set by the Faculty of Liberal Arts and Professional Studies and those established by the department. Note: Please consult the Faculty of Liberal Arts and Professional Studies Academic Advising and Student Responsibility section for regulations on independent reading courses. Prerequisite: Permission of the director of undergraduate studies.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course; permission/application-gated course.",
+      "courseDescription": "Students in their third-year may take independent, individually-supervised reading/research courses, either on a full-year or half-year basis, when the student and the course meet the requirements set by the Faculty of Liberal Arts and Professional Studies and those established by the department. Note: Please consult the Faculty of Liberal Arts and Professional Studies Academic Advising and Student Responsibility section for regulations on independent reading courses. Prerequisite: Permission of the director of undergraduate studies."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "POLS",
+      "courseCode": "3990",
+      "credit": 6,
+      "name": "Supervised Reading and Research",
+      "desc": "Students in their third-year may take independent, individually-supervised reading/research courses, either on a full-year or half-year basis, when the student and the course meet the requirements set by the Faculty of Liberal Arts and Professional Studies and those established by the department. Note: Please consult the Faculty of Liberal Arts and Professional Studies Advising and Student Responsibility section for regulations on independent reading courses. Prerequisite: Permission of the director of undergraduate studies.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course; permission/application-gated course.",
+      "courseDescription": "Students in their third-year may take independent, individually-supervised reading/research courses, either on a full-year or half-year basis, when the student and the course meet the requirements set by the Faculty of Liberal Arts and Professional Studies and those established by the department. Note: Please consult the Faculty of Liberal Arts and Professional Studies Advising and Student Responsibility section for regulations on independent reading courses. Prerequisite: Permission of the director of undergraduate studies."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "POLS",
+      "courseCode": "4990",
+      "credit": 3,
+      "name": "Supervised Reading and Research",
+      "desc": "Students in their fourth-year may take independent, individually-supervised reading/research courses, either on a full-year or half-year basis, when the student and the course meet the requirements set out by the Faculty of Liberal Arts and Professional Studies and those established by the department. Note: Please consult the Faculty of Liberal Arts and Professional Studies Academic Advising and Student Responsibility section for regulations on independent reading courses. Prerequisite: The permission of the undergraduate program director.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course; permission/application-gated course.",
+      "courseDescription": "Students in their fourth-year may take independent, individually-supervised reading/research courses, either on a full-year or half-year basis, when the student and the course meet the requirements set out by the Faculty of Liberal Arts and Professional Studies and those established by the department. Note: Please consult the Faculty of Liberal Arts and Professional Studies Academic Advising and Student Responsibility section for regulations on independent reading courses. Prerequisite: The permission of the undergraduate program director."
+    },
+    {
+      "faculty": "AP",
+      "deptAcronym": "POLS",
+      "courseCode": "4990",
+      "credit": 6,
+      "name": "Supervised Reading and Research",
+      "desc": "Students in their fourth-year may take independent, individually-supervised reading/research courses, either on a full-year or half-year basis, when the student and the course meet the requirements set out by the Faculty of Liberal Arts and Professional Studies and those established by the department. Note: Please consult the Faculty of Liberal Arts and Professional Studies Academic Advising and Student Responsibility section for regulations on independent reading courses. Prerequisite: The permission of the undergraduate program director.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course; permission/application-gated course.",
+      "courseDescription": "Students in their fourth-year may take independent, individually-supervised reading/research courses, either on a full-year or half-year basis, when the student and the course meet the requirements set out by the Faculty of Liberal Arts and Professional Studies and those established by the department. Note: Please consult the Faculty of Liberal Arts and Professional Studies Academic Advising and Student Responsibility section for regulations on independent reading courses. Prerequisite: The permission of the undergraduate program director."
+    },
+    {
+      "faculty": "ED",
+      "deptAcronym": "EDST",
+      "courseCode": "3910",
+      "credit": 3,
+      "name": "Reflecting On and Interpreting the International Educational Experience",
+      "desc": "This course is designed specifically for York University students whose undergraduate programme has included an international education experience. It can also include students from abroad studying at York as international students. A wide range of theories in international and intercultural education, cross-cultural psychology, internationalization, globalization and post colonial studies will provide a critical analytical framework to promote student reflection and interpretation of their international experiences. It will encourage students to integrate experiential learning into the theory and practice of their respective academic disciplines. Pre-requisites: Participation in an international study abroad in an international exchange program and/or international internship and/or international practicum placement experience. Students studying from abroad at York as international students on full degree or international exchange are also invited to participate.",
+      "reason": "Reviewed active-course exclusion: limited to a specific program/major/student cohort; placement/practicum/co-op/internship course.",
+      "courseDescription": "This course is designed specifically for York University students whose undergraduate programme has included an international education experience. It can also include students from abroad studying at York as international students. A wide range of theories in international and intercultural education, cross-cultural psychology, internationalization, globalization and post colonial studies will provide a critical analytical framework to promote student reflection and interpretation of their international experiences. It will encourage students to integrate experiential learning into the theory and practice of their respective academic disciplines. Pre-requisites: Participation in an international study abroad in an international exchange program and/or international internship and/or international practicum placement experience. Students studying from abroad at York as international students on full degree or international exchange are also invited to participate."
+    },
+    {
+      "faculty": "ED",
+      "deptAcronym": "EDST",
+      "courseCode": "4998",
+      "credit": 6,
+      "name": "Advanced Studies and Practices in Educational Development",
+      "desc": "Advanced Studies and Practices in Educational Development acts as capstone course for the Undergraduate Certificate in Educational Development and engages students in authentic educational development practice, as they identify educational support needs, design and deliver workshops to address those needs, evaluate the impact of their actions and reflect on their experiences to improve future practice. This is a practical course requiring students to work on their own and in teams, to lead and engage in workshops and events which require them to apply their learning throughout the Certificate program. As they hone their skills in workshop development and delivery the expand their knowledge of educational theories and practices by attending the workshops created by other students. This course is open to students enrolled on the Undergraduate Certificate in Educational Development. EDST 3500 and EDST 3510 should be taken before or at the same time as this course.",
+      "reason": "Reviewed active-course exclusion: limited to a specific program/major/student cohort; special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "Advanced Studies and Practices in Educational Development acts as capstone course for the Undergraduate Certificate in Educational Development and engages students in authentic educational development practice, as they identify educational support needs, design and deliver workshops to address those needs, evaluate the impact of their actions and reflect on their experiences to improve future practice. This is a practical course requiring students to work on their own and in teams, to lead and engage in workshops and events which require them to apply their learning throughout the Certificate program. As they hone their skills in workshop development and delivery the expand their knowledge of educational theories and practices by attending the workshops created by other students. This course is open to students enrolled on the Undergraduate Certificate in Educational Development. EDST 3500 and EDST 3510 should be taken before or at the same time as this course."
+    },
+    {
+      "faculty": "ED",
+      "deptAcronym": "EDST",
+      "courseCode": "4999",
+      "credit": 6,
+      "name": "Experience, Inquire, Contribute II (EIC): Inquiry Project",
+      "desc": "This course offers students opportunities to engage in learning about educational studies in context. Portfolios of students' academic work in educational studies are created and used as a point of departure for fieldwork experiences in settings engaged in educational work. An analytical report commenting on the learning in context is the culminating activity of the course. An important focus of the course is conducting an inquiry project in the field. This course builds on the experience and learning from EDST 3999. Prerequisites ED/EDST 1000 3.0; ED/EDST 1100 3.0; ED/EDST 1200 3.0",
+      "reason": "Reviewed active-course exclusion: placement/practicum/co-op/internship course; special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "This course offers students opportunities to engage in learning about educational studies in context. Portfolios of students' academic work in educational studies are created and used as a point of departure for fieldwork experiences in settings engaged in educational work. An analytical report commenting on the learning in context is the culminating activity of the course. An important focus of the course is conducting an inquiry project in the field. This course builds on the experience and learning from EDST 3999. Prerequisites ED/EDST 1000 3.0; ED/EDST 1100 3.0; ED/EDST 1200 3.0"
+    },
+    {
+      "faculty": "ED",
+      "deptAcronym": "HEB",
+      "courseCode": "2030",
+      "credit": 3,
+      "name": "Teaching Modern Hebrew Language Arts & the Jewish Year",
+      "desc": "ED/HEB 2030 introduces participants to the Canadian Jewish day school system, its breadth of ideologies and mission statements as well as implications for teaching practice. This seminar course emphasizes models of planning, pedagogy, and instruction for the teaching of communicative Hebrew language arts and curricular areas that rely on it. The seminar develops interdisciplinary approaches to the teaching of celebrations and commemorations that propel the cycle of the Jewish year. Participants use Hebrew as the language of instruction and materials in their related practicum placements in Jewish day schools. Prerequisite: AP/HEB 3000, Hebrew U. Ulpan Gimel, or approved equivalent.",
+      "reason": "Reviewed active-course exclusion: placement/practicum/co-op/internship course; teaching-placement course.",
+      "courseDescription": "ED/HEB 2030 introduces participants to the Canadian Jewish day school system, its breadth of ideologies and mission statements as well as implications for teaching practice. This seminar course emphasizes models of planning, pedagogy, and instruction for the teaching of communicative Hebrew language arts and curricular areas that rely on it. The seminar develops interdisciplinary approaches to the teaching of celebrations and commemorations that propel the cycle of the Jewish year. Participants use Hebrew as the language of instruction and materials in their related practicum placements in Jewish day schools. Prerequisite: AP/HEB 3000, Hebrew U. Ulpan Gimel, or approved equivalent."
+    },
+    {
+      "faculty": "ED",
+      "deptAcronym": "HEB",
+      "courseCode": "3030",
+      "credit": 3,
+      "name": "Teaching Classical Hebrew Texts in Jewish Studies",
+      "desc": "ED/HEB 2030 and its partner, ED/HEB 3030, approach the teaching of modern and classical Jewish studies through the lens of Hebrew as a communicative-heritage language. Both involve Hebrew as the language of instruction and learning materials at the university and in the related practicum placement. HEB 2030, described in its own course outline, concentrates on the teaching of the communicative aspect of the language in curricular areas that the Jewish day-schools teach in modern Hebrew: language arts and the cycle of celebrations and commemorations that structure the Jewish year. This course, HEB 3030 concentrates on the teaching of curricular areas that rely on the heritage aspect of Hebrew, carried in the classical texts that underpin Jewish Studies: the Hebrew Bible (ancient Hebrew), biblical commentaries (ancient, medieval, and modern Hebrew), Talmudic texts (rabbinic Hebrew), Liturgy (biblical and medieval Hebrew of the prayerbook and Haggadah) and primary documents for Jewish History that arise from heritage language texts and beyond. The course familiarizes students with resources, standards, benchmarks, taxonomies, and models for the teaching of classical Hebrew texts in Jewish Studies. The seminar emphasizes informed decision-making for teaching and implementation that incorporates generative ideas, taxonomies and engaging pedagogies suitable for the given learners.",
+      "reason": "Reviewed active-course exclusion: placement/practicum/co-op/internship course; teaching-placement course.",
+      "courseDescription": "ED/HEB 2030 and its partner, ED/HEB 3030, approach the teaching of modern and classical Jewish studies through the lens of Hebrew as a communicative-heritage language. Both involve Hebrew as the language of instruction and learning materials at the university and in the related practicum placement. HEB 2030, described in its own course outline, concentrates on the teaching of the communicative aspect of the language in curricular areas that the Jewish day-schools teach in modern Hebrew: language arts and the cycle of celebrations and commemorations that structure the Jewish year. This course, HEB 3030 concentrates on the teaching of curricular areas that rely on the heritage aspect of Hebrew, carried in the classical texts that underpin Jewish Studies: the Hebrew Bible (ancient Hebrew), biblical commentaries (ancient, medieval, and modern Hebrew), Talmudic texts (rabbinic Hebrew), Liturgy (biblical and medieval Hebrew of the prayerbook and Haggadah) and primary documents for Jewish History that arise from heritage language texts and beyond. The course familiarizes students with resources, standards, benchmarks, taxonomies, and models for the teaching of classical Hebrew texts in Jewish Studies. The seminar emphasizes informed decision-making for teaching and implementation that incorporates generative ideas, taxonomies and engaging pedagogies suitable for the given learners."
+    },
+    {
+      "faculty": "ED",
+      "deptAcronym": "HIST",
+      "courseCode": "4001",
+      "credit": 3,
+      "name": "Teaching History in the Intermediate-Senior Division - B",
+      "desc": "The course focuses on curriculum and instruction for history subjects in grades 7-12. This course gives students the opportunity to further develop their skills and knowledge on the philosophy and conceptual framework underlying history teaching and learning. Students will examine the history curriculum and apply the principles of design and the framework for research. Students will also examine various acts and regulations that underpin issues in the classroom. HIST 4000 (Part A) is a pre-requisite for this course. Students will have opportunities to further develop their skills and knowledge in: * Understanding the nature of the subject matter and its delivery; * Understanding the theoretical frameworks and research that inform the teaching, learning, assessment and evaluation of the subjects that comprise history at various stages of educational development in grades 7-12; * Critically analyzing the curriculum policy documents, learning activities, and materials pertaining to history curriculum; * Developing planning and instructional processes for creating active learning environments and fostering successful learner development; * Investigating how learners, including students with special needs, construct knowledge of history 7-12 in different types of program streams and contexts.",
+      "reason": "Reviewed active-course exclusion: BEd/Faculty of Education students only; limited to a specific program/major/student cohort.",
+      "courseDescription": "The course focuses on curriculum and instruction for history subjects in grades 7-12. This course gives students the opportunity to further develop their skills and knowledge on the philosophy and conceptual framework underlying history teaching and learning. Students will examine the history curriculum and apply the principles of design and the framework for research. Students will also examine various acts and regulations that underpin issues in the classroom. HIST 4000 (Part A) is a pre-requisite for this course. Students will have opportunities to further develop their skills and knowledge in: * Understanding the nature of the subject matter and its delivery; * Understanding the theoretical frameworks and research that inform the teaching, learning, assessment and evaluation of the subjects that comprise history at various stages of educational development in grades 7-12; * Critically analyzing the curriculum policy documents, learning activities, and materials pertaining to history curriculum; * Developing planning and instructional processes for creating active learning environments and fostering successful learner development; * Investigating how learners, including students with special needs, construct knowledge of history 7-12 in different types of program streams and contexts."
+    },
+    {
+      "faculty": "ED",
+      "deptAcronym": "ITEC",
+      "courseCode": "4000",
+      "credit": 3,
+      "name": "Business: Teaching Information and Communications Technology in the Intermediate/Senior Divisions - A",
+      "desc": "The course focuses on curriculum and instruction for Business Studies with a focus on and Information and Communications Technology subjects in grades 7-12. It is general in nature and emphasises the philosophy and conceptual framework underlying information and communications technology teaching and learning. Students will have the opportunity to learn how create lesson plans, unit plans curriculum design that encompass differentiated instructional strategies, layered curriculum techniques, assessment for learning strategies and evaluation design. Students will examine the information and communications technology curriculum and apply the principles of design and the framework for research. Students will also examine various acts and regulations that are the underpinning of issues in the classroom.",
+      "reason": "Reviewed active-course exclusion: BEd/Faculty of Education students only; limited to a specific program/major/student cohort.",
+      "courseDescription": "The course focuses on curriculum and instruction for Business Studies with a focus on and Information and Communications Technology subjects in grades 7-12. It is general in nature and emphasises the philosophy and conceptual framework underlying information and communications technology teaching and learning. Students will have the opportunity to learn how create lesson plans, unit plans curriculum design that encompass differentiated instructional strategies, layered curriculum techniques, assessment for learning strategies and evaluation design. Students will examine the information and communications technology curriculum and apply the principles of design and the framework for research. Students will also examine various acts and regulations that are the underpinning of issues in the classroom."
+    },
+    {
+      "faculty": "ED",
+      "deptAcronym": "ITEC",
+      "courseCode": "4001",
+      "credit": 3,
+      "name": "Business: Teaching Information and Communications Technology in the Intermediate/Senior Divisions - B",
+      "desc": "This course continues to prepare students to be qualified teachers of Business Studies with a focus on Information and Communications Technology in Ontario classrooms. It develops students' expertise in the theories, philosophies, knowledge, policies and practices specific to teaching information and communications technology areas in order to further develop students' expertise for teaching this subject. ED/ITEC 4000 (Part A) is a prerequisite for this course.",
+      "reason": "Reviewed active-course exclusion: BEd/Faculty of Education students only; limited to a specific program/major/student cohort.",
+      "courseDescription": "This course continues to prepare students to be qualified teachers of Business Studies with a focus on Information and Communications Technology in Ontario classrooms. It develops students' expertise in the theories, philosophies, knowledge, policies and practices specific to teaching information and communications technology areas in order to further develop students' expertise for teaching this subject. ED/ITEC 4000 (Part A) is a prerequisite for this course."
+    },
+    {
+      "faculty": "ED",
+      "deptAcronym": "MATH",
+      "courseCode": "4001",
+      "credit": 3,
+      "name": "Teaching Mathematics in the Intermediate-Senior Divisions - B",
+      "desc": "This course continues to prepare students to be qualified teachers of Math in Ontario classrooms. It develops students' expertise in the theories, philosophies, knowledge, policies and practices specific to teaching Math areas in order to further develop students' expertise for teaching this subject. ED/MATH 4000 (Part A) is a prerequisite for this course.",
+      "reason": "Reviewed active-course exclusion: BEd/Faculty of Education students only; limited to a specific program/major/student cohort.",
+      "courseDescription": "This course continues to prepare students to be qualified teachers of Math in Ontario classrooms. It develops students' expertise in the theories, philosophies, knowledge, policies and practices specific to teaching Math areas in order to further develop students' expertise for teaching this subject. ED/MATH 4000 (Part A) is a prerequisite for this course."
+    },
+    {
+      "faculty": "ED",
+      "deptAcronym": "SCIE",
+      "courseCode": "4000",
+      "credit": 3,
+      "name": "Teaching Science (General) in the Intermediate-Senior Divisions - A",
+      "desc": "This course begins to prepare students to be qualified teachers of science in Ontario classrooms. It allows students to examine the theories, philosophies, knowledge, policies and practices specific to teaching science in the intermediate and senior grades.",
+      "reason": "Reviewed active-course exclusion: BEd/Faculty of Education students only; limited to a specific program/major/student cohort.",
+      "courseDescription": "This course begins to prepare students to be qualified teachers of science in Ontario classrooms. It allows students to examine the theories, philosophies, knowledge, policies and practices specific to teaching science in the intermediate and senior grades."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "CMA",
+      "courseCode": "4101",
+      "credit": 6,
+      "name": "Fourth Year Projects",
+      "desc": "Fourth Year Projects is the culminating course in the Media Arts curriculum that builds on the media fundamentals introduced in Media Practice I and developed in Media Practice II. Using a student-led approach, the focus is on developing a working prototype as the focal point of a creative portfolio that showcases a variety of skills. The possibilities range from interactive stories or documentaries to AR and VR games, podcasts, installations, and web projects, developed either individually or collaboratively. With guidance and mentorship, students will complete a substantial creative work on the platform of their choice. Open to majors only. Pre-requisites: FA/CMA 3101 or permission of instructor.",
+      "reason": "Reviewed active-course exclusion: open only/primarily to a named program or student group; special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "Fourth Year Projects is the culminating course in the Media Arts curriculum that builds on the media fundamentals introduced in Media Practice I and developed in Media Practice II. Using a student-led approach, the focus is on developing a working prototype as the focal point of a creative portfolio that showcases a variety of skills. The possibilities range from interactive stories or documentaries to AR and VR games, podcasts, installations, and web projects, developed either individually or collaboratively. With guidance and mentorship, students will complete a substantial creative work on the platform of their choice. Open to majors only. Pre-requisites: FA/CMA 3101 or permission of instructor."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "DANC",
+      "courseCode": "4400",
+      "credit": 3,
+      "name": "Senior Projects",
+      "desc": "Students develop one or a series of self-directed interlinked projects, which may consist of research or field studies on a topic of interest (theoretical or creative) leading to a major piece of writing, a performance, an internship or some combination of these activities. Adjudication of the credit weighting of each project will be made by the department, based on the proposal. A supervisory committee may be established for projects involving more than six credits. Prerequisite: Fourth-year standing.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "Students develop one or a series of self-directed interlinked projects, which may consist of research or field studies on a topic of interest (theoretical or creative) leading to a major piece of writing, a performance, an internship or some combination of these activities. Adjudication of the credit weighting of each project will be made by the department, based on the proposal. A supervisory committee may be established for projects involving more than six credits. Prerequisite: Fourth-year standing."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "DANC",
+      "courseCode": "4400",
+      "credit": 6,
+      "name": "Senior Projects",
+      "desc": "Students develop one or a series of self-directed interlinked projects, which may consist of research or field studies on a topic of interest (theoretical or creative) leading to a major piece of writing, a performance, an internship or some combination of these activities. Adjudication of the credit weighting of each project will be made by the department, based on the proposal. A supervisory committee may be established for projects involving more than six credits. Prerequisite: Fourth-year standing.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "Students develop one or a series of self-directed interlinked projects, which may consist of research or field studies on a topic of interest (theoretical or creative) leading to a major piece of writing, a performance, an internship or some combination of these activities. Adjudication of the credit weighting of each project will be made by the department, based on the proposal. A supervisory committee may be established for projects involving more than six credits. Prerequisite: Fourth-year standing."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "DANC",
+      "courseCode": "4400",
+      "credit": 9,
+      "name": "Senior Projects",
+      "desc": "Students develop one or a series of self-directed interlinked projects, which may consist of research or field studies on a topic of interest (theoretical or creative) leading to a major piece of writing, a performance, an internship or some combination of these activities. Adjudication of the credit weighting of each project will be made by the department, based on the proposal. A supervisory committee may be established for projects involving more than six credits. Prerequisite: Fourth-year standing.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "Students develop one or a series of self-directed interlinked projects, which may consist of research or field studies on a topic of interest (theoretical or creative) leading to a major piece of writing, a performance, an internship or some combination of these activities. Adjudication of the credit weighting of each project will be made by the department, based on the proposal. A supervisory committee may be established for projects involving more than six credits. Prerequisite: Fourth-year standing."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "DANC",
+      "courseCode": "4401",
+      "credit": 3,
+      "name": "Independent Studies",
+      "desc": "Students develop one or a series of interlinked self-directed research projects, which may consist of research on a topic of interest (theoretical or creative) leading to a major piece of writing, thesis or series of essays. Open by application to the department. Adjudication of the appropriate credit weighting will be made by the department, based on the proposal.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course; permission/application-gated course.",
+      "courseDescription": "Students develop one or a series of interlinked self-directed research projects, which may consist of research on a topic of interest (theoretical or creative) leading to a major piece of writing, thesis or series of essays. Open by application to the department. Adjudication of the appropriate credit weighting will be made by the department, based on the proposal."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "DANC",
+      "courseCode": "4401",
+      "credit": 6,
+      "name": "Independent Studies",
+      "desc": "Students develop one or a series of interlinked self-directed research projects, which may consist of research on a topic of interest (theoretical or creative) leading to a major piece of writing, thesis, or series of essays. Adjudication of the appropriate credit weighting will be made by the Department, based on the proposal. Open by application to the department.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course; permission/application-gated course.",
+      "courseDescription": "Students develop one or a series of interlinked self-directed research projects, which may consist of research on a topic of interest (theoretical or creative) leading to a major piece of writing, thesis, or series of essays. Adjudication of the appropriate credit weighting will be made by the Department, based on the proposal. Open by application to the department."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "DANC",
+      "courseCode": "4401",
+      "credit": 9,
+      "name": "Independent Studies",
+      "desc": "Students develop one or a series of interlinked self-directed research projects, which may consist of research on a topic of interest (theoretical or creative) leading to a major piece of writing, thesis, or series of essays. Adjudication of the appropriate credit weighting will be made by the Department, based on the proposal. Open by application to the department.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course; permission/application-gated course.",
+      "courseDescription": "Students develop one or a series of interlinked self-directed research projects, which may consist of research on a topic of interest (theoretical or creative) leading to a major piece of writing, thesis, or series of essays. Adjudication of the appropriate credit weighting will be made by the Department, based on the proposal. Open by application to the department."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "MUSI",
+      "courseCode": "3082",
+      "credit": 3,
+      "name": "Piano Accompanying",
+      "desc": "Develops the pianist's ability to function as a sensitive and musical accompanist. Prerequisite: Permission of the Instructor.",
+      "reason": "Reviewed active-course exclusion: permission/application-gated course.",
+      "courseDescription": "Develops the pianist's ability to function as a sensitive and musical accompanist. Prerequisite: Permission of the Instructor."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "PANF",
+      "courseCode": "4990",
+      "credit": 6,
+      "name": "Interdisciplinary Arts Capstone Studio",
+      "desc": "Interdisciplinary Arts Capstone Studio is the culminating course for the Integrative Arts major. This year-long course offers fourth-year students the opportunity to synthesize the creative techniques and critical thinking that they have developed into a self-driven larger interdisciplinary project, either individual or collaborative. The course will respond to student needs and interests, drawing from a shared language in interdisciplinarity, conceptual and practical frameworks, art history, and social justice. Students will develop essential skills in producing their own work for and with the public. They will also gain professional development skills through regular field trips and engagement with arts organizations in the greater Toronto area. Open to non-majors. Prerequisite: Fourth year standing (minimum of 84 credits earned) in any AMPD program, or permission of the instructor.",
+      "reason": "Reviewed active-course exclusion: open only/primarily to a named program or student group; special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "Interdisciplinary Arts Capstone Studio is the culminating course for the Integrative Arts major. This year-long course offers fourth-year students the opportunity to synthesize the creative techniques and critical thinking that they have developed into a self-driven larger interdisciplinary project, either individual or collaborative. The course will respond to student needs and interests, drawing from a shared language in interdisciplinarity, conceptual and practical frameworks, art history, and social justice. Students will develop essential skills in producing their own work for and with the public. They will also gain professional development skills through regular field trips and engagement with arts organizations in the greater Toronto area. Open to non-majors. Prerequisite: Fourth year standing (minimum of 84 credits earned) in any AMPD program, or permission of the instructor."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "THEA",
+      "courseCode": "1110",
+      "credit": 3,
+      "name": "Introduction to Stagecraft II",
+      "desc": "Continues the introduction to the basics of theatrical production begun in FA/THEA 1100 3.00. Previously offered as: FA/THEA 1100 6.00. Note: Open to theatre majors only or permission of the department.",
+      "reason": "Reviewed active-course exclusion: open only/primarily to a named program or student group.",
+      "courseDescription": "Continues the introduction to the basics of theatrical production begun in FA/THEA 1100 3.00. Previously offered as: FA/THEA 1100 6.00. Note: Open to theatre majors only or permission of the department."
+    },
+    {
+      "faculty": "FA",
+      "deptAcronym": "THEA",
+      "courseCode": "3041",
+      "credit": 3,
+      "name": "An Introduction to Motion Capture Performance for Actors",
+      "desc": "Introduces the performer to the world of motion capture (mocap), using both practical and creative approaches. Utilizing their previous Actor training, students will learn: to perform in a digital environment; the importance of creating fully-realized scenes using only their imagination and a script; to live and play in imagined worlds using few (or no) props, set pieces, or costumes; and the requisite technical requirements for mocap performance, many of which are uncommon to other acting genres. Students work on scenes from professional AAA video games and will be encouraged to heighten character stakes and rediscover the freedom to play, while keeping their work authentic and organic. Collaboration and constructive feedback from peers is expected, and crucial to developing an understanding of this craft. Prerequisites: Grade of B or better in FA/THEA 2021 or FA/THEA 2051, and FA/THEA 2030 and FA/THEA 2010, and/or permission of the department. Open to majors only.",
+      "reason": "Reviewed active-course exclusion: open only/primarily to a named program or student group.",
+      "courseDescription": "Introduces the performer to the world of motion capture (mocap), using both practical and creative approaches. Utilizing their previous Actor training, students will learn: to perform in a digital environment; the importance of creating fully-realized scenes using only their imagination and a script; to live and play in imagined worlds using few (or no) props, set pieces, or costumes; and the requisite technical requirements for mocap performance, many of which are uncommon to other acting genres. Students work on scenes from professional AAA video games and will be encouraged to heighten character stakes and rediscover the freedom to play, while keeping their work authentic and organic. Collaboration and constructive feedback from peers is expected, and crucial to developing an understanding of this craft. Prerequisites: Grade of B or better in FA/THEA 2021 or FA/THEA 2051, and FA/THEA 2030 and FA/THEA 2010, and/or permission of the department. Open to majors only."
+    },
+    {
+      "faculty": "GL",
+      "deptAcronym": "GWST",
+      "courseCode": "4801",
+      "credit": 3,
+      "name": "Directed Reading",
+      "desc": "This course is designed to enable Honours students to undertake a detailed independent study of their own choosing. The student will undertake intensive reading and writing in one or two selected areas. Previously offered as: AP/WMST 4801 3.00, GL/WMST 4801 3.00. Previously offered as AP/GWST 4801 Cr=3.00 EN.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "This course is designed to enable Honours students to undertake a detailed independent study of their own choosing. The student will undertake intensive reading and writing in one or two selected areas. Previously offered as: AP/WMST 4801 3.00, GL/WMST 4801 3.00. Previously offered as AP/GWST 4801 Cr=3.00 EN."
+    },
+    {
+      "faculty": "GL",
+      "deptAcronym": "GWST",
+      "courseCode": "4801",
+      "credit": 6,
+      "name": "Directed Reading",
+      "desc": "This course is designed to enable Honours students to undertake a detailed independent study of their own choosing. The student will undertake intensive reading and writing in one or two selected areas. Previously offered as: AP/WMST 4801 6.00, GL/WMST 4801 6.00, AP/GWST 4801 Cr=6.00 EN.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "This course is designed to enable Honours students to undertake a detailed independent study of their own choosing. The student will undertake intensive reading and writing in one or two selected areas. Previously offered as: AP/WMST 4801 6.00, GL/WMST 4801 6.00, AP/GWST 4801 Cr=6.00 EN."
+    },
+    {
+      "faculty": "HH",
+      "deptAcronym": "KINE",
+      "courseCode": "1101",
+      "credit": 3,
+      "name": "Applied Human Anatomy and Physiology for Health Professionals I",
+      "desc": "Introduces the learner to the foundations of anatomy and physiology, within the context of the health practitioner. This course takes a systemic approach to learning human anatomy and physiology and content includes an overview of the structure, function, and organization of the human body from the cellular level to organ systems, and explores each major organ system, with a focus on maintaining homeostasis and clinical applications. Part I focuses on cellular organization, genetics, embryology, tissues, the skeletal system, the muscular system and the nervous system. Course Credit Exclusions: HH/GH 1001 3.00, HH/GH 1001 3.00, HH/KINE 2031 3.00, HH/KINE 2011 3.00, SC/NATS 1650 6.00. Not open to: Kinesiology majors or Global Health majors. Note: This will be a core course for students in the 4-Year Direct Entry BScN nursing degree program so the majority of spaces will be reserved for those students.",
+      "reason": "Reviewed active-course exclusion: limited to a specific program/major/student cohort; Nursing/BScN professional program course.",
+      "courseDescription": "Introduces the learner to the foundations of anatomy and physiology, within the context of the health practitioner. This course takes a systemic approach to learning human anatomy and physiology and content includes an overview of the structure, function, and organization of the human body from the cellular level to organ systems, and explores each major organ system, with a focus on maintaining homeostasis and clinical applications. Part I focuses on cellular organization, genetics, embryology, tissues, the skeletal system, the muscular system and the nervous system. Course Credit Exclusions: HH/GH 1001 3.00, HH/GH 1001 3.00, HH/KINE 2031 3.00, HH/KINE 2011 3.00, SC/NATS 1650 6.00. Not open to: Kinesiology majors or Global Health majors. Note: This will be a core course for students in the 4-Year Direct Entry BScN nursing degree program so the majority of spaces will be reserved for those students."
+    },
+    {
+      "faculty": "HH",
+      "deptAcronym": "KINE",
+      "courseCode": "1102",
+      "credit": 3,
+      "name": "Applied Human Anatomy and Physiology for Health Professionals II",
+      "desc": "Introduces the learner to the foundations of anatomy and physiology, within the context of the health practitioner. This course takes a systemic approach to learning human anatomy and physiology and content includes an overview of the structure, function, and organization of the human body from the cellular level to organ systems, and explores each major organ system, with a focus on maintaining homeostasis and clinical applications. Part II focuses on the cardiovascular, respiratory, digestive, renal, reproductive, endocrine and immune systems. Course Credit Exclusions: HH/IHST 1002 3.00, HH/KINE 2031 3.00, HH/KINE 2011 3.00, HH/NATS 1650 6.00. Not open to: Kinesiology major students; Global Health major students. Note: This will be a core course for students in the 4-Year Direct Entry BScN nursing degree program so the majority of spaces will be reserved for those students.",
+      "reason": "Reviewed active-course exclusion: limited to a specific program/major/student cohort; Nursing/BScN professional program course.",
+      "courseDescription": "Introduces the learner to the foundations of anatomy and physiology, within the context of the health practitioner. This course takes a systemic approach to learning human anatomy and physiology and content includes an overview of the structure, function, and organization of the human body from the cellular level to organ systems, and explores each major organ system, with a focus on maintaining homeostasis and clinical applications. Part II focuses on the cardiovascular, respiratory, digestive, renal, reproductive, endocrine and immune systems. Course Credit Exclusions: HH/IHST 1002 3.00, HH/KINE 2031 3.00, HH/KINE 2011 3.00, HH/NATS 1650 6.00. Not open to: Kinesiology major students; Global Health major students. Note: This will be a core course for students in the 4-Year Direct Entry BScN nursing degree program so the majority of spaces will be reserved for those students."
+    },
+    {
+      "faculty": "LE",
+      "deptAcronym": "TRON",
+      "courseCode": "1000",
+      "credit": 4,
+      "name": "Mechatronics System Design and Implementation I",
+      "desc": "This course is an introductory course in mechatronics. It introduces the topic through both in-class material and a laboratory-based component within which students participate in two team-based mini-projects. The course provides an overview of the subject area through specific case studies drawn from existing commercial systems, and uses two mini- projects to highlight mechatronics processes and technologies. The laboratory is also used to provide basic health and safety training, as well as hands-on training on specific electrical, electronic and mechanical technologies. Pre-requisites: Open to students enrolled in a BEng degree program.",
+      "reason": "Reviewed active-course exclusion: limited to a specific program/major/student cohort.",
+      "courseDescription": "This course is an introductory course in mechatronics. It introduces the topic through both in-class material and a laboratory-based component within which students participate in two team-based mini-projects. The course provides an overview of the subject area through specific case studies drawn from existing commercial systems, and uses two mini- projects to highlight mechatronics processes and technologies. The laboratory is also used to provide basic health and safety training, as well as hands-on training on specific electrical, electronic and mechanical technologies. Pre-requisites: Open to students enrolled in a BEng degree program."
+    },
+    {
+      "faculty": "SC",
+      "deptAcronym": "PHYS",
+      "courseCode": "4310",
+      "credit": 3,
+      "name": "Physics or Astronomy Project",
+      "desc": "A faculty-supervised research endeavour, either experimental or theoretical, in physics or astronomy. Before enrolling, the student and faculty member must agree upon the project scope, background reading, milestones including student-faculty meeting schedule, and deliverables including final written report.",
+      "reason": "Reviewed active-course exclusion: special-arrangement reading/thesis/project/private-lesson course.",
+      "courseDescription": "A faculty-supervised research endeavour, either experimental or theoretical, in physics or astronomy. Before enrolling, the student and faculty member must agree upon the project scope, background reading, milestones including student-faculty meeting schedule, and deliverables including final written report."
     }
   ]
 }

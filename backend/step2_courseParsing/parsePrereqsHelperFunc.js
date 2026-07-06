@@ -15,7 +15,7 @@ const KNOWN_FACULTY_PREFIXES = new Set([
 ]);
 
 const REQUIREMENT_HEADER_RE =
-  /\b(?:(?:Course|General|MBA|MFIN)\s+)?(?:Pre-?\s*requisite(?:s|\(s\))?(?:\s*(?:\/|and|or)\s*Co-?\s*requisite(?:s|\(s\))?)?|Co-?\s*requisite(?:s|\(s\))?(?:\s*(?:\/|and|or)\s*Pre-?\s*requisite(?:s|\(s\))?)?|Pre\s*(?:-?\s*\/\s*|-?\s*or\s+|-?\s*and\s+)Co-?\s*requisite(?:s|\(s\))?|Co\s*(?:-?\s*\/\s*|-?\s*or\s+|-?\s*and\s+)Pre-?\s*requisite(?:s|\(s\))?)(?:\s+for\b[^:.]{0,120})?\s*:?\s*:\s*/gi;
+  /\b(?:(?:Course|General|MBA|MFIN)\s+)?(?:Pre-?\s*requisite(?:s|\(s\))?(?:\s*(?:\/|and|or)\s*Co-?\s*requisite(?:s|\(s\))?)?|Co-?\s*requisite(?:s|\(s\))?(?:\s*(?:\/|and|or)\s*Pre-?\s*requisite(?:s|\(s\))?)?|Pre\s*(?:-?\s*\/\s*|-?\s*or\s+|-?\s*and\s+)Co-?\s*requisite(?:s|\(s\))?|Co\s*(?:-?\s*\/\s*|-?\s*or\s+|-?\s*and\s+)Pre-?\s*requisite(?:s|\(s\))?)(?:\s+for\b[^:.]{0,120})?(?:\s*:?\s*:\s*|\s+(?=(?:one\s+of\s+)?(?:[A-Z]{2,5}\s*\/|[A-Z]{2,5}\s+\d{3,4})))/gi;
 
 const STOP_HEADER_RE =
   /\b(?:(?:Strongly\s+)?Recommended[^:]*:|Suggested[^:]*:|Former\s+(?:pre-?\s*requisite|co-?\s*requisite)[^:]*:|Course\s+Credit\s+Exclusions?\b[^:.]{0,80}:?|Course\s+Credit\s+Exclusion\b[^:.]{0,80}:?|Course\s+Exclusions?\b[^:.]{0,80}:?|Course\s+Exclusion\b[^:.]{0,80}:?|Students\s+may\s+not\s+(?:also\s+)?receive\s+credit\b|NCR\s+Note[^:]*:|NCR\s*:|Notes?[^:]*:|Open\s+to\b|Not\s+open\s+to\b|Prior\s+to\b|Previously\b[^:]*:|Cross-?List(?:ed|ing)?[^:]*:|Integrated\s+with\b|CCEs?\s*:)/gi;

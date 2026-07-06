@@ -131,6 +131,17 @@ assert.deepEqual(
 
 assert.deepEqual(
   keys(extractPrereqsWithCredits(
+    'Prerequisites ED/EDST 1000 3.0; ED/EDST 1100 3.0; ED/EDST 1200 3.0.'
+  )),
+  [
+    'ED/EDST 1000 3 prerequisite',
+    'ED/EDST 1100 3 prerequisite',
+    'ED/EDST 1200 3 prerequisite',
+  ]
+);
+
+assert.deepEqual(
+  keys(extractPrereqsWithCredits(
     'Suggested pre-requisites: SC/BIOL 3130 3.00. Former prerequisite: SC/BIOL 2120 3.00.'
   )),
   []
