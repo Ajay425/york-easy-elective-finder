@@ -1,4 +1,4 @@
-  #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # Run the full pipeline:
 # 1) run step1_PythonCourseScraper/step_1_open_subject.py inside its virtualenv
@@ -6,8 +6,9 @@
 #
 # This script detaches into a screen session so it can run for days and be attached later.
 # Usage:
-#   ./run_full_pipeline.sh         # starts in a detached screen session
-#   ./run_full_pipeline.sh --attach  # starts (or reuses) a screen session and attaches to it
+#   ./run_full_pipeline.sh          # resume from existing scraper output/progress
+#   ./run_full_pipeline.sh --fresh  # archive scraper output/progress and start over
+#   ./run_full_pipeline.sh --attach # starts/reuses a screen session and attaches to it
 #
 # You can also use screen directly:
 #   screen -r york_pipeline
@@ -22,12 +23,36 @@ LOGFILE="$RUNTIME_PIPELINE_DIR/pipeline.log"
 
 mkdir -p "$RUNTIME_PIPELINE_DIR"
 
+ATTACH=0
+FRESH_START=0
+
+for arg in "$@"; do
+  case "$arg" in
+    --attach)
+      ATTACH=1
+      ;;
+    --fresh)
+      FRESH_START=1
+      ;;
+    *)
+      echo "ERROR: unknown argument: $arg" >&2
+      echo "Usage: $0 [--attach] [--fresh]" >&2
+      exit 1
+      ;;
+  esac
+done
+
 # Use the venv from step1 for the python run.
 VENV_PYTHON="$STEP1_DIR/venv/bin/python"
 if [ ! -x "$VENV_PYTHON" ]; then
   echo "ERROR: could not find python in virtualenv at $VENV_PYTHON" >&2
   echo "Make sure you have created the venv in $STEP1_DIR/venv." >&2
   exit 1
+fi
+
+FRESH_ENV=""
+if [ "$FRESH_START" = "1" ]; then
+  FRESH_ENV="FORCE_FRESH_SCRAPE=1 CONFIRM_FORCE_FRESH_SCRAPE=1"
 fi
 
 # Build the command that runs both steps.
@@ -40,7 +65,7 @@ echo "==> [\$(date)] running step1 (scrape subjects)"
 cd "$STEP1_DIR"
 
 # NOTE: step1 can take a long time. Output is captured in the screen log.
-FORCE_FRESH_SCRAPE=1 "$VENV_PYTHON" step_1_open_subject.py
+env -u FORCE_FRESH_SCRAPE -u CONFIRM_FORCE_FRESH_SCRAPE ${FRESH_ENV} "$VENV_PYTHON" step_1_open_subject.py
 
 # Once step1 completes, run the parsing/export pipeline.
 echo "==> [\$(date)] step1 complete; running JSON pipeline"
@@ -59,7 +84,7 @@ start_screen() {
 }
 
 # If user requests attach, create the session if missing then attach.
-if [ "${1:-}" = "--attach" ]; then
+if [ "$ATTACH" = "1" ]; then
   if ! screen -list | grep -q "\.${SCREEN_SESSION}\b"; then
     start_screen
   fi

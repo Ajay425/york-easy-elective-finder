@@ -7,14 +7,16 @@ import random
 import datetime
 import json
 import logging
+from dataclasses import dataclass
 from typing import List, Tuple, Set, Optional
+from urllib.parse import urljoin
 
 # ----------------------------------------------------------
 # ⚙️ USER SETTINGS
 # ----------------------------------------------------------
 FAST_MODE = False
 MAX_SUBJECTS = None
-SESSION_SELECT = "1"              # "0" for Fall/Winter 2025-2026, "1" for Summer 2026
+SESSION_SELECT = "1"              # York option value to select; session_meta.json records the actual label
 CAMPUS_NAME = "Keele"
 SAVE_DIR = "york_courses"
 PROGRESS_FILE = "progress.txt"
@@ -29,20 +31,34 @@ SESSION_META_SAVED = False
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SAVE_DIR_PATH = os.path.join(BASE_DIR, SAVE_DIR)
 PROGRESS_FILE_PATH = os.path.join(BASE_DIR, PROGRESS_FILE)
+LOG_FILE_PATH = os.path.join(BASE_DIR, LOG_FILE)
 
 COOLDOWN_SECONDS = 300              # 5 minutes (only after many consecutive fails)
 SUBJECT_ERROR_THRESHOLD = 5
 SUBJECT_MAX_TOTAL_ERRORS = 15       # skip/report a subject instead of looping forever
 COURSE_MAX_CONSEC_FAILS = 5         # only cooldown after 5 consecutive failures
 COURSE_MAX_TOTAL_ATTEMPTS = 25      # skip/report a course instead of looping forever
+COURSE_MAX_MISSING_ROW_ATTEMPTS = 3 # missing rows are deterministic after refreshed checks
 SHORT_BACKOFF_BASE = 10             # seconds; doubles each retry attempt
 RELAUNCH_PAUSE_SECONDS = 15         # pause after relaunch to avoid instant re-block
 SESSION_MAX_COURSES = 50            # Relaunch browser every N courses to refresh fingerprint
 SUBJECT_CODE_GUARD_MIN_COURSES = 3
+BLOCKED_OR_EXPIRED_NEEDLES = [
+    "your session has been ended",
+    "you have exceeded the maximum time limit",
+    "access denied",
+    "please log in",
+    "unauthorized",
+    "attention required",
+    "cloudflare",
+    "verify you are human",
+    "checking your browser",
+    "ray id",
+]
 # ----------------------------------------------------------
 
 logging.basicConfig(
-    filename=LOG_FILE,
+    filename=LOG_FILE_PATH,
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
@@ -63,6 +79,9 @@ def human_pause(min_sec: Optional[float] = None, max_sec: Optional[float] = None
     """More natural: single random sleep instead of two consecutive ones"""
     time.sleep(random.uniform(min_sec or HUMAN_DELAY_MIN, max_sec or HUMAN_DELAY_MAX))
 
+def env_flag(name: str) -> bool:
+    return os.environ.get(name, "").strip().lower() in {"1", "true", "yes", "on"}
+
 def between_pages_pause() -> None:
     """More natural: single random sleep"""
     time.sleep(random.uniform(BETWEEN_PAGES_MIN, BETWEEN_PAGES_MAX))
@@ -76,7 +95,16 @@ def sanitize_filename(name: str) -> str:
 
 def file_is_valid_html(path: str, min_bytes: int = 800) -> bool:
     try:
-        return os.path.exists(path) and os.path.getsize(path) >= min_bytes
+        if not os.path.exists(path) or os.path.getsize(path) < min_bytes:
+            return False
+
+        with open(path, "r", encoding="utf-8", errors="ignore") as f:
+            sample = f.read(12000).lower()
+
+        if "<html" not in sample:
+            return False
+
+        return not any(needle in sample for needle in BLOCKED_OR_EXPIRED_NEEDLES)
     except Exception:
         return False
 
@@ -87,8 +115,20 @@ def cooldown(reason: str) -> None:
 class SubjectMismatchError(RuntimeError):
     pass
 
+class CourseRowMissingError(RuntimeError):
+    pass
+
+@dataclass(frozen=True)
+class CourseEntry:
+    code: str
+    title: str
+    schedule_href: str
+
 def utc_now_iso() -> str:
     return datetime.datetime.now(datetime.UTC).isoformat()
+
+def normalize_visible_text(text: str) -> str:
+    return re.sub(r"\s+", " ", (text or "").replace("\xa0", " ")).strip()
 
 def subject_code_from_name(subject_name: str) -> str:
     return subject_name.split(" - ", 1)[0].strip().upper()
@@ -118,6 +158,10 @@ def validate_subject_course_list(subject_name: str, courses: List[Tuple[str, str
         f"observed {observed}. Sample rows: {sample}"
     )
 
+def progress_covers_subjects(completed_subjects: Set[str], subjects: List[Tuple[str, str]]) -> bool:
+    current_subject_names = {name for name, _value in subjects}
+    return bool(current_subject_names) and current_subject_names.issubset(completed_subjects)
+
 def write_failed_scrape_report(failed_subjects, failed_courses) -> None:
     report_path = os.path.join(BASE_DIR, FAILED_SCRAPE_REPORT)
     payload = {
@@ -134,17 +178,29 @@ def write_failed_scrape_report(failed_subjects, failed_courses) -> None:
 # ----------------------------------------------------------
 # 🕐 DAILY MAINTENANCE CHECK
 # ----------------------------------------------------------
-def check_maintenance_window() -> None:
-    now = datetime.datetime.now()
-    start = now.replace(hour=23, minute=55, second=0, microsecond=0)
-    end = now.replace(hour=1, minute=45, second=0, microsecond=0)
+def maintenance_window_wait_seconds(now: Optional[datetime.datetime] = None) -> Optional[float]:
+    now = now or datetime.datetime.now()
+
+    if now.hour >= 23:
+        start = now.replace(hour=23, minute=55, second=0, microsecond=0)
+        end = (now + datetime.timedelta(days=1)).replace(hour=1, minute=45, second=0, microsecond=0)
+    else:
+        start = now.replace(hour=23, minute=55, second=0, microsecond=0)
+        end = now.replace(hour=1, minute=45, second=0, microsecond=0)
+
     if now.hour < 2:
         start = (now - datetime.timedelta(days=1)).replace(hour=23, minute=55, second=0, microsecond=0)
-    if start <= now <= end:
-        target = now.replace(hour=1, minute=45, second=0, microsecond=0)
-        if now.hour >= 23:
-            target = (now + datetime.timedelta(days=1)).replace(hour=1, minute=45, second=0, microsecond=0)
-        wait_seconds = (target - now).total_seconds()
+        end = now.replace(hour=1, minute=45, second=0, microsecond=0)
+
+    if not (start <= now <= end):
+        return None
+
+    return max((end - now).total_seconds(), 0)
+
+def check_maintenance_window() -> None:
+    now = datetime.datetime.now()
+    wait_seconds = maintenance_window_wait_seconds(now)
+    if wait_seconds is not None:
         logging.info(f"🕐 Maintenance window detected ({now.strftime('%H:%M')} → 1:45 a.m.).")
         logging.info(f"💤 Sleeping for {wait_seconds/60:.1f} minutes...")
         time.sleep(wait_seconds)
@@ -159,19 +215,7 @@ def page_looks_blocked_or_expired(page) -> bool:
     except Exception:
         return True
 
-    needles = [
-        "your session has been ended",
-        "you have exceeded the maximum time limit",
-        "access denied",
-        "please log in",
-        "unauthorized",
-        "attention required",
-        "cloudflare",
-        "verify you are human",
-        "checking your browser",
-        "ray id",
-    ]
-    return any(n in html for n in needles)
+    return any(n in html for n in BLOCKED_OR_EXPIRED_NEEDLES)
 
 def page_is_dead(page) -> bool:
     try:
@@ -253,14 +297,14 @@ def open_subject_results(page, start_url: str, subject_value: str, campus_name: 
     no_courses = page.locator("text=No courses were found").count() > 0
     if no_courses:
         logging.info("   ℹ️ No courses found for this subject (empty subject)")
-        return  # This will cause collect_course_list to be skipped
+        return
     
     page.wait_for_selector("table", timeout=45000)
 
     # Wait for at least one "Course Schedule" link to exist
     page.wait_for_function(
         """() => Array.from(document.querySelectorAll('a'))
-              .some(a => (a.textContent || '').includes('Course Schedule'))""",
+              .some(a => ((a.textContent || '').toLowerCase()).includes('course schedule'))""",
         timeout=45000
     )
 
@@ -274,32 +318,122 @@ def open_subject_results(page, start_url: str, subject_value: str, campus_name: 
         raise RuntimeError("Blocked/session-expired page detected on subject results.")
 
 # ----------------------------------------------------------
-# ✅ Results parsing + click schedule
+# ✅ Results parsing + schedule navigation
 # ----------------------------------------------------------
-def collect_course_list(page) -> List[Tuple[str, str]]:
+def collect_course_entries(page) -> List[CourseEntry]:
     code_re = re.compile(r"^[A-Z]{2}\/[A-Z0-9]{2,}\s+\d{4}\s+\d\.\d{2}$")
 
-    rows = page.locator("table tr").all()
-    courses: List[Tuple[str, str]] = []
-    seen = set()
+    raw_rows = page.eval_on_selector_all(
+        "table tr",
+        """
+        rows => rows.map(tr => {
+            const cells = Array.from(tr.children)
+                .filter(el => el.tagName && el.tagName.toUpperCase() === 'TD');
+            if (cells.length < 3) return null;
 
-    for tr in rows:
-        tds = tr.locator("td")
-        if tds.count() < 3:
-            continue
-        code = tds.nth(0).inner_text().strip()
-        title = tds.nth(1).inner_text().strip()
+            const scheduleLink = Array.from(cells[2].querySelectorAll('a'))
+                .find(a => ((a.textContent || '').toLowerCase()).includes('course schedule'));
+
+            return {
+                code: cells[0].innerText || '',
+                title: cells[1].innerText || '',
+                href: scheduleLink ? (scheduleLink.href || scheduleLink.getAttribute('href') || '') : '',
+            };
+        }).filter(Boolean)
+        """
+    )
+
+    courses_by_key = {}
+
+    for row in raw_rows:
+        code = normalize_visible_text(row.get("code", ""))
+        title = normalize_visible_text(row.get("title", ""))
+        href = (row.get("href", "") or "").strip()
         if not code_re.match(code) or not title:
             continue
         key = (code, title)
-        if key in seen:
-            continue
-        seen.add(key)
-        courses.append(key)
+        if href:
+            href = urljoin("https://w2prod.sis.yorku.ca", href)
+        if "/Apps/WebObjects/cdm.woa/" not in href:
+            href = ""
+
+        existing = courses_by_key.get(key)
+        if existing is None or (not existing.schedule_href and href):
+            courses_by_key[key] = CourseEntry(code=code, title=title, schedule_href=href)
+
+    courses = list(courses_by_key.values())
 
     if not courses:
         raise RuntimeError("Found 0 valid course rows (results not loaded or markup changed).")
     return courses
+
+def collect_course_list(page) -> List[Tuple[str, str]]:
+    return [(entry.code, entry.title) for entry in collect_course_entries(page)]
+
+def summarize_course_entries(entries: List[CourseEntry], limit: int = 6) -> str:
+    if not entries:
+        return "no valid course rows"
+
+    sample = entries[:limit]
+    if len(entries) > limit:
+        sample += entries[-limit:]
+
+    seen = set()
+    parts = []
+    for entry in sample:
+        key = (entry.code, entry.title)
+        if key in seen:
+            continue
+        seen.add(key)
+        parts.append(f"{entry.code} - {entry.title}")
+    return "; ".join(parts)
+
+def find_course_entry(entries: List[CourseEntry], code: str, title: str) -> Optional[CourseEntry]:
+    normalized_code = normalize_visible_text(code)
+    normalized_title = normalize_visible_text(title)
+
+    for entry in entries:
+        if entry.code == normalized_code and entry.title == normalized_title:
+            return entry
+
+    code_matches = [entry for entry in entries if entry.code == normalized_code]
+    if len(code_matches) == 1:
+        logging.warning(
+            "      ⚠️ Course title changed on refreshed results for %s: expected %r, found %r",
+            normalized_code,
+            normalized_title,
+            code_matches[0].title,
+        )
+        return code_matches[0]
+
+    return None
+
+def open_course_schedule_page(page, entry: CourseEntry) -> None:
+    if not entry.schedule_href:
+        raise CourseRowMissingError(f"Course row has no usable Course Schedule link: {entry.code} - {entry.title}")
+
+    page.goto(entry.schedule_href, wait_until="domcontentloaded", timeout=45000)
+    page.wait_for_selector("body", timeout=45000)
+
+    try:
+        page.wait_for_load_state("networkidle", timeout=15000)
+    except Exception:
+        pass
+
+    if page_looks_blocked_or_expired(page):
+        raise RuntimeError("Blocked/session-expired page detected after opening schedule page.")
+
+    try:
+        body_text = normalize_visible_text(page.locator("body").inner_text(timeout=10000))
+    except Exception:
+        body_text = ""
+
+    if entry.code not in body_text:
+        observed = re.search(r"\b[A-Z]{2}\/[A-Z0-9]{2,}\s+\d{4}\s+\d\.\d{2}\b", body_text)
+        observed_code = observed.group(0) if observed else "unknown"
+        raise RuntimeError(
+            f"Schedule page did not match requested course {entry.code}; observed {observed_code}."
+        )
 
 def click_course_schedule_link_for_row(page, code: str, title: str) -> None:
     rows = page.locator("table tr").all()
@@ -308,9 +442,9 @@ def click_course_schedule_link_for_row(page, code: str, title: str) -> None:
         if tds.count() < 3:
             continue
 
-        r_code = tds.nth(0).inner_text().strip()
-        r_title = tds.nth(1).inner_text().strip()
-        if r_code != code or r_title != title:
+        r_code = normalize_visible_text(tds.nth(0).inner_text())
+        r_title = normalize_visible_text(tds.nth(1).inner_text())
+        if r_code != normalize_visible_text(code) or r_title != normalize_visible_text(title):
             continue
 
         link_locator = tds.nth(2).locator("a").filter(has_text="Course Schedule").first
@@ -338,7 +472,15 @@ def click_course_schedule_link_for_row(page, code: str, title: str) -> None:
             raise RuntimeError("Blocked/session-expired page detected after opening schedule page.")
         return
 
-    raise RuntimeError(f"Could not find matching row to click schedule link: {code} – {title}")
+    try:
+        entries = collect_course_entries(page)
+        available = summarize_course_entries(entries)
+    except Exception:
+        available = "unable to parse current results page"
+    raise CourseRowMissingError(
+        f"Could not find matching row to click schedule link: {code} – {title}. "
+        f"Available rows: {available}"
+    )
 
 # ----------------------------------------------------------
 # 💾 Save logic
@@ -414,8 +556,10 @@ def save_current_page_html(page, filepath: str) -> None:
     if page_looks_blocked_or_expired(page):
         raise RuntimeError("Blocked/session-expired HTML when saving.")
 
-    with open(filepath, "w", encoding="utf-8") as f:
+    tmp_filepath = f"{filepath}.tmp"
+    with open(tmp_filepath, "w", encoding="utf-8") as f:
         f.write(html)
+    os.replace(tmp_filepath, filepath)
 
 # ----------------------------------------------------------
 # 🚀 MAIN
@@ -508,8 +652,16 @@ def main() -> None:
             subjects = subjects[:MAX_SUBJECTS]
         logging.info(f"📚 Found {len(subjects)} subjects to scrape")
 
-        force_fresh_scrape = os.environ.get("FORCE_FRESH_SCRAPE") == "1"
+        force_fresh_requested = env_flag("FORCE_FRESH_SCRAPE")
+        force_fresh_confirmed = env_flag("CONFIRM_FORCE_FRESH_SCRAPE")
+        force_fresh_scrape = force_fresh_requested and force_fresh_confirmed
         run_complete_marker = os.path.join(BASE_DIR, RUN_COMPLETE_MARKER)
+
+        if force_fresh_requested and not force_fresh_confirmed:
+            logging.warning(
+                "⚠️ FORCE_FRESH_SCRAPE is set but ignored because "
+                "CONFIRM_FORCE_FRESH_SCRAPE=1 is not set. Resuming existing output/progress."
+            )
 
         if force_fresh_scrape:
             if os.path.isdir(SAVE_DIR_PATH):
@@ -558,7 +710,7 @@ def main() -> None:
 
         # Determine if the prior run finished completely; if so, archive its output.
         run_finished_cleanly = os.path.exists(run_complete_marker)
-        run_finished_by_progress = len(completed_subjects) == len(subjects) and len(subjects) > 0
+        run_finished_by_progress = progress_covers_subjects(completed_subjects, subjects)
 
         if (run_finished_cleanly or run_finished_by_progress) and os.path.isdir(SAVE_DIR_PATH):
             try:
@@ -633,7 +785,7 @@ def main() -> None:
                     no_courses = page.locator("text=No courses were found").count() > 0
                     if no_courses:
                         logging.info(f"   ✅ Subject has no courses - marking as complete")
-                        with open(PROGRESS_FILE, "a", encoding="utf-8") as f:
+                        with open(PROGRESS_FILE_PATH, "a", encoding="utf-8") as f:
                             f.write(subject_name + "\n")
                         
                         # Refresh browser and move to next subject
@@ -644,7 +796,8 @@ def main() -> None:
                         courses_in_session = 0
                         break
                     
-                    courses = collect_course_list(page)
+                    course_entries = collect_course_entries(page)
+                    courses = [(entry.code, entry.title) for entry in course_entries]
                     validate_subject_course_list(subject_name, courses)
                     logging.info(f"   → Found {len(courses)} courses")
                 except Exception as e:
@@ -686,6 +839,8 @@ def main() -> None:
                 if skipped_subject:
                     break
 
+                links_need_refresh = False
+
                 # Per-course loop
                 for i, (code, title) in enumerate(courses, start=1):
                     check_maintenance_window()
@@ -707,10 +862,42 @@ def main() -> None:
                         t0 = time.time()
 
                         try:
-                            open_subject_results(page, start_url, subject_value, CAMPUS_NAME)
-                            human_pause(1.0, 2.0)
+                            if courses_in_session >= SESSION_MAX_COURSES:
+                                logging.info(
+                                    f"🔄 Refreshing session after {courses_in_session} courses "
+                                    "(fingerprint renewal)"
+                                )
+                                close_session(browser, context)
+                                browser, context, page = new_session()
+                                courses_in_session = 0
+                                links_need_refresh = True
+                                time.sleep(RELAUNCH_PAUSE_SECONDS)
 
-                            click_course_schedule_link_for_row(page, code, title)
+                            if page_is_dead(page):
+                                logging.warning("Page died. Relaunching session.")
+                                close_session(browser, context)
+                                browser, context, page = new_session()
+                                courses_in_session = 0
+                                links_need_refresh = True
+                                time.sleep(RELAUNCH_PAUSE_SECONDS)
+
+                            if links_need_refresh:
+                                logging.info("      🔗 Refreshing course schedule links for current subject")
+                                open_subject_results(page, start_url, subject_value, CAMPUS_NAME)
+                                course_entries = collect_course_entries(page)
+                                refreshed_courses = [(entry.code, entry.title) for entry in course_entries]
+                                validate_subject_course_list(subject_name, refreshed_courses)
+                                links_need_refresh = False
+
+                            course_entry = find_course_entry(course_entries, code, title)
+                            if not course_entry:
+                                raise CourseRowMissingError(
+                                    f"Could not find schedule link for {code} - {title}. "
+                                    f"Available rows: {summarize_course_entries(course_entries)}"
+                                )
+
+                            human_pause(0.8, 1.8)
+                            open_course_schedule_page(page, course_entry)
 
                             time.sleep(1.5)
 
@@ -730,7 +917,13 @@ def main() -> None:
                                 f"      ⚠️ Attempt took {elapsed:.1f}s before failing for {code}: {e}"
                             )
 
-                            if total_fail >= COURSE_MAX_TOTAL_ATTEMPTS:
+                            max_total_attempts = (
+                                COURSE_MAX_MISSING_ROW_ATTEMPTS
+                                if isinstance(e, CourseRowMissingError)
+                                else COURSE_MAX_TOTAL_ATTEMPTS
+                            )
+
+                            if total_fail >= max_total_attempts:
                                 failed_course_keys.add((code, title))
                                 failed_courses.append({
                                     "subject": subject_name,
@@ -748,11 +941,15 @@ def main() -> None:
                                 break
 
                             msg = str(e)
+                            if isinstance(e, CourseRowMissingError) or "did not match requested course" in msg:
+                                links_need_refresh = True
+
                             if ("Search By Subject" in msg) or ("Blocked/interstitial" in msg) or ("cloudflare" in msg.lower()) or ("session" in msg.lower()):
                                 logging.warning("      ♻️ Bad state/blocked detected; relaunching browser/context.")
                                 close_session(browser, context)
                                 browser, context, page = new_session()
                                 courses_in_session = 0
+                                links_need_refresh = True
                                 time.sleep(RELAUNCH_PAUSE_SECONDS)
                                 if "Blocked" in msg or "session" in msg.lower():
                                     extra_wait = random.uniform(20, 40)
@@ -782,6 +979,7 @@ def main() -> None:
                                 close_session(browser, context)
                                 browser, context, page = new_session()
                                 courses_in_session = 0
+                                links_need_refresh = True
                                 time.sleep(RELAUNCH_PAUSE_SECONDS)
 
                             continue
@@ -800,7 +998,7 @@ def main() -> None:
                         break
 
                 if all_ok:
-                    with open(PROGRESS_FILE, "a", encoding="utf-8") as f:
+                    with open(PROGRESS_FILE_PATH, "a", encoding="utf-8") as f:
                         f.write(subject_name + "\n")
                     logging.info(f"✅ Finished {subject_name} (saved to {PROGRESS_FILE})")
                     
