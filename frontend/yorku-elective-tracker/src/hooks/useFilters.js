@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { YEARS, DEPARTMENTS, DAY_LABELS } from "../lib/courseFilters";
+import { useEffect, useState, useMemo } from "react";
+import { YEARS, DAY_LABELS, COURSE_TYPES } from "../lib/courseFilters";
 
 // Author: --Jon
 
@@ -39,11 +39,10 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
       courses.some((c) => c.year === year)
     );
 
-    const courseDepts = DEPARTMENTS.filter((dept) =>
-      courses.some((c) => c.deptAcronym === dept)
-    );
+    const courseDepts = Array.from(
+      new Set(courses.map((c) => c.deptAcronym || c.dept).filter(Boolean))
+    ).sort((a, b) => a.localeCompare(b));
 
-    const typeOrder = ["LECT", "SEMR", "TUTR", "LAB", "BLEN", "ONLN", "ONCA", "HYFX"];
     const foundTypes = new Set();
     courses.forEach((c) => {
       c.terms?.forEach((t) => {
@@ -51,11 +50,14 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
         t.meetings?.forEach((m) => {
           if (m?.type) foundTypes.add(m.type);
         });
+        t.courseTimes?.forEach((ct) => {
+          if (ct?.type) foundTypes.add(ct.type);
+        });
       });
     });
     const courseTypes = Array.from(foundTypes).sort((a, b) => {
-      const ia = typeOrder.indexOf(a);
-      const ib = typeOrder.indexOf(b);
+      const ia = COURSE_TYPES.indexOf(a);
+      const ib = COURSE_TYPES.indexOf(b);
       if (ia !== -1 || ib !== -1) return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
       return a.localeCompare(b);
     });
@@ -115,6 +117,35 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
     };
   }, [courses]);
 
+  useEffect(() => {
+    if (courses.length === 0) return;
+
+    setFilters((current) => {
+      const next = { ...current };
+      let changed = false;
+
+      ["Credits", "Year", "Department", "CourseType", "Day"].forEach((key) => {
+        const values = Array.isArray(next[key]) ? next[key] : [];
+        const allowed = new Set(filterOptions[key] || []);
+        const validValues = values.filter((value) => allowed.has(value));
+
+        if (validValues.length !== values.length) {
+          next[key] = validValues;
+          changed = true;
+        }
+      });
+
+      ["StartTime", "EndTime"].forEach((key) => {
+        if (next[key] != null && !(filterOptions[key] || []).includes(next[key])) {
+          next[key] = null;
+          changed = true;
+        }
+      });
+
+      return changed ? next : current;
+    });
+  }, [courses.length, filterOptions]);
+
   // Filter courses based on search and filters
   const filteredCourses = useMemo(() => {
     // For better UI behavior, filter at the term/section level and return
@@ -136,7 +167,8 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
         const termMatchesType = (t) => {
           if (filters.CourseType.length === 0) return true;
           if (t.type && filters.CourseType.includes(t.type)) return true;
-          return t.meetings?.some((m) => m?.type && filters.CourseType.includes(m.type));
+          if (t.meetings?.some((m) => m?.type && filters.CourseType.includes(m.type))) return true;
+          return t.courseTimes?.some((ct) => ct?.type && filters.CourseType.includes(ct.type));
         };
 
         const termMatchesDay = (t) => {

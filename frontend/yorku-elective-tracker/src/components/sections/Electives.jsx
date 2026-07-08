@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useCourses } from "../../hooks/useCourses";
 import { useCourseMeta } from "../../hooks/useCourseMeta";
@@ -14,6 +14,7 @@ import { UpdatesPopup } from "../UpdatesPopup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Bookmark, CalendarDays, Mail, Search } from "lucide-react";
 import { useSavedCatNumbers } from "../../hooks/useSavedCatNumbers";
+import { termMatchesSelection } from "../../lib/termMatching";
 import {
   Select,
   SelectContent,
@@ -21,6 +22,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+function courseMatchesSearch(course, query) {
+  if (!query) return false;
+
+  return [
+    course.code,
+    course.title,
+    course.name,
+    course.faculty,
+    course.facultyPrefix,
+    course.deptAcronym,
+    course.dept,
+  ].some((value) =>
+    String(value || "").toLowerCase().includes(query)
+  );
+}
 
 const Electives = () => {
   const location = useLocation();
@@ -40,11 +57,14 @@ const Electives = () => {
   } = useSavedCatNumbers();
 
   // Filter courses that match the selected term
-  const coursesForTerm = selectedTerm
-    ? courses.filter((course) =>
-        course.terms?.some((t) => t.term.startsWith(selectedTerm))
-      )
-    : [];
+  const coursesForTerm = useMemo(
+    () => selectedTerm
+      ? courses.filter((course) =>
+          course.terms?.some((t) => termMatchesSelection(t.term, selectedTerm))
+        )
+      : [],
+    [courses, selectedTerm]
+  );
 
   // Load saved data
   const savedFilters = (() => {
@@ -69,6 +89,25 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
     filteredCourses,
     clearFilters,
   } = useFilters(coursesForTerm, savedFilters, savedSearch);
+
+  const labelForTermCode = (term) =>
+    courseMeta.terms.find((item) => item.term === term)?.label || term;
+
+  const outsideTermMatches = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!selectedTerm || !query) return [];
+
+    return courses
+      .filter((course) =>
+        !course.terms?.some((t) => termMatchesSelection(t.term, selectedTerm))
+      )
+      .filter((course) => courseMatchesSearch(course, query));
+  }, [courses, searchQuery, selectedTerm]);
+
+  const summarizeCourseTerms = (course) => {
+    const terms = Array.from(new Set((course.terms || []).map((t) => t.term).filter(Boolean)));
+    return terms.map(labelForTermCode).join(", ");
+  };
 
 
 
@@ -169,8 +208,17 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
     });
   };
 
+  const getOfferingTermLabel = (offeringTerm) => {
+    const termMeta = courseMeta.terms.find((item) => item.term === offeringTerm);
+    if (termMeta?.label) return termMeta.label;
+    if (offeringTerm === selectedCourseDetails?.term && selectedCourseDetails?.termLabel) {
+      return selectedCourseDetails.termLabel;
+    }
+    return offeringTerm || selectedTermLabel;
+  };
+
   const handleSaveCatNumber = (course, offering) => {
-    saveCatNumber(course, offering, selectedCourseDetails?.termLabel || selectedTermLabel, selectedTermAndYear);
+    saveCatNumber(course, offering, getOfferingTermLabel(offering?.term), selectedTermAndYear);
   };
 
   // Stop users from bypassing Home page
@@ -188,7 +236,7 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
   const getPopularityForCourse = (course) => {
     if (!selectedTerm || !course.terms) return 0;
     const pops = course.terms
-      .filter((t) => t.term === selectedTerm || t.term?.startsWith(selectedTerm))
+      .filter((t) => termMatchesSelection(t.term, selectedTerm))
       .flatMap((offering) => offering.meetings || [])
       .map((m) => m.popularity)
       .filter((p) => p !== undefined && p !== null);
@@ -364,6 +412,34 @@ const savedSearch = localStorage.getItem("electiveSearch") || "";
                 />
 
               ))
+            ) : outsideTermMatches.length > 0 ? (
+              <div className="col-span-full mx-auto w-full max-w-2xl rounded-lg border border-yellow-300/30 bg-yellow-300/10 p-5 text-left">
+                <h3 className="text-lg font-semibold text-yellow-100">
+                  Matches exist outside {selectedTermLabel || selectedTerm}
+                </h3>
+                <p className="mt-2 text-sm text-yellow-50/85">
+                  Your selected term is still being respected. These matching courses are available in a different term:
+                </p>
+                <div className="mt-4 space-y-3">
+                  {outsideTermMatches.slice(0, 5).map((course) => (
+                    <div key={course.code} className="rounded-md border border-white/10 bg-black/20 p-3">
+                      <p className="font-semibold text-white">{course.code}</p>
+                      <p className="text-sm text-gray-300">{course.title}</p>
+                      <p className="mt-1 text-xs text-yellow-100">
+                        Available in: {summarizeCourseTerms(course)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                {outsideTermMatches.length > 5 && (
+                  <p className="mt-3 text-xs text-yellow-50/75">
+                    And {outsideTermMatches.length - 5} more matching courses outside this selected term.
+                  </p>
+                )}
+                <p className="mt-4 text-sm text-gray-300">
+                  Switch the term dropdown above to view these courses.
+                </p>
+              </div>
             ) : (
               <div className="col-span-full text-center py-10">
                 <p className="text-gray-300 text-lg">No courses found matching your criteria</p>

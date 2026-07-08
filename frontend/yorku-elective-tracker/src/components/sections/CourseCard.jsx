@@ -2,13 +2,9 @@ import {
   Card,
 } from "@/components/ui/card";
 import { GraduationCap, Users, Flame } from "lucide-react";
+import { termMatchesSelection } from "../../lib/termMatching";
 
 export function CourseCard({ course, selectedTerm, onClick }) {
-
-  const termMatchesSelection = (term, selection) => {
-    if (!selection) return true;
-    return term === selection || term?.startsWith(selection);
-  };
 
   // Build a comparable instructor summary from a meeting row
   const getInstructorFromMeeting = (meeting) => {

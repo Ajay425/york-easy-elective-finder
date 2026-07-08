@@ -3,6 +3,8 @@ import { ChevronDown, X, Copy, Check, Bookmark, BookmarkCheck } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useMemo } from "react";
 import { getCatEntryId } from "../../hooks/useSavedCatNumbers";
+import { COURSE_TYPE_LABELS } from "../../lib/courseFilters";
+import { termMatchesSelection } from "../../lib/termMatching";
 import {
   Select,
   SelectContent,
@@ -24,17 +26,7 @@ const DAY_LABELS = {
   Sun: "Sunday",
 };
 
-const TYPE_LABELS = {
-  LECT: "Lecture",
-  TUTR: "Tutorial",
-  LAB: "Lab",
-  SEM: "Seminar",
-  SEMR: "Seminar",
-  BLEN: "Blended",
-  ONLN: "Online",
-  ONCA: "Online Async",
-  HYFX: "Hybrid",
-};
+const TYPE_LABELS = COURSE_TYPE_LABELS;
 
 const COURSE_TYPE_ORDER = [
   "LECT",
@@ -362,9 +354,18 @@ export function CourseDetailPanel({
 
   // Filter term offerings based on selected term
   const termOfferings = useMemo(
-    () => course?.terms?.filter((t) => t.term === selectedTerm) || [],
+    () => course?.terms?.filter((t) => termMatchesSelection(t.term, selectedTerm)) || [],
     [course?.terms, selectedTerm]
   );
+  const displayedTermLabel = useMemo(() => {
+    const labels = Array.from(new Set(
+      termOfferings
+        .map((offering) => termLabel(offering.term, selectedTerm, selectedTermLabel))
+        .filter(Boolean)
+    ));
+
+    return labels.length ? labels.join(", ") : selectedTermLabel || selectedTerm;
+  }, [termOfferings, selectedTerm, selectedTermLabel]);
   const offeringGroups = useMemo(() => {
     const map = new Map();
 
@@ -537,7 +538,7 @@ export function CourseDetailPanel({
       {termOfferings.length > 0 && (
         <div className="mt-6 space-y-6">
           <h4 className="text-yellow-200 font-semibold text-lg">
-            Sections for {selectedTermLabel || selectedTerm}
+            Sections for {displayedTermLabel}
           </h4>
 
           {visibleOfferings.map(({ group, offering: t }, idx) => (
