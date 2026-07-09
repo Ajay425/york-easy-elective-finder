@@ -59,9 +59,21 @@ const Electives = () => {
   // Filter courses that match the selected term
   const coursesForTerm = useMemo(
     () => selectedTerm
-      ? courses.filter((course) =>
-          course.terms?.some((t) => termMatchesSelection(t.term, selectedTerm))
-        )
+      ? courses
+          .map((course) => {
+            const termOfferings = (course.terms || []).filter((t) =>
+              termMatchesSelection(t.term, selectedTerm)
+            );
+
+            if (termOfferings.length === 0) return null;
+
+            return {
+              ...course,
+              allTerms: course.terms || [],
+              terms: termOfferings,
+            };
+          })
+          .filter(Boolean)
       : [],
     [courses, selectedTerm]
   );

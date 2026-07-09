@@ -133,7 +133,7 @@ function SearchableOptions({
   options,
   selectedValues,
   onSelect,
-  preventClose = true,
+  closeOnSelect = true,
   searchable = false,
 }) {
   const [query, setQuery] = useState("");
@@ -189,7 +189,7 @@ function SearchableOptions({
               <DropdownMenuItem
                 key={String(option)}
                 onSelect={(event) => {
-                  if (preventClose) event.preventDefault();
+                  if (!closeOnSelect) event.preventDefault();
                   onSelect(option);
                 }}
                 className={optionClass(active)}
@@ -262,6 +262,7 @@ function MultiSelectFilterMenu({
           filterName={filterName}
           options={options}
           selectedValues={selectedValues}
+          closeOnSelect
           searchable={filterName === "Department" || filterName === "CourseType"}
           onSelect={(option) => {
             setFilters((prev) => {
@@ -306,7 +307,7 @@ function SingleSelectFilterMenu({
           filterName={filterName}
           options={options}
           selectedValues={selectedValues}
-          preventClose={false}
+          closeOnSelect
           searchable
           onSelect={(option) => {
             setFilters((prev) => ({
