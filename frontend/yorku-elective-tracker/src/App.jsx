@@ -1,10 +1,10 @@
 import './App.css'
 import './index.css'
 import {BrowserRouter as Router, Routes , Route} from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Home from './components/sections/Home.jsx';
 import Electives from './components/sections/Electives.jsx';
 import ContactUs from './components/sections/Contact.jsx';
-import { Analytics } from '@vercel/analytics/react';
 
 
 

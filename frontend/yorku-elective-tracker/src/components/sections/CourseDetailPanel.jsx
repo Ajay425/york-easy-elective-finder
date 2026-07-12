@@ -3,6 +3,7 @@ import { ChevronDown, X, Copy, Check, Bookmark, BookmarkCheck } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useMemo } from "react";
 import { getCatEntryId } from "../../hooks/useSavedCatNumbers";
+import { useSeats, getOpenSeats, formatSeatTimestamp } from "../../hooks/useSeats";
 import {
   Select,
   SelectContent,
@@ -348,6 +349,9 @@ export function CourseDetailPanel({
 }) {
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [showOutsideSections, setShowOutsideSections] = useState(false);
+  const seatsData = useSeats();
+  const seats = seatsData?.seats ?? null;
+  const generatedAt = seatsData?.generatedAt ?? null;
 
   // Close panel on Escape key
   useEffect(() => {
@@ -506,6 +510,11 @@ export function CourseDetailPanel({
         </p>
 
         <p className="italic">
+          Open seats shown may not all be available — departments sometimes reserve seats for specific students.
+          If you receive a &quot;reserved seats&quot; error when enrolling, please contact the respective department directly.
+        </p>
+
+        <p className="italic">
           To manually add this course visit{" "}
           <a
             href="https://wrem.sis.yorku.ca/Apps/WebObjects/REM.woa/wa/DirectAction/rem"
@@ -594,6 +603,33 @@ export function CourseDetailPanel({
                       <span className="font-mono">{t.catNumber}</span>
                     </p>
                   )}
+
+                  {/* Open seats badge */}
+                  {t.catNumber && seatsData !== null && (() => {
+                    const open = getOpenSeats(seats, t.catNumber);
+                    const ts = formatSeatTimestamp(generatedAt);
+                    if (open === null) {
+                      return (
+                        <p className="mt-2 text-[11px] text-gray-600 italic">No seat data</p>
+                      );
+                    }
+                    const isFull = open === 0;
+                    const isLow  = open <= 10;
+                    const dotColor   = isFull ? "bg-red-400"    : isLow ? "bg-yellow-400"  : "bg-green-400";
+                    const textColor  = isFull ? "text-red-300"  : isLow ? "text-yellow-200": "text-green-300";
+                    const label      = isFull ? "Full"          : `${open} open seats`;
+                    return (
+                      <div className="mt-2 space-y-0.5">
+                        <div className="flex items-center gap-1.5">
+                          <span className={`w-2 h-2 rounded-full flex-shrink-0 ${dotColor}`} />
+                          <span className={`text-xs font-semibold ${textColor}`}>{label}</span>
+                        </div>
+                        {ts && (
+                          <p className="text-[10px] text-gray-400 pl-3.5">Updated {ts}</p>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
 
                 {t.catNumber && (
