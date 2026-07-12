@@ -1,14 +1,13 @@
-import { useState, useMemo } from "react";
-import { YEARS, DEPARTMENTS, DAY_LABELS } from "../lib/courseFilters";
+import { useEffect, useState, useMemo } from "react";
+import { YEARS, COURSE_TYPES, DAY_LABELS } from "../lib/courseFilters";
+import {
+  DAY_ORDER,
+  getDayLabelsForOffering,
+  offeringMatchesDayTimeFilters,
+  timeToMinutes,
+} from "../lib/dayTimeFilters";
 
 // Author: --Jon
-
-function timeToMinutes(t) {
-  if (!t) return null;
-  const [h, m] = t.split(":").map(Number);
-  if (Number.isNaN(h) || Number.isNaN(m)) return null;
-  return h * 60 + m;
-}
 
 export function useFilters(courses, initialFilters = null, initialSearch = "") {
   const defaultFilters = {
@@ -39,11 +38,10 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
       courses.some((c) => c.year === year)
     );
 
-    const courseDepts = DEPARTMENTS.filter((dept) =>
-      courses.some((c) => c.deptAcronym === dept)
-    );
+    const courseDepts = Array.from(
+      new Set(courses.map((c) => c.deptAcronym || c.dept).filter(Boolean))
+    ).sort((a, b) => a.localeCompare(b));
 
-    const typeOrder = ["LECT", "SEMR", "TUTR", "LAB", "BLEN", "ONLN", "ONCA", "HYFX"];
     const foundTypes = new Set();
     courses.forEach((c) => {
       c.terms?.forEach((t) => {
@@ -51,34 +49,29 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
         t.meetings?.forEach((m) => {
           if (m?.type) foundTypes.add(m.type);
         });
+        t.courseTimes?.forEach((ct) => {
+          if (ct?.type) foundTypes.add(ct.type);
+        });
       });
     });
     const courseTypes = Array.from(foundTypes).sort((a, b) => {
-      const ia = typeOrder.indexOf(a);
-      const ib = typeOrder.indexOf(b);
+      const ia = COURSE_TYPES.indexOf(a);
+      const ib = COURSE_TYPES.indexOf(b);
       if (ia !== -1 || ib !== -1) return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
       return a.localeCompare(b);
     });
 
-    // ✅ Day options derived from meetings.dayOfWeek or courseTimes.dayOfWeek
+    // Day options derived from the selected term's real schedule data.
     const dayKeys = new Set();
     courses.forEach((c) => {
       c.terms?.forEach((t) => {
-        // Check meetings for dayOfWeek
-        t.meetings?.forEach((m) => {
-          if (m?.dayOfWeek) dayKeys.add(m.dayOfWeek);
-        });
-        // Also check courseTimes for dayOfWeek
-        t.courseTimes?.forEach((ct) => {
-          if (ct?.dayOfWeek) dayKeys.add(ct.dayOfWeek);
-        });
+        getDayLabelsForOffering(t).forEach((label) => dayKeys.add(label));
       });
     });
 
-    const days = ["M", "T", "W", "R", "F", "S", "U"]
-      .filter((d) => dayKeys.has(d))
-      .map((d) => DAY_LABELS[d] || d);
-
+    const days = DAY_ORDER
+      .map((key) => DAY_LABELS[key])
+      .filter((label) => dayKeys.has(label));
 
     // Use a regular set of time options (30-minute increments) from 07:00 to 23:00
     const generateTimeOptions = (from = "07:00", to = "23:00", stepMins = 30) => {
@@ -115,84 +108,66 @@ export function useFilters(courses, initialFilters = null, initialSearch = "") {
     };
   }, [courses]);
 
+  useEffect(() => {
+    if (courses.length === 0) return;
+
+    setFilters((current) => {
+      const next = { ...current };
+      let changed = false;
+
+      ["Credits", "Year", "Department", "CourseType", "Day"].forEach((key) => {
+        const values = Array.isArray(next[key]) ? next[key] : [];
+        const allowed = new Set(filterOptions[key] || []);
+        const validValues = values.filter((value) => allowed.has(value));
+
+        if (validValues.length !== values.length) {
+          next[key] = validValues;
+          changed = true;
+        }
+      });
+
+      ["StartTime", "EndTime"].forEach((key) => {
+        if (next[key] != null && !(filterOptions[key] || []).includes(next[key])) {
+          next[key] = null;
+          changed = true;
+        }
+      });
+
+      return changed ? next : current;
+    });
+  }, [courses.length, filterOptions]);
+
   // Filter courses based on search and filters
   const filteredCourses = useMemo(() => {
     // For better UI behavior, filter at the term/section level and return
     // courses where at least one term matches the selected section-level filters.
     return courses
       .map((course) => {
-        // helper: collect day labels for a term
-        const termDays = (t) => {
-          const days = new Set();
-          t.meetings?.forEach((m) => {
-            if (m?.dayOfWeek) days.add(DAY_LABELS[m.dayOfWeek] || m.dayOfWeek);
-          });
-          t.courseTimes?.forEach((ct) => {
-            if (ct?.dayOfWeek) days.add(DAY_LABELS[ct.dayOfWeek] || ct.dayOfWeek);
-          });
-          return Array.from(days);
-        };
-
         const termMatchesType = (t) => {
           if (filters.CourseType.length === 0) return true;
           if (t.type && filters.CourseType.includes(t.type)) return true;
-          return t.meetings?.some((m) => m?.type && filters.CourseType.includes(m.type));
+          if (t.meetings?.some((m) => m?.type && filters.CourseType.includes(m.type))) return true;
+          return t.courseTimes?.some((ct) => ct?.type && filters.CourseType.includes(ct.type));
         };
 
-        const termMatchesDay = (t) => {
-          if (filters.Day.length === 0) return true;
-          const days = termDays(t);
-          if (days.length === 0) return false;
-          // include term only if its set of days EXACTLY matches the selected set
-          if (days.length !== filters.Day.length) return false;
-          return filters.Day.every((sel) => days.includes(sel));
-        };
-
-        const termMatchesTiming = (t) => {
-          // If no start/end filter selected, allow the term
-          const selStart = filters.StartTime ? timeToMinutes(filters.StartTime) : null;
-          const selEnd = filters.EndTime ? timeToMinutes(filters.EndTime) : null;
-          if (selStart == null && selEnd == null) return true;
-
-          // collect time ranges for this term
-          const ranges = [];
-          t.meetings?.forEach((m) => {
-            const s = timeToMinutes(m?.startTime);
-            let e = timeToMinutes(m?.endTime);
-            if ((e == null || Number.isNaN(e)) && m?.durationMinutes && s != null) e = s + m.durationMinutes;
-            if (s != null && e != null) ranges.push({ s, e });
+        const termMatchesSchedule = (t) =>
+          offeringMatchesDayTimeFilters(t, {
+            days: filters.Day,
+            startTime: filters.StartTime,
+            endTime: filters.EndTime,
           });
-          t.courseTimes?.forEach((ct) => {
-            const s = timeToMinutes(ct?.startTime);
-            let e = timeToMinutes(ct?.endTime);
-            if ((e == null || Number.isNaN(e)) && ct?.durationMinutes && s != null) e = s + ct.durationMinutes;
-            if (s != null && e != null) ranges.push({ s, e });
-          });
-
-          if (ranges.length === 0) return false;
-
-          // A term matches if any of its time ranges satisfy the selected constraints
-          return ranges.some(({ s, e }) => {
-            if (selStart != null && s < selStart) return false;
-            if (selEnd != null && e > selEnd) return false;
-            return true;
-          });
-        };
 
         // Build list of terms that match ALL section-level filters.
         // IMPORTANT: do NOT mutate or prune term objects — return the original term
-        // if it contains any of the selected day(s). This preserves instructors and
-        // other metadata attached to the term.
+        // so instructors and other metadata attached to the term stay intact.
         const matchingTerms = (course.terms || []).filter((t) => {
-          if (!termMatchesType(t) || !termMatchesDay(t) || !termMatchesTiming(t)) return false;
-          // termMatchesDay already ensures the term has at least one selected day
-          return true;
+          return termMatchesType(t) && termMatchesSchedule(t);
         });
 
         if (matchingTerms.length === 0) return null;
 
         // Keep full availability for detail views while preserving filtered terms for cards/results.
-        return { ...course, allTerms: course.terms || [], terms: matchingTerms };
+        return { ...course, allTerms: course.allTerms || course.terms || [], terms: matchingTerms };
       })
       .filter(Boolean)
       .filter((course) => {
