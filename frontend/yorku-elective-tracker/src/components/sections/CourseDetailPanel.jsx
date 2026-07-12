@@ -3,6 +3,7 @@ import { ChevronDown, X, Copy, Check, Bookmark, BookmarkCheck } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useMemo } from "react";
 import { getCatEntryId } from "../../hooks/useSavedCatNumbers";
+import { useSeats, getOpenSeats, formatSeatTimestamp } from "../../hooks/useSeats";
 import {
   Select,
   SelectContent,
@@ -24,7 +25,17 @@ const DAY_LABELS = {
   Sun: "Sunday",
 };
 
-const TYPE_LABELS = COURSE_TYPE_LABELS;
+const TYPE_LABELS = {
+  LECT: "Lecture",
+  TUTR: "Tutorial",
+  LAB: "Lab",
+  SEM: "Seminar",
+  SEMR: "Seminar",
+  BLEN: "Blended",
+  ONLN: "Online",
+  ONCA: "Online Async",
+  HYFX: "Hybrid",
+};
 
 const COURSE_TYPE_ORDER = [
   "LECT",
@@ -70,6 +81,11 @@ function sortTimes(times) {
     if (timeDiff !== 0) return timeDiff;
     return String(a.type || "").localeCompare(String(b.type || ""));
   });
+}
+
+function termMatchesSelection(term, selection) {
+  if (!selection) return true;
+  return term === selection || term?.startsWith(selection);
 }
 
 function splitTimesByRole(times) {
@@ -452,14 +468,22 @@ export function CourseDetailPanel({
 
   return (
     <>
-      <div
+      <motion.div
         className="fixed inset-0 z-40 bg-black/30"
         onClick={onClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
       />
-      <div
+      <MotionDiv
         className="fixed top-0 right-0 h-full w-full sm:w-[420px] 
                    bg-white/10 backdrop-blur-2xl border-l border-white/20 
                    shadow-2xl p-6 z-50 flex flex-col overflow-y-auto"
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
       {/* HEADER */}
       <div
@@ -903,7 +927,7 @@ export function CourseDetailPanel({
           )}
         </div>
       )}
-      </div>
+      </MotionDiv>
     </>
   );
 }
