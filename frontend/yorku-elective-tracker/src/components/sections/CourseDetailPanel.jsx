@@ -3,8 +3,7 @@ import { ChevronDown, X, Copy, Check, Bookmark, BookmarkCheck } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useMemo } from "react";
 import { getCatEntryId } from "../../hooks/useSavedCatNumbers";
-import { COURSE_TYPE_LABELS } from "../../lib/courseFilters";
-import { termMatchesSelection } from "../../lib/termMatching";
+import { useSeats, getOpenSeats, formatSeatTimestamp } from "../../hooks/useSeats";
 import {
   Select,
   SelectContent,
@@ -26,7 +25,17 @@ const DAY_LABELS = {
   Sun: "Sunday",
 };
 
-const TYPE_LABELS = COURSE_TYPE_LABELS;
+const TYPE_LABELS = {
+  LECT: "Lecture",
+  TUTR: "Tutorial",
+  LAB: "Lab",
+  SEM: "Seminar",
+  SEMR: "Seminar",
+  BLEN: "Blended",
+  ONLN: "Online",
+  ONCA: "Online Async",
+  HYFX: "Hybrid",
+};
 
 const COURSE_TYPE_ORDER = [
   "LECT",
@@ -72,6 +81,11 @@ function sortTimes(times) {
     if (timeDiff !== 0) return timeDiff;
     return String(a.type || "").localeCompare(String(b.type || ""));
   });
+}
+
+function termMatchesSelection(term, selection) {
+  if (!selection) return true;
+  return term === selection || term?.startsWith(selection);
 }
 
 function splitTimesByRole(times) {
@@ -340,6 +354,9 @@ export function CourseDetailPanel({
 }) {
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [showOutsideSections, setShowOutsideSections] = useState(false);
+  const seatsData = useSeats();
+  const seats = seatsData?.seats ?? null;
+  const generatedAt = seatsData?.generatedAt ?? null;
 
   // Close panel on Escape key
   useEffect(() => {
@@ -451,14 +468,22 @@ export function CourseDetailPanel({
 
   return (
     <>
-      <div
+      <motion.div
         className="fixed inset-0 z-40 bg-black/30"
         onClick={onClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
       />
-      <div
+      <MotionDiv
         className="fixed top-0 right-0 h-full w-full sm:w-[420px] 
                    bg-white/10 backdrop-blur-2xl border-l border-white/20 
                    shadow-2xl p-6 z-50 flex flex-col overflow-y-auto"
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
       {/* HEADER */}
       <div
@@ -504,6 +529,11 @@ export function CourseDetailPanel({
       <div className="mt-4 space-y-4 text-sm text-yellow-100">
         <p className="italic">
           Always double-check if you need permission from an instructor to enroll.
+        </p>
+
+        <p className="italic">
+          Open seats shown may not all be available — departments sometimes reserve seats for specific students.
+          If you receive a &quot;reserved seats&quot; error when enrolling, please contact the respective department directly.
         </p>
 
         <p className="italic">
@@ -595,6 +625,33 @@ export function CourseDetailPanel({
                       <span className="font-mono">{t.catNumber}</span>
                     </p>
                   )}
+
+                  {/* Open seats badge */}
+                  {t.catNumber && seatsData !== null && (() => {
+                    const open = getOpenSeats(seats, t.catNumber);
+                    const ts = formatSeatTimestamp(generatedAt);
+                    if (open === null) {
+                      return (
+                        <p className="mt-2 text-[11px] text-gray-600 italic">No seat data</p>
+                      );
+                    }
+                    const isFull = open === 0;
+                    const isLow  = open <= 10;
+                    const dotColor   = isFull ? "bg-red-400"    : isLow ? "bg-yellow-400"  : "bg-green-400";
+                    const textColor  = isFull ? "text-red-300"  : isLow ? "text-yellow-200": "text-green-300";
+                    const label      = isFull ? "Full"          : `${open} open seats`;
+                    return (
+                      <div className="mt-2 space-y-0.5">
+                        <div className="flex items-center gap-1.5">
+                          <span className={`w-2 h-2 rounded-full flex-shrink-0 ${dotColor}`} />
+                          <span className={`text-xs font-semibold ${textColor}`}>{label}</span>
+                        </div>
+                        {ts && (
+                          <p className="text-[10px] text-gray-400 pl-3.5">Updated {ts}</p>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
 
                 {t.catNumber && (
@@ -870,7 +927,7 @@ export function CourseDetailPanel({
           )}
         </div>
       )}
-      </div>
+      </MotionDiv>
     </>
   );
 }

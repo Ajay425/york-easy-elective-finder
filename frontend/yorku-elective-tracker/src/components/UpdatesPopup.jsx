@@ -6,12 +6,12 @@ export function UpdatesPopup() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const hasBeenShown = localStorage.getItem("updatesPopupShown_v2");
+    const hasBeenShown = localStorage.getItem("updatesPopupShown_v3");
 
     // Show popup only if it hasn't been shown before
     if (!hasBeenShown) {
       setIsOpen(true);
-      localStorage.setItem("updatesPopupShown_v2", "true");
+      localStorage.setItem("updatesPopupShown_v3", "true");
     }
   }, []);
 
@@ -54,6 +54,15 @@ export function UpdatesPopup() {
 
           {/* Updates List */}
           <div className="space-y-4 mb-6">
+            <div className="bg-gradient-to-br from-green-500/10 to-teal-500/10 border border-green-400/30 rounded-lg p-4 hover:from-green-500/20 hover:to-teal-500/20 transition-all duration-300 group">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-bold text-green-400 uppercase tracking-wider bg-green-400/10 px-2 py-0.5 rounded-full">New</span>
+                <h3 className="font-semibold text-green-200 group-hover:text-green-100 transition-colors">Live Seat Availability</h3>
+              </div>
+              <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">
+                Course cards now show real-time open seat counts — 🟢 available, 🟡 low, 🔴 full — updated daily. Tap a course for a per-section breakdown with the exact timestamp.
+              </p>
+            </div>
             <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/30 rounded-lg p-4 hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-300 group">
               <h3 className="font-semibold text-purple-200 mb-1 group-hover:text-purple-100 transition-colors">Fall/Winter 2026-2027 Courses Now Available</h3>
               <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">

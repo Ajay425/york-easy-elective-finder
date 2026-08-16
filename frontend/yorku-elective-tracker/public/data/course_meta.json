@@ -42,10 +42,12 @@
     "ISTY",
     "FDEX",
     "FIEL",
+    "INSP",
     "LGCL",
+    "RESP",
     "WKSP"
   ],
-  "hasTimingData": true,
+  "hasTimingData": false,
   "stats": {
     "offeringsWithCatNumbers": 4636,
     "offeringsWithTimes": 4084,
