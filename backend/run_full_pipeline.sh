@@ -16,6 +16,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 STEP1_DIR="$SCRIPT_DIR/step1_PythonCourseScraper"
 SCREEN_SESSION="york_pipeline"
 RUNTIME_PIPELINE_DIR="$SCRIPT_DIR/runtime/pipeline"
@@ -72,6 +73,24 @@ echo "==> [\$(date)] step1 complete; running JSON pipeline"
 
 cd "$SCRIPT_DIR"
 npm run pipeline
+
+echo "==> [\$(date)] publishing generated frontend course data"
+git -C "$REPO_ROOT" add \
+  frontend/yorku-elective-tracker/public/data/electives.json \
+  frontend/yorku-elective-tracker/public/data/course_meta.json
+
+if git -C "$REPO_ROOT" diff --cached --quiet -- \
+  frontend/yorku-elective-tracker/public/data/electives.json \
+  frontend/yorku-elective-tracker/public/data/course_meta.json; then
+  echo "==> [\$(date)] no frontend course data changes to publish"
+else
+  git -C "$REPO_ROOT" commit --only \
+    frontend/yorku-elective-tracker/public/data/electives.json \
+    frontend/yorku-elective-tracker/public/data/course_meta.json \
+    -m "chore: update course data"
+  git -C "$REPO_ROOT" push origin main
+  echo "==> [\$(date)] frontend course data pushed"
+fi
 
 echo "==> [\$(date)] pipeline finished"
 EOF
