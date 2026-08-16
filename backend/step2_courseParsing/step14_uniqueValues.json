@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-08T09:43:56.026Z",
+  "generatedAt": "2026-08-16T21:36:00.383Z",
   "source": "step2_courseParsing/all_courses.json",
   "faculties": [
     "AP",
@@ -153,6 +153,7 @@
     "OVGS",
     "PACC",
     "PANF",
+    "PDEV",
     "PERS",
     "PHED",
     "PHIL",
