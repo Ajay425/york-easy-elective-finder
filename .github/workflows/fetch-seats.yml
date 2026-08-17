@@ -45,4 +45,27 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add frontend/yorku-elective-tracker/public/data/seats.json
-          git diff --cached --quiet && echo "No changes to commit" || (git commit -m "chore: update seats.json [skip ci]" && git push)
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "chore: update seats.json [skip ci]"
+          pushed=0
+          for attempt in 1 2 3; do
+            if git push origin main; then
+              pushed=1
+              break
+            fi
+
+            if [ "$attempt" -lt 3 ]; then
+              echo "Remote changed; rebasing seat update (retry $((attempt + 1))/3)"
+              git fetch origin main
+              git rebase origin/main
+            fi
+          done
+
+          if [ "$pushed" -ne 1 ]; then
+            echo "Could not push seat update after 3 attempts" >&2
+            exit 1
+          fi

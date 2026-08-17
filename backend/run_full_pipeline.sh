@@ -88,7 +88,26 @@ else
     frontend/yorku-elective-tracker/public/data/electives.json \
     frontend/yorku-elective-tracker/public/data/course_meta.json \
     -m "chore: update course data"
-  git -C "$REPO_ROOT" push origin main
+
+  pushed=0
+  for attempt in 1 2 3; do
+    if git -C "$REPO_ROOT" push origin main; then
+      pushed=1
+      break
+    fi
+
+    if [ "$attempt" -lt 3 ]; then
+      echo "==> [\$(date)] remote changed; rebasing course data commit (retry $((attempt + 1))/3)"
+      git -C "$REPO_ROOT" fetch origin main
+      git -C "$REPO_ROOT" rebase origin/main
+    fi
+  done
+
+  if [ "$pushed" -ne 1 ]; then
+    echo "ERROR: could not push course data after 3 attempts" >&2
+    exit 1
+  fi
+
   echo "==> [\$(date)] frontend course data pushed"
 fi
 
