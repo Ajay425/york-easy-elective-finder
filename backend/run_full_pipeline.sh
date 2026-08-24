@@ -96,14 +96,14 @@ else
       break
     fi
 
-    if [ "$attempt" -lt 3 ]; then
-      echo "==> [\$(date)] remote changed; rebasing course data commit (retry $((attempt + 1))/3)"
+    if [ "\$attempt" -lt 3 ]; then
+      echo "==> [\$(date)] remote changed; rebasing course data commit (retry \$((attempt + 1))/3)"
       git -C "$REPO_ROOT" fetch origin main
-      git -C "$REPO_ROOT" rebase origin/main
+      git -C "$REPO_ROOT" rebase --autostash origin/main
     fi
   done
 
-  if [ "$pushed" -ne 1 ]; then
+  if [ "\$pushed" -ne 1 ]; then
     echo "ERROR: could not push course data after 3 attempts" >&2
     exit 1
   fi
