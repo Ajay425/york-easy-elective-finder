@@ -1,18 +1,18 @@
 {
   "msg": "success",
-  "generatedAt": "2026-08-13T01:37:31.082Z",
+  "generatedAt": "2026-08-26T17:36:32.317Z",
   "termAndYear": "Fall/Winter 2026-2027",
-  "source": "backend/step2_courseParsing/archive/all_courses_FallWinter_2026-2027_2026-08-13T01-37-30-029Z.json",
+  "source": "backend/step2_courseParsing/archive/all_courses_FallWinter_2026-2027_2026-08-26T17-36-31-184Z.json",
   "sourceKind": "latest-completed-archive",
-  "sourceMtime": "2026-08-13T01:37:29.779Z",
-  "sourceCourseCount": 4367,
+  "sourceMtime": "2026-08-26T17:36:30.933Z",
+  "sourceCourseCount": 4370,
   "approvedNoRealPrereqCourses": 36,
   "approvedNoRealPrereqRowsCleared": 0,
-  "manuallyHiddenCourses": 509,
-  "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/WRIT - Writing - ( AP )/AP_WRIT 3740 3.00_Fundamentals of Editing for Non-majors_CourseSchedule.html",
-  "rawYorkCoursesNewestMtime": "2026-08-13T01:30:48.271Z",
+  "manuallyHiddenCourses": 508,
+  "rawYorkCoursesNewestFile": "backend/step1_PythonCourseScraper/york_courses/VISA - Visual Arts - ( FA, GS, ED )/AP_URST 4130 3.00_Planning Suburbs_CourseSchedule.html",
+  "rawYorkCoursesNewestMtime": "2026-08-26T17:22:52.259Z",
   "rawYorkCoursesNewerThanSource": false,
-  "courseCount": 1307,
+  "courseCount": 1302,
   "terms": [
     {
       "term": "F",
@@ -42,19 +42,17 @@
     "ISTY",
     "FDEX",
     "FIEL",
-    "INSP",
     "LGCL",
-    "RESP",
     "WKSP"
   ],
-  "hasTimingData": false,
+  "hasTimingData": true,
   "stats": {
-    "offeringsWithCatNumbers": 4636,
-    "offeringsWithTimes": 4084,
-    "instructorsWithRmpLinks": 1315,
+    "offeringsWithCatNumbers": 4627,
+    "offeringsWithTimes": 4101,
+    "instructorsWithRmpLinks": 1388,
     "courseTimeHtmlFiles": 11,
-    "courseTimeComponentsParsed": 14777,
-    "courseTimeRowsParsed": 14931,
-    "courseTimeSectionKeys": 6735
+    "courseTimeComponentsParsed": 15021,
+    "courseTimeRowsParsed": 14875,
+    "courseTimeSectionKeys": 6704
   }
 }
